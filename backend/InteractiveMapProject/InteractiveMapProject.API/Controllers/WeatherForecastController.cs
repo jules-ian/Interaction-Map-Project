@@ -1,3 +1,4 @@
+using InteractiveMapProject.Contracts.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InteractiveMapProject.API.Controllers;

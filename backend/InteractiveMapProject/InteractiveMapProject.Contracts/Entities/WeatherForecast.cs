@@ -1,4 +1,4 @@
-namespace InteractiveMapProject.API;
+namespace InteractiveMapProject.Contracts.Entities;
 
 public class WeatherForecast
 {
