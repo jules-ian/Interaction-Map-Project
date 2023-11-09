@@ -1,4 +1,13 @@
+using InteractiveMapProject.Data.Db.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("InteractiveMapProjectDb"),
+        opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db"));
+});
 
 // Add services to the container.
 

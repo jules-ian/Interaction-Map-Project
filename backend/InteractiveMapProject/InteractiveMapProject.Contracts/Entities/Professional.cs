@@ -4,9 +4,11 @@ namespace InteractiveMapProject.Contracts.Entities;
 
 public class Professional
 {
+    public int Id { get; set; }
+
     public string ServiceName { get; set; } = default!;
 
-    public string Address { get; set; } = default!;
+    public Address Address { get; set; } = default!;
 
     public int PhoneNumber { get; set; }
 
