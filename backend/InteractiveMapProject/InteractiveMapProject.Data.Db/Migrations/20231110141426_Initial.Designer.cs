@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveMapProject.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231109214237_Initial")]
+    [Migration("20231110141426_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
