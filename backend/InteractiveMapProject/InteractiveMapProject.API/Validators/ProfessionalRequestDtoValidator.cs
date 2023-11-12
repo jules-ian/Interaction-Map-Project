@@ -10,7 +10,8 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
         RuleFor(x => x.ServiceName)
             .NotNull().WithMessage("Service name is required.");
         RuleFor(x => x.Address)
-            .NotNull().WithMessage("Address is required.");
+            .NotNull().WithMessage("Address is required.")
+            .SetValidator(new AddressValidator());
         RuleFor(x => x.PhoneNumber)
             .NotNull().WithMessage("Phone number is required.");
         RuleFor(x => x.Email)
@@ -25,7 +26,8 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
         RuleFor(x => x.ContactPersonEmail)
             .NotNull().WithMessage("Email of the resource person is required.");
         RuleFor(x => x.FieldOfIntervention)
-            .NotNull().WithMessage("Field of intervention is required.");
+            .NotNull().WithMessage("Field of intervention is required.")
+            .SetValidator(new FieldOfInterventionValidator());
         RuleFor(x => x.Mission)
             .NotNull().WithMessage("Mission is required.");
     }

@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using InteractiveMapProject.API.Middleware;
+using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Common.Profiles;
 using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
@@ -17,7 +19,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+})
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ProfessionalRequestDtoValidator>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
