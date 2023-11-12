@@ -10,6 +10,9 @@ public class MappingProfile : Profile
     {
         CreateMap<ProfessionalRequestDto, Professional>()
             .ForMember(dest =>
+                dest.Geolocation,
+                opt => opt.MapFrom(src => new Geolocation()))
+            .ForMember(dest =>
                 dest.CreationDateTime,
                 opt => opt.MapFrom(src => DateTime.Now));
         CreateMap<Professional, ProfessionalResponseDto>();
