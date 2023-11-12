@@ -41,7 +41,7 @@ public class ProfessionalController : ControllerBase
         return Ok(await _professionalService.UpdateAsync(id, request));
     }
 
-    [HttpDelete(Name = "DeleteProfessional")]
+    [HttpDelete("{id}", Name = "DeleteProfessional")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         await _professionalService.DeleteAsync(id);
