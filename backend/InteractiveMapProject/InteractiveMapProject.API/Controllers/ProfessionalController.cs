@@ -1,6 +1,5 @@
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InteractiveMapProject.API.Controllers;
