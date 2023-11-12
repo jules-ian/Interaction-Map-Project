@@ -24,13 +24,13 @@ public class ProfessionalService : IProfessionalService
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
     }
 
-    public async Task<ProfessionalResponseDto?> GetAsync(Guid id)
+    public async Task<ProfessionalResponseDto> GetAsync(Guid id)
     {
-        Professional? professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
+        Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 
-    public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalResponseDto request)
+    public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalRequestDto request)
     {
         Professional professional = _mapper.Map<Professional>(request);
         _uow.Professionals.Add(professional);
@@ -38,9 +38,17 @@ public class ProfessionalService : IProfessionalService
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 
+    public async Task<ProfessionalResponseDto> UpdateAsync(Guid id, ProfessionalRequestDto request)
+    {
+        Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
+        professional = _mapper.Map<Professional>(request);
+        await _uow.SaveChangesAsync();
+        return _mapper.Map<ProfessionalResponseDto>(professional);
+    }
+
     public async Task DeleteAsync(Guid id)
     {
-        Professional? professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
+        Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         _uow.Professionals.Remove(professional);
         await _uow.SaveChangesAsync();
     }
