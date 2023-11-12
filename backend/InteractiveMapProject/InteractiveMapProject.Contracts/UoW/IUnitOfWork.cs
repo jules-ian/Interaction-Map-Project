@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Repsitories;
 
-namespace InteractiveMapProject.Contracts.UoW
+namespace InteractiveMapProject.Contracts.UoW;
+
+public interface IUnitOfWork
 {
-    internal interface IUnitOfWork
-    {
-    }
+    IRepository<Professional> Professionals { get; }
+    Task SaveChangesAsync();
 }

@@ -1,4 +1,8 @@
+using InteractiveMapProject.Contracts.Repsitories;
+using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
+using InteractiveMapProject.Data.Db.Repositories;
+using InteractiveMapProject.Data.Db.UoW;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

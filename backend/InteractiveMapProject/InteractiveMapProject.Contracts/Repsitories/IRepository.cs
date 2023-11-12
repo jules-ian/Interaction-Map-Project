@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace InteractiveMapProject.Contracts.Repsitories;
 
-namespace InteractiveMapProject.Contracts.Repsitories
+public interface IRepository<TEntity> where TEntity : class
 {
-    internal interface IRepository
-    {
-    }
+    Task<List<TEntity>> GetAllAsync();
+    Task<TEntity?> GetAsync(int id);
+    void Add(TEntity entity);
+    void Update(TEntity entity);
 }
