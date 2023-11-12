@@ -42,7 +42,9 @@ public class ProfessionalService : IProfessionalService
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         professional = _mapper.Map<Professional>(request);
+        _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
+        professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 

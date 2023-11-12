@@ -35,7 +35,7 @@ public class ProfessionalController : ControllerBase
         return Ok(await _professionalService.CreateAsync(request));
     }
 
-    [HttpPut(Name = "UpdateProfessional")]
+    [HttpPut("{id}", Name = "UpdateProfessional")]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ProfessionalRequestDto request)
     {
         return Ok(await _professionalService.UpdateAsync(id, request));

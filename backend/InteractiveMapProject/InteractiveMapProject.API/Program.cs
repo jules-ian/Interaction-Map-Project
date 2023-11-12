@@ -1,3 +1,4 @@
+using InteractiveMapProject.API.Middleware;
 using InteractiveMapProject.Common.Profiles;
 using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
@@ -41,6 +42,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
