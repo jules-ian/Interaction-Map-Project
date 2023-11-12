@@ -6,11 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="UoW\" />
-    <Folder Include="Services\" />
-    <Folder Include="Repsitories\" />
-  </ItemGroup>
-
 </Project>

@@ -18,7 +18,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         return await _entity.ToListAsync();
     }
 
-    public async Task<TEntity?> GetAsync(int id)
+    public async Task<TEntity?> GetAsync(Guid id)
     {
         return await _entity.FindAsync(id);
     }
@@ -31,5 +31,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     public void Update(TEntity entity)
     {
         _entity.Update(entity);
+    }
+
+    public void Remove(TEntity entity)
+    {
+        _entity.Remove(entity);
     }
 }

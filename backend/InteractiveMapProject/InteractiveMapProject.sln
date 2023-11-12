@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveMapProject.API",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveMapProject.Contracts", "InteractiveMapProject.Contracts\InteractiveMapProject.Contracts.csproj", "{3222EBE5-B9BD-47FE-9880-CA131D1C8A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveMapProject.Data.Db", "InteractiveMapProject.Data.Db\InteractiveMapProject.Data.Db.csproj", "{020EB415-C188-485E-8A20-9D1938AD8413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveMapProject.Data.Db", "InteractiveMapProject.Data.Db\InteractiveMapProject.Data.Db.csproj", "{020EB415-C188-485E-8A20-9D1938AD8413}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C830464A-A209-4893-87C5-4FCC3072E497}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{09E02DEE-E98B-46A1-976E-B4D0FC59A243}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveMapProject.Services", "InteractiveMapProject.Services\InteractiveMapProject.Services.csproj", "{299E66AC-A1F2-47A0-AC62-2D7DE70317CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveMapProject.Services", "InteractiveMapProject.Services\InteractiveMapProject.Services.csproj", "{299E66AC-A1F2-47A0-AC62-2D7DE70317CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

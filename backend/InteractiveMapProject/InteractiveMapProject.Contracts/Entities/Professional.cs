@@ -4,7 +4,7 @@ namespace InteractiveMapProject.Contracts.Entities;
 
 public class Professional
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string ServiceName { get; set; } = default!;
 

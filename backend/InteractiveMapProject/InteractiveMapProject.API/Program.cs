@@ -1,7 +1,6 @@
-using InteractiveMapProject.Contracts.Repsitories;
+using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
-using InteractiveMapProject.Data.Db.Repositories;
 using InteractiveMapProject.Data.Db.UoW;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +19,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddScoped<IProfessionalService, IProfessionalService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
