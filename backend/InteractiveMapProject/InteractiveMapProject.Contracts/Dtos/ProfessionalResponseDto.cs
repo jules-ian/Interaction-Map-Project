@@ -29,5 +29,5 @@ public class ProfessionalResponseDto
 
     public Geolocation Geolocation { get; set; } = default!;
 
-    public string Description { get; set; } = default!;
+    public string? Description { get; set; } = default!;
 }

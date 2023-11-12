@@ -25,5 +25,5 @@ public class ProfessionalRequestDto
 
     public Mission Mission { get; set; } = default!;
 
-    public string Description { get; set; } = default!;
+    public string? Description { get; set; } = default!;
 }

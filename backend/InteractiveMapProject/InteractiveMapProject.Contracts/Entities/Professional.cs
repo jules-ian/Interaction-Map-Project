@@ -28,7 +28,7 @@ public class Professional
 
     public Geolocation Geolocation { get; set; } = default!;
 
-    public string Description { get; set; } = default!;
+    public string? Description { get; set; } = default!;
 
     public DateTime CreationDateTime { get; set; }
 }

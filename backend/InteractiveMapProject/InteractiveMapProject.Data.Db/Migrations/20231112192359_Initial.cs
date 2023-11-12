@@ -32,7 +32,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     Mission = table.Column<int>(type: "int", nullable: false),
                     Geolocation_Latitude = table.Column<double>(type: "float", nullable: false),
                     Geolocation_Longitude = table.Column<double>(type: "float", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveMapProject.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231112181338_Initial")]
+    [Migration("20231112192359_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -42,7 +42,6 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
