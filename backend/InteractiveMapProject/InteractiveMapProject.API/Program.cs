@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using InteractiveMapProject.API.Middleware;
 using InteractiveMapProject.API.Validators;
@@ -19,10 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 
 // Add services to the container.
 
-builder.Services.AddControllers(options =>
-{
-    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-})
+builder.Services
+    .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ProfessionalRequestDtoValidator>());
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
