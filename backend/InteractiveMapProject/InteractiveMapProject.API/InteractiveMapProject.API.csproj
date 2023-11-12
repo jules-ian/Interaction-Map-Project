@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\InteractiveMapProject.Contracts\InteractiveMapProject.Contracts.csproj" />
     <ProjectReference Include="..\InteractiveMapProject.Data.Db\InteractiveMapProject.Data.Db.csproj" />
+    <ProjectReference Include="..\InteractiveMapProject.Services\InteractiveMapProject.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,6 +2,7 @@ using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.UoW;
+using InteractiveMapProject.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddScoped<IProfessionalService, IProfessionalService>();
+builder.Services.AddScoped<IProfessionalService, ProfessionalService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveMapProject.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231110141426_Initial")]
+    [Migration("20231112181338_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -27,11 +27,9 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ContactPersonEmail")
                         .IsRequired()
@@ -78,8 +76,8 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
                         {
-                            b1.Property<int>("ProfessionalId")
-                                .HasColumnType("int");
+                            b1.Property<Guid>("ProfessionalId")
+                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("City")
                                 .IsRequired()
@@ -102,8 +100,8 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.FieldOfIntervention", "FieldOfIntervention", b1 =>
                         {
-                            b1.Property<int>("ProfessionalId")
-                                .HasColumnType("int");
+                            b1.Property<Guid>("ProfessionalId")
+                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<int>("Audience")
                                 .HasColumnType("int");
@@ -126,8 +124,8 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
                         {
-                            b1.Property<int>("ProfessionalId")
-                                .HasColumnType("int");
+                            b1.Property<Guid>("ProfessionalId")
+                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<double>("Latitude")
                                 .HasColumnType("float");
