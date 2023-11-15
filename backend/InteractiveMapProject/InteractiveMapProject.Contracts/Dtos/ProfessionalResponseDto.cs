@@ -1,5 +1,4 @@
 using InteractiveMapProject.Contracts.Entities;
-using InteractiveMapProject.Contracts.Enums;
 
 namespace InteractiveMapProject.Contracts.Dtos;
 
