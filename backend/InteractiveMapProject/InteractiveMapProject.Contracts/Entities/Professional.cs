@@ -20,11 +20,7 @@ public class Professional
 
     public string ContactPersonEmail { get; set; } = default!;
 
-    public Audience Audience { get; set; } = default!;
-
-    public PlaceOfIntervention PlaceOfIntervention { get; set; } = default!;
-
-    public Mission Mission { get; set; } = default!;
+    public FieldOfIntervention FieldOfIntervention { get; set; } = default!;
 
     public Geolocation Geolocation { get; set; } = default!;
 
