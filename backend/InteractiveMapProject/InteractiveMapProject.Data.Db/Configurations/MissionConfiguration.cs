@@ -1,25 +1,25 @@
-namespace DefaultNamespace;
+Namespace DefaultNamespace;
 
 public class MissionConfiguration : IEntityTypeConfiguration<Mission>
 {
     public static void SeedMission(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Mission>().HasData(
-            new Mission(mId = 1, name = "Accueil de loisirs"),
-            new Mission(mId = 2, name = "Petite enfance"),
-            new Mission(mId = 3, name = "Répit"),
-            new Mission(mId = 4, name = "Accueil occasionnel"),
-            new Mission(mId = 5, name = "Scolarité"),
-            new Mission(mId = 6, name = "Référent santé accueil inclusif (RSAI)"),
-            new Mission(mId = 7, name = "Accueil de jour"),
-            new Mission(mId = 8, name = "Accueil de nuit"),
-            new Mission(mId = 9, name = "Soins/santé/réeducation"),
-            new Mission(mId = 10, name = "Accompagnement à la parentalité"),
-            new Mission(mId = 11, name = "Accompagnement administratif"),
-            new Mission(mId = 12, name = "Ressource documentaire"),
-            new Mission(mId = 13, name = "Group de parole/Ateliers"),
-            new Mission(mId = 14, name = "Orientation"),
-            new Mission(mId = 15, name = "Prestataire")
+            new Mission(MId = 1, Name = "Accueil de loisirs"),
+            new Mission(MId = 2, Name = "Petite enfance"),
+            new Mission(MId = 3, Name = "Répit"),
+            new Mission(MId = 4, Name = "Accueil occasionnel"),
+            new Mission(MId = 5, Name = "Scolarité"),
+            new Mission(MId = 6, Name = "Référent santé accueil inclusif (RSAI)"),
+            new Mission(MId = 7, Name = "Accueil de jour"),
+            new Mission(MId = 8, Name = "Accueil de nuit"),
+            new Mission(MId = 9, Name = "Soins/santé/réeducation"),
+            new Mission(MId = 10, Name = "Accompagnement à la parentalité"),
+            new Mission(MId = 11, Name = "Accompagnement administratif"),
+            new Mission(MId = 12, Name = "Ressource documentaire"),
+            new Mission(MId = 13, Name = "Group de parole/Ateliers"),
+            new Mission(MId = 14, Name = "Orientation"),
+            new Mission(MId = 15, Name = "Prestataire")
         );
     }
 }
