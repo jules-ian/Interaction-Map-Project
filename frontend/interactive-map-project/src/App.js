@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import DropdownExample from './Components/Dropdown';
 import DropMultiSelect from './Components/DropMultiSelect';
+import SearchBar from './Components/SearchBar';
 export default function App() {
-  return (<div>
-
-        <DropMultiSelect/>
-    
-      </div>
-      )}
+  const testStyle = {
+    padding:10
+  }
+  return (
+    <div style={testStyle}>
+      <SearchBar/> 
+      <DropMultiSelect/> 
+    </div>
+)}
