@@ -1,4 +1,5 @@
 using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.Dtos;
 

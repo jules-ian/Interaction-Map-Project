@@ -1,3 +1,5 @@
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
+
 namespace InteractiveMapProject.Contracts.Entities;
 
 public class Professional
@@ -20,7 +22,11 @@ public class Professional
 
     public string ContactPersonEmail { get; set; } = default!;
 
-    public FieldOfIntervention FieldOfIntervention { get; set; } = default!;
+    public IEnumerable<ProfessionalAudience> Audiences { get; set; } = default!;
+
+    public IEnumerable<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } = default!;
+
+    public IEnumerable<ProfessionalMission> Missions { get; set; } = default!;
 
     public Geolocation Geolocation { get; set; } = default!;
 
