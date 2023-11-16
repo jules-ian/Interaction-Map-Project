@@ -24,11 +24,11 @@ public class ProfessionalResponseDto
 
     public string ContactPersonEmail { get; set; } = default!;
 
-    public IEnumerable<AudienceResponseDto> Audiences { get; set; } = default!;
+    public IEnumerable<AudienceDto> Audiences { get; set; } = default!;
 
-    public IEnumerable<PlaceOfInterventionResponseDto> PlacesOfIntervention { get; set; } = default!;
+    public IEnumerable<PlaceOfInterventionDto> PlacesOfIntervention { get; set; } = default!;
 
-    public IEnumerable<MissionResponseDto> Missions { get; set; } = default!;
+    public IEnumerable<MissionDto> Missions { get; set; } = default!;
 
     public Mission Mission { get; set; } = default!;
 
