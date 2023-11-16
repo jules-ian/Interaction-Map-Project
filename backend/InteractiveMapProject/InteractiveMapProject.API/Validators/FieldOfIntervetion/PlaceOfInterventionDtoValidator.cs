@@ -1,7 +1,7 @@
 using FluentValidation;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 
-namespace InteractiveMapProject.API.Validators;
+namespace InteractiveMapProject.API.Validators.FieldOfIntervetion;
 
 public class PlaceOfInterventionDtoValidator : AbstractValidator<PlaceOfInterventionDto>
 {
