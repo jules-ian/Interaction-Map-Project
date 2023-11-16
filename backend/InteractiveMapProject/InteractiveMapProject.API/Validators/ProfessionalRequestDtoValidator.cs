@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using InteractiveMapProject.Contracts.Dtos;
 
 namespace InteractiveMapProject.API.Validators;
@@ -25,10 +25,14 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
             .NotNull().WithMessage("Phone number of the resource person is required.");
         RuleFor(x => x.ContactPersonEmail)
             .NotNull().WithMessage("Email of the resource person is required.");
-        RuleFor(x => x.FieldOfIntervention)
-            .NotNull().WithMessage("Field of intervention is required.")
-            .SetValidator(new FieldOfInterventionValidator());
-        RuleFor(x => x.Mission)
-            .NotNull().WithMessage("Mission is required.");
+        RuleForEach(x => x.Audiences)
+            .NotNull().WithMessage("Audience is required.")
+            .SetValidator(new AudienceDtoValidator());
+        RuleForEach(x => x.PlacesOfIntervention)
+            .NotNull().WithMessage("Place of intervetion is required.")
+            .SetValidator(new PlaceOfInterventionDtoValidator());
+        RuleForEach(x => x.Missions)
+            .NotNull().WithMessage("Mission is required.")
+            .SetValidator(new MissionDtoValidator());
     }
 }

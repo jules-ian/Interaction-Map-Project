@@ -1,5 +1,6 @@
+using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Entities;
-using InteractiveMapProject.Contracts.Enums;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.Dtos;
 
@@ -23,7 +24,11 @@ public class ProfessionalResponseDto
 
     public string ContactPersonEmail { get; set; } = default!;
 
-    public FieldOfIntervention FieldOfIntervention { get; set; } = default!;
+    public IEnumerable<AudienceDto> Audiences { get; set; } = default!;
+
+    public IEnumerable<PlaceOfInterventionDto> PlacesOfIntervention { get; set; } = default!;
+
+    public IEnumerable<MissionDto> Missions { get; set; } = default!;
 
     public Mission Mission { get; set; } = default!;
 
