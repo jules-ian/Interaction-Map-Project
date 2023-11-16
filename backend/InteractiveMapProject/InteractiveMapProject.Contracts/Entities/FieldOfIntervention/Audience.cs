@@ -7,4 +7,6 @@ public class Audience
     public string Name { get; set; } = default!;
 
     public IEnumerable<ProfessionalAudience> Professionals { get; set; } = default!;
+
+    public DateTime CreationDateTime { get; set; }
 }

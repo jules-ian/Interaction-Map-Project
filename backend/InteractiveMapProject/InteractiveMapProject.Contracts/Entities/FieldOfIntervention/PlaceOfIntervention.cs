@@ -7,4 +7,6 @@ public class PlaceOfIntervention
     public string Name { get; set; } = default!;
 
     public IEnumerable<ProfessionalPlaceOfIntervention> Professionals { get; set; } = default!;
+
+    public DateTime CreationDateTime { get; set; }
 }

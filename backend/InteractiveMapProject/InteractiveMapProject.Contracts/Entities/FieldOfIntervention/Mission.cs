@@ -7,4 +7,6 @@ public class Mission
     public string Name { get; set; } = default!;
 
     public IEnumerable<ProfessionalMission> Professionals { get; set; } = default!;
+
+    public DateTime CreationDateTime { get; set; }
 }

@@ -1,3 +1,4 @@
+using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
@@ -21,9 +22,11 @@ public class ProfessionalRequestDto
 
     public string ContactPersonEmail { get; set; } = default!;
 
-    public FieldOfIntervention FieldOfIntervention { get; set; } = default!;
+    public IEnumerable<AudienceRequestDto> Audiences { get; set; } = default!;
 
-    public Mission Mission { get; set; } = default!;
+    public IEnumerable<PlaceOfInterventionRequestDto> PlacesOfIntervention { get; set; } = default!;
+
+    public IEnumerable<MissionRequestDto> Missions { get; set; } = default!;
 
     public string? Description { get; set; } = default!;
 }
