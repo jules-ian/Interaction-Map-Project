@@ -1,64 +1,59 @@
-import React, { useRef, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
-import "./Map.css";
-import geoJson from "./chicago-parks.json";
+import React, { useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
+// Set your Mapbox access token
+mapboxgl.accessToken = "pk.eyJ1Ijoic29uZHJlbHV4IiwiYSI6ImNsbnZ3aXRneDAzcDcydG82NGE2dG4xYnQifQ._TpEa0XTz2SpM5Zv9xju_w";
 
 const Map = () => {
-  const mapContainerRef = useRef(null);
-
-  // Initialize map when component mounts
   useEffect(() => {
+    // Create a new map instance
     const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-87.65, 41.84],
-      zoom: 10,
+      container: 'map-container', // container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      center: [1.4442, 43.6047], // Toulouse coordinates [lng, lat]
+      zoom: 12 // Zoom level
     });
 
-    map.on("load", function () {
-      // Add an image to use as a custom marker
-      map.loadImage(
-        "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
-        function (error, image) {
-          if (error) throw error;
-          map.addImage("custom-marker", image);
-          // Add a GeoJSON source with multiple points
-          map.addSource("points", {
-            type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: geoJson.features,
-            },
-          });
-          // Add a symbol layer
-          map.addLayer({
-            id: "points",
-            type: "symbol",
-            source: "points",
-            layout: {
-              "icon-image": "custom-marker",
-              // get the title name from the source's "title" property
-              "text-field": ["get", "title"],
-              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-              "text-offset": [0, 1.25],
-              "text-anchor": "top",
-            },
-          });
-        }
-      );
+    // Add a marker for Toulouse
+    // Create a marker element
+    const marker = new mapboxgl.Marker()
+      .setLngLat([1.4442, 43.6047]) // Toulouse coordinates [lng, lat]
+      .addTo(map);
+
+    // Add hover interactions
+    marker.getElement().addEventListener('mouseenter', () => {
+      // Increase marker size on hover
+      marker.getElement().style.transform = 'scale(1.5)';
+      
+      // Add a popup with text
+      new mapboxgl.Popup()
+        .setLngLat([1.4442, 43.6047]) // Toulouse coordinates [lng, lat]
+        .setHTML('DOCTOR 1')
+        .addTo(map);
     });
 
-    // Add navigation control (the +/- zoom buttons)
-    map.addControl(new mapboxgl.NavigationControl(), "top-right");
+    marker.getElement().addEventListener('mouseleave', () => {
+      // Reset marker size on mouse leave
+      marker.getElement().style.transform = 'scale(1)';
+      
+      // Remove the popup on mouse leave
+      document.querySelectorAll('.mapboxgl-popup').forEach(popup => popup.remove());
+    });
 
-    // Clean up on unmount
+    // Cleanup on component unmount
     return () => map.remove();
-  }, []);
+  }, []); // empty dependency array ensures this effect runs once on component mount
 
-  return <div className="map-container" ref={mapContainerRef} />;
+
+  return (
+    <div id="map-container" style={{ width: '100%', height: '400px' }} />
+  );
 };
 
 export default Map;
+
+
+
+
+
