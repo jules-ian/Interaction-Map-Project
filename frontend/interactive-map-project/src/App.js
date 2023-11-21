@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import DropMultiSelect from './Components/DropMultiSelect';
-import SearchBar from './Components/SearchBar';
+import Search from './Pages/Search';
+import Test from './utils/test';
 export default function App() {
   const testStyle = {
-    padding:10
+    margin:2
   }
   return (
     <div style={testStyle}>
-      <SearchBar/> 
-      <DropMultiSelect/> 
+      <Search/> 
     </div>
 )}
