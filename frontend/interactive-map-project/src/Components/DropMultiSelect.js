@@ -1,18 +1,17 @@
 import { Autocomplete, TextField } from "@mui/material"
 
-function DropMultiSelect (){
+function DropMultiSelect ({options, label="label", placeholder="placeholder"}){
     return (
         <Autocomplete
             multiple
             id="tags-standard"
-            options={top100Films}
-            getOptionLabel={(option) => option.title}
+            options={options}
+            getOptionLabel={(option) => option}
             renderInput={(params) => (
             <TextField
                 {...params}
-                variant="standard"
-                label="Multiple values"
-                placeholder="Favorites"
+                label={label}
+                placeholder={placeholder}
             />
             )}
             onKeyDown={(event) => {

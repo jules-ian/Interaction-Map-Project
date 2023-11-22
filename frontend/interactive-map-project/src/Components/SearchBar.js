@@ -6,6 +6,7 @@ function SearchBar (){
         id="outlined-basic" 
         label="Search" 
         variant="outlined" 
+        fullWidth="true"
         onKeyDown={(event) => {
             if (event.key === 'Enter') {
                 // handle events here
