@@ -16,21 +16,21 @@ public class MissionConfiguration : IEntityTypeConfiguration<Mission>
             .WithOne(p => p.Mission);
 
         builder.HasData(
-            new Mission(Id = Guid.NewGuid(), Name = "Accueil de loisirs"),
-            new Mission(Id = Guid.NewGuid(), Name = "Petite enfance"),
-            new Mission(Id = Guid.NewGuid(), Name = "Répit"),
-            new Mission(Id = Guid.NewGuid(), Name = "Accueil occasionnel"),
-            new Mission(Id = Guid.NewGuid(), Name = "Scolarité"),
-            new Mission(Id = Guid.NewGuid(), Name = "Référent santé accueil inclusif (RSAI)"),
-            new Mission(Id = Guid.NewGuid(), Name = "Accueil de jour"),
-            new Mission(Id = Guid.NewGuid(), Name = "Accueil de nuit"),
-            new Mission(Id = Guid.NewGuid(), Name = "Soins/santé/réeducation"),
-            new Mission(Id = Guid.NewGuid(), Name = "Accompagnement à la parentalité"),
-            new Mission(Id = Guid.NewGuid(), Name = "Accompagnement administratif"),
-            new Mission(Id = Guid.NewGuid(), Name = "Ressource documentaire"),
-            new Mission(Id = Guid.NewGuid(), Name = "Group de parole/Ateliers"),
-            new Mission(Id = Guid.NewGuid(), Name = "Orientation"),
-            new Mission(Id = Guid.NewGuid(), Name = "Prestataire")
-            )
+            new Mission(Guid.NewGuid(), "Accueil de loisirs"),
+            new Mission(Guid.NewGuid(), "Petite enfance"),
+            new Mission(Guid.NewGuid(), "Répit"),
+            new Mission(Guid.NewGuid(), "Accueil occasionnel"),
+            new Mission(Guid.NewGuid(), "Scolarité"),
+            new Mission(Guid.NewGuid(), "Référent santé accueil inclusif (RSAI)"),
+            new Mission(Guid.NewGuid(), "Accueil de jour"),
+            new Mission(Guid.NewGuid(), "Accueil de nuit"),
+            new Mission(Guid.NewGuid(), "Soins/santé/réeducation"),
+            new Mission(Guid.NewGuid(), "Accompagnement à la parentalité"),
+            new Mission(Guid.NewGuid(), "Accompagnement administratif"),
+            new Mission(Guid.NewGuid(), "Ressource documentaire"),
+            new Mission(Guid.NewGuid(), "Group de parole/Ateliers"),
+            new Mission(Guid.NewGuid(), "Orientation"),
+            new Mission(Guid.NewGuid(), "Prestataire")
+            );
     }
 }

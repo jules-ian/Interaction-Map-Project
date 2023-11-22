@@ -2,5 +2,5 @@ namespace DefaultNamespace;
 
 public class MissionRequestDto
 {
-    public string Name { get; set } = default!;
+    public string Name { get; set; } = default!;
 }

@@ -16,10 +16,10 @@ public class PlaceOfInterventionConfiguration : IEntityTypeConfiguration<PlaceOf
             .WithOne(p => p.PlaceOfIntervention);
 
         builder.HasData(
-            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "Domicile"),
-            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "EAJE"),
-            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "École"),
-            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "Cabinet")
-            )
+            new PlaceOfIntervention(Guid.NewGuid(), "Domicile"),
+            new PlaceOfIntervention(Guid.NewGuid(), "EAJE"),
+            new PlaceOfIntervention(Guid.NewGuid(), "École"),
+            new PlaceOfIntervention(Guid.NewGuid(), "Cabinet")
+            );
     }
 }

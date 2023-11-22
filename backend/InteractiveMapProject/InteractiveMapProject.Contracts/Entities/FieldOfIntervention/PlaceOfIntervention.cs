@@ -9,4 +9,12 @@ public class PlaceOfIntervention
     public IEnumerable<ProfessionalPlaceOfIntervention> Professionals { get; set; } = default!;
 
     public DateTime CreationDateTime { get; set; }
+
+    public PlaceOfIntervention(
+        Guid id,
+        string name)
+    {
+        Id = id;
+        Name = name;
+    }
 }
