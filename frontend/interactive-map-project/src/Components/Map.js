@@ -15,8 +15,7 @@ const Map = () => {
       zoom: 12 // Zoom level
     });
 
-    // Add a marker for Toulouse
-    // Create a marker element
+
     const marker = new mapboxgl.Marker()
       .setLngLat([1.4442, 43.6047]) // Toulouse coordinates [lng, lat]
       .addTo(map);
