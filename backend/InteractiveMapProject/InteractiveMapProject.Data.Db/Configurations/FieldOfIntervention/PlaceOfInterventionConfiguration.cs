@@ -14,5 +14,12 @@ public class PlaceOfInterventionConfiguration : IEntityTypeConfiguration<PlaceOf
         builder
             .HasMany(p => p.Professionals)
             .WithOne(p => p.PlaceOfIntervention);
+
+        builder.HasData(
+            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "Domicile"),
+            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "EAJE"),
+            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "École"),
+            new PlaceOfIntervention(Id = Guid.NewGuid(), Name = "Cabinet")
+            )
     }
 }
