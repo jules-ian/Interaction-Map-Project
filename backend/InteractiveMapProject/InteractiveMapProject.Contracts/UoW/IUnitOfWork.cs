@@ -1,4 +1,5 @@
 using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Repsitories;
 
 namespace InteractiveMapProject.Contracts.UoW;

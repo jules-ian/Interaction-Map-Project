@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using InteractiveMapProject.Contracts.Entities;
 
-namespace InteractiveMapProject.Contracts.Filtering;
+namespace InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 
 public static class ProfessionalSpecification
 {
