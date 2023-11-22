@@ -1,6 +1,6 @@
 namespace DefaultNamespace;
 
-public class Mission
+public class IAudienceService
 {
 
 }
