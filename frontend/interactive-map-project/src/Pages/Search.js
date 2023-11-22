@@ -2,10 +2,11 @@ import SearchBar from "../Components/SearchBar"
 import DropMultiSelect from "../Components/DropMultiSelect"
 import Box from '@mui/system/Box';
 import useWindowDimensions from "../utils/windowDimension";
-import { List, ListItem } from "@mui/material";
+import { Button, List, ListItem } from "@mui/material";
 import { getLieuIntervention, getMission, getPublic } from "../utils/BackendFunctions";
 import PostalCodeInput from "../Components/PostalCodeInput";
 import { useEffect, useState } from "react";
+import InputComponent from "../Components/InputComponent";
 
 export default function Search() {
     const [postalcode, setpostalcode] = useState("");
@@ -13,19 +14,40 @@ export default function Search() {
     const {height, width} = useWindowDimensions();
 
     
-    useEffect(()=>{
+    const rerenderResults = () =>{
       setResults(produce_random_results())
-    },[postalcode])
+    }
+
+
     return (
       <Box>
         <Box sx={{ display:"flex",flexDirection:"row"}}>
           
           <Box sx={{width:400, margin:2}}>
-            <SearchBar/> 
-            <PostalCodeInput state_postalcode = {{postalcode,setpostalcode}} label="Postalcode"/>
-            <DropMultiSelect label="Mission" options={getMission()}/>
-            <DropMultiSelect label="Public" options={getPublic()}/>
-            <DropMultiSelect label="Lieu d'intervention" options={getLieuIntervention()}/>
+            <InputComponent>
+              <SearchBar/>
+            </InputComponent>
+            <InputComponent> 
+              <PostalCodeInput state_postalcode = {{postalcode,setpostalcode}} label="Postalcode"/>
+            </InputComponent>
+            <InputComponent>
+              <DropMultiSelect label="Mission" options={getMission()}/>
+            </InputComponent>
+            <InputComponent>
+              <DropMultiSelect label="Public" options={getPublic()}/>
+            </InputComponent>
+            <InputComponent>
+              <DropMultiSelect label="Lieu d'intervention" options={getLieuIntervention()}/>
+            </InputComponent>
+
+
+            <InputComponent>
+             <Button variant="contained" fullWidth={true} 
+             onClick={rerenderResults}>
+              Search
+             </Button>
+            </InputComponent>
+
           </Box>
           <Placeholder text="Map under construction" height={height*0.7} width={"100%"}/>
           </Box>
