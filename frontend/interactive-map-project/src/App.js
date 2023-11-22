@@ -1,11 +1,13 @@
 
 import './App.css';
-import Map from './Components/Map';
-
+import Search from './Pages/Search';
+import Test from './utils/test';
 export default function App() {
-
-
+  const testStyle = {
+    margin:2
+  }
   return (
-      <Map />
-      )}
-
+    <div style={testStyle}>
+      <Search/> 
+    </div>
+)}
