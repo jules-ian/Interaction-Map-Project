@@ -1,4 +1,5 @@
 using FluentValidation;
+using InteractiveMapProject.API.Validators.FieldOfIntervetion;
 using InteractiveMapProject.Contracts.Dtos;
 
 namespace InteractiveMapProject.API.Validators;
