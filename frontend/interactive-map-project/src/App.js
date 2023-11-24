@@ -1,5 +1,6 @@
 
 import './App.css';
+import Form from './Pages/Form';
 import Search from './Pages/Search';
 import Test from './utils/test';
 export default function App() {
@@ -8,6 +9,6 @@ export default function App() {
   }
   return (
     <div style={testStyle}>
-      <Search/> 
+      <Form/> 
     </div>
 )}

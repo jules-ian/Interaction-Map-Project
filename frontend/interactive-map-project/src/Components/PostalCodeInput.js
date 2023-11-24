@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { isPostalCode } from "../utils/checkFunctions";
 
 export default function PostalCodeInput ({state_postalcode, label}){
 
@@ -22,8 +22,5 @@ export default function PostalCodeInput ({state_postalcode, label}){
     );
 }
 
-function isPostalCode(postalcode){
-    return (! (postalcode == "" || postalcode.length == 6 && !isNaN(Number(postalcode))))
-}
 
 // how to put the error part into a function, function only get called at initialization but i want it to be bound to the state and rerender on update
