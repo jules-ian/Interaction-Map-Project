@@ -1,11 +1,11 @@
 import { Autocomplete, TextField } from "@mui/material"
 
-function DropMultiSelect ({options=[], label="label", placeholder="placeholder"}){
+function DropMultiSelect ({optionsState=[], setOptionsState, label="label", placeholder="placeholder"}){
     return (
         <Autocomplete
             multiple
             id="tags-standard"
-            options={options}
+            options={optionsState}
             getOptionLabel={(option) => option}
             renderInput={(params) => (
             <TextField

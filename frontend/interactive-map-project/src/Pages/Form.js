@@ -18,10 +18,10 @@ export default function Form(){
     const [telephonePersonneRessource, setTelephonePersonneRessource] = useState("")
     const [_function, set_Function] = useState("")
     const [adressePersonneRessource, setadressePersonneRessource] = useState("")
-    const [mission, setMission] = useState([])
-    const [_public, set_Public] = useState([])
+    const [mission, setMission] = useState(getMission())
+    const [_public, set_Public] = useState(getPublic())
     const [sectuerIntervention, setSectuerIntervention] = useState([])
-    const [lieuIntervention, setLieuIntervention] = useState([])
+    const [lieuIntervention, setLieuIntervention] = useState(getLieuIntervention())
     const [presentation, setPresentation] = useState("")
     const [accept, setAccept] = useState(false)
     
@@ -30,7 +30,7 @@ export default function Form(){
             <Header>Veuillez remplir le formulaire suivant.</Header>
             <Text>Avec une inscription confirmée, vous entrez dans notre service de recherche et d'identification dans le domaine professionnel des handicaps de la petite enfance.</Text>
             
-                <Grid padding={2} paddingLeft={5} container spacing={2}>
+                <Grid padding={2} paddingX={10} container spacing={2}>
                     <Grid item xs={12}>
                         <Text>Information de votre structure</Text>
                     </Grid>
@@ -71,22 +71,22 @@ export default function Form(){
                         <Text>Champs d'intervention</Text>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DropMultiSelect options={getMission()} label={"Mission (pusieur choix possible)"}/>
+                        <DropMultiSelect optionsState={mission} setOptionsState={setMission} label={"Mission (pusieur choix possible)"}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DropMultiSelect options={getPublic()} label={"public (pusieur choix possible)"}/>
+                        <DropMultiSelect optionsState={_public} setOptionsState={set_Public} label={"public (pusieur choix possible)"}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <DropMultiSelect label={"TODO"}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <DropMultiSelect options={getLieuIntervention()} label={"lieu d'intervention(pusieur choix possible)"}/>
+                        <DropMultiSelect optionsState={lieuIntervention} setOptionsState={setLieuIntervention} label={"lieu d'intervention(pusieur choix possible)"}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Text>Présentation personnalisée de vos missions</Text>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextInput textState={presentation} setTextState={setPresentation} />
+                    <Grid item xs={12}>
+                        <TextInput textState={presentation} setTextState={setPresentation} multiline={true} />
                     </Grid>
                     <Grid item xs={12}>
                         <Text>Accepter Licence</Text>

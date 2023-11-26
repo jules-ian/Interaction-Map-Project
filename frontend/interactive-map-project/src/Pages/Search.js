@@ -10,6 +10,9 @@ import InputComponent from "../Components/InputComponent";
 
 export default function Search() {
     const [postalcode, setpostalcode] = useState("");
+    const [mission, setMission] = useState(getMission());
+    const [_public, set_Public] = useState(getPublic());
+    const [lieuIntervention, setLieuIntervention] = useState(getLieuIntervention());
     const [results, setResults] = useState([]);
     const {height, width} = useWindowDimensions();
 
@@ -31,13 +34,13 @@ export default function Search() {
               <PostalCodeInput state_postalcode = {{postalcode,setpostalcode}} label="Postalcode"/>
             </InputComponent>
             <InputComponent>
-              <DropMultiSelect label="Mission" options={getMission()}/>
+              <DropMultiSelect label="Mission" optionsState={mission} setOptionsState={setMission}/>
             </InputComponent>
             <InputComponent>
-              <DropMultiSelect label="Public" options={getPublic()}/>
+              <DropMultiSelect label="Public" optionsState={_public} setOptionsState={set_Public}/>
             </InputComponent>
             <InputComponent>
-              <DropMultiSelect label="Lieu d'intervention" options={getLieuIntervention()}/>
+              <DropMultiSelect label="Lieu d'intervention" optionsState={lieuIntervention} setOptionsState={setLieuIntervention}/>
             </InputComponent>
 
 
