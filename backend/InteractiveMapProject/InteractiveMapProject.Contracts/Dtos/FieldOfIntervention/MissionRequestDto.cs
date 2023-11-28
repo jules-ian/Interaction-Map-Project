@@ -1,4 +1,4 @@
-namespace DefaultNamespace;
+namespace InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 
 public class MissionRequestDto
 {

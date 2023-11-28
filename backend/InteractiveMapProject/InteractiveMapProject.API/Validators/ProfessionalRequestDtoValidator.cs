@@ -31,9 +31,9 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
             .SetValidator(new AudienceDtoValidator());
         RuleForEach(x => x.PlacesOfIntervention)
             .NotNull().WithMessage("Place of intervetion is required.")
-            .SetValidator(new PlaceOfInterventionDtoValidator());
+            .SetValidator(new PlaceOfInterventionRequestDtoValidator());
         RuleForEach(x => x.Missions)
             .NotNull().WithMessage("Mission is required.")
-            .SetValidator(new MissionDtoValidator());
+            .SetValidator(new MissionRequestDtoValidator());
     }
 }
