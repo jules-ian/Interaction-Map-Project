@@ -1,26 +1,41 @@
-import { Autocomplete, TextField } from "@mui/material"
+import { Autocomplete, TextField } from "@mui/material";
+import InputComponent from "./InputComponent";
 
-function DropMultiSelect ({optionsState=[], setOptionsState, label="label", placeholder="placeholder"}){
-    return (
-        <Autocomplete
-            multiple
-            id="tags-standard"
-            options={optionsState}
-            getOptionLabel={(option) => option}
-            renderInput={(params) => (
-            <TextField
-                {...params}
-                label={label}
-                placeholder={placeholder}
-            />
-            )}
-            onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                    // handle events here
-                }
-              }}
-        />
-    );
+function DropMultiSelect({
+  setSelectionState = function () {},
+  options = [],
+  label = "label",
+  error = false,
+  setErrorState = function () {},
+  placeholder = "placeholder",
+}) {
+  return (
+    <InputComponent>
+      <Autocomplete
+        multiple
+        id="tags-standard"
+        options={options}
+        error={true}
+        getOptionLabel={(option) => option}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={label}
+            error={error}
+            placeholder={placeholder}
+          />
+        )}
+        onChange={(event, newValue) => {
+          setErrorState(false);
+          setSelectionState(newValue);
+
+          if (event.key === "Enter") {
+            // handle events here
+          }
+        }}
+      />
+    </InputComponent>
+  );
 }
 
 export default DropMultiSelect;

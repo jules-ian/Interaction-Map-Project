@@ -1,14 +1,14 @@
 export class Professional {
   constructor(
     id,
-    serviceName,
+    serviceName, // should be named structure name
     address,
     phoneNumber,
     geolocation,
     email,
     contactPerson,
     audiences = [],
-    placeOfIntervention = [],
+    placesOfIntervention = [],
     missions = [],
     description = null
   ) {
@@ -20,8 +20,8 @@ export class Professional {
     this.email = email;
     this.conactPerson = contactPerson;
     this.audiences = audiences;
-    this.placeOfIntervention = placeOfIntervention;
-    this.mission = missions;
+    this.placesOfIntervention = placesOfIntervention;
+    this.missions = missions;
     this.description = description;
   }
 }

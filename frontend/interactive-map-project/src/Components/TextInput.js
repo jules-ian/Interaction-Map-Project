@@ -1,17 +1,29 @@
-import { TextField } from "@mui/material"
-export default function TextInput({textState, setTextState, label="placeholder", multiline=false}){
-    return(
-        <TextField 
-            id="outlined-basic" 
-            label={label} 
-            variant="outlined" 
-            fullWidth="true"
-            multiline={multiline}
-            onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                    setTextState(event.target.value)
-                }
-            }}
-        />
-    )
+import { TextField } from "@mui/material";
+import InputComponent from "./InputComponent";
+export default function TextInput({
+  defaultValue = "",
+  setTextState,
+  error = false,
+  setErrorState = function () {},
+  label = "placeholder",
+  multiline = false,
+}) {
+  return (
+    <InputComponent>
+      <TextField
+        id="outlined-basic"
+        label={label}
+        variant="outlined"
+        fullWidth="true"
+        error={error}
+        multiline={multiline}
+        onKeyDown={(event) => {
+          setErrorState(false);
+          setTextState(event.target.value);
+          if (event.key === "Enter") {
+          }
+        }}
+      />
+    </InputComponent>
+  );
 }

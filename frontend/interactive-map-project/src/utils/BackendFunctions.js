@@ -1,8 +1,4 @@
-export function getZoneGeographique() {
-  return ["Haute-Garonne", "Ariège", "Aude", "Portet Garonne"];
-}
-
-export function getMission() {
+export function getMissions() {
   return [
     "Accueil de loisirs",
     "Petite enfance",
@@ -13,10 +9,10 @@ export function getMission() {
   ];
 }
 
-export function getPublic() {
+export function getAudiences() {
   return ["0-3 ans", "3-6 ans", "6-12 ans", "12-18 ans", "parents"];
 }
 
-export function getLieuIntervention() {
+export function getPlacesOfIntervention() {
   return ["domicile", "EAJE", "école", "cabinet"];
 }
