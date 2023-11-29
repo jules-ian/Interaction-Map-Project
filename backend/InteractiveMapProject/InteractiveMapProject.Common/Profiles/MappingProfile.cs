@@ -16,8 +16,26 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => new Geolocation()))
             .ForMember(dest =>
                 dest.CreationDateTime,
-                opt => opt.MapFrom(src => DateTime.Now));
-        CreateMap<Professional, ProfessionalResponseDto>();
+                opt => opt.MapFrom(src => DateTime.Now))
+            .ForMember(dest =>
+                dest.Audiences,
+                opt => opt.Ignore())
+            .ForMember(dest =>
+                dest.PlacesOfIntervention,
+                opt => opt.Ignore())
+            .ForMember(dest =>
+                dest.Missions,
+                opt => opt.Ignore());
+        CreateMap<Professional, ProfessionalResponseDto>()
+            .ForMember(dest =>
+                dest.Audiences,
+                opt => opt.Ignore())
+            .ForMember(dest =>
+                dest.PlacesOfIntervention,
+                opt => opt.Ignore())
+            .ForMember(dest =>
+                dest.Missions,
+                opt => opt.Ignore());
 
         CreateMap<AudienceRequestDto, Audience>();
         CreateMap<Audience, AudienceResponseDto>();
