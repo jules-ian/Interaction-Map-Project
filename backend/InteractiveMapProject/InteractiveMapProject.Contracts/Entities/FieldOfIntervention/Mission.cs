@@ -9,4 +9,16 @@ public class Mission
     public IEnumerable<ProfessionalMission> Professionals { get; set; } = default!;
 
     public DateTime CreationDateTime { get; set; }
+
+    public Mission()
+    {
+    }
+
+    public Mission(
+        Guid id,
+        string name)
+    {
+        Id = id;
+        Name = name;
+    }
 }

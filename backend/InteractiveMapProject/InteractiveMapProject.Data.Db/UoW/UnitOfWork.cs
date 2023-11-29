@@ -2,6 +2,7 @@ using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Repositories;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.Repositories;
@@ -11,6 +12,9 @@ namespace InteractiveMapProject.Data.Db.UoW;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly IProfessionalRepository _professionals;
+    private readonly IRepository<Audience> _audiences;
+    private readonly IRepository<Mission> _missions;
+    private readonly IRepository<PlaceOfIntervention> _placesOfIntervention;
 
     private readonly IFilterFactory<Professional, ProfessionalFilterRequest> _filterFactory;
 
@@ -23,6 +27,15 @@ public class UnitOfWork : IUnitOfWork
 
     public IProfessionalRepository Professionals
         => _professionals ?? new ProfessionalRepository(_dbContext, _filterFactory);
+
+    public IRepository<Audience> Audiences
+        => _audiences ?? new Repository<Audience>(_dbContext);
+
+    public IRepository<Mission> Missions
+        => _missions ?? new Repository<Mission>(_dbContext);
+
+    public IRepository<PlaceOfIntervention> PlacesOfIntervention
+        => _placesOfIntervention ?? new Repository<PlaceOfIntervention>(_dbContext);
 
     public async Task SaveChangesAsync()
     {

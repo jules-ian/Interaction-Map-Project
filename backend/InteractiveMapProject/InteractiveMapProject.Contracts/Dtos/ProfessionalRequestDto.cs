@@ -13,19 +13,13 @@ public class ProfessionalRequestDto
 
     public string Email { get; set; } = default!;
 
-    public string ResourcePersonName { get; set; } = default!;
+    public ContactPerson ContactPerson { get; set; } = default!;
 
-    public string Function { get; set; } = default!;
+    public IEnumerable<AudienceRequestDto> Audiences { get; set; } = default!;
 
-    public int ContactPersonPhoneNumber { get; set; }
+    public IEnumerable<PlaceOfInterventionRequestDto> PlacesOfIntervention { get; set; } = default!;
 
-    public string ContactPersonEmail { get; set; } = default!;
-
-    public IEnumerable<AudienceDto> Audiences { get; set; } = default!;
-
-    public IEnumerable<PlaceOfInterventionDto> PlacesOfIntervention { get; set; } = default!;
-
-    public IEnumerable<MissionDto> Missions { get; set; } = default!;
+    public IEnumerable<MissionRequestDto> Missions { get; set; } = default!;
 
     public string? Description { get; set; } = default!;
 }

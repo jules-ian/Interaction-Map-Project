@@ -9,4 +9,16 @@ public class Audience
     public IEnumerable<ProfessionalAudience> Professionals { get; set; } = default!;
 
     public DateTime CreationDateTime { get; set; }
+
+    public Audience()
+    {
+    }
+
+    public Audience(
+        Guid id,
+        string name)
+    {
+        Id = id;
+        Name = name;
+    }
 }

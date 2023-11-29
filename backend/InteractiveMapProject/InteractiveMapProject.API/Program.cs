@@ -38,6 +38,9 @@ builder.Services.AddAutoMapper(cfg =>
 builder.Services.AddScoped<IFilterFactory<Professional, ProfessionalFilterRequest>, ProfessionalFilterFactory>();
 
 builder.Services.AddScoped<IProfessionalService, ProfessionalService>();
+builder.Services.AddScoped<IAudienceService, AudienceService>();
+builder.Services.AddScoped<IPlaceOfInterventionService, PlaceOfInterventionService>();
+builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
