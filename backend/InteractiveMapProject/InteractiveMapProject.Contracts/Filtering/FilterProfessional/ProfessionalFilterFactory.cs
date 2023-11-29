@@ -14,19 +14,19 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
             dbFilters.Add(ProfessionalSpecification.FilterByPostalCode(request.PostalCode));
         }
 
-        if (request?.AudienceIds.Any() == true)
+        if (request?.Audiences.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.AudienceIds));
+            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Audiences));
         }
 
-        if (request?.PlaceOfInterventionIds.Any() == true)
+        if (request?.PlacesOfIntervention.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.PlaceOfInterventionIds));
+            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.PlacesOfIntervention));
         }
 
-        if (request?.MissionIds.Any() == true)
+        if (request?.Missions.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.MissionIds));
+            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Missions));
         }
 
         return dbFilters.ToArray();
