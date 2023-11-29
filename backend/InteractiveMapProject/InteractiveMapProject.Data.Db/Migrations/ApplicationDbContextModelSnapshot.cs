@@ -42,37 +42,37 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("78edc373-1e55-4642-beb2-c87a19dc64a5"),
+                            Id = new Guid("7ab1874c-166d-449b-b0fd-60bf99fbb50e"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "0-3 ans"
                         },
                         new
                         {
-                            Id = new Guid("b7608311-f345-4f6b-a3c8-83f6e9a314ab"),
+                            Id = new Guid("1fb3dd4c-c8a1-452f-b59a-da5e8df4cd43"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "3-6 ans"
                         },
                         new
                         {
-                            Id = new Guid("fd0a0a32-95fe-47c1-9c26-e59927d71d3b"),
+                            Id = new Guid("11853a91-e22f-4098-80ad-3268d02780a3"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "6-12 ans"
                         },
                         new
                         {
-                            Id = new Guid("2b4d23bb-69f3-4293-b44c-bd2743fc972e"),
+                            Id = new Guid("bae704f3-7211-4201-8e06-f402e328f4bf"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "12-18 ans"
                         },
                         new
                         {
-                            Id = new Guid("ed95a023-0a1c-4ad0-9ee0-03dc1d579249"),
+                            Id = new Guid("5847cb74-d640-490d-a203-89e4d567ae12"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Parents"
                         },
                         new
                         {
-                            Id = new Guid("970a7fac-b534-43a3-8c4f-4190755ed7cc"),
+                            Id = new Guid("4709c7e2-7770-460e-ba24-8ccf883bfb92"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Professionnels"
                         });
@@ -98,91 +98,91 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("16e80f07-e6df-481d-bcc1-bbe91473e124"),
+                            Id = new Guid("d5b7fd7c-1c16-4677-935e-59e43f5fcd82"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de loisirs"
                         },
                         new
                         {
-                            Id = new Guid("ded64fcb-50f1-4acf-83b1-4f9a78ac5a62"),
+                            Id = new Guid("d01b121e-e358-443a-9c6d-224abbe5a2d2"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petite enfance"
                         },
                         new
                         {
-                            Id = new Guid("74866b44-a0e2-4c4e-9f44-ff73c6f17a9a"),
+                            Id = new Guid("8a27c1a3-694f-4385-a2fc-8bcddc633c84"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Répit"
                         },
                         new
                         {
-                            Id = new Guid("77ac0c16-c62c-4108-8767-be200051a4da"),
+                            Id = new Guid("43781777-161e-4585-a282-525a6d124c29"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil occasionnel"
                         },
                         new
                         {
-                            Id = new Guid("b8b2b4a8-8b32-4280-b411-1bce2b8d5b06"),
+                            Id = new Guid("43840c49-f350-49cb-bb21-354bdc272ad2"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Scolarité"
                         },
                         new
                         {
-                            Id = new Guid("221d692d-35ef-47ac-8b2e-8b23e3c74d31"),
+                            Id = new Guid("414a8f84-00ce-47dd-b3cb-c955d93676c3"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Référent santé accueil inclusif (RSAI)"
                         },
                         new
                         {
-                            Id = new Guid("3674fb22-177b-4d0c-aa7c-1278b4e13679"),
+                            Id = new Guid("e9703ca5-5fa6-4ab5-8c2d-f0a36e721a2e"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de jour"
                         },
                         new
                         {
-                            Id = new Guid("cd88eacd-6066-46f2-99a3-4353860fc558"),
+                            Id = new Guid("3945002e-72ae-4f62-8672-512b6c719ae6"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de nuit"
                         },
                         new
                         {
-                            Id = new Guid("6e5ba94d-74d9-4590-a601-d7d1a40a8bef"),
+                            Id = new Guid("97ba9f81-2460-4afe-b440-02fbe78860a5"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Soins/santé/réeducation"
                         },
                         new
                         {
-                            Id = new Guid("b9639141-3a1d-46f3-b495-dc89865de742"),
+                            Id = new Guid("818156bf-8c5e-4909-98ba-f94009942818"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement à la parentalité"
                         },
                         new
                         {
-                            Id = new Guid("2f0e10fd-0820-408a-bf8f-30c9d2998aea"),
+                            Id = new Guid("73dd467f-8346-4535-8249-241259af10e3"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement administratif"
                         },
                         new
                         {
-                            Id = new Guid("0387aceb-1b7b-44e8-9037-a91eab6cea1d"),
+                            Id = new Guid("bcf709a9-ecbb-47f2-b7eb-8bd30e75f361"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ressource documentaire"
                         },
                         new
                         {
-                            Id = new Guid("78748042-c2f4-4048-a7d1-253dec8daace"),
+                            Id = new Guid("a31b2880-a347-4a18-b8e3-e59db7222681"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Group de parole/Ateliers"
                         },
                         new
                         {
-                            Id = new Guid("834ed4d1-927a-430f-845d-b307cdad0d80"),
+                            Id = new Guid("5d01312a-7a2f-4c91-952c-7553f51189b9"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Orientation"
                         },
                         new
                         {
-                            Id = new Guid("3dfbf728-8b92-4db6-a9ee-bdd72f3377c7"),
+                            Id = new Guid("3d1ba809-27b8-4711-9b08-64e88f9b5f53"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Prestataire"
                         });
@@ -208,25 +208,25 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e41afb76-b21b-4513-ad8f-557e72f4136f"),
+                            Id = new Guid("c82b7e97-216a-4295-b848-541e6e977b8c"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Domicile"
                         },
                         new
                         {
-                            Id = new Guid("a36f0642-bb38-44c8-9f5d-31e2741574f0"),
+                            Id = new Guid("901fc4ec-e995-4c6b-80d4-594bfe985401"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "EAJE"
                         },
                         new
                         {
-                            Id = new Guid("0c32ed40-6d6c-4fd5-ac61-a75e93e06621"),
+                            Id = new Guid("f9224979-b4b8-4b72-ac52-45e1200fe18d"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "École"
                         },
                         new
                         {
-                            Id = new Guid("19e6647e-bbea-4d0d-8221-93696e511f00"),
+                            Id = new Guid("098690ae-6cc1-4b09-af13-57c7c982621c"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cabinet"
                         });
@@ -283,13 +283,6 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ContactPersonEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ContactPersonPhoneNumber")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
@@ -300,16 +293,8 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Function")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
-
-                    b.Property<string>("ResourcePersonName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceName")
                         .IsRequired()
@@ -404,6 +389,34 @@ namespace InteractiveMapProject.Data.Db.Migrations
                                 .HasForeignKey("ProfessionalId");
                         });
 
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
+                        {
+                            b1.Property<Guid>("ProfessionalId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Email")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Function")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("PhoneNumber")
+                                .HasColumnType("int");
+
+                            b1.HasKey("ProfessionalId");
+
+                            b1.ToTable("Professionals");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProfessionalId");
+                        });
+
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
@@ -424,6 +437,9 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         });
 
                     b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("ContactPerson")
                         .IsRequired();
 
                     b.Navigation("Geolocation")
