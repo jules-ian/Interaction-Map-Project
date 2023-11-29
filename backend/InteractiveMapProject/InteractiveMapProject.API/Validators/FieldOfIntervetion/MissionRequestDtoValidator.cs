@@ -3,9 +3,9 @@ using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 
 namespace InteractiveMapProject.API.Validators.FieldOfIntervetion;
 
-public class MissionDtoValidator : AbstractValidator<MissionDto>
+public class MissionRequestDtoValidator : AbstractValidator<MissionRequestDto>
 {
-    public MissionDtoValidator()
+    public MissionRequestDtoValidator()
     {
         RuleFor(x => x.Name)
             .NotNull().WithMessage("Name is required.");

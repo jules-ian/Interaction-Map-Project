@@ -14,13 +14,7 @@ public class Professional
 
     public string Email { get; set; } = default!;
 
-    public string ResourcePersonName { get; set; } = default!;
-
-    public string Function { get; set; } = default!;
-
-    public int ContactPersonPhoneNumber { get; set; }
-
-    public string ContactPersonEmail { get; set; } = default!;
+    public ContactPerson ContactPerson { get; set; } = default!;
 
     public IEnumerable<ProfessionalAudience> Audiences { get; set; } = default!;
 
