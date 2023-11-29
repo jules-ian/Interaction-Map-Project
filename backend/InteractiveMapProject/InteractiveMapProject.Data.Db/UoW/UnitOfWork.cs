@@ -1,3 +1,5 @@
+using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Contracts.UoW;
@@ -10,12 +12,13 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly IProfessionalRepository _professionals;
 
-    private readonly ProfessionalFilterFactory _filterFactory;
+    private readonly IFilterFactory<Professional, ProfessionalFilterRequest> _filterFactory;
 
     private readonly ApplicationDbContext _dbContext;
-    public UnitOfWork(ApplicationDbContext context)
+    public UnitOfWork(ApplicationDbContext context, IFilterFactory<Professional, ProfessionalFilterRequest> filterFactory)
     {
         _dbContext = context;
+        _filterFactory = filterFactory;
     }
 
     public IProfessionalRepository Professionals

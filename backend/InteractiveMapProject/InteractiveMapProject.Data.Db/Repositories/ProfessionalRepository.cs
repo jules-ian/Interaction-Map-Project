@@ -1,4 +1,5 @@
 using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Data.Db.Context;
@@ -9,9 +10,9 @@ namespace InteractiveMapProject.Data.Db.Repositories;
 public class ProfessionalRepository : Repository<Professional>, IProfessionalRepository
 {
     private readonly DbSet<Professional> _professionals;
-    private readonly ProfessionalFilterFactory _filterFactory;
+    private readonly IFilterFactory<Professional, ProfessionalFilterRequest> _filterFactory;
 
-    public ProfessionalRepository(ApplicationDbContext dbContext, ProfessionalFilterFactory filterFactory) : base(dbContext)
+    public ProfessionalRepository(ApplicationDbContext dbContext, IFilterFactory<Professional, ProfessionalFilterRequest> filterFactory) : base(dbContext)
     {
         _professionals = dbContext.Set<Professional>();
         _filterFactory = filterFactory;
