@@ -1,4 +1,3 @@
-using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
@@ -8,7 +7,7 @@ namespace InteractiveMapProject.Data.Db.UoW;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly IRepository<Professional> _professionals;
+    private readonly IProfessionalRepository _professionals;
 
     private readonly ApplicationDbContext _dbContext;
     public UnitOfWork(ApplicationDbContext context)
@@ -16,8 +15,8 @@ public class UnitOfWork : IUnitOfWork
         _dbContext = context;
     }
 
-    public IRepository<Professional> Professionals
-        => _professionals ?? new Repository<Professional>(_dbContext);
+    public IProfessionalRepository Professionals
+        => _professionals ?? new ProfessionalRepository(_dbContext);
 
     public async Task SaveChangesAsync()
     {
