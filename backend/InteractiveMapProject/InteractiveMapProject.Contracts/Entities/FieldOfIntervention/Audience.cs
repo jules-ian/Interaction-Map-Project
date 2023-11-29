@@ -10,6 +10,10 @@ public class Audience
 
     public DateTime CreationDateTime { get; set; }
 
+    public Audience()
+    {
+    }
+
     public Audience(
         Guid id,
         string name)

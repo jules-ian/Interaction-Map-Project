@@ -15,6 +15,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly IRepository<PlaceOfIntervention> _placesOfIntervention;
 
     private readonly ApplicationDbContext _dbContext;
+
     public UnitOfWork(ApplicationDbContext context)
     {
         _dbContext = context;

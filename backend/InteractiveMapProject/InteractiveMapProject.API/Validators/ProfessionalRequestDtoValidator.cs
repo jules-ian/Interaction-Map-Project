@@ -28,7 +28,7 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
             .NotNull().WithMessage("Email of the resource person is required.");
         RuleForEach(x => x.Audiences)
             .NotNull().WithMessage("Audience is required.")
-            .SetValidator(new AudienceDtoValidator());
+            .SetValidator(new AudienceRequestDtoValidator());
         RuleForEach(x => x.PlacesOfIntervention)
             .NotNull().WithMessage("Place of intervetion is required.")
             .SetValidator(new PlaceOfInterventionRequestDtoValidator());

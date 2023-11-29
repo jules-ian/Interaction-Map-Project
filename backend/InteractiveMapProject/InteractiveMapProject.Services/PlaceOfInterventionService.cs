@@ -1,8 +1,8 @@
 using AutoMapper;
-using DefaultNamespace;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Exceptions;
+using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
 
 namespace InteractiveMapProject.Services;

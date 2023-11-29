@@ -1,6 +1,6 @@
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 
-namespace DefaultNamespace;
+namespace InteractiveMapProject.Contracts.Services;
 
 public interface IAudienceService
 {

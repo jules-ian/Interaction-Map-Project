@@ -10,6 +10,10 @@ public class PlaceOfIntervention
 
     public DateTime CreationDateTime { get; set; }
 
+    public PlaceOfIntervention()
+    {
+    }
+
     public PlaceOfIntervention(
         Guid id,
         string name)

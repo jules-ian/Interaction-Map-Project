@@ -1,8 +1,5 @@
-using DefaultNamespace;
-using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Services;
-using InteractiveMapProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InteractiveMapProject.API.Controllers;

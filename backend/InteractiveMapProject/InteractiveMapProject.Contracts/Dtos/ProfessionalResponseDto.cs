@@ -1,6 +1,5 @@
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Entities;
-using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.Dtos;
 
@@ -29,8 +28,6 @@ public class ProfessionalResponseDto
     public IEnumerable<PlaceOfInterventionRequestDto> PlacesOfIntervention { get; set; } = default!;
 
     public IEnumerable<MissionRequestDto> Missions { get; set; } = default!;
-
-    public Mission Mission { get; set; } = default!;
 
     public Geolocation Geolocation { get; set; } = default!;
 
