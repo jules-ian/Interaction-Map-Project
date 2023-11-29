@@ -2,6 +2,7 @@ using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Exceptions;
+using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
 
@@ -18,7 +19,7 @@ public class ProfessionalService : IProfessionalService
         _mapper = mapper;
     }
 
-    public async Task<List<ProfessionalResponseDto>> GetAllAsync()
+    public async Task<List<ProfessionalResponseDto>> GetAllAsync(ProfessionalFilterRequest filterRequest)
     {
         List<Professional> professionals = await _uow.Professionals.GetAllAsync();
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();

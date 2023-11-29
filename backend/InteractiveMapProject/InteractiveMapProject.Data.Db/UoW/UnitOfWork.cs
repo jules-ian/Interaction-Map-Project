@@ -1,5 +1,5 @@
 using InteractiveMapProject.Contracts.Entities;
-using InteractiveMapProject.Contracts.Repsitories;
+using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.Repositories;

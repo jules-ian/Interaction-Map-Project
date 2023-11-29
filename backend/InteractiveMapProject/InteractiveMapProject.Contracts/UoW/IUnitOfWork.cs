@@ -1,6 +1,6 @@
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
-using InteractiveMapProject.Contracts.Repsitories;
+using InteractiveMapProject.Contracts.Repositories;
 
 namespace InteractiveMapProject.Contracts.UoW;
 
