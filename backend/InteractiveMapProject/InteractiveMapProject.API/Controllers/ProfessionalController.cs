@@ -17,9 +17,15 @@ public class ProfessionalController : ControllerBase
     }
 
     [HttpGet("all", Name = "GetAllProfessionals")]
-    public async Task<IActionResult> GetAll(ProfessionalFilterRequest filterRequest)
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(await _professionalService.GetAllAsync(filterRequest));
+        return Ok(await _professionalService.GetAllAsync());
+    }
+
+    [HttpPost("all-filtered", Name = "GetAllProfessionalsFiltered")]
+    public async Task<IActionResult> GetAllFiltered(ProfessionalFilterRequest filterRequest)
+    {
+        return Ok(await _professionalService.GetAllFilteredAsync(filterRequest));
     }
 
     [HttpGet("{id}", Name = "GetProfessional")]

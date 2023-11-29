@@ -1,3 +1,4 @@
+using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
@@ -9,6 +10,8 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly IProfessionalRepository _professionals;
 
+    private readonly ProfessionalFilterFactory _filterFactory;
+
     private readonly ApplicationDbContext _dbContext;
     public UnitOfWork(ApplicationDbContext context)
     {
@@ -16,7 +19,7 @@ public class UnitOfWork : IUnitOfWork
     }
 
     public IProfessionalRepository Professionals
-        => _professionals ?? new ProfessionalRepository(_dbContext);
+        => _professionals ?? new ProfessionalRepository(_dbContext, _filterFactory);
 
     public async Task SaveChangesAsync()
     {

@@ -19,21 +19,31 @@ public class ProfessionalService : IProfessionalService
         _mapper = mapper;
     }
 
-    public async Task<List<ProfessionalResponseDto>> GetAllAsync(ProfessionalFilterRequest filterRequest)
+    public async Task<List<ProfessionalResponseDto>> GetAllAsync()
     {
         List<Professional> professionals = await _uow.Professionals.GetAllAsync();
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
+        // TODO: map fields of intervention
+    }
+
+    public async Task<List<ProfessionalResponseDto>> GetAllFilteredAsync(ProfessionalFilterRequest filterRequest)
+    {
+        List<Professional> professionals = await _uow.Professionals.GetAllAsync(filterRequest);
+        return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
+        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> GetAsync(Guid id)
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         return _mapper.Map<ProfessionalResponseDto>(professional);
+        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalRequestDto request)
     {
         Professional professional = _mapper.Map<Professional>(request);
+        // TODO: map fields of intervention
         _uow.Professionals.Add(professional);
         await _uow.SaveChangesAsync();
         return _mapper.Map<ProfessionalResponseDto>(professional);
@@ -43,6 +53,7 @@ public class ProfessionalService : IProfessionalService
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         professional = _mapper.Map(request, professional);
+        // TODO: map fields of intervention
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
         return _mapper.Map<ProfessionalResponseDto>(professional);
