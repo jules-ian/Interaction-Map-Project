@@ -1,4 +1,5 @@
 using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Repositories;
@@ -28,6 +29,6 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
         {
             query = filters.Aggregate(query, (current, item) => current.Where(item));
         }
-        return await _professionals.ToListAsync();
+        return await query.ToListAsync();
     }
 }
