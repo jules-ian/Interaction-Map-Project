@@ -1,4 +1,5 @@
 using InteractiveMapProject.Contracts.Dtos;
+using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,12 @@ public class ProfessionalController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _professionalService.GetAllAsync());
+    }
+
+    [HttpPost("all-filtered", Name = "GetAllProfessionalsFiltered")]
+    public async Task<IActionResult> GetAllFiltered(ProfessionalFilterRequest filterRequest)
+    {
+        return Ok(await _professionalService.GetAllFilteredAsync(filterRequest));
     }
 
     [HttpGet("{id}", Name = "GetProfessional")]

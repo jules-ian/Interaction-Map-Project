@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InteractiveMapProject.Common\InteractiveMapProject.Common.csproj" />
     <ProjectReference Include="..\InteractiveMapProject.Contracts\InteractiveMapProject.Contracts.csproj" />
   </ItemGroup>
 
