@@ -21,12 +21,12 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
 
         if (request?.PlacesOfIntervention.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.PlacesOfIntervention));
+            dbFilters.Add(ProfessionalSpecification.FilterByPlaceOfIntervetion(request.PlacesOfIntervention));
         }
 
         if (request?.Missions.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Missions));
+            dbFilters.Add(ProfessionalSpecification.FilterByMission(request.Missions));
         }
 
         return dbFilters.ToArray();
