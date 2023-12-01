@@ -1,5 +1,7 @@
 using InteractiveMapProject.Contracts.Services;
 using System.Text.Json;
+using System.Web;
+using System.Xml.Linq;
 
 namespace InteractiveMapProject.Services;
 
@@ -29,7 +31,7 @@ public class HttpService : IHttpService
             return baseUrl;
         }
 
-        var queryString = string.Join("&", parameters.Select(kvp => $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(kvp.Value)}"));
+        var queryString = string.Join("&", parameters.Select(kvp => $"{HttpUtility.HtmlEncode(kvp.Key)}={HttpUtility.HtmlEncode(kvp.Value)}"));
 
         if (baseUrl.Contains("?"))
         {
