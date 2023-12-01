@@ -11,4 +11,9 @@ public class Geolocation
         Latitude = latitude;
         Longitude = longitude;
     }
+    public Geolocation()
+    {
+        Latitude = 0;
+        Longitude = 0;
+    }
 }
