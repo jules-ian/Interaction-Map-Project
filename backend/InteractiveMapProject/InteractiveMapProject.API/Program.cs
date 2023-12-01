@@ -42,6 +42,7 @@ builder.Services.AddScoped<IFilterFactory<Professional, ProfessionalFilterReques
 builder.Services.AddHttpClient();
 
 builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddScoped<IGeocodingService, GeoapifyGeocodingService>();
 builder.Services.AddScoped<IProfessionalService, ProfessionalService>();
 builder.Services.AddScoped<IAudienceService, AudienceService>();
 builder.Services.AddScoped<IPlaceOfInterventionService, PlaceOfInterventionService>();

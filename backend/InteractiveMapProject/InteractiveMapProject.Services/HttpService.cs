@@ -12,24 +12,32 @@ public class HttpService : IHttpService
         _httpClient = httpClient;
     }
 
-    public async Task<T?> GetAsync<T>(string url, Dictionary<string, string>? headers = null)
+    public async Task<T?> GetAsync<T>(string url, Dictionary<string, string>? parameters = null)
     {
-        AddHeaders(headers);
+        string urlWithParams = AddParameters(url, parameters);
 
-        var response = await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync(urlWithParams);
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<T>(responseBody);
     }
 
-    private void AddHeaders(Dictionary<string, string>? headers)
+    private string AddParameters(string baseUrl, Dictionary<string, string>? parameters)
     {
-        if (headers != null)
+        if (parameters == null || parameters.Count == 0)
         {
-            foreach (var header in headers)
-            {
-                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-            }
+            return baseUrl;
+        }
+
+        var queryString = string.Join("&", parameters.Select(kvp => $"{Uri.EscapeDataString(kvp.Key)}={Uri.EscapeDataString(kvp.Value)}"));
+
+        if (baseUrl.Contains("?"))
+        {
+            return $"{baseUrl}{queryString}";
+        }
+        else
+        {
+            return $"{baseUrl}?{queryString}";
         }
     }
 }
