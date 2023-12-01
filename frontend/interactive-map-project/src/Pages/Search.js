@@ -1,20 +1,23 @@
-import SearchBar from "../Components/SearchBar";
 import DropMultiSelect from "../Components/DropMultiSelect";
 import Box from "@mui/system/Box";
 import useWindowDimensions from "../utils/windowDimension";
-import { Button, List, ListItem } from "@mui/material";
+import { Button } from "@mui/material";
 import {
   getAudiences,
   getPlacesOfIntervention,
   getMissions,
+  getResults,
 } from "../utils/BackendFunctions";
-import PostalCodeInput from "../Components/PostalCodeInput";
-import { useEffect, useState } from "react";
-import InputComponent from "../Components/InputComponent";
+import TextInput from "../Components/TextInput";
+import { useState } from "react";
+import { isPostalCode } from "../utils/checkFunctions";
+import { ResultCard } from "../Components/ProfessionalResult";
 
 export default function Search() {
-  const [postalcode, setpostalcode] = useState("");
-  const [mission, setMission] = useState(getMissions());
+  const [search, setSearch] = useState("");
+  const [postal, setPostal] = useState("");
+  const [postalError, setPostalError] = useState(false);
+  const [missions, setMissions] = useState(getMissions());
   const [_public, set_Public] = useState(getAudiences());
   const [lieuIntervention, setLieuIntervention] = useState(
     getPlacesOfIntervention()
@@ -22,25 +25,39 @@ export default function Search() {
   const [results, setResults] = useState([]);
   const { height, width } = useWindowDimensions();
 
-  const rerenderResults = () => {
-    setResults(produce_random_results());
+  const onSearch = function () {
+    let success = checkEntries();
+    if (success) {
+      setResults(getResults());
+    }
+  };
+
+  const checkEntries = function () {
+    let checkSuccess = true;
+    if (!isPostalCode(postal) && postal !== "") {
+      setPostalError(true);
+      checkSuccess = false;
+    }
+    return checkSuccess;
   };
 
   return (
     <Box>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <Box sx={{ width: 400, margin: 2 }}>
-          <SearchBar />
+          <TextInput setTextState={setSearch} label="Search" />
 
-          <PostalCodeInput
-            state_postalcode={{ postalcode, setpostalcode }}
+          <TextInput
+            setTextState={setPostal}
+            error={postalError}
+            setErrorState={setPostalError}
             label="Postalcode"
           />
 
           <DropMultiSelect
             label="Mission"
-            optionsState={mission}
-            setOptionsState={setMission}
+            optionsState={missions}
+            setOptionsState={setMissions}
           />
 
           <DropMultiSelect
@@ -55,11 +72,7 @@ export default function Search() {
             setOptionsState={setLieuIntervention}
           />
 
-          <Button
-            variant="contained"
-            fullWidth={true}
-            onClick={rerenderResults}
-          >
+          <Button variant="contained" fullWidth onClick={onSearch}>
             Search
           </Button>
         </Box>
@@ -70,10 +83,10 @@ export default function Search() {
         />
       </Box>
       <Box sx={{ display: "flex", overflow: "auto", flexDirection: "row" }}>
-        {results.map((i) => (
-          <Placeholder
-            text={"Result " + i}
-            width={height * 0.2}
+        {results.map((professional) => (
+          <ResultCard
+            professional={professional}
+            width={height * 0.4}
             height={height * 0.2}
             other={{ flexShrink: 0 }}
           />
@@ -81,10 +94,6 @@ export default function Search() {
       </Box>
     </Box>
   );
-}
-
-function produce_random_results() {
-  return [...Array(Math.round(Math.random() * 10) + 1).keys()];
 }
 
 function Placeholder({ text, width, height, other }) {

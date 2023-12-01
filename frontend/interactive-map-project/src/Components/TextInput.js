@@ -17,7 +17,7 @@ export default function TextInput({
         fullWidth="true"
         error={error}
         multiline={multiline}
-        onKeyDown={(event) => {
+        onChange={(event) => {
           setErrorState(false);
           setTextState(event.target.value);
           if (event.key === "Enter") {

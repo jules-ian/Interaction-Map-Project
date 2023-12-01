@@ -16,18 +16,23 @@ import {
   isPostalCode,
   isTelephoneNumber,
 } from "../utils/checkFunctions";
+import { Address, ContactPerson, Professional } from "../utils/Entities";
 
 export default function Form() {
-  const [structureName, setStructureName] = useState("");
-  const [structureNameError, setStructureNameError] = useState(false);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [establishmentType, setEstablishmentType] = useState("");
+  const [establishmentTypeError, setEstablishmentTypeError] = useState(false);
+  const [managementType, setManagementType] = useState("");
+  const [managementTypeError, setManagementTypeError] = useState(false);
   const [telephone, setTelephone] = useState("");
   const [telephoneError, setTelephoneError] = useState(false);
   const [street, setStreet] = useState("");
   const [streetError, setStreetError] = useState(false);
   const [city, setCity] = useState("");
   const [cityError, setCityError] = useState(false);
-  const [postale, setPostale] = useState("");
-  const [postaleError, setPostaleError] = useState(false);
+  const [postal, setPostal] = useState("");
+  const [postalError, setPostalError] = useState(false);
   const [mail, setMail] = useState("");
   const [mailError, setMailError] = useState(false);
   const [contactPersonName, setContactPersonName] = useState("");
@@ -53,15 +58,28 @@ export default function Form() {
   const [acceptError, setAcceptError] = useState(false);
 
   const onSubmit = function () {
-    checkEntries();
-    console.log("Hello from onSubmit");
+    let success = checkEntries();
+    if (success) {
+      let professional = createProfessinalEntitiy();
+      console.log(professional);
+    }
   };
 
   const checkEntries = function () {
     let checkSuccess = true;
-    // Structure Name
-    if (!isName(structureName)) {
-      setStructureNameError(true);
+    // Name
+    if (!isName(name)) {
+      setNameError(true);
+      checkSuccess = false;
+    }
+    // Establishment Type
+    if (!isName(establishmentType)) {
+      setEstablishmentTypeError(true);
+      checkSuccess = false;
+    }
+    // Management Type
+    if (!isName(managementType)) {
+      setManagementTypeError(true);
       checkSuccess = false;
     }
     // Telephonenumber
@@ -80,8 +98,8 @@ export default function Form() {
       checkSuccess = false;
     }
     // PostalCode
-    if (!isPostalCode(postale)) {
-      setPostaleError(true);
+    if (!isPostalCode(postal)) {
+      setPostalError(true);
       checkSuccess = false;
     }
     // Mail
@@ -110,7 +128,6 @@ export default function Form() {
       checkSuccess = false;
     }
     //Audiences
-    console.log(audiences.length + " länge", audiences);
     if (audiences.length == 0) {
       setAudiencesError(true);
       checkSuccess = false;
@@ -135,9 +152,34 @@ export default function Form() {
       setAcceptError(true);
       checkSuccess = false;
     }
+    return checkSuccess;
   };
 
-  const createProfessinalEntitiy = function () {};
+  const createProfessinalEntitiy = function () {
+    const address = new Address(street, city, postal);
+    const contactPerson = new ContactPerson(
+      contactPersonName,
+      contactPersonTelephone,
+      contactPersonEmail,
+      contactPersonFunction
+    );
+    const professional = new Professional(
+      null,
+      name,
+      establishmentType,
+      managementType,
+      address,
+      telephone,
+      null,
+      mail,
+      contactPerson,
+      audiences,
+      placesOfIntervention,
+      missions,
+      description
+    );
+    return professional;
+  };
 
   return (
     <Box>
@@ -154,10 +196,26 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextInput
-            error={structureNameError}
-            setTextState={setStructureName}
-            setErrorState={setStructureNameError}
+            error={nameError}
+            setTextState={setName}
+            setErrorState={setNameError}
             label="Nom de la structure"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextInput
+            error={establishmentTypeError}
+            setTextState={setEstablishmentType}
+            setErrorState={setEstablishmentTypeError}
+            label="Service"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextInput
+            error={managementTypeError}
+            setTextState={setManagementType}
+            setErrorState={setManagementTypeError}
+            label="Gestionnaire"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -187,10 +245,10 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextInput
-            error={postaleError}
-            setTextState={setPostale}
-            setErrorState={setPostaleError}
-            label="Postale"
+            error={postalError}
+            setTextState={setPostal}
+            setErrorState={setPostalError}
+            label="Postal"
           />
         </Grid>
 

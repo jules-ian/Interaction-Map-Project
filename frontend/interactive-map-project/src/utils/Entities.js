@@ -1,7 +1,9 @@
 export class Professional {
   constructor(
     id,
-    serviceName, // should be named structure name
+    name,
+    establishmentType,
+    managementType,
     address,
     phoneNumber,
     geolocation,
@@ -13,7 +15,9 @@ export class Professional {
     description = null
   ) {
     this.id = id;
-    this.serviceName = serviceName;
+    this.name = name;
+    this.establishmentType = establishmentType;
+    this.managementType = managementType;
     this.address = address;
     this.phoneNumber = phoneNumber;
     this.geolocation = geolocation;
@@ -23,6 +27,9 @@ export class Professional {
     this.placesOfIntervention = placesOfIntervention;
     this.missions = missions;
     this.description = description;
+  }
+  toString() {
+    return "Professional" + this.serviceName;
   }
 }
 
@@ -59,6 +66,8 @@ const dummyGeoLocation = new GeoLocation(1.1, 0.1);
 export const dummyProf = new Professional(
   0,
   "serviceName",
+  "dummy est.",
+  "dummy management",
   dummyAdd,
   1111111,
   dummyGeoLocation,

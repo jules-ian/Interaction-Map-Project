@@ -1,5 +1,4 @@
 export function isPostalCode(postalcode) {
-  //   const regex = new RegExp("^(?:0[1-9]|[1-8]d|9[0-8])d{3}$");
   const regex = new RegExp("^(?:0[1-9]|[1-8]\\d|9[0-8])\\d{3}$");
   return regex.test(postalcode);
 }

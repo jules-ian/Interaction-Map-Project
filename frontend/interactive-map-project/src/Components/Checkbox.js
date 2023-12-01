@@ -1,8 +1,8 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
+import { red } from "@mui/material/colors";
 import InputComponent from "./InputComponent";
 
 export function SingleCheckbox({
-  // TODO visual feedback depending on error
   checked,
   error,
   setErrorState,
@@ -17,11 +17,16 @@ export function SingleCheckbox({
         setErrorState(false);
         setStateCheck(event.target.checked);
       }}
+      sx={{ color: error ? red[800] : "black" }}
     />
   );
   return (
     <InputComponent>
-      <FormControlLabel control={singleCheckbox} label={label} />
+      <FormControlLabel
+        control={singleCheckbox}
+        label={label}
+        sx={{ color: error ? red[800] : "black" }}
+      />
     </InputComponent>
   );
 }
