@@ -15,7 +15,19 @@ public class ProfessionalConfiguration : IEntityTypeConfiguration<Professional>
             .OwnsOne(p => p.Address);
 
         builder
-            .OwnsOne(p => p.FieldOfIntervention);
+            .OwnsOne(p => p.ContactPerson);
+
+        builder
+            .HasMany(p => p.Audiences)
+            .WithOne(p => p.Professional);
+
+        builder
+            .HasMany(p => p.PlacesOfIntervention)
+            .WithOne(p => p.Professional);
+
+        builder
+            .HasMany(p => p.Missions)
+            .WithOne(p => p.Professional);
 
         builder
             .OwnsOne(p => p.Geolocation);

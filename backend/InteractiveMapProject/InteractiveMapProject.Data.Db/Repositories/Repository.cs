@@ -1,4 +1,4 @@
-using InteractiveMapProject.Contracts.Repsitories;
+using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Data.Db.Context;
 using Microsoft.EntityFrameworkCore;
 
