@@ -7,11 +7,11 @@ using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Services;
+using InteractiveMapProject.Contracts.Settings;
 using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.UoW;
 using InteractiveMapProject.Services;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +34,8 @@ builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<MappingProfile>();
 }, AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.Configure<GeoapifySettings>(builder.Configuration.GetSection("Geoapify"));
 
 builder.Services.AddScoped<IFilterFactory<Professional, ProfessionalFilterRequest>, ProfessionalFilterFactory>();
 
