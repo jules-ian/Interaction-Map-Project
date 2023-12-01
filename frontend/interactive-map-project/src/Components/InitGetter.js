@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dropdown from './DropMultiSelect';
 
-const InitGetter = () => {
+const InitGetter = (API) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,13 +14,9 @@ const InitGetter = () => {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }, []); 
+  }, []);
 
-  return (
-    <div>
-      <DropMultiSelect data={data} />
-    </div>
-  );
+  return data;
 };
 
 export default InitGetter;
