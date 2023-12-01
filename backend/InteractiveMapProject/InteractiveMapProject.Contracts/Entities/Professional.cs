@@ -6,7 +6,11 @@ public class Professional
 {
     public Guid Id { get; set; }
 
-    public string ServiceName { get; set; } = default!;
+    public string Name { get; set; } = default!;
+
+    public string EstablishmentType { get; set; } = default!;
+
+    public string ManagementType { get; set; } = default!;
 
     public Address Address { get; set; } = default!;
 
