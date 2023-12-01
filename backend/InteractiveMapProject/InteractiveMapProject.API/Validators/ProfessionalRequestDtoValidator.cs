@@ -8,7 +8,13 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
 {
     public ProfessionalRequestDtoValidator()
     {
-        RuleFor(x => x.ServiceName)
+        RuleFor(x => x.Name)
+            .NotNull().WithMessage("Name is required.");
+        RuleFor(x => x.EstablishmentType)
+            .NotNull().WithMessage("Establishment type is required.");
+        RuleFor(x => x.ManagementType)
+            .NotNull().WithMessage("Management type is required.");
+        RuleFor(x => x.Name)
             .NotNull().WithMessage("Service name is required.");
         RuleFor(x => x.Address)
             .NotNull().WithMessage("Address is required.")
