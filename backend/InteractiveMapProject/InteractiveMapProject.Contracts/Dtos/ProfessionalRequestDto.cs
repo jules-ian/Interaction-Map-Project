@@ -19,11 +19,11 @@ public class ProfessionalRequestDto
 
     public ContactPerson ContactPerson { get; set; } = default!;
 
-    public IEnumerable<AudienceRequestDto> Audiences { get; set; } = default!;
+    public IEnumerable<FieldOfInterventionGetRequestDto> Audiences { get; set; } = default!;
 
-    public IEnumerable<PlaceOfInterventionRequestDto> PlacesOfIntervention { get; set; } = default!;
+    public IEnumerable<FieldOfInterventionGetRequestDto> PlacesOfIntervention { get; set; } = default!;
 
-    public IEnumerable<MissionRequestDto> Missions { get; set; } = default!;
+    public IEnumerable<FieldOfInterventionGetRequestDto> Missions { get; set; } = default!;
 
     public string? Description { get; set; } = default!;
 }

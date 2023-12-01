@@ -4,9 +4,9 @@ namespace InteractiveMapProject.Contracts.Services;
 
 public interface IMissionService
 {
-    Task<List<MissionResponseDto>> GetAllAsync();
-    Task<MissionResponseDto> GetAsync(Guid id);
-    Task<MissionResponseDto> CreateAsync(MissionRequestDto request);
-    Task<MissionResponseDto> UpdateAsync(Guid id, MissionRequestDto request);
+    Task<List<FieldOfInterventionResponseDto>> GetAllAsync();
+    Task<FieldOfInterventionResponseDto> GetAsync(Guid id);
+    Task<FieldOfInterventionResponseDto> CreateAsync(FieldOfInterventionCreateRequestDto request);
+    Task<FieldOfInterventionResponseDto> UpdateAsync(Guid id, FieldOfInterventionCreateRequestDto request);
     Task DeleteAsync(Guid id);
 }

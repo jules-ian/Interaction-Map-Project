@@ -4,9 +4,9 @@ namespace InteractiveMapProject.Contracts.Services;
 
 public interface IAudienceService
 {
-    Task<List<AudienceResponseDto>> GetAllAsync();
-    Task<AudienceResponseDto> GetAsync(Guid id);
-    Task<AudienceResponseDto> CreateAsync(AudienceRequestDto request);
-    Task<AudienceResponseDto> UpdateAsync(Guid id, AudienceRequestDto request);
+    Task<List<FieldOfInterventionResponseDto>> GetAllAsync();
+    Task<FieldOfInterventionResponseDto> GetAsync(Guid id);
+    Task<FieldOfInterventionResponseDto> CreateAsync(FieldOfInterventionCreateRequestDto request);
+    Task<FieldOfInterventionResponseDto> UpdateAsync(Guid id, FieldOfInterventionCreateRequestDto request);
     Task DeleteAsync(Guid id);
 }

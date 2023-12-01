@@ -28,13 +28,13 @@ public class MissionController : ControllerBase
     }
 
     [HttpPost(Name = "CreateMission")]
-    public async Task<IActionResult> Create([FromBody] MissionRequestDto request)
+    public async Task<IActionResult> Create([FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _missionService.CreateAsync(request));
     }
 
     [HttpPut("{id}", Name = "UpdateMission")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] MissionRequestDto request)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _missionService.UpdateAsync(id, request));
     }
