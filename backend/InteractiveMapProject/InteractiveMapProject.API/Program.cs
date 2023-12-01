@@ -39,6 +39,9 @@ builder.Services.Configure<GeoapifySettings>(builder.Configuration.GetSection("G
 
 builder.Services.AddScoped<IFilterFactory<Professional, ProfessionalFilterRequest>, ProfessionalFilterFactory>();
 
+builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IProfessionalService, ProfessionalService>();
 builder.Services.AddScoped<IAudienceService, AudienceService>();
 builder.Services.AddScoped<IPlaceOfInterventionService, PlaceOfInterventionService>();
