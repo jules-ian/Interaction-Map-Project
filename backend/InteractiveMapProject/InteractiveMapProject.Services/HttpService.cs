@@ -21,7 +21,11 @@ public class HttpService : IHttpService
         var response = await _httpClient.GetAsync(urlWithParams);
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
-        return JsonSerializer.Deserialize<T>(responseBody);
+        JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+        };
+        return JsonSerializer.Deserialize<T>(responseBody, options);
     }
 
     private string AddParameters(string baseUrl, Dictionary<string, string>? parameters)

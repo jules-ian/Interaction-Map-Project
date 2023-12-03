@@ -1,5 +1,7 @@
+using System.Text.Json;
 using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
+using InteractiveMapProject.Contracts.Dtos.Geoapify;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Exceptions;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;

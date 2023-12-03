@@ -23,7 +23,7 @@ public class GeoapifyGeocodingService : IGeocodingService
         parameters.Add("apiKey", _settings.ApiKey);
         parameters.Add("text", string.Format("{0}, {1} {2}", address.Street, address.City, address.PostalCode));
         GeoapifyResponseDto? geoapifyResponse = await _httpService.GetAsync<GeoapifyResponseDto>(_settings.Url, parameters);
-        if (geoapifyResponse != null || geoapifyResponse.Features.Count() == 0)
+        if (geoapifyResponse == null || geoapifyResponse.Features.Count() == 0)
         {
             return null;
         }
