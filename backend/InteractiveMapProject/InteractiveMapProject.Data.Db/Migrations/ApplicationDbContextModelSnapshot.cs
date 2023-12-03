@@ -37,7 +37,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Audience");
+                    b.ToTable("Audience", (string)null);
 
                     b.HasData(
                         new
@@ -93,7 +93,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Mission");
+                    b.ToTable("Mission", (string)null);
 
                     b.HasData(
                         new
@@ -203,7 +203,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlaceOfIntervention");
+                    b.ToTable("PlaceOfIntervention", (string)null);
 
                     b.HasData(
                         new
@@ -244,7 +244,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasIndex("AudienceId");
 
-                    b.ToTable("ProfessionalAudience");
+                    b.ToTable("ProfessionalAudience", (string)null);
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalMission", b =>
@@ -259,7 +259,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasIndex("MissionId");
 
-                    b.ToTable("ProfessionalMission");
+                    b.ToTable("ProfessionalMission", (string)null);
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalPlaceOfIntervention", b =>
@@ -274,7 +274,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasIndex("PlaceOfInterventionId");
 
-                    b.ToTable("ProfessionalPlaceOfIntervention");
+                    b.ToTable("ProfessionalPlaceOfIntervention", (string)null);
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
@@ -310,7 +310,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Professionals");
+                    b.ToTable("Professionals", (string)null);
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalAudience", b =>
@@ -372,7 +372,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
                 {
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Professional.Address#InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
                                 .HasColumnType("uniqueidentifier");
@@ -391,13 +391,13 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                             b1.HasKey("ProfessionalId");
 
-                            b1.ToTable("Professionals");
+                            b1.ToTable("Professionals", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProfessionalId");
                         });
 
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Professional.ContactPerson#InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
                                 .HasColumnType("uniqueidentifier");
@@ -419,13 +419,13 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                             b1.HasKey("ProfessionalId");
 
-                            b1.ToTable("Professionals");
+                            b1.ToTable("Professionals", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProfessionalId");
                         });
 
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Professional.Geolocation#InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
                                 .HasColumnType("uniqueidentifier");
@@ -438,7 +438,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                             b1.HasKey("ProfessionalId");
 
-                            b1.ToTable("Professionals");
+                            b1.ToTable("Professionals", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProfessionalId");
