@@ -28,14 +28,14 @@ public class MappingProfile : Profile
                 opt => opt.Ignore());
         CreateMap<Professional, ProfessionalResponseDto>()
             .ForMember(dest =>
-                dest.Audiences,
-                opt => opt.Ignore())
+                    dest.Audiences,
+                opt => opt.MapFrom(src => src.Audiences.Select(pa => pa.Audience)))
             .ForMember(dest =>
-                dest.PlacesOfIntervention,
-                opt => opt.Ignore())
+                    dest.PlacesOfIntervention,
+                opt => opt.MapFrom(src => src.PlacesOfIntervention.Select(pp => pp.PlaceOfIntervention)))
             .ForMember(dest =>
-                dest.Missions,
-                opt => opt.Ignore());
+                    dest.Missions,
+                opt => opt.MapFrom(src => src.Missions.Select(pm => pm.Mission)));
 
         CreateMap<FieldOfInterventionCreateRequestDto, Audience>();
         CreateMap<Audience, FieldOfInterventionResponseDto>();
