@@ -67,10 +67,16 @@ public class ProfessionalService : IProfessionalService
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ??
                                     throw new EntityNotFoundException("There is no professional with that id.");
-
         professional = _mapper.Map(request, professional);
 
-        // TODO: map fields of intervention
+        professional.Audiences.Clear();
+        professional.PlacesOfIntervention.Clear();
+        professional.Missions.Clear();
+
+        CreateProfessionalAudiences(professional, request.Audiences);
+        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        CreateProfessionalMissions(professional, request.Missions);
+
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
 
@@ -86,38 +92,38 @@ public class ProfessionalService : IProfessionalService
     }
 
     private async void CreateProfessionalMissions(Professional professional,
-        IEnumerable<FieldOfInterventionGetRequestDto> missions)
+        IEnumerable<FieldOfInterventionGetRequestDto> requests)
     {
-        foreach (FieldOfInterventionGetRequestDto mission in missions)
+        foreach (FieldOfInterventionGetRequestDto request in requests)
         {
-            Mission unused = await _uow.Missions.GetAsync(mission.Id)
+            Mission mission = await _uow.Missions.GetAsync(request.Id)
                              ?? throw new EntityNotFoundException("There is no mission with that id.");
 
-            professional.Missions.Append(new ProfessionalMission(professional.Id, mission.Id));
+            professional.Missions.Add(new ProfessionalMission(professional.Id, mission.Id));
         }
     }
 
     private async void CreateProfessionalAudiences(Professional professional,
-        IEnumerable<FieldOfInterventionGetRequestDto> audiences)
+        IEnumerable<FieldOfInterventionGetRequestDto> requests)
     {
-        foreach (FieldOfInterventionGetRequestDto audience in audiences)
+        foreach (FieldOfInterventionGetRequestDto request in requests)
         {
-            Audience unused = await _uow.Audiences.GetAsync(audience.Id)
+            Audience audience = await _uow.Audiences.GetAsync(request.Id)
                               ?? throw new EntityNotFoundException("There is no audience with that id.");
 
-            professional.Audiences.Append(new ProfessionalAudience(professional.Id, audience.Id));
+            professional.Audiences.Add(new ProfessionalAudience(professional.Id, audience.Id));
         }
     }
 
     private async void CreateProfessionalPlacesOfIntervention(Professional professional,
-        IEnumerable<FieldOfInterventionGetRequestDto> places)
+        IEnumerable<FieldOfInterventionGetRequestDto> requests)
     {
-        foreach (FieldOfInterventionGetRequestDto place in places)
+        foreach (FieldOfInterventionGetRequestDto request in requests)
         {
-            PlaceOfIntervention unused = await _uow.PlacesOfIntervention.GetAsync(place.Id)
+            PlaceOfIntervention placeOfIntervention = await _uow.PlacesOfIntervention.GetAsync(request.Id)
                               ?? throw new EntityNotFoundException("There is no place with that id.");
 
-            professional.PlacesOfIntervention.Append(new ProfessionalPlaceOfIntervention(professional.Id, place.Id));
+            professional.PlacesOfIntervention.Add(new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id));
         }
     }
 }

@@ -40,11 +40,6 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
             query = filters.Aggregate(query, (current, item) => current.Where(item));
         }
 
-        /*query.Include(p => p.Audiences).ThenInclude(pa => pa.Audience)
-            .Include(p => p.Missions).ThenInclude(pm => pm.Mission)
-            .Include(p => p.PlacesOfIntervention).ThenInclude(pp => pp.PlaceOfIntervention);
-            */
-
         return await query.ToListAsync();
     }
 
