@@ -17,12 +17,12 @@ public class AudienceService : IAudienceService
         _mapper = mapper;
     }
 
-    public async Task<AudienceResponseDto> CreateAsync(AudienceRequestDto request)
+    public async Task<FieldOfInterventionResponseDto> CreateAsync(FieldOfInterventionCreateRequestDto request)
     {
         Audience audience = _mapper.Map<Audience>(request);
         _uow.Audiences.Add(audience);
         await _uow.SaveChangesAsync();
-        return _mapper.Map<AudienceResponseDto>(audience);
+        return _mapper.Map<FieldOfInterventionResponseDto>(audience);
     }
 
     public async Task DeleteAsync(Guid id)
@@ -32,24 +32,24 @@ public class AudienceService : IAudienceService
         await _uow.SaveChangesAsync();
     }
 
-    public async Task<List<AudienceResponseDto>> GetAllAsync()
+    public async Task<List<FieldOfInterventionResponseDto>> GetAllAsync()
     {
         List<Audience> audiences = await _uow.Audiences.GetAllAsync();
-        return audiences.Select(a => _mapper.Map<AudienceResponseDto>(a)).ToList();
+        return audiences.Select(a => _mapper.Map<FieldOfInterventionResponseDto>(a)).ToList();
     }
 
-    public async Task<AudienceResponseDto> GetAsync(Guid id)
+    public async Task<FieldOfInterventionResponseDto> GetAsync(Guid id)
     {
         Audience audience = await _uow.Audiences.GetAsync(id) ?? throw new EntityNotFoundException("There is no audience with that id.");
-        return _mapper.Map<AudienceResponseDto>(audience);
+        return _mapper.Map<FieldOfInterventionResponseDto>(audience);
     }
 
-    public async Task<AudienceResponseDto> UpdateAsync(Guid id, AudienceRequestDto request)
+    public async Task<FieldOfInterventionResponseDto> UpdateAsync(Guid id, FieldOfInterventionCreateRequestDto request)
     {
         Audience audience = await _uow.Audiences.GetAsync(id) ?? throw new EntityNotFoundException("There is no audience with that id.");
         audience = _mapper.Map(request, audience);
         _uow.Audiences.Update(audience);
         await _uow.SaveChangesAsync();
-        return _mapper.Map<AudienceResponseDto>(audience);
+        return _mapper.Map<FieldOfInterventionResponseDto>(audience);
     }
 }

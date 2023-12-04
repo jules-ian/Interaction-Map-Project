@@ -29,12 +29,12 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
             .SetValidator(new ContactPersonValidator());
         RuleForEach(x => x.Audiences)
             .NotNull().WithMessage("Audience is required.")
-            .SetValidator(new AudienceRequestDtoValidator());
+            .SetValidator(new FieldOfInterventionGetRequestDtoValidator());
         RuleForEach(x => x.PlacesOfIntervention)
             .NotNull().WithMessage("Place of intervetion is required.")
-            .SetValidator(new PlaceOfInterventionRequestDtoValidator());
+            .SetValidator(new FieldOfInterventionGetRequestDtoValidator());
         RuleForEach(x => x.Missions)
             .NotNull().WithMessage("Mission is required.")
-            .SetValidator(new MissionRequestDtoValidator());
+            .SetValidator(new FieldOfInterventionGetRequestDtoValidator());
     }
 }

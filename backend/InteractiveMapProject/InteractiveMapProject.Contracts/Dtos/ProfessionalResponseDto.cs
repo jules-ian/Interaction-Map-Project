@@ -21,11 +21,11 @@ public class ProfessionalResponseDto
 
     public ContactPerson ContactPerson { get; set; } = default!;
 
-    public IEnumerable<AudienceRequestDto> Audiences { get; set; } = default!;
+    public IEnumerable<FieldOfInterventionResponseDto> Audiences { get; set; } = default!;
 
-    public IEnumerable<PlaceOfInterventionRequestDto> PlacesOfIntervention { get; set; } = default!;
+    public IEnumerable<FieldOfInterventionResponseDto> PlacesOfIntervention { get; set; } = default!;
 
-    public IEnumerable<MissionRequestDto> Missions { get; set; } = default!;
+    public IEnumerable<FieldOfInterventionResponseDto> Missions { get; set; } = default!;
 
     public Geolocation Geolocation { get; set; } = default!;
 

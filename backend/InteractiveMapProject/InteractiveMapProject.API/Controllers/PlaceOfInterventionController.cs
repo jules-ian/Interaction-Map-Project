@@ -28,13 +28,13 @@ public class PlaceOfInterventionController : ControllerBase
     }
 
     [HttpPost(Name = "CreatePlaceOfIntervention")]
-    public async Task<IActionResult> Create([FromBody] PlaceOfInterventionRequestDto request)
+    public async Task<IActionResult> Create([FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _placeOfInterventionService.CreateAsync(request));
     }
 
     [HttpPut("{id}", Name = "UpdatePlaceOfIntervention")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] PlaceOfInterventionRequestDto request)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _placeOfInterventionService.UpdateAsync(id, request));
     }

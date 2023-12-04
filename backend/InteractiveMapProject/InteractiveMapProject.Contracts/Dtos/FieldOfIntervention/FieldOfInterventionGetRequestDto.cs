@@ -1,7 +1,7 @@
 namespace InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 
-public class AudienceResponseDto
+public class FieldOfInterventionGetRequestDto
 {
     public Guid Id { get; set; }
-    public string Name { get; set; } = default!;
+
 }

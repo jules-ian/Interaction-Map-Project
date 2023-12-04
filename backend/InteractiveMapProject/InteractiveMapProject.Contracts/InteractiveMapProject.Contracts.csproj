@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Dtos\FieldOfIntervention\MissionRequestDto.cs" />
+    <Compile Remove="Dtos\FieldOfIntervention\PlaceOfInterventionResponseDto.cs" />
+  </ItemGroup>
+
 </Project>
