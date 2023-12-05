@@ -8,6 +8,7 @@ import PostalCodeInput from "../Components/PostalCodeInput";
 import { useEffect, useState } from "react";
 import InputComponent from "../Components/InputComponent";
 import Map from "../Components/Map";
+import InitGetter from "../Components/InitGetter";
 
 export default function Search() {
   const [postalcode, setpostalcode] = useState("");
@@ -40,9 +41,7 @@ export default function Search() {
           <InputComponent>
             <DropMultiSelect label="Public" optionsState={_public} setOptionsState={set_Public} />
           </InputComponent>
-          <InputComponent>
-            <DropMultiSelect label="Lieu d'intervention" optionsState={lieuIntervention} setOptionsState={setLieuIntervention} />
-          </InputComponent>
+          <InitGetter label="Lieu d'interventation" API="https://localhost:7212/api/field-of-intervention/place-of-intervention/all" />
 
 
           <InputComponent>
@@ -54,6 +53,7 @@ export default function Search() {
 
         </Box>
         <Map />
+
       </Box>
       <Box sx={{ display: "flex", overflow: "auto", flexDirection: "row" }}>
         {results.map((i) => (<Placeholder text={"Result " + i} width={height * 0.2} height={height * 0.2} other={{ flexShrink: 0 }} />))}

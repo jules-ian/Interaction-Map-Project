@@ -43,7 +43,20 @@ builder.Services.AddScoped<IPlaceOfInterventionService, PlaceOfInterventionServi
 builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000");
+                      });
+});
+
+
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -51,9 +64,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.UseCors(MyAllowSpecificOrigins);
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
