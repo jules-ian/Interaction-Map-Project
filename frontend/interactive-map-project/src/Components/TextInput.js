@@ -7,6 +7,7 @@ export default function TextInput({
   setErrorState = function () {},
   label = "placeholder",
   multiline = false,
+  helperText = "Empty Helpertext",
 }) {
   return (
     <InputComponent>
@@ -15,6 +16,7 @@ export default function TextInput({
         label={label}
         variant="outlined"
         fullWidth="true"
+        helperText={error ? helperText : ""}
         error={error}
         multiline={multiline}
         onChange={(event) => {
