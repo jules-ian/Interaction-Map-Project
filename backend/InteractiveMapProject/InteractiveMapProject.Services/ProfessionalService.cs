@@ -12,11 +12,13 @@ public class ProfessionalService : IProfessionalService
 {
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
+    private readonly IGeocodingService _geocodingService;
 
-    public ProfessionalService(IUnitOfWork uow, IMapper mapper)
+    public ProfessionalService(IUnitOfWork uow, IMapper mapper, IGeocodingService geocodingService)
     {
         _uow = uow;
         _mapper = mapper;
+        _geocodingService = geocodingService;
     }
 
     public async Task<List<ProfessionalResponseDto>> GetAllAsync()
@@ -43,6 +45,8 @@ public class ProfessionalService : IProfessionalService
     public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalRequestDto request)
     {
         Professional professional = _mapper.Map<Professional>(request);
+        Geolocation geolocation = await _geocodingService.GetGeolocationFromAddressAsync(request.Address) ?? throw new InvalidAddressException("Address is invalid.");
+        professional.Geolocation = geolocation;
         // TODO: map fields of intervention
         _uow.Professionals.Add(professional);
         await _uow.SaveChangesAsync();

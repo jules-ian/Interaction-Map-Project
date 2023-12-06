@@ -28,13 +28,13 @@ public class AudienceController : ControllerBase
     }
 
     [HttpPost(Name = "CreateAudience")]
-    public async Task<IActionResult> Create([FromBody] AudienceRequestDto request)
+    public async Task<IActionResult> Create([FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _audienceService.CreateAsync(request));
     }
 
     [HttpPut("{id}", Name = "UpdateAudience")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] AudienceRequestDto request)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _audienceService.UpdateAsync(id, request));
     }

@@ -37,13 +37,13 @@ public class MappingProfile : Profile
                 dest.Missions,
                 opt => opt.Ignore());
 
-        CreateMap<AudienceRequestDto, Audience>();
-        CreateMap<Audience, AudienceResponseDto>();
+        CreateMap<FieldOfInterventionCreateRequestDto, Audience>();
+        CreateMap<Audience, FieldOfInterventionResponseDto>();
 
-        CreateMap<PlaceOfInterventionRequestDto, PlaceOfIntervention>();
-        CreateMap<PlaceOfIntervention, PlaceOfInterventionResponseDto>();
+        CreateMap<FieldOfInterventionCreateRequestDto, PlaceOfIntervention>();
+        CreateMap<PlaceOfIntervention, FieldOfInterventionResponseDto>();
 
-        CreateMap<MissionRequestDto, Mission>();
-        CreateMap<Mission, MissionResponseDto>();
+        CreateMap<FieldOfInterventionCreateRequestDto, Mission>();
+        CreateMap<Mission, FieldOfInterventionResponseDto>();
     }
 }
