@@ -14,17 +14,17 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
             dbFilters.Add(ProfessionalSpecification.FilterByPostalCode(request.PostalCode));
         }
 
-        if (request?.Audiences.Any() == true)
+        if (request?.Audiences?.Any() == true)
         {
             dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Audiences));
         }
 
-        if (request?.PlacesOfIntervention.Any() == true)
+        if (request?.PlacesOfIntervention?.Any() == true)
         {
             dbFilters.Add(ProfessionalSpecification.FilterByPlaceOfIntervetion(request.PlacesOfIntervention));
         }
 
-        if (request?.Missions.Any() == true)
+        if (request?.Missions?.Any() == true)
         {
             dbFilters.Add(ProfessionalSpecification.FilterByMission(request.Missions));
         }
