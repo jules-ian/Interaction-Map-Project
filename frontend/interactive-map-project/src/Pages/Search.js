@@ -17,14 +17,17 @@ export default function Search() {
   const [search, setSearch] = useState("");
   const [postal, setPostal] = useState("");
   const [postalError, setPostalError] = useState(false);
-  const [missions, setMissions] = useState(getMissions());
-  const [_public, set_Public] = useState(getAudiences());
-  const [lieuIntervention, setLieuIntervention] = useState([]);
+  const [missions, setMissions] = useState([]);
+  const [audiences, setAudiences] = useState([]);
+  const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
   const [results, setResults] = useState([]);
 
+  // on first render
   useEffect(() => {
-    getPlacesOfIntervention(setLieuIntervention);
-  });
+    getPlacesOfIntervention(setPlacesOfIntervention);
+    getMissions(setMissions);
+    getAudiences(setAudiences);
+  }, []);
 
   const onSearch = function () {
     let success = checkEntries();
@@ -53,17 +56,13 @@ export default function Search() {
             setErrorState={setPostalError}
             label="Postalcode"
           />
-          <DropMultiSelect
-            label="Mission"
-            optionsState={missions}
-            setOptionsState={setMissions}
-          />
+          <DropMultiSelect label="Missions" options={missions} />
 
-          <DropMultiSelect label="Public" options={getAudiences()} />
+          <DropMultiSelect label="Public" options={audiences} />
 
           <DropMultiSelect
             label="Lieu d'intervention"
-            options={lieuIntervention}
+            options={placesOfIntervention}
           />
           <Button variant="contained" fullWidth onClick={onSearch}>
             Search
