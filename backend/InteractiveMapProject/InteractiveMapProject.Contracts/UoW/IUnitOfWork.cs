@@ -1,10 +1,14 @@
-using InteractiveMapProject.Contracts.Entities;
-using InteractiveMapProject.Contracts.Repsitories;
+using InteractiveMapProject.Contracts.Repositories;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.UoW;
 
 public interface IUnitOfWork
 {
-    IRepository<Professional> Professionals { get; }
+
+    IProfessionalRepository Professionals { get; }
+    IRepository<Audience> Audiences { get; }
+    IRepository<Mission> Missions { get; }
+    IRepository<PlaceOfIntervention> PlacesOfIntervention { get; }
     Task SaveChangesAsync();
 }

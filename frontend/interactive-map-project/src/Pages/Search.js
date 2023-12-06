@@ -66,10 +66,14 @@ export default function Search() {
             setOptionsState={set_Public}
           />
 
-          <DropMultiSelect
+          {/* <DropMultiSelect
             label="Lieu d'intervention"
             optionsState={lieuIntervention}
             setOptionsState={setLieuIntervention}
+          /> */}
+          <InitGetter
+            label="Lieu d'interventation"
+            API="https://localhost:7212/api/field-of-intervention/place-of-intervention/all"
           />
 
           <Button variant="contained" fullWidth onClick={onSearch}>

@@ -1,6 +1,10 @@
-import { dummyProf } from "./Entities";
+import InitGetter from "../Components/InitGetter";
 
-export function getMissions() {
+export function getZoneGeographique() {
+  return ["Haute-Garonne", "Ariège", "Aude", "Portet Garonne"];
+}
+
+export function getMission() {
   return [
     "Accueil de loisirs",
     "Petite enfance",
@@ -11,22 +15,12 @@ export function getMissions() {
   ];
 }
 
-export function getAudiences() {
+export function getPublic() {
   return ["0-3 ans", "3-6 ans", "6-12 ans", "12-18 ans", "parents"];
 }
 
-export function getPlacesOfIntervention() {
-  return ["domicile", "EAJE", "école", "cabinet"];
-}
-
-// returns an array of Professionals
-export function getResults() {
-  let results = [];
-  let randomNumberOfResults = Math.round(Math.random() * 10) + 1;
-  for (let i = 0; i < randomNumberOfResults; i++) {
-    const newProf = { ...dummyProf };
-    newProf.name = i + "test";
-    results.push(newProf);
-  }
-  return results;
+export function getLieuIntervention() {
+  return InitGetter(
+    "https://localhost:7212/api/field-of-intervention/place-of-intervention/all"
+  );
 }

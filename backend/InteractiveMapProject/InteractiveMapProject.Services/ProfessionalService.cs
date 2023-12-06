@@ -2,6 +2,7 @@ using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Exceptions;
+using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
 
@@ -22,17 +23,27 @@ public class ProfessionalService : IProfessionalService
     {
         List<Professional> professionals = await _uow.Professionals.GetAllAsync();
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
+        // TODO: map fields of intervention
+    }
+
+    public async Task<List<ProfessionalResponseDto>> GetAllFilteredAsync(ProfessionalFilterRequest filterRequest)
+    {
+        List<Professional> professionals = await _uow.Professionals.GetAllAsync(filterRequest);
+        return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
+        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> GetAsync(Guid id)
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         return _mapper.Map<ProfessionalResponseDto>(professional);
+        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalRequestDto request)
     {
         Professional professional = _mapper.Map<Professional>(request);
+        // TODO: map fields of intervention
         _uow.Professionals.Add(professional);
         await _uow.SaveChangesAsync();
         return _mapper.Map<ProfessionalResponseDto>(professional);
@@ -41,10 +52,10 @@ public class ProfessionalService : IProfessionalService
     public async Task<ProfessionalResponseDto> UpdateAsync(Guid id, ProfessionalRequestDto request)
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
-        professional = _mapper.Map<Professional>(request);
+        professional = _mapper.Map(request, professional);
+        // TODO: map fields of intervention
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
-        professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 

@@ -1,4 +1,4 @@
-namespace InteractiveMapProject.Contracts.Repsitories;
+namespace InteractiveMapProject.Contracts.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class
 {

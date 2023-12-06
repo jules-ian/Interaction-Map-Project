@@ -1,4 +1,4 @@
-using InteractiveMapProject.Contracts.Enums;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.Entities;
 
@@ -6,7 +6,11 @@ public class Professional
 {
     public Guid Id { get; set; }
 
-    public string ServiceName { get; set; } = default!;
+    public string Name { get; set; } = default!;
+
+    public string EstablishmentType { get; set; } = default!;
+
+    public string ManagementType { get; set; } = default!;
 
     public Address Address { get; set; } = default!;
 
@@ -14,17 +18,13 @@ public class Professional
 
     public string Email { get; set; } = default!;
 
-    public string ResourcePersonName { get; set; } = default!;
+    public ContactPerson ContactPerson { get; set; } = default!;
 
-    public string Function { get; set; } = default!;
+    public IEnumerable<ProfessionalAudience> Audiences { get; set; } = default!;
 
-    public int ContactPersonPhoneNumber { get; set; }
+    public IEnumerable<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } = default!;
 
-    public string ContactPersonEmail { get; set; } = default!;
-
-    public FieldOfIntervention FieldOfIntervention { get; set; } = default!;
-
-    public Mission Mission { get; set; } = default!;
+    public IEnumerable<ProfessionalMission> Missions { get; set; } = default!;
 
     public Geolocation Geolocation { get; set; } = default!;
 
