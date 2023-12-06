@@ -24,7 +24,9 @@ export function getResults() {
   let results = [];
   let randomNumberOfResults = Math.round(Math.random() * 10) + 1;
   for (let i = 0; i < randomNumberOfResults; i++) {
-    results.push(dummyProf);
+    const newProf = { ...dummyProf };
+    newProf.name = i + "test";
+    results.push(newProf);
   }
   return results;
 }

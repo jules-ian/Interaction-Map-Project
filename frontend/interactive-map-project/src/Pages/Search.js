@@ -11,7 +11,7 @@ import {
 import TextInput from "../Components/TextInput";
 import { useState } from "react";
 import { isPostalCode } from "../utils/checkFunctions";
-import { ResultCard } from "../Components/ProfessionalResult";
+import ResultCardDisplay from "../Components/ProfessionalResult";
 
 export default function Search() {
   const [search, setSearch] = useState("");
@@ -82,16 +82,7 @@ export default function Search() {
           width={"100%"}
         />
       </Box>
-      <Box sx={{ display: "flex", overflow: "auto", flexDirection: "row" }}>
-        {results.map((professional) => (
-          <ResultCard
-            professional={professional}
-            width={height * 0.4}
-            height={height * 0.2}
-            other={{ flexShrink: 0 }}
-          />
-        ))}
-      </Box>
+      <ResultCardDisplay results={results} />
     </Box>
   );
 }
