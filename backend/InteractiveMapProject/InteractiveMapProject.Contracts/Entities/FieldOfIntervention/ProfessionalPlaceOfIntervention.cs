@@ -6,4 +6,12 @@ public class ProfessionalPlaceOfIntervention
     public Professional Professional { get; set; } = default!;
     public Guid PlaceOfInterventionId { get; set; }
     public PlaceOfIntervention PlaceOfIntervention { get; set; } = default!;
+
+    public ProfessionalPlaceOfIntervention(
+        Guid professionalId,
+        Guid placeOfInterventionId)
+    {
+        ProfessionalId = professionalId;
+        PlaceOfInterventionId = placeOfInterventionId;
+    }
 }
