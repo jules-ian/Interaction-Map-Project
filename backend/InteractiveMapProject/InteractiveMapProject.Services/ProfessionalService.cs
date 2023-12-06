@@ -1,6 +1,8 @@
 using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
+using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Exceptions;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Services;
@@ -25,7 +27,6 @@ public class ProfessionalService : IProfessionalService
     {
         List<Professional> professionals = await _uow.Professionals.GetAllAsync();
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
-        // TODO: map fields of intervention
     }
 
     public async Task<List<ProfessionalResponseDto>> GetAllFilteredAsync(ProfessionalFilterRequest filterRequest)
@@ -37,9 +38,9 @@ public class ProfessionalService : IProfessionalService
 
     public async Task<ProfessionalResponseDto> GetAsync(Guid id)
     {
-        Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
+        Professional professional = await _uow.Professionals.GetAsync(id) ??
+                                    throw new EntityNotFoundException("There is no professional with that id.");
         return _mapper.Map<ProfessionalResponseDto>(professional);
-        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalRequestDto request)
@@ -47,26 +48,82 @@ public class ProfessionalService : IProfessionalService
         Professional professional = _mapper.Map<Professional>(request);
         Geolocation geolocation = await _geocodingService.GetGeolocationFromAddressAsync(request.Address) ?? throw new InvalidAddressException("Address is invalid.");
         professional.Geolocation = geolocation;
-        // TODO: map fields of intervention
+
         _uow.Professionals.Add(professional);
+
+        CreateProfessionalMissions(professional, request.Missions);
+        CreateProfessionalAudiences(professional, request.Audiences);
+        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+
         await _uow.SaveChangesAsync();
+
+        professional = await _uow.Professionals.GetAsync(professional.Id) ??
+                       throw new EntityNotFoundException("There is no professional with that id.");;
+
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 
     public async Task<ProfessionalResponseDto> UpdateAsync(Guid id, ProfessionalRequestDto request)
     {
-        Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
+        Professional professional = await _uow.Professionals.GetAsync(id) ??
+                                    throw new EntityNotFoundException("There is no professional with that id.");
         professional = _mapper.Map(request, professional);
-        // TODO: map fields of intervention
+
+        professional.Audiences.Clear();
+        professional.PlacesOfIntervention.Clear();
+        professional.Missions.Clear();
+
+        CreateProfessionalAudiences(professional, request.Audiences);
+        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        CreateProfessionalMissions(professional, request.Missions);
+
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
+
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        Professional professional = await _uow.Professionals.GetAsync(id) ?? throw new EntityNotFoundException("There is no professional with that id.");
+        Professional professional = await _uow.Professionals.GetAsync(id) ??
+                                    throw new EntityNotFoundException("There is no professional with that id.");
         _uow.Professionals.Remove(professional);
         await _uow.SaveChangesAsync();
+    }
+
+    private async void CreateProfessionalMissions(Professional professional,
+        IEnumerable<FieldOfInterventionGetRequestDto> requests)
+    {
+        foreach (FieldOfInterventionGetRequestDto request in requests)
+        {
+            Mission mission = await _uow.Missions.GetAsync(request.Id)
+                             ?? throw new EntityNotFoundException("There is no mission with that id.");
+
+            professional.Missions.Add(new ProfessionalMission(professional.Id, mission.Id));
+        }
+    }
+
+    private async void CreateProfessionalAudiences(Professional professional,
+        IEnumerable<FieldOfInterventionGetRequestDto> requests)
+    {
+        foreach (FieldOfInterventionGetRequestDto request in requests)
+        {
+            Audience audience = await _uow.Audiences.GetAsync(request.Id)
+                              ?? throw new EntityNotFoundException("There is no audience with that id.");
+
+            professional.Audiences.Add(new ProfessionalAudience(professional.Id, audience.Id));
+        }
+    }
+
+    private async void CreateProfessionalPlacesOfIntervention(Professional professional,
+        IEnumerable<FieldOfInterventionGetRequestDto> requests)
+    {
+        foreach (FieldOfInterventionGetRequestDto request in requests)
+        {
+            PlaceOfIntervention placeOfIntervention = await _uow.PlacesOfIntervention.GetAsync(request.Id)
+                              ?? throw new EntityNotFoundException("There is no place with that id.");
+
+            professional.PlacesOfIntervention.Add(new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id));
+        }
     }
 }
