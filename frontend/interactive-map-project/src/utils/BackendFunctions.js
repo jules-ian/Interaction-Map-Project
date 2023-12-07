@@ -1,6 +1,13 @@
 import InitGetter from "../Components/InitGetter";
 import axios from "axios";
-import { dummyProf } from "./Entities";
+import {
+  Address,
+  ContactPerson,
+  GeoLocation,
+  Professional,
+  dummyProf,
+  professionalFromJSON,
+} from "./Entities";
 
 export function getAllMissions(setReturn) {
   let url = "https://localhost:7212/api/field-of-intervention/mission/all";
@@ -51,6 +58,19 @@ export function getResults() {
   return results;
 }
 
+export function addNewProfessional(professional) {
+  let url = "https://localhost:7212/api/professional";
+
+  axios
+    .post(url, professional.toJSON())
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error("Error Posting Professional:", error);
+    });
+}
+
 export function getResultsSearch(
   postalCode,
   audiencesIDs,
@@ -81,7 +101,12 @@ export function getResultsSearch(
         // Add any other headers if needed
       },
     })
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      let professionals = response.data.map((profData) => {
+        return professionalFromJSON(profData);
+      });
+      setResults(professionals);
+    })
     .catch((error) => {
       console.error("Error sending post for search:", error);
     });

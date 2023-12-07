@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { isPostalCode } from "../utils/checkFunctions";
 import ResultCardDisplay from "../Components/ProfessionalResult";
 import Map from "../Components/Map";
+import { mapNamesToIDs } from "../utils/ArrayFunctions";
 
 export default function Search() {
   const [search, setSearch] = useState("");
@@ -52,13 +53,6 @@ export default function Search() {
         setResults
       );
     }
-  };
-  const mapNamesToIDs = function (nameArray, tupleArray) {
-    let ids = nameArray.map((name) => {
-      const match = tupleArray.find((tuple) => tuple.name === name);
-      return match ? match.id : null;
-    });
-    return ids;
   };
 
   const checkEntries = function () {

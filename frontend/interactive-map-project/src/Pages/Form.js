@@ -1,9 +1,10 @@
 import { Box, Grid, Button } from "@mui/material";
 import DropMultiSelect from "../Components/DropMultiSelect";
 import { Text, Header } from "../Components/Label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "../Components/TextInput";
 import {
+  addNewProfessional,
   getAllAudiences,
   getAllMissions,
   getAllPlacesOfIntervention,
@@ -16,6 +17,7 @@ import {
   isTelephoneNumber,
 } from "../utils/checkFunctions";
 import { Address, ContactPerson, Professional } from "../utils/Entities";
+import { mapNamesToIDs } from "../utils/ArrayFunctions";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -45,22 +47,36 @@ export default function Form() {
   const [contactPersonFunctionError, setContactPersonFunctionError] =
     useState(false);
   const [audiences, setAudiences] = useState([]);
-  const [audiencesError, setAudiencesError] = useState(false);
+  const [audiencesSelection, setAudiencesSelection] = useState([]);
+  const [audiencesSelectionError, setAudiencesSelectionError] = useState(false);
   const [missions, setMissions] = useState([]);
-  const [missionsError, setMissionsError] = useState(false);
+  const [missionsSelection, setMissionsSelection] = useState([]);
+  const [missionsSelectionError, setMissionsSelectionError] = useState(false);
   const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
-  const [placesOfInterventionError, setPlacesOfInterventionError] =
-    useState(false);
+  const [placesOfInterventionSelection, setPlacesOfInterventionSelection] =
+    useState([]);
+  const [
+    placesOfInterventionSelectionError,
+    setPlacesOfInterventionSelectionError,
+  ] = useState(false);
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
   const [accept, setAccept] = useState(false);
   const [acceptError, setAcceptError] = useState(false);
 
+  // on first render
+  useEffect(() => {
+    getAllPlacesOfIntervention(setPlacesOfIntervention);
+    getAllMissions(setMissions);
+    getAllAudiences(setAudiences);
+  }, []);
+
   const onSubmit = function () {
     let success = checkEntries();
     if (success) {
       let professional = createProfessinalEntitiy();
-      console.log(professional);
+      console.log(professional.toJSON());
+      addNewProfessional(professional);
     }
   };
 
@@ -127,18 +143,18 @@ export default function Form() {
       checkSuccess = false;
     }
     //Audiences
-    if (audiences.length == 0) {
-      setAudiencesError(true);
+    if (audiencesSelection.length == 0) {
+      setAudiencesSelectionError(true);
       checkSuccess = false;
     }
     //Missions
-    if (missions.length == 0) {
-      setMissionsError(true);
+    if (missionsSelection.length == 0) {
+      setMissionsSelectionError(true);
       checkSuccess = false;
     }
     //PlaceOfInterventions
-    if (placesOfIntervention.length === 0) {
-      setPlacesOfInterventionError(true);
+    if (placesOfInterventionSelection.length === 0) {
+      setPlacesOfInterventionSelectionError(true);
       checkSuccess = false;
     }
     // Description
@@ -155,6 +171,12 @@ export default function Form() {
   };
 
   const createProfessinalEntitiy = function () {
+    let audiencesIDs = mapNamesToIDs(audiencesSelection, audiences);
+    let placesOfInterventionIDs = mapNamesToIDs(
+      placesOfInterventionSelection,
+      placesOfIntervention
+    );
+    let missionsIDS = mapNamesToIDs(missionsSelection, missions);
     const address = new Address(street, city, postal);
     const contactPerson = new ContactPerson(
       contactPersonName,
@@ -172,11 +194,12 @@ export default function Form() {
       null,
       mail,
       contactPerson,
-      audiences,
-      placesOfIntervention,
-      missions,
+      audiencesIDs,
+      placesOfInterventionIDs,
+      missionsIDS,
       description
     );
+    console.log(professional);
     return professional;
   };
 
@@ -299,28 +322,28 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
-            options={getAllAudiences()}
-            error={audiencesError}
-            setSelectionState={setAudiences}
-            setErrorState={setAudiencesError}
+            options={audiences.map((item) => item.name)}
+            error={audiencesSelectionError}
+            setSelectionState={setAudiencesSelection}
+            setErrorState={setAudiencesSelectionError}
             label="Audiences (pusieur choix possible)"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
-            options={getAllPlacesOfIntervention()}
-            error={placesOfInterventionError}
-            setSelectionState={setPlacesOfIntervention}
-            setErrorState={setPlacesOfInterventionError}
+            options={placesOfIntervention.map((item) => item.name)}
+            error={placesOfInterventionSelectionError}
+            setSelectionState={setPlacesOfInterventionSelection}
+            setErrorState={setPlacesOfInterventionSelectionError}
             label="Lieu d'Intervention (pusieur choix possible)"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
-            options={getAllMissions()}
-            error={missionsError}
-            setSelectionState={setMissions}
-            setErrorState={setMissionsError}
+            options={missions.map((item) => item.name)}
+            error={missionsSelectionError}
+            setSelectionState={setMissionsSelection}
+            setErrorState={setMissionsSelectionError}
             label="Mission (pusieur choix possible)"
           />
         </Grid>
