@@ -34,6 +34,8 @@ public class ExceptionHandlerMiddleware
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound,
             InvalidAddressException =>
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest,
+            GeoapifyApiKeyMissingException =>
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized,
             _ => context.Response.StatusCode = (int)HttpStatusCode.InternalServerError
         };
 

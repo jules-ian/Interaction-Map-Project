@@ -1,5 +1,6 @@
 using InteractiveMapProject.Contracts.Dtos.Geoapify;
 using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Exceptions;
 using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.Settings;
 using Microsoft.Extensions.Options;
@@ -22,7 +23,16 @@ public class GeoapifyGeocodingService : IGeocodingService
         var parameters = new Dictionary<string, string>();
         parameters.Add("apiKey", _settings.ApiKey);
         parameters.Add("text", string.Format("{0}, {1} {2}", address.Street, address.City, address.PostalCode));
-        GeoapifyResponseDto? geoapifyResponse = await _httpService.GetAsync<GeoapifyResponseDto>(_settings.Url, parameters);
+        GeoapifyResponseDto? geoapifyResponse;
+        try
+        {
+            geoapifyResponse = await _httpService.GetAsync<GeoapifyResponseDto>(_settings.Url, parameters);
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new GeoapifyApiKeyMissingException("Geoapify API key is missing.");
+        };
+        
         if (geoapifyResponse == null || geoapifyResponse.Features.Count() == 0)
         {
             return null;
