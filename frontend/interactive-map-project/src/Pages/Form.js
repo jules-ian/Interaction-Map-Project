@@ -1,13 +1,12 @@
 import { Box, Grid, Button } from "@mui/material";
 import DropMultiSelect from "../Components/DropMultiSelect";
 import { Text, Header } from "../Components/Label";
-import InputComponent from "../Components/InputComponent";
 import { useState } from "react";
 import TextInput from "../Components/TextInput";
 import {
-  getAudiences,
-  getMissions,
-  getPlacesOfIntervention,
+  getAllAudiences,
+  getAllMissions,
+  getAllPlacesOfIntervention,
 } from "../utils/BackendFunctions";
 import { SingleCheckbox } from "../Components/Checkbox";
 import {
@@ -300,7 +299,7 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
-            options={getAudiences()}
+            options={getAllAudiences()}
             error={audiencesError}
             setSelectionState={setAudiences}
             setErrorState={setAudiencesError}
@@ -309,7 +308,7 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
-            options={getPlacesOfIntervention()}
+            options={getAllPlacesOfIntervention()}
             error={placesOfInterventionError}
             setSelectionState={setPlacesOfIntervention}
             setErrorState={setPlacesOfInterventionError}
@@ -318,7 +317,7 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
-            options={getMissions()}
+            options={getAllMissions()}
             error={missionsError}
             setSelectionState={setMissions}
             setErrorState={setMissionsError}
