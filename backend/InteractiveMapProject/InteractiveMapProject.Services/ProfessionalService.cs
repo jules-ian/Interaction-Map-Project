@@ -33,7 +33,6 @@ public class ProfessionalService : IProfessionalService
     {
         List<Professional> professionals = await _uow.Professionals.GetAllAsync(filterRequest);
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
-        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> GetAsync(Guid id)
@@ -51,9 +50,9 @@ public class ProfessionalService : IProfessionalService
 
         _uow.Professionals.Add(professional);
 
-        CreateProfessionalMissions(professional, request.Missions);
-        CreateProfessionalAudiences(professional, request.Audiences);
-        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        //CreateProfessionalMissions(professional, request.Missions);
+        //CreateProfessionalAudiences(professional, request.Audiences);
+        //CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
 
         await _uow.SaveChangesAsync();
 
@@ -69,13 +68,13 @@ public class ProfessionalService : IProfessionalService
                                     throw new EntityNotFoundException("There is no professional with that id.");
         professional = _mapper.Map(request, professional);
 
-        professional.Audiences.Clear();
-        professional.PlacesOfIntervention.Clear();
-        professional.Missions.Clear();
+        //professional.Audiences.Clear();
+        //professional.PlacesOfIntervention.Clear();
+        //professional.Missions.Clear();
 
-        CreateProfessionalAudiences(professional, request.Audiences);
-        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
-        CreateProfessionalMissions(professional, request.Missions);
+        //CreateProfessionalAudiences(professional, request.Audiences);
+        //CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        //CreateProfessionalMissions(professional, request.Missions);
 
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
