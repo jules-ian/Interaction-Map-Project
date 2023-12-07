@@ -33,7 +33,6 @@ public class ProfessionalService : IProfessionalService
     {
         List<Professional> professionals = await _uow.Professionals.GetAllAsync(filterRequest);
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
-        // TODO: map fields of intervention
     }
 
     public async Task<ProfessionalResponseDto> GetAsync(Guid id)
