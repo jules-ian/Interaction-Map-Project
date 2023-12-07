@@ -73,17 +73,14 @@ export function getResultsSearch(
   }
   console.log(data);
 
-  // let url =
-  //   "https://localhost:7212/api/field-of-intervention/place-of-intervention/10";
-  // axios
-  //   .delete(url)
-  //   .then((response) => console.log(response.data))
-  //   .catch((error) => {
-  //     console.error("Error sending post for search:", error);
-  //   });
   let url = "https://localhost:7212/api/professional/all-filtered";
   axios
-    .post(url, [])
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        // Add any other headers if needed
+      },
+    })
     .then((response) => console.log(response.data))
     .catch((error) => {
       console.error("Error sending post for search:", error);
