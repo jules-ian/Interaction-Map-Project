@@ -67,9 +67,9 @@ public class ProfessionalService : IProfessionalService
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
 
-        professional.Audiences.ToList().Clear();
-        professional.PlacesOfIntervention.ToList().Clear();
-        professional.Missions.ToList().Clear();
+        await DeleteProfessionalAudiences(professional);
+        await DeleteProfessionalPlacesOfIntervention(professional);
+        await DeleteProfessionalMissions(professional);
 
         await CreateProfessionalAudiences(professional, request.Audiences);
         await CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
@@ -96,8 +96,9 @@ public class ProfessionalService : IProfessionalService
 
             ProfessionalAudience professionalAudience = new ProfessionalAudience(professional.Id, audience.Id);
             _uow.ProfessionalAudiences.Add(professionalAudience);
-            await _uow.SaveChangesAsync();
         }
+
+        await _uow.SaveChangesAsync();
     }
 
     private async Task CreateProfessionalPlacesOfIntervention(Professional professional,
@@ -110,8 +111,9 @@ public class ProfessionalService : IProfessionalService
 
             ProfessionalPlaceOfIntervention professionalPlaceOfIntervention = new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id);
             _uow.ProfessionalPlacesOfIntervention.Add(professionalPlaceOfIntervention);
-            await _uow.SaveChangesAsync();
         }
+
+        await _uow.SaveChangesAsync();
     }
 
     private async Task CreateProfessionalMissions(Professional professional,
@@ -124,7 +126,35 @@ public class ProfessionalService : IProfessionalService
 
             ProfessionalMission professionalMission = new ProfessionalMission(professional.Id, mission.Id);
             _uow.ProfessionalMissions.Add(professionalMission);
-            await _uow.SaveChangesAsync();
         }
+
+        await _uow.SaveChangesAsync();
+    }
+
+    private async Task DeleteProfessionalAudiences(Professional professional)
+    {
+        foreach (var professionalAudience in professional.Audiences)
+        {
+            _uow.ProfessionalAudiences.Remove(professionalAudience);
+        }
+        await _uow.SaveChangesAsync();
+    }
+
+    private async Task DeleteProfessionalPlacesOfIntervention(Professional professional)
+    {
+        foreach (var professionalPlaceOfIntervention in professional.PlacesOfIntervention)
+        {
+            _uow.ProfessionalPlacesOfIntervention.Remove(professionalPlaceOfIntervention);
+        }
+        await _uow.SaveChangesAsync();
+    }
+
+    private async Task DeleteProfessionalMissions(Professional professional)
+    {
+        foreach (var professionalMission in professional.Missions)
+        {
+            _uow.ProfessionalMissions.Remove(professionalMission);
+        }
+        await _uow.SaveChangesAsync();
     }
 }
