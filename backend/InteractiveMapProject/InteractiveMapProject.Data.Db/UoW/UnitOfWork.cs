@@ -15,6 +15,9 @@ public class UnitOfWork : IUnitOfWork
     private readonly IRepository<Audience> _audiences;
     private readonly IRepository<Mission> _missions;
     private readonly IRepository<PlaceOfIntervention> _placesOfIntervention;
+    private readonly IRepository<ProfessionalAudience> _professionalAudiences;
+    private readonly IRepository<ProfessionalPlaceOfIntervention> _professionalPlacesOfIntervention;
+    private readonly IRepository<ProfessionalMission> _professionalMissions;
 
     private readonly IFilterFactory<Professional, ProfessionalFilterRequest> _filterFactory;
 
@@ -36,6 +39,15 @@ public class UnitOfWork : IUnitOfWork
 
     public IRepository<PlaceOfIntervention> PlacesOfIntervention
         => _placesOfIntervention ?? new Repository<PlaceOfIntervention>(_dbContext);
+
+    public IRepository<ProfessionalAudience> ProfessionalAudiences
+        => _professionalAudiences ?? new Repository<ProfessionalAudience>(_dbContext);
+
+    public IRepository<ProfessionalPlaceOfIntervention> ProfessionalPlacesOfIntervention
+        => _professionalPlacesOfIntervention ?? new Repository<ProfessionalPlaceOfIntervention>(_dbContext);
+
+    public IRepository<ProfessionalMission> ProfessionalMissions
+        => _professionalMissions ?? new Repository<ProfessionalMission>(_dbContext);
 
     public async Task SaveChangesAsync()
     {
