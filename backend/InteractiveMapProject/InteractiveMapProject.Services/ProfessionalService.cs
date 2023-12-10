@@ -1,4 +1,3 @@
-using System.Reflection;
 using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
@@ -65,16 +64,16 @@ public class ProfessionalService : IProfessionalService
                                     throw new EntityNotFoundException("There is no professional with that id.");
         professional = _mapper.Map(request, professional);
 
-        //professional.Audiences.Clear();
-        //professional.PlacesOfIntervention.Clear();
-        //professional.Missions.Clear();
-
-        //CreateProfessionalAudiences(professional, request.Audiences);
-        //CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
-        //CreateProfessionalMissions(professional, request.Missions);
-
         _uow.Professionals.Update(professional);
         await _uow.SaveChangesAsync();
+
+        professional.Audiences.ToList().Clear();
+        professional.PlacesOfIntervention.ToList().Clear();
+        professional.Missions.ToList().Clear();
+
+        await CreateProfessionalAudiences(professional, request.Audiences);
+        await CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        await CreateProfessionalMissions(professional, request.Missions);
 
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }

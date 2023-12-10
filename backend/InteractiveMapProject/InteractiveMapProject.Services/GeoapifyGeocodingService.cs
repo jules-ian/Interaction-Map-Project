@@ -28,11 +28,11 @@ public class GeoapifyGeocodingService : IGeocodingService
         {
             geoapifyResponse = await _httpService.GetAsync<GeoapifyResponseDto>(_settings.Url, parameters);
         }
-        catch (HttpRequestException ex)
+        catch (HttpRequestException)
         {
             throw new GeoapifyApiKeyMissingException("Geoapify API key is missing.");
         };
-        
+
         if (geoapifyResponse == null || geoapifyResponse.Features.Count() == 0)
         {
             return null;
