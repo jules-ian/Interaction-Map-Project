@@ -8,6 +8,8 @@ public class ProfessionalPlaceOfInterventionConfiguration : IEntityTypeConfigura
 {
     public void Configure(EntityTypeBuilder<ProfessionalPlaceOfIntervention> builder)
     {
+        builder.ToTable("ProfessionalsPlacesOfIntervention");
+
         builder
             .HasKey(pa => new { ProfessionalId = pa.ProfessionalId, MissionId = pa.PlaceOfInterventionId });
 

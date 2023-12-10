@@ -8,6 +8,8 @@ public class ProfessionalAudienceConfiguration : IEntityTypeConfiguration<Profes
 {
     public void Configure(EntityTypeBuilder<ProfessionalAudience> builder)
     {
+        builder.ToTable("ProfessionalsAudiences");
+
         builder
             .HasKey(pa => new { ProfessionalId = pa.ProfessionalId, AudienceId = pa.AudienceId });
 

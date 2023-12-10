@@ -9,6 +9,8 @@ public class MissionConfiguration : IEntityTypeConfiguration<Mission>
 
     public void Configure(EntityTypeBuilder<Mission> builder)
     {
+        builder.ToTable("Missions");
+
         builder.HasKey(p => p.Id);
 
         builder
