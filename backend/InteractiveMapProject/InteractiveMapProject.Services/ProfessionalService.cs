@@ -48,11 +48,11 @@ public class ProfessionalService : IProfessionalService
         Geolocation geolocation = await _geocodingService.GetGeolocationFromAddressAsync(request.Address) ?? throw new InvalidAddressException("Address is invalid.");
         professional.Geolocation = geolocation;
 
-        _uow.Professionals.Add(professional);
+        CreateProfessionalMissions(professional, request.Missions);
+        CreateProfessionalAudiences(professional, request.Audiences);
+        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
 
-        //CreateProfessionalMissions(professional, request.Missions);
-        //CreateProfessionalAudiences(professional, request.Audiences);
-        //CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        _uow.Professionals.Add(professional);
 
         await _uow.SaveChangesAsync();
 

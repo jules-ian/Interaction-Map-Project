@@ -27,12 +27,18 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
         RuleFor(x => x.ContactPerson)
             .NotNull().WithMessage("Contact person is required.")
             .SetValidator(new ContactPersonValidator());
+        RuleFor(x => x.Audiences)
+            .NotNull().WithMessage("Audiences are required.");
         RuleForEach(x => x.Audiences)
             .NotNull().WithMessage("Audience is required.")
             .SetValidator(new FieldOfInterventionGetRequestDtoValidator());
+        RuleFor(x => x.PlacesOfIntervention)
+            .NotNull().WithMessage("Places of intervention are required.");
         RuleForEach(x => x.PlacesOfIntervention)
             .NotNull().WithMessage("Place of intervetion is required.")
             .SetValidator(new FieldOfInterventionGetRequestDtoValidator());
+        RuleFor(x => x.Missions)
+            .NotNull().WithMessage("Missions are required.");
         RuleForEach(x => x.Missions)
             .NotNull().WithMessage("Mission is required.")
             .SetValidator(new FieldOfInterventionGetRequestDtoValidator());
