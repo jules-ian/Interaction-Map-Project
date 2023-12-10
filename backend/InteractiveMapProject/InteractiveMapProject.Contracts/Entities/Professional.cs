@@ -20,11 +20,11 @@ public class Professional
 
     public ContactPerson ContactPerson { get; set; } = default!;
 
-    public List<ProfessionalAudience> Audiences { get; set; } = default!;
+    public IEnumerable<ProfessionalAudience> Audiences { get; set; } = new List<ProfessionalAudience> { };
 
-    public List<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } = default!;
+    public IEnumerable<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } = new List<ProfessionalPlaceOfIntervention> { };
 
-    public List<ProfessionalMission> Missions { get; set; } = default!;
+    public IEnumerable<ProfessionalMission> Missions { get; set; } = new List<ProfessionalMission> { };
 
     public Geolocation Geolocation { get; set; } = default!;
 

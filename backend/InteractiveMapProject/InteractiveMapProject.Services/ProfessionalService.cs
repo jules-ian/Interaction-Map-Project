@@ -48,9 +48,9 @@ public class ProfessionalService : IProfessionalService
         Geolocation geolocation = await _geocodingService.GetGeolocationFromAddressAsync(request.Address) ?? throw new InvalidAddressException("Address is invalid.");
         professional.Geolocation = geolocation;
 
-        CreateProfessionalMissions(professional, request.Missions);
-        CreateProfessionalAudiences(professional, request.Audiences);
-        CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        await CreateProfessionalAudiences(professional, request.Audiences);
+        await CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
+        await CreateProfessionalMissions(professional, request.Missions);
 
         _uow.Professionals.Add(professional);
 
@@ -90,39 +90,39 @@ public class ProfessionalService : IProfessionalService
         await _uow.SaveChangesAsync();
     }
 
-    private async void CreateProfessionalMissions(Professional professional,
+    private async Task CreateProfessionalMissions(Professional professional,
         IEnumerable<FieldOfInterventionGetRequestDto> requests)
     {
         foreach (FieldOfInterventionGetRequestDto request in requests)
         {
             Mission mission = await _uow.Missions.GetAsync(request.Id)
-                             ?? throw new EntityNotFoundException("There is no mission with that id.");
+                                ?? throw new EntityNotFoundException("There is no mission with that id.");
 
-            professional.Missions.Add(new ProfessionalMission(professional.Id, mission.Id));
+            professional.Missions.Append(new ProfessionalMission(professional.Id, mission.Id));
         }
     }
 
-    private async void CreateProfessionalAudiences(Professional professional,
+    private async Task CreateProfessionalAudiences(Professional professional,
         IEnumerable<FieldOfInterventionGetRequestDto> requests)
     {
         foreach (FieldOfInterventionGetRequestDto request in requests)
         {
             Audience audience = await _uow.Audiences.GetAsync(request.Id)
-                              ?? throw new EntityNotFoundException("There is no audience with that id.");
+                                ?? throw new EntityNotFoundException("There is no audience with that id.");
 
-            professional.Audiences.Add(new ProfessionalAudience(professional.Id, audience.Id));
+            professional.Audiences.Append(new ProfessionalAudience(professional.Id, audience.Id));
         }
     }
 
-    private async void CreateProfessionalPlacesOfIntervention(Professional professional,
+    private async Task CreateProfessionalPlacesOfIntervention(Professional professional,
         IEnumerable<FieldOfInterventionGetRequestDto> requests)
     {
         foreach (FieldOfInterventionGetRequestDto request in requests)
         {
             PlaceOfIntervention placeOfIntervention = await _uow.PlacesOfIntervention.GetAsync(request.Id)
-                              ?? throw new EntityNotFoundException("There is no place with that id.");
+                                ?? throw new EntityNotFoundException("There is no place of intervention with that id.");
 
-            professional.PlacesOfIntervention.Add(new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id));
+            professional.PlacesOfIntervention.Append(new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id));
         }
     }
 }
