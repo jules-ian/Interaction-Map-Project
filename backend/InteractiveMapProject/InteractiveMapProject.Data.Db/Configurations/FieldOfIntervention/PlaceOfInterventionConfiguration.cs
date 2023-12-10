@@ -9,6 +9,8 @@ public class PlaceOfInterventionConfiguration : IEntityTypeConfiguration<PlaceOf
 
     public void Configure(EntityTypeBuilder<PlaceOfIntervention> builder)
     {
+        builder.ToTable("PlacesOfIntervention");
+
         builder.HasKey(p => p.Id);
 
         builder

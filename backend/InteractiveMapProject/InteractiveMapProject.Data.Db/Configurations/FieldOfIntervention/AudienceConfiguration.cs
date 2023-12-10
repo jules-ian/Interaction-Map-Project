@@ -9,6 +9,8 @@ public class AudienceConfiguration : IEntityTypeConfiguration<Audience>
 
     public void Configure(EntityTypeBuilder<Audience> builder)
     {
+        builder.ToTable("Audiences");
+
         builder.HasKey(p => p.Id);
 
         builder
