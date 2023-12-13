@@ -74,8 +74,6 @@ export default function Form() {
   }, []);
 
   const onSubmit = function () {
-    navigate("/FormSuccess", { replace: true });
-    return;
     let success = checkEntries();
     if (success) {
       let professional = createProfessinalEntitiy();
