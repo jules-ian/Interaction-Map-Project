@@ -8,8 +8,9 @@ export function isName(name) {
 }
 
 export function isTelephoneNumber(number) {
-  // TODO
-  return number !== "";
+  const regex = /^[0-9]+$/;
+
+  return number !== "" && regex.test(number);
 }
 
 export function isEmail(email) {

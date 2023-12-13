@@ -246,6 +246,7 @@ export default function Form() {
             setTextState={setTelephone}
             setErrorState={setTelephoneError}
             label="Numero téléphone"
+            helperText="Not a valid téléphone number"
           />
         </Grid>
 
@@ -299,6 +300,7 @@ export default function Form() {
             setTextState={setContactPersonTelephone}
             setErrorState={setContactPersonTelephoneError}
             label="Numero téléphone contact personne"
+            helperText="Not a valid téléphone number"
           />
         </Grid>
         <Grid item xs={12} sm={6}>

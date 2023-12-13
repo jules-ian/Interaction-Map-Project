@@ -16,6 +16,14 @@ import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 
 export default function Search() {
+  //TODO Task Sondre
+  const [mapCoordinates, setMapCoordinates] = useState({
+    topleft: { lo: 0, la: 0 },
+    topright: { lo: 0, la: 0 },
+    bottomleft: { lo: 0, la: 0 },
+    bottomright: { lo: 0, la: 0 },
+  });
+
   const [search, setSearch] = useState("");
   const [postal, setPostal] = useState("");
   const [postalError, setPostalError] = useState(false);
@@ -34,11 +42,21 @@ export default function Search() {
     getAllMissions(setMissions);
     getAllAudiences(setAudiences);
   }, []);
+  // change to search criteria
+  useEffect(() => {
+    onSearch();
+  }, [
+    search,
+    postal,
+    missionsSelection,
+    audiencesSelection,
+    placesOfInterventionSelection,
+    mapCoordinates,
+  ]);
 
   const onSearch = function () {
     let success = checkEntries();
     if (success) {
-      setResults(getResults());
       let audiencesIDs = mapNamesToIDs(audiencesSelection, audiences);
       let placesOfInterventionIDs = mapNamesToIDs(
         placesOfInterventionSelection,
@@ -67,7 +85,15 @@ export default function Search() {
   return (
     <Box>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box sx={{ width: 400, margin: 2 }}>
+        <Box
+          sx={{
+            width: 400,
+            margin: 2,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
           <TextInput setTextState={setSearch} label="Search" />
           <TextInput
             setTextState={setPostal}
@@ -92,9 +118,6 @@ export default function Search() {
             options={placesOfIntervention.map((item) => item.name)}
             setSelectionState={setPlacesOfInterventionSelection}
           />
-          <Button variant="contained" fullWidth onClick={onSearch}>
-            Search
-          </Button>
         </Box>
         <Map />
       </Box>
@@ -102,24 +125,3 @@ export default function Search() {
     </Box>
   );
 }
-
-// function Placeholder({ text, width, height, other }) {
-//   return (
-//     <Box
-//       sx={{
-//         margin: 2,
-//         height: height,
-//         width: width,
-//         borderRadius: 3,
-//         bgcolor: "black",
-//         alignItems: "center",
-//         justifyContent: "center",
-//         display: "flex",
-//         color: "white",
-//         ...other,
-//       }}
-//     >
-//       {text}
-//     </Box>
-//   );
-// }

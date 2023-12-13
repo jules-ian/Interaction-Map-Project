@@ -49,15 +49,6 @@ export function getAllPlacesOfIntervention(setReturn) {
     });
 }
 
-export function getResults() {
-  let results = [];
-  let randomNumberOfResults = Math.round(Math.random() * 10) + 1;
-  for (let i = 0; i < randomNumberOfResults; i++) {
-    results.push(dummyProf);
-  }
-  return results;
-}
-
 export function addNewProfessional(professional) {
   let url = "https://localhost:7212/api/professional";
 
@@ -67,7 +58,7 @@ export function addNewProfessional(professional) {
       console.log(response);
     })
     .catch((error) => {
-      console.error("Error Posting Professional:", error);
+      console.error("Error Posting Professional:", error.response);
     });
 }
 
