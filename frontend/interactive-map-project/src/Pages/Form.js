@@ -18,6 +18,7 @@ import {
 } from "../utils/checkFunctions";
 import { Address, ContactPerson, Professional } from "../utils/Entities";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -63,6 +64,7 @@ export default function Form() {
   const [descriptionError, setDescriptionError] = useState(false);
   const [accept, setAccept] = useState(false);
   const [acceptError, setAcceptError] = useState(false);
+  const navigate = useNavigate();
 
   // on first render
   useEffect(() => {
@@ -72,11 +74,14 @@ export default function Form() {
   }, []);
 
   const onSubmit = function () {
+    navigate("/FormSuccess", { replace: true });
+    return;
     let success = checkEntries();
     if (success) {
       let professional = createProfessinalEntitiy();
       console.log(professional.toJSON());
       addNewProfessional(professional);
+      navigate("/FormSuccess", { replace: true });
     }
   };
 
