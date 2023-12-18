@@ -9,11 +9,6 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
     {
         List<Expression<Func<Professional, bool>>> dbFilters = new();
 
-        if (request?.PostalCode != null)
-        {
-            dbFilters.Add(ProfessionalSpecification.FilterByPostalCode(request.PostalCode));
-        }
-
         if (request?.Audiences?.Any() == true)
         {
             dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Audiences));
@@ -21,12 +16,17 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
 
         if (request?.PlacesOfIntervention?.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByPlaceOfIntervetion(request.PlacesOfIntervention));
+            dbFilters.Add(ProfessionalSpecification.FilterByPlaceOfIntervention(request.PlacesOfIntervention));
         }
 
         if (request?.Missions?.Any() == true)
         {
             dbFilters.Add(ProfessionalSpecification.FilterByMission(request.Missions));
+        }
+
+        if (request?.MapSquare != null)
+        {
+            dbFilters.Add(ProfessionalSpecification.FilterByMapSquare(request.MapSquare));
         }
 
         return dbFilters.ToArray();
