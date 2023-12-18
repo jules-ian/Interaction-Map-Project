@@ -17,7 +17,7 @@ public static class ProfessionalSpecification
         x => x.Missions.Any(professional => missions.Contains(professional.Mission.Id));
 
     public static Expression<Func<Professional, bool>>
-        FilterByMapSquare(ProfessionalFilterRequestMapSquare mapSquare) =>
+        FilterByMapSquare(MapSquare mapSquare) =>
         x =>
             mapSquare.NorthWestLatitude >= x.Geolocation.Latitude &&
             mapSquare.SouthEastLatitude <= x.Geolocation.Latitude &&
