@@ -8,7 +8,6 @@ public class ProfessionalFilterRequestValidator : AbstractValidator<Professional
     public ProfessionalFilterRequestValidator()
     {
         RuleFor(x => x.MapSquare)
-            .NotNull().WithMessage("Map square is required.")
             .SetValidator(new MapSquareValidator());
     }
 }

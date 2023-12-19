@@ -9,11 +9,6 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
     {
         List<Expression<Func<Professional, bool>>> dbFilters = new();
 
-        if (request?.Text != null)
-        {
-            dbFilters.Add(ProfessionalSpecification.FilterByText(request.Text));
-        }
-
         if (request?.Audiences?.Any() == true)
         {
             dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Audiences));

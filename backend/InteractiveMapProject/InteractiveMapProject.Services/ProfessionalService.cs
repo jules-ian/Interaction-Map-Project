@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
@@ -28,6 +29,8 @@ public class ProfessionalService : IProfessionalService
         List<Professional> professionals = await _uow.Professionals.GetAllAsync();
         return professionals.Select(p => _mapper.Map<ProfessionalResponseDto>(p)).ToList();
     }
+
+    
 
     public async Task<List<ProfessionalResponseDto>> GetAllFilteredAsync(ProfessionalFilterRequest filterRequest)
     {
