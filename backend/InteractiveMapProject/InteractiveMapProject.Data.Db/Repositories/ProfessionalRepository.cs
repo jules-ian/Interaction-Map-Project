@@ -1,6 +1,4 @@
-using System.IO;
 using InteractiveMapProject.Contracts.Entities;
-using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 using InteractiveMapProject.Contracts.Repositories;
