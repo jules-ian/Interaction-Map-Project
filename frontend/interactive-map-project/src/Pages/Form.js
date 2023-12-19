@@ -18,6 +18,7 @@ import {
 } from "../utils/checkFunctions";
 import { Address, ContactPerson, Professional } from "../utils/Entities";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -63,6 +64,7 @@ export default function Form() {
   const [descriptionError, setDescriptionError] = useState(false);
   const [accept, setAccept] = useState(false);
   const [acceptError, setAcceptError] = useState(false);
+  const navigate = useNavigate();
 
   // on first render
   useEffect(() => {
@@ -77,6 +79,7 @@ export default function Form() {
       let professional = createProfessinalEntitiy();
       console.log(professional.toJSON());
       addNewProfessional(professional);
+      navigate("/FormSuccess", { replace: true });
     }
   };
 
@@ -246,6 +249,7 @@ export default function Form() {
             setTextState={setTelephone}
             setErrorState={setTelephoneError}
             label="Numero téléphone"
+            helperText="Not a valid téléphone number"
           />
         </Grid>
 
@@ -299,6 +303,7 @@ export default function Form() {
             setTextState={setContactPersonTelephone}
             setErrorState={setContactPersonTelephoneError}
             label="Numero téléphone contact personne"
+            helperText="Not a valid téléphone number"
           />
         </Grid>
         <Grid item xs={12} sm={6}>

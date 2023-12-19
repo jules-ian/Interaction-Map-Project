@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
 
 export default function InputComponent(properties) {
-  return <Box marginBottom={2} {...properties} />;
+  return <Box marginTop={1} marginBottom={1} {...properties} />;
 }
