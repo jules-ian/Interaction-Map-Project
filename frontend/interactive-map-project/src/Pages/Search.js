@@ -10,30 +10,26 @@ import {
 } from "../utils/BackendFunctions";
 import TextInput from "../Components/TextInput";
 import { useEffect, useState } from "react";
-import { isPostalCode } from "../utils/checkFunctions";
 import ResultCardDisplay from "../Components/ProfessionalResult";
 import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 
 export default function Search() {
   //TODO Task Sondre
-  const [mapCoordinates, setMapCoordinates] = useState({
-    topleft: { lo: 0, la: 0 },
-    topright: { lo: 0, la: 0 },
-    bottomleft: { lo: 0, la: 0 },
-    bottomright: { lo: 0, la: 0 },
-  });
+  const [northWestLongitude, setNorthWestLongitude] = useState(0);
+  const [northWestLatitude, setNorthWestLatitude] = useState(0);
+  const [southEastLongitude, setSouthEastLongitude] = useState(0);
+  const [southEastLatitude, setSouthEastLatitude] = useState(0);
 
   const [search, setSearch] = useState("");
-  const [postal, setPostal] = useState("");
-  const [postalError, setPostalError] = useState(false);
-  const [missions, setMissions] = useState([]);
-  const [audiences, setAudiences] = useState([]);
-  const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
   const [missionsSelection, setMissionsSelection] = useState([]);
   const [audiencesSelection, setAudiencesSelection] = useState([]);
   const [placesOfInterventionSelection, setPlacesOfInterventionSelection] =
     useState([]);
+
+  const [missions, setMissions] = useState([]);
+  const [audiences, setAudiences] = useState([]);
+  const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
   const [results, setResults] = useState([]);
 
   // on first render
@@ -47,11 +43,13 @@ export default function Search() {
     onSearch();
   }, [
     search,
-    postal,
     missionsSelection,
     audiencesSelection,
     placesOfInterventionSelection,
-    mapCoordinates,
+    northWestLongitude,
+    northWestLatitude,
+    southEastLongitude,
+    southEastLatitude,
   ]);
 
   const onSearch = function () {
@@ -64,7 +62,6 @@ export default function Search() {
       );
       let missionsIDS = mapNamesToIDs(missionsSelection, missions);
       getResultsSearch(
-        postal,
         audiencesIDs,
         placesOfInterventionIDs,
         missionsIDS,
@@ -75,10 +72,6 @@ export default function Search() {
 
   const checkEntries = function () {
     let checkSuccess = true;
-    if (!isPostalCode(postal) && postal !== "") {
-      setPostalError(true);
-      checkSuccess = false;
-    }
     return checkSuccess;
   };
 
@@ -95,12 +88,6 @@ export default function Search() {
           }}
         >
           <TextInput setTextState={setSearch} label="Search" />
-          <TextInput
-            setTextState={setPostal}
-            error={postalError}
-            setErrorState={setPostalError}
-            label="Postalcode"
-          />
           <DropMultiSelect
             label="Missions"
             options={missions.map((item) => item.name)}

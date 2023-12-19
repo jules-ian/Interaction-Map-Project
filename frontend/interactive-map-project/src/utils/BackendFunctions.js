@@ -63,16 +63,12 @@ export function addNewProfessional(professional) {
 }
 
 export function getResultsSearch(
-  postalCode,
   audiencesIDs,
   placesOfInterventionIDs,
   missionIDs,
   setResults
 ) {
   let data = {};
-  if (!postalCode === "") {
-    data.postalCode = postalCode;
-  }
   if (!audiencesIDs.length == 0) {
     data.audiences = audiencesIDs;
   }
