@@ -5,13 +5,51 @@ namespace InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 
 public static class ProfessionalSpecification
 {
+    private static string[] ProfessionalToArray(Professional professional)
+    {
+        if (professional.Description == null)
+        {
+            return new string[]
+            {
+                professional.Name,
+                professional.EstablishmentType,
+                professional.ManagementType,
+                professional.Address.Street,
+                professional.Address.City,
+                professional.Address.PostalCode,
+                professional.PhoneNumber.ToString(),
+                professional.Email,
+                professional.ContactPerson.Name,
+                professional.ContactPerson.Function,
+                professional.ContactPerson.PhoneNumber.ToString(),
+                professional.ContactPerson.Email
+            };
+        }
+        return new string[]
+        {
+            professional.Name,
+            professional.EstablishmentType,
+            professional.ManagementType,
+            professional.Address.Street,
+            professional.Address.City,
+            professional.Address.PostalCode,
+            professional.PhoneNumber.ToString(),
+            professional.Email,
+            professional.ContactPerson.Name,
+            professional.ContactPerson.Function,
+            professional.ContactPerson.PhoneNumber.ToString(),
+            professional.ContactPerson.Email,
+            professional.Description
+        };
+    }
+    public static Expression<Func<Professional, bool>> FilterByText(string text) =>
+        x => ProfessionalToArray(x).Intersect(text.Split(' ', StringSplitOptions.None)).Count() > 3;
+
     public static Expression<Func<Professional, bool>> FilterByAudience(IEnumerable<Guid> audiences) =>
         x => x.Audiences.Any(professional => audiences.Contains(professional.Audience.Id));
 
-    public static Expression<Func<Professional, bool>>
-        FilterByPlaceOfIntervention(IEnumerable<Guid> placesOfIntervention) =>
-        x => x.PlacesOfIntervention.Any(professional =>
-            placesOfIntervention.Contains(professional.PlaceOfIntervention.Id));
+    public static Expression<Func<Professional, bool>> FilterByPlaceOfIntervention(IEnumerable<Guid> placesOfIntervention) =>
+        x => x.PlacesOfIntervention.Any(professional => placesOfIntervention.Contains(professional.PlaceOfIntervention.Id));
 
     public static Expression<Func<Professional, bool>> FilterByMission(IEnumerable<Guid> missions) =>
         x => x.Missions.Any(professional => missions.Contains(professional.Mission.Id));
