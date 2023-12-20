@@ -3,7 +3,9 @@ import {
   Button,
   Card,
   CardContent,
+  Grid,
   MobileStepper,
+  Stack,
   Typography,
 } from "@mui/material";
 import useWindowDimensions from "../utils/windowDimension";
@@ -22,21 +24,18 @@ export default function ResultCardDisplay({ results }) {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        overflow: "auto",
-        flexDirection: "row",
-        backgroundColor: "lightgrey",
-        margin: 1,
-        borderRadius: 1,
-      }}
+      spacing={2}
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      overflow="auto"
     >
       {results.length != 0 ? (
         results.map((professional) => (
           <ProfessionalCard
             professional={professional}
-            width={height * 0.4}
-            height={height * 0.2}
+            width={width * 0.3}
+            height={150}
             other={{ flexShrink: 0 }}
           />
         ))
@@ -74,23 +73,25 @@ function ProfessionalCard({ professional, width, height, other }) {
   );
 }
 
-function ResultCard(props, { width, height, other }) {
+function ResultCard(props) {
+  const { width, height, other } = props;
   const content = props.children;
+
   return (
     <Card
       sx={{
-        margin: 2,
-        padding: 2,
+        margin: 1,
+        padding: 1,
         height: height,
-        wdith: width,
-        alignItems: "center",
-        justifyContent: "center",
-        display: "flex",
+        width: width,
         color: "black",
+        "&:hover": {
+          background: "lightblue", // change to the desired background color on hover
+        },
         ...other,
       }}
     >
-      <CardContent sx={{ maxWidth: width }}>{content}</CardContent>
+      <CardContent>{content}</CardContent>
     </Card>
   );
 }
