@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import ResultCardDisplay from "../Components/ProfessionalResult";
 import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
+import { PopoverWindow } from "../Components/PopoverWindow";
 
 export default function Search() {
   //TODO Task Sondre
@@ -32,6 +33,7 @@ export default function Search() {
   const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
   const [results, setResults] = useState([]);
 
+  const [selectedProfessional, SetSelectedProfessinoal] = useState(null);
   // on first render
   useEffect(() => {
     getAllPlacesOfIntervention(setPlacesOfIntervention);
@@ -77,38 +79,46 @@ export default function Search() {
 
   return (
     <Box>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box
-          sx={{
-            width: 400,
-            margin: 2,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <TextInput setTextState={setSearch} label="Search" />
-          <DropMultiSelect
-            label="Missions"
-            options={missions.map((item) => item.name)}
-            setSelectionState={setMissionsSelection}
-          />
+      <Box>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box
+            sx={{
+              width: 400,
+              margin: 2,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "top",
+            }}
+          >
+            <TextInput setTextState={setSearch} label="Search" />
+            <DropMultiSelect
+              label="Missions"
+              options={missions.map((item) => item.name)}
+              setSelectionState={setMissionsSelection}
+            />
 
-          <DropMultiSelect
-            label="Public"
-            options={audiences.map((item) => item.name)}
-            setSelectionState={setAudiencesSelection}
-          />
+            <DropMultiSelect
+              label="Public"
+              options={audiences.map((item) => item.name)}
+              setSelectionState={setAudiencesSelection}
+            />
 
-          <DropMultiSelect
-            label="Lieu d'intervention"
-            options={placesOfIntervention.map((item) => item.name)}
-            setSelectionState={setPlacesOfInterventionSelection}
-          />
+            <DropMultiSelect
+              label="Lieu d'intervention"
+              options={placesOfIntervention.map((item) => item.name)}
+              setSelectionState={setPlacesOfInterventionSelection}
+            />
+          </Box>
+          <Map />
         </Box>
-        <Map />
+        <ResultCardDisplay
+          results={results}
+          setSelectedProfessional={SetSelectedProfessinoal}
+        />
       </Box>
-      <ResultCardDisplay results={results} />
+      <PopoverWindow
+        selectedProfessional={selectedProfessional}
+      ></PopoverWindow>
     </Box>
   );
 }

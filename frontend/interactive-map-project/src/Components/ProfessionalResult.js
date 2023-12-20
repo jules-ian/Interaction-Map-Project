@@ -1,20 +1,14 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  MobileStepper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import useWindowDimensions from "../utils/windowDimension";
 import { useEffect, useState } from "react";
 import { Text } from "./Label";
 
 //const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-export default function ResultCardDisplay({ results }) {
+export default function ResultCardDisplay({
+  results,
+  setSelectedProfessional,
+}) {
   const { height, width } = useWindowDimensions();
 
   useEffect(() => {
@@ -34,9 +28,10 @@ export default function ResultCardDisplay({ results }) {
         results.map((professional) => (
           <ProfessionalCard
             professional={professional}
-            width={width * 0.3}
-            height={150}
+            width={width * 0.2}
+            height={height * 0.15}
             other={{ flexShrink: 0 }}
+            setOnClick={setSelectedProfessional}
           />
         ))
       ) : (
@@ -48,7 +43,7 @@ export default function ResultCardDisplay({ results }) {
   );
 }
 
-function ProfessionalCard({ professional, width, height, other }) {
+function ProfessionalCard({ professional, width, height, other, setOnClick }) {
   return (
     <ResultCard width={width} height={height} other={other}>
       <Typography variant="h5" noWrap>
@@ -64,7 +59,7 @@ function ProfessionalCard({ professional, width, height, other }) {
         variant="contained"
         fullWidth
         onClick={() => {
-          /*TODO*/
+          setOnClick(professional);
         }}
       >
         More Info
@@ -85,6 +80,10 @@ function ResultCard(props) {
         height: height,
         width: width,
         color: "black",
+        justifyContent: "center",
+        display: "flex",
+        flexDirection: "column",
+
         "&:hover": {
           background: "lightblue", // change to the desired background color on hover
         },

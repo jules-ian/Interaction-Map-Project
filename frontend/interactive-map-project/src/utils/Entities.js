@@ -31,6 +31,7 @@ export class Professional {
   toString() {
     return "Professional" + this.serviceName;
   }
+
   // is for posting a new professional to backend
   toJSON() {
     return {
