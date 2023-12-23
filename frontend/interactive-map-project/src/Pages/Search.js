@@ -22,7 +22,7 @@ export default function Search() {
   const [southEastLongitude, setSouthEastLongitude] = useState(0);
   const [southEastLatitude, setSouthEastLatitude] = useState(0);
 
-  const [search, setSearch] = useState("");
+  const [textSearch, setTextSearch] = useState("");
   const [missionsSelection, setMissionsSelection] = useState([]);
   const [audiencesSelection, setAudiencesSelection] = useState([]);
   const [placesOfInterventionSelection, setPlacesOfInterventionSelection] =
@@ -44,7 +44,7 @@ export default function Search() {
   useEffect(() => {
     onSearch();
   }, [
-    search,
+    textSearch,
     missionsSelection,
     audiencesSelection,
     placesOfInterventionSelection,
@@ -64,6 +64,7 @@ export default function Search() {
       );
       let missionsIDS = mapNamesToIDs(missionsSelection, missions);
       getResultsSearch(
+        textSearch,
         audiencesIDs,
         placesOfInterventionIDs,
         missionsIDS,
@@ -90,7 +91,7 @@ export default function Search() {
               justifyContent: "top",
             }}
           >
-            <TextInput setTextState={setSearch} label="Search" />
+            <TextInput setTextState={setTextSearch} label="Search" />
             <DropMultiSelect
               label="Missions"
               options={missions.map((item) => item.name)}

@@ -319,7 +319,7 @@ export default function Form() {
             error={contactPersonFunctionError}
             setTextState={setContactPersonFunction}
             setErrorState={setContactPersonFunctionError}
-            label="function contact personne"
+            label="Function contact personne"
           />
         </Grid>
         <Grid item xs={12}>

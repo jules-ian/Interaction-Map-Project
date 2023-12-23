@@ -63,12 +63,16 @@ export function addNewProfessional(professional) {
 }
 
 export function getResultsSearch(
+  textSearch,
   audiencesIDs,
   placesOfInterventionIDs,
   missionIDs,
   setResults
 ) {
   let data = {};
+  if (!textSearch.length == 0) {
+    data.text = textSearch;
+  }
   if (!audiencesIDs.length == 0) {
     data.audiences = audiencesIDs;
   }
@@ -78,6 +82,7 @@ export function getResultsSearch(
   if (!placesOfInterventionIDs.length == 0) {
     data.placesOfIntervention = placesOfInterventionIDs;
   }
+  console.log("Data send to backend on search");
   console.log(data);
 
   let url = "https://localhost:7212/api/professional/all-filtered";

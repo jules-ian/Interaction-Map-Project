@@ -122,11 +122,10 @@ function ProfessionalTable({ professional }) {
         value={professional.placesOfIntervention}
       />
       <Row label="Mission" value={professional.missions} marked={true} />
-
-      {/* <Header>Name: </Header>
-      <Text>{professional.name}</Text>
-      <Header>Gestionnare</Header>
-      <Text>{professional.establishmentType}</Text> */}
+      <Text>Présentation: </Text>
+      <Grid item xs={12}>
+        {professional.description}
+      </Grid>
     </Box>
   );
 }
