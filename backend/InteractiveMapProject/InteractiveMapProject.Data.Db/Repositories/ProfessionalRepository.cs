@@ -107,6 +107,7 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
 
         return query
             .ToList()
+            .Where(professional => GetNumberOfMatches(ProfessionalToArray(professional), filterRequest.Text.Split(" ")) > 0)
             .OrderByDescending(professional => GetNumberOfMatches(ProfessionalToArray(professional), filterRequest.Text.Split(" ")))
             .ToList();
     }
