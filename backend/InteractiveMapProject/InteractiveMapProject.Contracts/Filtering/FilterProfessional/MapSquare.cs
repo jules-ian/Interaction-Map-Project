@@ -2,8 +2,8 @@ namespace InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 
 public class MapSquare
 {
-    public double? NorthWestLatitude { get; set; }
-    public double? NorthWestLongitude { get; set; }
-    public double? SouthEastLatitude { get; set; }
-    public double? SouthEastLongitude { get; set; }
+    public double? NorthEastLatitude { get; set; }
+    public double? NorthEastLongitude { get; set; }
+    public double? SouthWestLatitude { get; set; }
+    public double? SouthWestLongitude { get; set; }
 }
