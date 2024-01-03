@@ -9,11 +9,12 @@ import {
   getResultsSearch,
 } from "../utils/BackendFunctions";
 import TextInput from "../Components/TextInput";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import ResultCardDisplay from "../Components/ProfessionalResult";
 import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
+import { useTranslation } from "react-i18next";
 
 export default function Search() {
   //TODO Task Sondre
@@ -34,6 +35,8 @@ export default function Search() {
   const [results, setResults] = useState([]);
 
   const [selectedProfessional, SetSelectedProfessinoal] = useState(null);
+
+  const { t, i18n } = useTranslation(["search"]);
   // on first render
   useEffect(() => {
     getAllPlacesOfIntervention(setPlacesOfIntervention);
@@ -91,7 +94,7 @@ export default function Search() {
               justifyContent: "top",
             }}
           >
-            <TextInput setTextState={setTextSearch} label="Search" />
+            <TextInput setTextState={setTextSearch} label={t("title")} />
             <DropMultiSelect
               label="Missions"
               options={missions.map((item) => item.name)}

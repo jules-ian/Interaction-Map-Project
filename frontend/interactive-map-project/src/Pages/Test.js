@@ -19,6 +19,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import useWindowDimensions from "../utils/windowDimension.js";
 import { PopoverWindow } from "../Components/PopoverWindow.js";
+import { useTranslation } from "react-i18next";
 export default function Test() {
-  return <PopoverWindow selectedProfessional={dummyProf} />;
+  const { t, i18n } = useTranslation(["test2"]);
+  return <Box>{t("blub")}</Box>;
 }
