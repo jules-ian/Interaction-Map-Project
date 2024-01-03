@@ -22,6 +22,8 @@ export default function Search() {
   const [southEastLongitude, setSouthEastLongitude] = useState(0);
   const [southEastLatitude, setSouthEastLatitude] = useState(0);
 
+  const [mapBounds, setMapBounds] = useState(null);
+
   const [textSearch, setTextSearch] = useState("");
   const [missionsSelection, setMissionsSelection] = useState([]);
   const [audiencesSelection, setAudiencesSelection] = useState([]);
@@ -48,10 +50,7 @@ export default function Search() {
     missionsSelection,
     audiencesSelection,
     placesOfInterventionSelection,
-    northWestLongitude,
-    northWestLatitude,
-    southEastLongitude,
-    southEastLatitude,
+    mapBounds
   ]);
 
   const onSearch = function () {
@@ -68,6 +67,7 @@ export default function Search() {
         audiencesIDs,
         placesOfInterventionIDs,
         missionsIDS,
+        mapBounds,
         setResults
       );
     }
@@ -110,7 +110,7 @@ export default function Search() {
               setSelectionState={setPlacesOfInterventionSelection}
             />
           </Box>
-          <Map />
+          <Map setMapBounds={setMapBounds} />
         </Box>
         <ResultCardDisplay
           results={results}
