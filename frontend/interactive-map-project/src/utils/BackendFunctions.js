@@ -62,12 +62,26 @@ export function addNewProfessional(professional) {
     });
 }
 
+export function approveProfessional(professional, callback) {
+  new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+    callback();
+    console.log(professional.name + " was approved");
+  });
+}
+
+export function declineProfessional(professional, callback) {
+  new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+    callback();
+    console.log(professional.name + " was declined");
+  });
+}
+
 export function getResultsSearch(
-  textSearch,
-  audiencesIDs,
-  placesOfInterventionIDs,
-  missionIDs,
-  setResults
+  setResults,
+  textSearch = "",
+  audiencesIDs = [],
+  placesOfInterventionIDs = [],
+  missionIDs = []
 ) {
   let data = {};
   if (!textSearch.length == 0) {

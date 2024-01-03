@@ -205,7 +205,11 @@ export default function Form() {
     console.log(professional);
     return professional;
   };
-
+  const catergoryHeaderProps = {
+    textAlign: "left",
+    marginLeft: -2,
+    borderBottom: "2px solid lightblue",
+  };
   return (
     <Box>
       <Header>Veuillez remplir le formulaire suivant.</Header>
@@ -217,7 +221,7 @@ export default function Form() {
 
       <Grid paddingX={10} container spacing={2}>
         <Grid item xs={12}>
-          <Text>Information de votre structure</Text>
+          <Text sx={catergoryHeaderProps}>Information de votre structure</Text>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextInput
@@ -287,7 +291,9 @@ export default function Form() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Text>Information de la personne ressource</Text>
+          <Text sx={catergoryHeaderProps}>
+            Information de la personne ressource
+          </Text>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextInput
@@ -323,7 +329,7 @@ export default function Form() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Text>Champs d'intervention</Text>
+          <Text sx={catergoryHeaderProps}>Champs d'intervention</Text>
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
@@ -354,7 +360,9 @@ export default function Form() {
         </Grid>
 
         <Grid item xs={12}>
-          <Text>Présentation personnalisée de vos missions</Text>
+          <Text sx={catergoryHeaderProps}>
+            Présentation personnalisée de vos missions
+          </Text>
         </Grid>
         <Grid item xs={12}>
           <TextInput

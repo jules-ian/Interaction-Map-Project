@@ -64,11 +64,11 @@ export default function Search() {
       );
       let missionsIDS = mapNamesToIDs(missionsSelection, missions);
       getResultsSearch(
+        setResults,
         textSearch,
         audiencesIDs,
         placesOfInterventionIDs,
-        missionsIDS,
-        setResults
+        missionsIDS
       );
     }
   };

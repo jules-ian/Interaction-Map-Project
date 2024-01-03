@@ -78,6 +78,7 @@ function ResultCard(props) {
         margin: 1,
         padding: 1,
         height: height,
+        minHeight: 100,
         width: width,
         color: "black",
         justifyContent: "center",
