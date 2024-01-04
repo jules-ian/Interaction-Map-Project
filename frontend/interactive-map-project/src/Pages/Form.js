@@ -19,8 +19,10 @@ import {
 import { Address, ContactPerson, Professional } from "../utils/Entities";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Form() {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [establishmentType, setEstablishmentType] = useState("");
@@ -205,6 +207,7 @@ export default function Form() {
     console.log(professional);
     return professional;
   };
+
   const catergoryHeaderProps = {
     textAlign: "left",
     marginLeft: -2,
@@ -212,23 +215,19 @@ export default function Form() {
   };
   return (
     <Box>
-      <Header>Veuillez remplir le formulaire suivant.</Header>
-      <Text>
-        Avec une inscription confirmée, vous entrez dans notre service de
-        recherche et d'identification dans le domaine professionnel des
-        handicaps de la petite enfance.
-      </Text>
+      <Header>{t("form.header")}</Header>
+      <Text>{t("form.descriptionOfForm")}</Text>
 
       <Grid paddingX={10} container spacing={2}>
         <Grid item xs={12}>
-          <Text sx={catergoryHeaderProps}>Information de votre structure</Text>
+          <Text sx={catergoryHeaderProps}>{t("form.subHeaderStructure")}</Text>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextInput
             error={nameError}
             setTextState={setName}
             setErrorState={setNameError}
-            label="Nom de la structure"
+            label={t("professional.name")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -236,7 +235,7 @@ export default function Form() {
             error={establishmentTypeError}
             setTextState={setEstablishmentType}
             setErrorState={setEstablishmentTypeError}
-            label="Service"
+            label={t("common.typeOf") + " " + t("professional.establishment")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -244,7 +243,7 @@ export default function Form() {
             error={managementTypeError}
             setTextState={setManagementType}
             setErrorState={setManagementTypeError}
-            label="Gestionnaire"
+            label={t("common.typeOf") + " " + t("professional.management")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -252,8 +251,8 @@ export default function Form() {
             error={telephoneError}
             setTextState={setTelephone}
             setErrorState={setTelephoneError}
-            label="Numero téléphone"
-            helperText="Not a valid téléphone number"
+            label={t("professional.phoneNumber")}
+            helperText={t("form.helperText.phoneNumber")}
           />
         </Grid>
 
@@ -262,7 +261,7 @@ export default function Form() {
             error={streetError}
             setTextState={setStreet}
             setErrorState={setStreetError}
-            label="Street"
+            label={t("professional.address.street")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -270,7 +269,7 @@ export default function Form() {
             error={cityError}
             setTextState={setCity}
             setErrorState={setCityError}
-            label="City"
+            label={t("professional.address.city")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -278,7 +277,7 @@ export default function Form() {
             error={postalError}
             setTextState={setPostal}
             setErrorState={setPostalError}
-            label="Postal"
+            label={t("professional.address.postalCode")}
           />
         </Grid>
 
@@ -287,20 +286,18 @@ export default function Form() {
             error={mailError}
             setTextState={setMail}
             setErrorState={setMailError}
-            label="Mail"
+            label={t("professional.email")}
           />
         </Grid>
         <Grid item xs={12}>
-          <Text sx={catergoryHeaderProps}>
-            Information de la personne ressource
-          </Text>
+          <Text sx={catergoryHeaderProps}>{t("form.subHeaderPerson")}</Text>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextInput
             error={contactPersonNameError}
             setTextState={setContactPersonName}
             setErrorState={setContactPersonNameError}
-            label="Nom contact personne"
+            label={t("professional.contactPerson.name")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -308,8 +305,8 @@ export default function Form() {
             error={contactPersonTelephoneError}
             setTextState={setContactPersonTelephone}
             setErrorState={setContactPersonTelephoneError}
-            label="Numero téléphone contact personne"
-            helperText="Not a valid téléphone number"
+            label={t("professional.contactPerson.phoneNumber")}
+            helperText={t("form.helperText.phoneNumber")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -317,7 +314,7 @@ export default function Form() {
             error={contactPersonEmailError}
             setTextState={setContactPersonEmail}
             setErrorState={setContactPersonEmailError}
-            label="Email contact personne"
+            label={t("professional.contactPerson.email")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -325,11 +322,13 @@ export default function Form() {
             error={contactPersonFunctionError}
             setTextState={setContactPersonFunction}
             setErrorState={setContactPersonFunctionError}
-            label="Function contact personne"
+            label={t("professional.contactPerson._function")}
           />
         </Grid>
         <Grid item xs={12}>
-          <Text sx={catergoryHeaderProps}>Champs d'intervention</Text>
+          <Text sx={catergoryHeaderProps}>
+            {t("form.subHeaderFieldsOfIntervention")}
+          </Text>
         </Grid>
         <Grid item xs={12} sm={6}>
           <DropMultiSelect
@@ -337,7 +336,7 @@ export default function Form() {
             error={audiencesSelectionError}
             setSelectionState={setAudiencesSelection}
             setErrorState={setAudiencesSelectionError}
-            label="Audiences (pusieur choix possible)"
+            label={t("professional.audiences") + " (pusieur choix possible)"}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -346,7 +345,10 @@ export default function Form() {
             error={placesOfInterventionSelectionError}
             setSelectionState={setPlacesOfInterventionSelection}
             setErrorState={setPlacesOfInterventionSelectionError}
-            label="Lieu d'Intervention (pusieur choix possible)"
+            label={
+              t("professional.placesOfIntervention") +
+              " (pusieur choix possible)"
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -355,21 +357,19 @@ export default function Form() {
             error={missionsSelectionError}
             setSelectionState={setMissionsSelection}
             setErrorState={setMissionsSelectionError}
-            label="Mission (pusieur choix possible)"
+            label={t("professional.missions") + " (pusieur choix possible)"}
           />
         </Grid>
 
         <Grid item xs={12}>
-          <Text sx={catergoryHeaderProps}>
-            Présentation personnalisée de vos missions
-          </Text>
+          <Text sx={catergoryHeaderProps}>{t("form.description")}</Text>
         </Grid>
         <Grid item xs={12}>
           <TextInput
             error={descriptionError}
             setTextState={setDescription}
             setErrorState={setDescriptionError}
-            label="Présentation"
+            label={t("professional.description")}
             multiline={true}
           />
         </Grid>
@@ -379,14 +379,12 @@ export default function Form() {
             error={acceptError}
             setErrorState={setAcceptError}
             setStateCheck={setAccept}
-            label={
-              "J'accepte d'apparître sur le répoire de partenaires du réseau d'Accueil pour tous et ainsi d'être solicité si besoin en tant que personne ressource."
-            }
+            label={t("form.license")}
           />
         </Grid>
         <Grid item xs={12}>
           <Button variant="contained" fullWidth={true} onClick={onSubmit}>
-            Submit
+            {t("common.submit")}
           </Button>
         </Grid>
       </Grid>

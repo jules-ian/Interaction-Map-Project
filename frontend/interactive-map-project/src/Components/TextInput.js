@@ -5,9 +5,9 @@ export default function TextInput({
   setTextState,
   error = false,
   setErrorState = function () {},
-  label = "placeholder",
+  label = "",
   multiline = false,
-  helperText = "Empty Helpertext",
+  helperText = "",
 }) {
   return (
     <InputComponent>

@@ -1,7 +1,8 @@
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import useWindowDimensions from "../utils/windowDimension";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Text } from "./Label";
+import { useTranslation } from "react-i18next";
 
 //const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -10,7 +11,7 @@ export default function ResultCardDisplay({
   setSelectedProfessional,
 }) {
   const { height, width } = useWindowDimensions();
-
+  const { t } = useTranslation();
   useEffect(() => {
     console.log(results.length);
     console.log(results);
@@ -36,7 +37,7 @@ export default function ResultCardDisplay({
         ))
       ) : (
         <ResultCard>
-          <Text>No Results</Text>
+          <Text>{t("common.noResults")}</Text>
         </ResultCard>
       )}
     </Box>
@@ -44,16 +45,19 @@ export default function ResultCardDisplay({
 }
 
 function ProfessionalCard({ professional, width, height, other, setOnClick }) {
+  const { t } = useTranslation();
   return (
     <ResultCard width={width} height={height} other={other}>
       <Typography variant="h5" noWrap>
         {professional.name}
       </Typography>
       <Typography noWrap>
-        {"Gestionnare: " + professional.managementType}
+        {t("professional.management") + ": " + professional.managementType}
       </Typography>
       <Typography noWrap>
-        {"Service: " + professional.establishmentType}
+        {t("professional.establishment") +
+          ": " +
+          professional.establishmentType}
       </Typography>
       <Button
         variant="contained"
@@ -62,7 +66,7 @@ function ProfessionalCard({ professional, width, height, other, setOnClick }) {
           setOnClick(professional);
         }}
       >
-        More Info
+        {t("common.moreInfo")}
       </Button>
     </ResultCard>
   );

@@ -1,54 +1,62 @@
 {
+  "page": {
+    "form": "Form",
+    "home": "Home",
+    "search": "Search",
+    "admin": "Admin"
+  },
+
   "form": {
-    "title": "Form",
-    "description": "With a confirmed registration, you enter our professional identification service in the professional field of early childhood early childhood disabilities. After successfull completion this form is send to a superviser and will be checked for approval",
+    "descriptionOfForm": "With a confirmed registration, you enter our professional identification service in the professional field of early childhood early childhood disabilities. After successfull completion this form is send to a superviser and will be checked for approval",
     "header": "Please fill in the following form",
     "subHeaderStructure": "Information about your structure",
     "subHeaderFieldsOfIntervention": "Fields of Intervention",
     "subHeaderPerson": "Information about contact person",
+    "description": "Personal description about your mission",
     "license": "I agree to appear on the directory of Accueil pour tous network partners and thus to be contacted if necessary as a resource person",
-    "submit": "Submit"
+    "helperText": {
+      "phoneNumber": "Not a valid phonenumber"
+    }
   },
   "successForm": {
     "description": "Entering Form was successfull returning to Homescreen"
   },
-  "admin": {
-    "title": "title",
-    "accept": "Accept",
-    "decline": "decline"
-  },
-  "search": {
-    "title": "Search",
-    "search": "Searchöajehdf",
-    "moreInfo": "More Info"
-  },
   "professional": {
     "name": "Name of the Structure",
-    "establishmentType": "Type of Establishment",
-    "managementType": "Type of Management",
-    "street": "Street",
-    "city": "City",
-    "postalcode": "Postalcode",
+    "establishment": "Establishment",
+    "management": "Management",
+    "address": {
+      "street": "Street",
+      "city": "City",
+      "postalCode": "Postalcode"
+    },
     "phoneNumber": "Telephonenumber",
     "email": "E-Mail",
     "contactPerson": {
       "name": "Name of Contact Person",
       "phoneNumber": "Telephonenumber of Contact Person",
       "email": "E-Mail of Contact Person",
-      "function": "Function of Contact Person"
+      "_function": "Function of Contact Person"
     },
     "audiences": "Audiences",
     "missions": "Missions",
     "placesOfIntervention": "Places of Intervention",
-    "description": "Description"
+    "description": "Description",
+    "popOver": {
+      "infoProfessional": "Information of the Structure",
+      "infoContactPerson": "Information of Contact Person",
+      "infoFieldsOfIntervention": "Fields of Intervention",
+      "description": "Description"
+    }
   },
+
   "common": {
-    "noResults": "No Results"
-  },
-  "test": "apsidhfopj",
-  "test2": {
-    "blub": "_blub_"
+    "noResults": "No Results",
+    "moreInfo": "More Info",
+    "search": "Search",
+    "submit": "Submit",
+    "accept": "Accept",
+    "decline": "Decline",
+    "typeOf": "Type of"
   }
 }
-
-//https://react.i18next.com/latest/using-with-hooks#translate-your-content

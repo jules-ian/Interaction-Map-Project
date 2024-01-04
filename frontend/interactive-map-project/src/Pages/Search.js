@@ -17,6 +17,7 @@ import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
 
 export default function Search() {
+  const { t } = useTranslation();
   //TODO Task Sondre
   const [northWestLongitude, setNorthWestLongitude] = useState(0);
   const [northWestLatitude, setNorthWestLatitude] = useState(0);
@@ -35,8 +36,6 @@ export default function Search() {
   const [results, setResults] = useState([]);
 
   const [selectedProfessional, SetSelectedProfessinoal] = useState(null);
-
-  const { t, i18n } = useTranslation(["search"]);
   // on first render
   useEffect(() => {
     getAllPlacesOfIntervention(setPlacesOfIntervention);
@@ -94,21 +93,24 @@ export default function Search() {
               justifyContent: "top",
             }}
           >
-            <TextInput setTextState={setTextSearch} label={t("title")} />
+            <TextInput
+              setTextState={setTextSearch}
+              label={t("common.search")}
+            />
             <DropMultiSelect
-              label="Missions"
+              label={t("professional.missions")}
               options={missions.map((item) => item.name)}
               setSelectionState={setMissionsSelection}
             />
 
             <DropMultiSelect
-              label="Public"
+              label={t("professional.audiences")}
               options={audiences.map((item) => item.name)}
               setSelectionState={setAudiencesSelection}
             />
 
             <DropMultiSelect
-              label="Lieu d'intervention"
+              label={t("professional.placesOfIntervention")}
               options={placesOfIntervention.map((item) => item.name)}
               setSelectionState={setPlacesOfInterventionSelection}
             />

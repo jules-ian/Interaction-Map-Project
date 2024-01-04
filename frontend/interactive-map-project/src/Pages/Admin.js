@@ -3,13 +3,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 import CheckIcon from "@mui/icons-material/Check";
 import useWindowDimensions from "../utils/windowDimension";
 import { Header, Text } from "../Components/Label";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   approveProfessional,
   declineProfessional,
   getResultsSearch,
 } from "../utils/BackendFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
+import { useTranslation } from "react-i18next";
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -54,7 +55,6 @@ export default function Admin() {
     </Box>
   );
 }
-
 function Tabel({
   unapprovedProfessionals,
   setSelectedProfessional,
@@ -62,12 +62,13 @@ function Tabel({
   callbackAcceptDecline,
   setLoading,
 }) {
+  const { t } = useTranslation();
   return (
     <Box>
       {/* HEADERS */}
       <Grid container sx={{ marginBottom: 2, alignItems: "center" }}>
         <Grid item xs={8}>
-          <Header sx={{ textAlign: "left" }}>Nom de la structure</Header>
+          <Header sx={{ textAlign: "left" }}>{t("professional.name")}</Header>
         </Grid>
       </Grid>
       ;{/*TABEL*/}
@@ -122,7 +123,7 @@ function Tabel({
                   approveProfessional(professional, callbackAcceptDecline);
                 }}
               >
-                Accepter
+                {t("common.accept")}
               </Box>
             </Grid>
             <Grid
@@ -153,13 +154,13 @@ function Tabel({
                   declineProfessional(professional, callbackAcceptDecline);
                 }}
               >
-                Refuser
+                {t("common.decline")}
               </Box>
             </Grid>
           </Grid>
         ))
       ) : (
-        <Text>No Results</Text>
+        <Text> {t("common.noResults")}</Text>
       )}
       <PopoverWindow
         selectedProfessional={selectedProfessional}

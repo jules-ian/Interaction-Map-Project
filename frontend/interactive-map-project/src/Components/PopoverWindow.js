@@ -3,6 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import React, { useEffect, useState } from "react";
 import useWindowDimensions from "../utils/windowDimension.js";
 import { Header, Text } from "./Label.js";
+import { useTranslation } from "react-i18next";
 
 export function PopoverWindow(props) {
   const { selectedProfessional } = props;
@@ -70,6 +71,7 @@ export function PopoverWindow(props) {
 
 function ProfessionalTable({ professional }) {
   const { width, height } = useWindowDimensions();
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -87,51 +89,83 @@ function ProfessionalTable({ professional }) {
           width: "100%",
         }}
       >
-        <Text sx={{ marginLeft: -2 }}>Information de votre structure</Text>
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.infoProfessional")}
+        </Text>
         <Row
-          label="Nom de la structure"
+          label={t("professional.name")}
           value={professional.name}
           marked={true}
         />
-        <Row label="Service" value={professional.establishmentType} />
         <Row
-          label="Gestionnaire"
+          label={t("common.typeOf") + " " + t("professional.establishment")}
+          value={professional.establishmentType}
+        />
+        <Row
+          label={t("common.typeOf") + " " + t("professional.management")}
           value={professional.managementType}
           marked={true}
         />
-        <Row label="Street" value={professional.address.street} />
-        <Row label="City" value={professional.address.city} marked={true} />
-        <Row label="Postal" value={professional.address.postalCode} />
-        <Row label="Mail" value={professional.email} marked={true} />
+        <Row
+          label={t("professional.address.street")}
+          value={professional.address.street}
+        />
+        <Row
+          label={t("professional.address.city")}
+          value={professional.address.city}
+          marked={true}
+        />
+        <Row
+          label={t("professional.address.postalCode")}
+          value={professional.address.postalCode}
+        />
+        <Row
+          label={t("professional.email")}
+          value={professional.email}
+          marked={true}
+        />
         <Text sx={{ marginLeft: -2 }}>
-          Information de la personne ressource
+          {t("professional.popOver.infoContactPerson")}
         </Text>
         <Row
-          label="Nom contact personne"
+          label={t("professional.contactPerson.name")}
           value={professional.contactPerson.name}
           marked={true}
         />
         <Row
-          label="Numero téléphone contact personne"
+          label={t("professional.contactPerson.phoneNumber")}
           value={professional.contactPerson.phoneNumber}
         />
         <Row
-          label="Email contact personne"
+          label={t("professional.contactPerson.email")}
           value={professional.contactPerson.email}
           marked={true}
         />
         <Row
-          label="function contact personne"
+          label={t("professional.contactPerson._function")}
           value={professional.contactPerson._function}
         />
-        <Text sx={{ marginLeft: -2 }}>Champs d'intervention</Text>
-        <Row label="Audiences" value={professional.audiences} marked={true} />
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.infoFieldsOfIntervention")}
+        </Text>
         <Row
-          label="Lieu d'Intervention"
+          label={t("professional.audiences")}
+          value={professional.audiences}
+          marked={true}
+        />
+        <Row
+          label={t("professional.placesOfIntervention")}
           value={professional.placesOfIntervention}
         />
-        <Row label="Mission" value={professional.missions} marked={true} />
-        <Text sx={{ marginLeft: -2 }}>Présentation: </Text>
+        <Row
+          label={t("professional.missions")}
+          value={professional.missions}
+          marked={true}
+        />
+
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.description")}
+        </Text>
         <Grid item xs={12}>
           {professional.description}
         </Grid>
