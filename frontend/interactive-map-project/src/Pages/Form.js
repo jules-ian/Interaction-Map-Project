@@ -21,8 +21,9 @@ import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export default function Form() {
+export default function Form({ setMenuTitel }) {
   const { t } = useTranslation();
+  setMenuTitel(t("page.form"));
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [establishmentType, setEstablishmentType] = useState("");

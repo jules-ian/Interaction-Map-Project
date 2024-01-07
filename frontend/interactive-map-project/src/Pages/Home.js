@@ -4,10 +4,11 @@ import ButtonComponent from "../Components/ButtonComponent";
 import useWindowDimensions from "../utils/windowDimension";
 import { useTranslation } from "react-i18next";
 
-export default function Home() {
+export default function Home({ setMenuTitel }) {
+  const { t } = useTranslation();
+  setMenuTitel(t("page.home"));
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
-  const { t } = useTranslation();
   return (
     <Box
       sx={{

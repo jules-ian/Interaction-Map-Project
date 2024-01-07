@@ -12,7 +12,9 @@ import {
 import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
 
-export default function Admin() {
+export default function Admin({ setMenuTitel }) {
+  const { t } = useTranslation();
+  setMenuTitel(t("page.admin"));
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
   const [unapprovedProfessionals, setUnapprovedProfessionals] = useState([]);
@@ -71,7 +73,7 @@ function Tabel({
           <Header sx={{ textAlign: "left" }}>{t("professional.name")}</Header>
         </Grid>
       </Grid>
-      ;{/*TABEL*/}
+      {/*TABEL*/}
       {unapprovedProfessionals.length != 0 ? (
         unapprovedProfessionals.map((professional) => (
           // every professional

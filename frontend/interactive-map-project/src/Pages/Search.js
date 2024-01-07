@@ -16,8 +16,9 @@ import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
 
-export default function Search() {
+export default function Search({ setMenuTitel }) {
   const { t } = useTranslation();
+  setMenuTitel(t("page.search"));
   //TODO Task Sondre
   const [northWestLongitude, setNorthWestLongitude] = useState(0);
   const [northWestLatitude, setNorthWestLatitude] = useState(0);

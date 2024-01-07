@@ -5,10 +5,11 @@ import useWindowDimensions from "../utils/windowDimension";
 import { Text } from "../Components/Label";
 import { useTranslation } from "react-i18next";
 
-export default function FormSuccess() {
+export default function FormSuccess({ setMenuTitel }) {
+  const { t } = useTranslation();
+  setMenuTitel(t("page.successForm"));
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
-  const { t } = useTranslation();
   return (
     <Box
       sx={{

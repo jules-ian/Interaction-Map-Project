@@ -3,7 +3,8 @@
     "form": "Form",
     "home": "Home",
     "search": "Search",
-    "admin": "Admin"
+    "admin": "Admin",
+    "successForm": "Success"
   },
 
   "form": {
