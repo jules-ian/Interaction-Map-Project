@@ -19,8 +19,10 @@ import useWindowDimensions from "./utils/windowDimension";
 import { Header } from "./Components/Label";
 import HomeIcon from "@mui/icons-material/Home";
 import DropMultiSelect from "./Components/DropMultiSelect";
+import { useTranslation } from "react-i18next";
 export default function App() {
   const defaultRoute = "Home";
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const [menuTitel, setMenuTitel] = useState("");
@@ -28,11 +30,15 @@ export default function App() {
   const testStyle = {
     margin: 2,
   };
+  const [currentLanguage, setCurrentLanguage] = useState("fr");
   const onBackButtonClick = function () {
     console.log("blub");
     navigate("/Home", { replace: true });
   };
-  const onChangeLanguage = function () {};
+  const onChangeLanguage = function (languageString) {
+    setCurrentLanguage(languageString);
+    i18n.changeLanguage(languageString);
+  };
   return (
     <Box style={testStyle}>
       <Paper
@@ -55,15 +61,18 @@ export default function App() {
         </IconButton>
         <Header>{menuTitel}</Header>
 
-        <FormControl
+        <Select
           variant="standard"
-          sx={{ backgroundColor: "white", padding: 0.4, borderRadius: 1 }}
+          sx={{ backgroundColor: "white", padding: 0.5, borderRadius: 1 }}
+          value={currentLanguage}
+          onChange={function (event) {
+            onChangeLanguage(event.target.value);
+          }}
+          label="Language"
         >
-          <Select value={"en"} onChange={onChangeLanguage} label="Language">
-            <MenuItem value="en">en</MenuItem>
-            <MenuItem value="fr">fr</MenuItem>
-          </Select>
-        </FormControl>
+          <MenuItem value="en">en</MenuItem>
+          <MenuItem value="fr">fr</MenuItem>
+        </Select>
       </Paper>
       <Routes>
         <Route path="/" element={<Navigate to={defaultRoute} />} />
