@@ -19,32 +19,32 @@ public class ProfessionalController : ControllerBase
         _pendingProfessionalService = pendingProfessionalService;
     }
 
-    [HttpGet("approved/all", Name = "GetAllProfessionals")]
+    [HttpGet("approved/all", Name = "GetAllApproved")]
     public async Task<IActionResult> GetAllApproved()
     {
         return Ok(await _professionalService.GetAllAsync());
     }
 
-    [HttpGet("pending/all", Name = "GetAllPendingProfessionals")]
+    [HttpGet("pending/all", Name = "GetAllPending")]
     public async Task<IActionResult> GetAllPending()
     {
         return Ok(await _pendingProfessionalService.GetAllAsync());
     }
 
-    [HttpPost("approved/filtered", Name = "GetAllProfessionalsFiltered")]
+    [HttpPost("approved/filtered", Name = "GetAllApprovedFiltered")]
     public async Task<IActionResult> GetAllApprovedFiltered(ProfessionalFilterRequest filterRequest)
     {
         return Ok(await _professionalService.GetAllFilteredAsync(filterRequest));
     }
 
-    [HttpGet("approved/{id}", Name = "GetApprovedProfessional")]
+    [HttpGet("approved/{id}", Name = "GetApproved")]
     public async Task<IActionResult> GetApproved([FromRoute] Guid id)
     {
         ProfessionalResponseDto response = await _professionalService.GetAsync(id);
         return Ok(response);
     }
 
-    [HttpGet("pending/{id}", Name = "GetPendingProfessional")]
+    [HttpGet("pending/{id}", Name = "GetPending")]
     public async Task<IActionResult> GetPending([FromRoute] Guid id)
     {
         PendingProfessionalResponseDto response = await _pendingProfessionalService.GetAsync(id);
@@ -59,7 +59,7 @@ public class ProfessionalController : ControllerBase
     }
 
     [HttpPost(Name = "CreateProfessional")]
-    public async Task<IActionResult> Create([FromBody] ProfessionalRequestDto request)
+    public async Task<IActionResult> CreateProfessional([FromBody] ProfessionalRequestDto request)
     {
         return Ok(await _pendingProfessionalService.CreateAsync(request));
     }
@@ -68,35 +68,31 @@ public class ProfessionalController : ControllerBase
      * Update is currently written with the assumption there can only be one request to be approved per user and if
      * a new request is added it will override the previous one
      */
-    //TODO: consensus on how exactly update works, is it only possible on the active user or also on pending requests
-    //is expecting professionalId not pendingProfessionalId
-    [HttpPut("{id}", Name = "UpdateProfessional")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ProfessionalRequestDto request)
+    [HttpPut("{professionalId}", Name = "UpdateProfessional")]
+    public async Task<IActionResult> UpdateProfessional([FromRoute] Guid id, [FromBody] ProfessionalRequestDto request)
     {
         return Ok(await _pendingProfessionalService.UpdateAsync(id, request));
     }
 
-    [HttpDelete("approved/{id}", Name = "DeleteProfessional")]
-    public async Task<IActionResult> DeleteProfessional([FromRoute] Guid id)
+    [HttpDelete("approved/{id}", Name = "DeleteApproved")]
+    public async Task<IActionResult> DeleteApproved([FromRoute] Guid id)
     {
         await _professionalService.DeleteAsync(id);
         return Ok();
     }
 
-    [HttpDelete("pending/{id}", Name = "DeletePendingProfessional")]
-    public async Task<IActionResult> DeletePendingProfessional([FromRoute] Guid id)
+    [HttpDelete("pending/{id}", Name = "DeletePending")]
+    public async Task<IActionResult> DeletePending([FromRoute] Guid id)
     {
         await _pendingProfessionalService.DeleteAsync(id);
         return Ok();
     }
 
-    [HttpPost("validate/{pendingProfessionalId}", Name = "ValidateProfessional")]
-    public async Task<IActionResult> Validate([FromRoute] Guid pendingProfessionalId,
+    [HttpPost("validate/{pendingProfessionalId}", Name = "ValidatePending")]
+    public async Task<IActionResult> ValidatePending([FromRoute] Guid pendingProfessionalId,
         [FromBody] ValidationDto validationDto)
     {
         await _professionalService.ValidateAsync(pendingProfessionalId, validationDto);
         return Ok();
     }
-
-    //TODO: add mail sending service
 }
