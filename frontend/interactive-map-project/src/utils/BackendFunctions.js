@@ -80,7 +80,7 @@ export function getResultsSearch(
   }
   console.log(data);
 
-  let url = "https://localhost:7212/api/professional/all-filtered";
+  let url = "https://localhost:7212/api/professional/approved/filtered";
   axios
     .post(url, data, {
       headers: {

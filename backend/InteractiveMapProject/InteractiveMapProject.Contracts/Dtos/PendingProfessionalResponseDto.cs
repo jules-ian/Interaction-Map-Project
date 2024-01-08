@@ -2,9 +2,11 @@ using InteractiveMapProject.Contracts.Entities;
 
 namespace InteractiveMapProject.Contracts.Dtos;
 
-public class ProfessionalResponseDto
+public class PendingProfessionalResponseDto
 {
     public Guid Id { get; set; }
+
+    public Guid ProfessionalId { get; set; } = default;
 
     public string Name { get; set; } = default!;
 
@@ -14,7 +16,7 @@ public class ProfessionalResponseDto
 
     public Address Address { get; set; } = default!;
 
-    public string PhoneNumber { get; set; } = default!;
+    public int PhoneNumber { get; set; }
 
     public string Email { get; set; } = default!;
 
@@ -31,6 +33,4 @@ public class ProfessionalResponseDto
     public string? Description { get; set; }
 
     public IdNameDto ValidationStatus { get; set; } = default!;
-
-    public IEnumerable<IdNameDto> PendingProfessionals { get; set; } = default!;
 }

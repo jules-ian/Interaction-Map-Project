@@ -1,12 +1,11 @@
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
 using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace InteractiveMapProject.Data.Db.Configurations.FieldOfIntervention;
 
 public class AudienceConfiguration : IEntityTypeConfiguration<Audience>
 {
-
     public void Configure(EntityTypeBuilder<Audience> builder)
     {
         builder.ToTable("Audiences");
@@ -17,6 +16,10 @@ public class AudienceConfiguration : IEntityTypeConfiguration<Audience>
             .HasMany(p => p.Professionals)
             .WithOne(p => p.Audience);
 
+        builder
+            .HasMany(p => p.PendingProfessionals)
+            .WithOne(p => p.Audience);
+
         builder.HasData(
             new Audience(Guid.NewGuid(), "0-3 ans"),
             new Audience(Guid.NewGuid(), "3-6 ans"),
@@ -24,6 +27,6 @@ public class AudienceConfiguration : IEntityTypeConfiguration<Audience>
             new Audience(Guid.NewGuid(), "12-18 ans"),
             new Audience(Guid.NewGuid(), "Parents"),
             new Audience(Guid.NewGuid(), "Professionnels")
-            );
+        );
     }
 }

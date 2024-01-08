@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using InteractiveMapProject.Contracts.Repositories;
 using InteractiveMapProject.Data.Db.Context;
 using Microsoft.EntityFrameworkCore;
@@ -36,5 +37,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     public void Remove(TEntity entity)
     {
         _entity.Remove(entity);
+    }
+
+    public Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> e)
+    {
+        return _entity.FirstOrDefaultAsync(e);
     }
 }
