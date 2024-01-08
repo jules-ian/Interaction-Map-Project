@@ -2,9 +2,13 @@ using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.Entities;
 
-public class Professional
+public class PendingProfessional
 {
     public Guid Id { get; set; }
+
+    public Guid? ProfessionalId { get; set; }
+
+    public Professional Professional { get; set; } = default!;
 
     public string Name { get; set; } = default!;
 
@@ -20,20 +24,18 @@ public class Professional
 
     public ContactPerson ContactPerson { get; set; } = default!;
 
-    public IEnumerable<ProfessionalAudience> Audiences { get; set; } = new List<ProfessionalAudience> { };
+    public IEnumerable<PendingProfessionalAudience> Audiences { get; set; } = new List<PendingProfessionalAudience> { };
 
-    public IEnumerable<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } =
-        new List<ProfessionalPlaceOfIntervention> { };
+    public IEnumerable<PendingProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } =
+        new List<PendingProfessionalPlaceOfIntervention> { };
 
-    public IEnumerable<ProfessionalMission> Missions { get; set; } = new List<ProfessionalMission> { };
+    public IEnumerable<PendingProfessionalMission> Missions { get; set; } = new List<PendingProfessionalMission> { };
 
     public Geolocation Geolocation { get; set; } = default!;
 
     public Guid ValidationStatusId { get; set; }
 
     public ValidationStatus? ValidationStatus { get; set; } = default!;
-
-    public IEnumerable<PendingProfessional> PendingProfessionals { get; set; } = default!;
 
     public string? Description { get; set; }
 

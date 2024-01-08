@@ -1,6 +1,5 @@
 using AutoMapper;
 using InteractiveMapProject.Contracts.Dtos;
-using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Exceptions;
@@ -14,13 +13,11 @@ public class ProfessionalService : IProfessionalService
 {
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
-    private readonly IGeocodingService _geocodingService;
 
-    public ProfessionalService(IUnitOfWork uow, IMapper mapper, IGeocodingService geocodingService)
+    public ProfessionalService(IUnitOfWork uow, IMapper mapper)
     {
         _uow = uow;
         _mapper = mapper;
-        _geocodingService = geocodingService;
     }
 
     public async Task<List<ProfessionalResponseDto>> GetAllAsync()
@@ -42,56 +39,94 @@ public class ProfessionalService : IProfessionalService
         return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 
-    public async Task<ProfessionalResponseDto> CreateAsync(ProfessionalRequestDto request)
+    public async Task<ProfessionalResponseDto> GetAsync(Guid statusId, Guid id)
     {
-        Professional professional = _mapper.Map<Professional>(request);
-        Geolocation geolocation = await _geocodingService.GetGeolocationFromAddressAsync(request.Address) ?? throw new InvalidAddressException("Address is invalid.");
-        professional.Geolocation = geolocation;
+        ValidationStatus validationStatus = await _uow.ValidationStatuses.GetAsync(statusId) ??
+                                            throw new EntityNotFoundException(
+                                                "There is no validation status with that id.");
 
-        _uow.Professionals.Add(professional);
-        await _uow.SaveChangesAsync();
+        if (!validationStatus.Name.Equals("Approved"))
+        {
+            PendingProfessional pendingProfessional = await _uow.PendingProfessionals.GetAsync(id) ??
+                                                      throw new EntityNotFoundException(
+                                                          "There is no pending professional with that id.");
+            return _mapper.Map<ProfessionalResponseDto>(pendingProfessional);
+        }
 
-        await CreateProfessionalAudiences(professional, request.Audiences);
-        await CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
-        await CreateProfessionalMissions(professional, request.Missions);
-
-        return _mapper.Map<ProfessionalResponseDto>(professional);
+        return await GetAsync(id);
     }
 
-    public async Task<ProfessionalResponseDto> UpdateAsync(Guid id, ProfessionalRequestDto request)
+    public async Task ValidateAsync(Guid pendingProfessionalId, ValidationDto validationDto)
     {
-        Professional professional = await _uow.Professionals.GetAsync(id) ??
-                                    throw new EntityNotFoundException("There is no professional with that id.");
-        professional = _mapper.Map(request, professional);
+        PendingProfessional pendingProfessional = await _uow.PendingProfessionals.GetAsync(pendingProfessionalId) ??
+                                                  throw new EntityNotFoundException(
+                                                      "There is no pending professional with that id.");
 
-        _uow.Professionals.Update(professional);
+        if (validationDto.Approve && pendingProfessional.ValidationStatus.Name.Equals("Waiting After Creation"))
+        {
+            ValidationStatus validationStatus =
+                await _uow.ValidationStatuses.FirstOrDefaultAsync(vs => vs.Name == "Approved") ??
+                throw new EntityNotFoundException("There is no validation status for your action.");
+
+            Professional professional = _mapper.Map<Professional>(pendingProfessional);
+            professional.ValidationStatusId = validationStatus.Id;
+
+            _uow.Professionals.Add(professional);
+            await _uow.SaveChangesAsync();
+
+            await CreateProfessionalAudiences(professional,
+                pendingProfessional.Audiences.Select(p => p.Audience).ToList());
+            await CreateProfessionalPlacesOfIntervention(professional,
+                pendingProfessional.PlacesOfIntervention.Select(p => p.PlaceOfIntervention).ToList());
+            await CreateProfessionalMissions(professional,
+                pendingProfessional.Missions.Select(p => p.Mission).ToList());
+        }
+        else if (validationDto.Approve && pendingProfessional.ValidationStatus.Name.Equals("Waiting After Update"))
+        {
+            Professional professional =
+                await _uow.Professionals.GetAsync(pendingProfessional.ProfessionalId.GetValueOrDefault()) ??
+                throw new EntityNotFoundException("There is no professional with that id.");
+
+            professional = _mapper.Map(pendingProfessional, professional);
+            _uow.Professionals.Update(professional);
+            await _uow.SaveChangesAsync();
+
+            await DeleteProfessionalAudiences(professional);
+            await DeleteProfessionalPlacesOfIntervention(professional);
+            await DeleteProfessionalMissions(professional);
+
+            await CreateProfessionalAudiences(professional,
+                pendingProfessional.Audiences.Select(p => p.Audience).ToList());
+            await CreateProfessionalPlacesOfIntervention(professional,
+                pendingProfessional.PlacesOfIntervention.Select(p => p.PlaceOfIntervention).ToList());
+            await CreateProfessionalMissions(professional,
+                pendingProfessional.Missions.Select(p => p.Mission).ToList());
+        }
+
+        _uow.PendingProfessionals.Remove(pendingProfessional);
         await _uow.SaveChangesAsync();
-
-        await DeleteProfessionalAudiences(professional);
-        await DeleteProfessionalPlacesOfIntervention(professional);
-        await DeleteProfessionalMissions(professional);
-
-        await CreateProfessionalAudiences(professional, request.Audiences);
-        await CreateProfessionalPlacesOfIntervention(professional, request.PlacesOfIntervention);
-        await CreateProfessionalMissions(professional, request.Missions);
-
-        return _mapper.Map<ProfessionalResponseDto>(professional);
     }
 
     public async Task DeleteAsync(Guid id)
     {
         Professional professional = await _uow.Professionals.GetAsync(id) ??
                                     throw new EntityNotFoundException("There is no professional with that id.");
+
+        if (professional.PendingProfessionals.Count() != 0)
+        {
+            PendingProfessional pendingProfessional = professional.PendingProfessionals.ToList().First();
+            _uow.PendingProfessionals.Remove(pendingProfessional);
+        }
+
         _uow.Professionals.Remove(professional);
         await _uow.SaveChangesAsync();
     }
 
-    private async Task CreateProfessionalAudiences(Professional professional,
-        IEnumerable<FieldOfInterventionGetRequestDto> requests)
+    private async Task CreateProfessionalAudiences(Professional professional, List<Audience> audiences)
     {
-        foreach (FieldOfInterventionGetRequestDto request in requests)
+        foreach (Audience a in audiences)
         {
-            Audience audience = await _uow.Audiences.GetAsync(request.Id)
+            Audience audience = await _uow.Audiences.GetAsync(a.Id)
                                 ?? throw new EntityNotFoundException("There is no audience with that id.");
 
             ProfessionalAudience professionalAudience = new ProfessionalAudience(professional.Id, audience.Id);
@@ -102,27 +137,28 @@ public class ProfessionalService : IProfessionalService
     }
 
     private async Task CreateProfessionalPlacesOfIntervention(Professional professional,
-        IEnumerable<FieldOfInterventionGetRequestDto> requests)
+        List<PlaceOfIntervention> places)
     {
-        foreach (FieldOfInterventionGetRequestDto request in requests)
+        foreach (PlaceOfIntervention p in places)
         {
-            PlaceOfIntervention placeOfIntervention = await _uow.PlacesOfIntervention.GetAsync(request.Id)
-                                ?? throw new EntityNotFoundException("There is no place of intervention with that id.");
+            PlaceOfIntervention placeOfIntervention = await _uow.PlacesOfIntervention.GetAsync(p.Id)
+                                                      ?? throw new EntityNotFoundException(
+                                                          "There is no place of intervention with that id.");
 
-            ProfessionalPlaceOfIntervention professionalPlaceOfIntervention = new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id);
+            ProfessionalPlaceOfIntervention professionalPlaceOfIntervention =
+                new ProfessionalPlaceOfIntervention(professional.Id, placeOfIntervention.Id);
             _uow.ProfessionalPlacesOfIntervention.Add(professionalPlaceOfIntervention);
         }
 
         await _uow.SaveChangesAsync();
     }
 
-    private async Task CreateProfessionalMissions(Professional professional,
-        IEnumerable<FieldOfInterventionGetRequestDto> requests)
+    private async Task CreateProfessionalMissions(Professional professional, List<Mission> missions)
     {
-        foreach (FieldOfInterventionGetRequestDto request in requests)
+        foreach (Mission m in missions)
         {
-            Mission mission = await _uow.Missions.GetAsync(request.Id)
-                                ?? throw new EntityNotFoundException("There is no mission with that id.");
+            Mission mission = await _uow.Missions.GetAsync(m.Id)
+                              ?? throw new EntityNotFoundException("There is no mission with that id.");
 
             ProfessionalMission professionalMission = new ProfessionalMission(professional.Id, mission.Id);
             _uow.ProfessionalMissions.Add(professionalMission);
@@ -137,6 +173,7 @@ public class ProfessionalService : IProfessionalService
         {
             _uow.ProfessionalAudiences.Remove(professionalAudience);
         }
+
         await _uow.SaveChangesAsync();
     }
 
@@ -146,6 +183,7 @@ public class ProfessionalService : IProfessionalService
         {
             _uow.ProfessionalPlacesOfIntervention.Remove(professionalPlaceOfIntervention);
         }
+
         await _uow.SaveChangesAsync();
     }
 
@@ -155,6 +193,7 @@ public class ProfessionalService : IProfessionalService
         {
             _uow.ProfessionalMissions.Remove(professionalMission);
         }
+
         await _uow.SaveChangesAsync();
     }
 }

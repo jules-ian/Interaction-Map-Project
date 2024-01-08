@@ -1,12 +1,13 @@
+using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 
 namespace InteractiveMapProject.Contracts.Services;
 
 public interface IPlaceOfInterventionService
 {
-    Task<List<FieldOfInterventionResponseDto>> GetAllAsync();
-    Task<FieldOfInterventionResponseDto> GetAsync(Guid id);
-    Task<FieldOfInterventionResponseDto> CreateAsync(FieldOfInterventionCreateRequestDto request);
-    Task<FieldOfInterventionResponseDto> UpdateAsync(Guid id, FieldOfInterventionCreateRequestDto request);
+    Task<List<IdNameDto>> GetAllAsync();
+    Task<IdNameDto> GetAsync(Guid id);
+    Task<IdNameDto> CreateAsync(FieldOfInterventionCreateRequestDto request);
+    Task<IdNameDto> UpdateAsync(Guid id, FieldOfInterventionCreateRequestDto request);
     Task DeleteAsync(Guid id);
 }
