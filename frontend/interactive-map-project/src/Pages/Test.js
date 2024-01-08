@@ -20,7 +20,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import useWindowDimensions from "../utils/windowDimension.js";
 import { PopoverWindow } from "../Components/PopoverWindow.js";
 import { useTranslation } from "react-i18next";
+import { test } from "../utils/BackendFunctions.js";
+import ButtonComponent from "../Components/ButtonComponent.js";
 export default function Test() {
   const { t, i18n } = useTranslation();
-  return <Box>{t("test2.blub")}</Box>;
+  return (
+    <Box>
+      <ButtonComponent label="test" onClick={test} />
+    </Box>
+  );
 }
