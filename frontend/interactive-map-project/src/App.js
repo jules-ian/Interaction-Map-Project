@@ -45,7 +45,7 @@ export default function App() {
         elevation={3}
         sx={{
           backgroundColor: "lightblue",
-          minHeight: width * 0.075,
+          minHeight: height * 0.07,
           alignItems: "center",
           justifyContent: "space-between",
           color: "lightblack",

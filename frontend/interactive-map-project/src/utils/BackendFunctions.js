@@ -49,7 +49,7 @@ export function getAllPlacesOfIntervention(setReturn) {
     });
 }
 
-export function addNewProfessional(professional) {
+export function addNewProfessional(professional, callback) {
   let url = "https://localhost:7212/api/professional";
 
   axios

@@ -77,12 +77,18 @@ export default function Form({ setMenuTitel }) {
   }, []);
 
   const onSubmit = function () {
-    let success = checkEntries();
-    if (success) {
+    let valid = checkEntries();
+    if (valid) {
+      const callback = function (success) {
+        if (success) {
+          navigate("/FormSuccess", { replace: true });
+        } else {
+          navigate("/FormError", { replace: true });
+        }
+      };
       let professional = createProfessinalEntitiy();
       console.log(professional.toJSON());
-      addNewProfessional(professional);
-      navigate("/FormSuccess", { replace: true });
+      addNewProfessional(professional, callback);
     }
   };
 
@@ -216,9 +222,10 @@ export default function Form({ setMenuTitel }) {
   };
   return (
     <Box>
-      <Header>{t("form.header")}</Header>
-      <Text>{t("form.descriptionOfForm")}</Text>
-
+      <Box sx={{ padding: 5 }}>
+        <Header>{t("form.header")}</Header>
+        <Text>{t("form.descriptionOfForm")}</Text>
+      </Box>
       <Grid paddingX={10} container spacing={2}>
         <Grid item xs={12}>
           <Text sx={catergoryHeaderProps}>{t("form.subHeaderStructure")}</Text>
