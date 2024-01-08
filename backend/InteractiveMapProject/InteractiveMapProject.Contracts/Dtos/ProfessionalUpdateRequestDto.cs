@@ -3,8 +3,10 @@ using InteractiveMapProject.Contracts.Entities;
 
 namespace InteractiveMapProject.Contracts.Dtos;
 
-public class ProfessionalRequestDto
+public class ProfessionalUpdateRequestDto
 {
+    public Guid ProfessionalId { get; set; } = default!;
+
     public string Name { get; set; } = default!;
 
     public string EstablishmentType { get; set; } = default!;
@@ -13,7 +15,7 @@ public class ProfessionalRequestDto
 
     public Address Address { get; set; } = default!;
 
-    public string PhoneNumber { get; set; } = default!;
+    public int PhoneNumber { get; set; }
 
     public string Email { get; set; } = default!;
 

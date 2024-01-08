@@ -8,6 +8,8 @@ public class PlaceOfIntervention
 
     public IEnumerable<ProfessionalPlaceOfIntervention> Professionals { get; set; } = default!;
 
+    public IEnumerable<PendingProfessionalPlaceOfIntervention> PendingProfessionals { get; set; } = default!;
+
     public DateTime CreationDateTime { get; set; }
 
     public PlaceOfIntervention()

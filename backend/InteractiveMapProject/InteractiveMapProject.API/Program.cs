@@ -45,9 +45,11 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IGeocodingService, GeoapifyGeocodingService>();
 builder.Services.AddScoped<IProfessionalService, ProfessionalService>();
+builder.Services.AddScoped<IPendingProfessionalService, PendingProfessionalService>();
 builder.Services.AddScoped<IAudienceService, AudienceService>();
 builder.Services.AddScoped<IPlaceOfInterventionService, PlaceOfInterventionService>();
 builder.Services.AddScoped<IMissionService, MissionService>();
+builder.Services.AddScoped<IValidationStatusService, ValidationStatusService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -57,7 +59,6 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
-            // TODO
             policy.WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod();

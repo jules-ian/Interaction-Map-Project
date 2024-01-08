@@ -20,7 +20,8 @@ public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalReq
             .NotNull().WithMessage("Address is required.")
             .SetValidator(new AddressValidator());
         RuleFor(x => x.PhoneNumber)
-            .NotNull().WithMessage("Phone number is required.");
+            .NotNull().WithMessage("Phone number is required.")
+            .Matches("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$").WithMessage("Phone number must be a valid phone number.");
         RuleFor(x => x.Email)
             .NotNull().WithMessage("Email is required.")
             .EmailAddress().WithMessage("Email must be valid.");

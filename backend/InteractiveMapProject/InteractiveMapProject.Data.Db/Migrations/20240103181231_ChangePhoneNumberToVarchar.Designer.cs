@@ -4,6 +4,7 @@ using InteractiveMapProject.Data.Db.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveMapProject.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103181231_ChangePhoneNumberToVarchar")]
+    partial class ChangePhoneNumberToVarchar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,37 +45,37 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("19772152-f82f-4e36-ab6a-a629f1b413f2"),
+                            Id = new Guid("71e35027-0d98-412f-a1a0-4c025654584f"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "0-3 ans"
                         },
                         new
                         {
-                            Id = new Guid("4846bbb4-8f3e-47a8-9dba-9345c8ded78a"),
+                            Id = new Guid("3e8d427e-3411-4ec5-9ab8-4f2e72868167"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "3-6 ans"
                         },
                         new
                         {
-                            Id = new Guid("d0f480c9-d3e6-4604-a7cb-10abc2c346b7"),
+                            Id = new Guid("204d6123-2943-4cb0-8bf6-96df118407a9"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "6-12 ans"
                         },
                         new
                         {
-                            Id = new Guid("1e49c055-7a4e-4a4b-8c04-f654ee753b27"),
+                            Id = new Guid("e9eb23b8-7b4e-411a-a142-477ed5e4d2c3"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "12-18 ans"
                         },
                         new
                         {
-                            Id = new Guid("ff35fadc-740f-4046-a6cb-14be3cb5d51f"),
+                            Id = new Guid("62e26312-79f9-42cf-a74c-f76b01c29ec0"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Parents"
                         },
                         new
                         {
-                            Id = new Guid("edfdcb42-0313-46f2-a5d3-5c8441dd8209"),
+                            Id = new Guid("4ad7e403-febd-46a7-81ec-d48caec35fef"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Professionnels"
                         });
@@ -98,133 +101,88 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ef2dd6ce-3cc0-4175-8733-c2162b6303ca"),
+                            Id = new Guid("6927eccf-1781-4f2b-a754-576bfdfdffc6"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de loisirs"
                         },
                         new
                         {
-                            Id = new Guid("fc78bfcf-6753-49f8-8ef2-3bdbf1b4166a"),
+                            Id = new Guid("1e06a7b1-b104-4f82-b342-5f49efe72b33"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Culture et loisirs"
                         },
                         new
                         {
-                            Id = new Guid("c1088f1d-6f2e-4752-a4d7-141ae6e52ebf"),
+                            Id = new Guid("aa549435-62af-4d97-a41f-eee328687212"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petite enfance"
                         },
                         new
                         {
-                            Id = new Guid("e2f0be63-6c44-4529-96e7-225d6551984d"),
+                            Id = new Guid("223f1c1b-b203-4044-8cc8-acdc4e06d447"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Répit"
                         },
                         new
                         {
-                            Id = new Guid("31c2f5af-69a7-4558-81ae-44990492fa85"),
+                            Id = new Guid("bbcb1ad4-b519-4329-821f-2b4306baa7e2"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil occasionnel"
                         },
                         new
                         {
-                            Id = new Guid("b6136f4f-d1a4-4718-8e8f-bc40a9fa47e0"),
+                            Id = new Guid("90cdb7da-ce68-4d5e-b7fa-37b90a915f0a"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil d’urgence"
                         },
                         new
                         {
-                            Id = new Guid("9a3d1cc6-b40f-4a1b-83e6-0aa0c253c156"),
+                            Id = new Guid("840c721e-ca75-44f2-81e8-f3596fc0bcd7"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Scolarité"
                         },
                         new
                         {
-                            Id = new Guid("11ebcb8a-fece-4fc8-b464-296370040a99"),
+                            Id = new Guid("b44b01bb-4671-452d-9f2e-baaef54cced9"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de nuit"
                         },
                         new
                         {
-                            Id = new Guid("da1ab655-1403-4f5e-b14f-941fee5c199d"),
+                            Id = new Guid("1105c7c7-7747-48a7-a83d-e30f903e4fb2"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Soins/santé"
                         },
                         new
                         {
-                            Id = new Guid("083f63e8-96be-416c-b2f5-3c255e3d957a"),
+                            Id = new Guid("984ea5d1-0550-4c41-b95e-28a86a0b1737"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rééducation"
                         },
                         new
                         {
-                            Id = new Guid("70bec29d-7d2e-4fc3-b0e2-c931fff5f33c"),
+                            Id = new Guid("ec2aa828-cc2f-44da-a4a8-1ac31156be18"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement à la parentalité"
                         },
                         new
                         {
-                            Id = new Guid("1e4393e8-96f3-47ca-891a-5fb3ba16ee6d"),
+                            Id = new Guid("01b73f77-c28e-4f76-95b9-c031fe9bef33"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement administratif"
                         },
                         new
                         {
-                            Id = new Guid("c579adc0-3ae4-48e0-bb5f-d0d3eb5b864f"),
+                            Id = new Guid("e29322ba-52cc-4c45-8cae-c9c06f2e7815"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Group de parole/Ateliers"
                         },
                         new
                         {
-                            Id = new Guid("f472b572-e2d0-4a45-8af4-c504c68443df"),
+                            Id = new Guid("2cc0132e-9ae8-4614-b408-c17731dda093"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Information/orientation"
                         });
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalAudience", b =>
-                {
-                    b.Property<Guid>("PendingProfessionalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AudienceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PendingProfessionalId", "AudienceId");
-
-                    b.HasIndex("AudienceId");
-
-                    b.ToTable("PendingProfessionalAudiences", (string)null);
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalMission", b =>
-                {
-                    b.Property<Guid>("PendingProfessionalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MissionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PendingProfessionalId", "MissionId");
-
-                    b.HasIndex("MissionId");
-
-                    b.ToTable("PendingProfessionalsMissions", (string)null);
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalPlaceOfIntervention", b =>
-                {
-                    b.Property<Guid>("PendingProfessionalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PlaceOfInterventionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PendingProfessionalId", "PlaceOfInterventionId");
-
-                    b.HasIndex("PlaceOfInterventionId");
-
-                    b.ToTable("PendingProfessionalsPlacesOfIntervention", (string)null);
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PlaceOfIntervention", b =>
@@ -247,49 +205,49 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cae4187d-93d8-4f53-9c0f-49adc7de314a"),
+                            Id = new Guid("3ee7f715-7424-4f19-8e2b-50ffacd9db8f"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Domicile"
                         },
                         new
                         {
-                            Id = new Guid("f240abbd-25d4-47e3-b08a-c7e91dd70d17"),
+                            Id = new Guid("006b5183-9ce2-4638-acbb-3119d122ca97"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "EAJE"
                         },
                         new
                         {
-                            Id = new Guid("618d2c25-7790-40ff-a8e3-aadc210e8afa"),
+                            Id = new Guid("044dc5ef-5ef4-4350-9d57-e8d962342c86"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "École"
                         },
                         new
                         {
-                            Id = new Guid("3a2949b1-5bd8-4c8a-b042-0195a149a8f9"),
+                            Id = new Guid("83e3dfa0-9e0e-41f8-8073-6df13e73e82f"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure individuelle"
                         },
                         new
                         {
-                            Id = new Guid("732a37f0-55b8-4297-be75-048431217693"),
+                            Id = new Guid("1b15c2fd-dbb9-4175-bdd6-9b7fb5b7bfdb"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure de soins"
                         },
                         new
                         {
-                            Id = new Guid("d0ce58dd-80f1-4660-bf24-76488b5b0e42"),
+                            Id = new Guid("70f8cb94-eb69-44b0-9439-fc1463ea3e95"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Institution"
                         },
                         new
                         {
-                            Id = new Guid("eed81397-85ef-4c25-aafd-5cde21606069"),
+                            Id = new Guid("dc704ad5-c20d-4ffe-858e-d741676dc048"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure d’orientation et d’information"
                         },
                         new
                         {
-                            Id = new Guid("e7defe56-5010-44c0-9ad7-56a9c7794dcd"),
+                            Id = new Guid("3c8c54de-1473-46f2-8b47-32d6c6c40c2c"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tiers lieu"
                         });
@@ -340,52 +298,6 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.ToTable("ProfessionalsPlacesOfIntervention", (string)null);
                 });
 
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.PendingProfessional", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EstablishmentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ManagementType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ProfessionalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ValidationStatusId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfessionalId");
-
-                    b.HasIndex("ValidationStatusId");
-
-                    b.ToTable("PendingProfessionals", (string)null);
-                });
-
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
                 {
                     b.Property<Guid>("Id")
@@ -418,103 +330,9 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ValidationStatusId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ValidationStatusId");
 
                     b.ToTable("Professionals", (string)null);
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.ValidationStatus", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ValidationStatuses", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1b255f17-18b7-40d3-8fc0-9d249eae398c"),
-                            Name = "Approved"
-                        },
-                        new
-                        {
-                            Id = new Guid("6c546dc4-ef17-4986-96de-840a302b755e"),
-                            Name = "Waiting After Creation"
-                        },
-                        new
-                        {
-                            Id = new Guid("26e80480-0431-44c1-a135-94c31f46011b"),
-                            Name = "Waiting After Update"
-                        });
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalAudience", b =>
-                {
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.Audience", "Audience")
-                        .WithMany("PendingProfessionals")
-                        .HasForeignKey("AudienceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.PendingProfessional", "PendingProfessional")
-                        .WithMany("Audiences")
-                        .HasForeignKey("PendingProfessionalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Audience");
-
-                    b.Navigation("PendingProfessional");
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalMission", b =>
-                {
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.Mission", "Mission")
-                        .WithMany("PendingProfessionals")
-                        .HasForeignKey("MissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.PendingProfessional", "PendingProfessional")
-                        .WithMany("Missions")
-                        .HasForeignKey("PendingProfessionalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Mission");
-
-                    b.Navigation("PendingProfessional");
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalPlaceOfIntervention", b =>
-                {
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.PendingProfessional", "PendingProfessional")
-                        .WithMany("PlacesOfIntervention")
-                        .HasForeignKey("PendingProfessionalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PlaceOfIntervention", "PlaceOfIntervention")
-                        .WithMany("PendingProfessionals")
-                        .HasForeignKey("PlaceOfInterventionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PendingProfessional");
-
-                    b.Navigation("PlaceOfIntervention");
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalAudience", b =>
@@ -574,114 +392,8 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.Navigation("Professional");
                 });
 
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.PendingProfessional", b =>
-                {
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.Professional", "Professional")
-                        .WithMany("PendingProfessionals")
-                        .HasForeignKey("ProfessionalId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.ValidationStatus", "ValidationStatus")
-                        .WithMany("PendingProfessionals")
-                        .HasForeignKey("ValidationStatusId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("PendingProfessionalId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PendingProfessionalId");
-
-                            b1.ToTable("PendingProfessionals");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PendingProfessionalId");
-                        });
-
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
-                        {
-                            b1.Property<Guid>("PendingProfessionalId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Email")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Function")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PendingProfessionalId");
-
-                            b1.ToTable("PendingProfessionals");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PendingProfessionalId");
-                        });
-
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
-                        {
-                            b1.Property<Guid>("PendingProfessionalId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<double>("Latitude")
-                                .HasColumnType("float");
-
-                            b1.Property<double>("Longitude")
-                                .HasColumnType("float");
-
-                            b1.HasKey("PendingProfessionalId");
-
-                            b1.ToTable("PendingProfessionals");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PendingProfessionalId");
-                        });
-
-                    b.Navigation("Address")
-                        .IsRequired();
-
-                    b.Navigation("ContactPerson")
-                        .IsRequired();
-
-                    b.Navigation("Geolocation")
-                        .IsRequired();
-
-                    b.Navigation("Professional");
-
-                    b.Navigation("ValidationStatus");
-                });
-
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
                 {
-                    b.HasOne("InteractiveMapProject.Contracts.Entities.ValidationStatus", "ValidationStatus")
-                        .WithMany("Professionals")
-                        .HasForeignKey("ValidationStatusId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
@@ -763,38 +475,21 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.Navigation("Geolocation")
                         .IsRequired();
-
-                    b.Navigation("ValidationStatus");
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.Audience", b =>
                 {
-                    b.Navigation("PendingProfessionals");
-
                     b.Navigation("Professionals");
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.Mission", b =>
                 {
-                    b.Navigation("PendingProfessionals");
-
                     b.Navigation("Professionals");
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PlaceOfIntervention", b =>
                 {
-                    b.Navigation("PendingProfessionals");
-
                     b.Navigation("Professionals");
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.PendingProfessional", b =>
-                {
-                    b.Navigation("Audiences");
-
-                    b.Navigation("Missions");
-
-                    b.Navigation("PlacesOfIntervention");
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
@@ -803,16 +498,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.Navigation("Missions");
 
-                    b.Navigation("PendingProfessionals");
-
                     b.Navigation("PlacesOfIntervention");
-                });
-
-            modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.ValidationStatus", b =>
-                {
-                    b.Navigation("PendingProfessionals");
-
-                    b.Navigation("Professionals");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,16 +8,18 @@ namespace InteractiveMapProject.Data.Db.Context;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<Professional> Professionals { get; set; } = default!;
+    public DbSet<PendingProfessional> PendingProfessionals { get; set; } = default!;
     public DbSet<Audience> Audiences { get; set; } = default!;
     public DbSet<PlaceOfIntervention> PlacesOfIntervention { get; set; } = default!;
     public DbSet<Mission> Missions { get; set; } = default!;
+    public DbSet<ValidationStatus> ValidationStatuses { get; set; } = default!;
 
     public ApplicationDbContext()
     {
     }
 
     public ApplicationDbContext(DbContextOptions options)
-    : base(options)
+        : base(options)
     {
     }
 

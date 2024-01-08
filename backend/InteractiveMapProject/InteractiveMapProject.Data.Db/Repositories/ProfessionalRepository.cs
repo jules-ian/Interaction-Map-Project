@@ -25,6 +25,7 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
             .Include(p => p.Audiences).ThenInclude(pa => pa.Audience)
             .Include(p => p.Missions).ThenInclude(pm => pm.Mission)
             .Include(p => p.PlacesOfIntervention).ThenInclude(pp => pp.PlaceOfIntervention)
+            .Include(p => p.ValidationStatus)
             .ToListAsync();
     }
 
@@ -49,6 +50,7 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
                 professional.ContactPerson.Email
             };
         }
+
         professionalArray = new string[]
         {
             professional.Name,
@@ -79,13 +81,13 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
                 numberOfMatches++;
             }
         }
+
         return numberOfMatches;
     }
 
     public async Task<List<Professional>> GetAllAsync(ProfessionalFilterRequest filterRequest)
     {
         IQueryable<Professional> query = _professionals.AsQueryable();
-
         var filters = _filterFactory.BuildFilters(filterRequest);
 
         if (filters?.Any() == true)
@@ -97,6 +99,7 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
             .Include(p => p.Audiences).ThenInclude(pa => pa.Audience)
             .Include(p => p.Missions).ThenInclude(pm => pm.Mission)
             .Include(p => p.PlacesOfIntervention).ThenInclude(pp => pp.PlaceOfIntervention)
+            .Include(p => p.ValidationStatus)
             .ToListAsync();
 
         if (filterRequest.Text == null)
@@ -107,8 +110,10 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
 
         return query
             .ToList()
-            .Where(professional => GetNumberOfMatches(ProfessionalToArray(professional), filterRequest.Text.Split(" ")) > 0)
-            .OrderByDescending(professional => GetNumberOfMatches(ProfessionalToArray(professional), filterRequest.Text.Split(" ")))
+            .Where(professional =>
+                GetNumberOfMatches(ProfessionalToArray(professional), filterRequest.Text.Split(" ")) > 0)
+            .OrderByDescending(professional =>
+                GetNumberOfMatches(ProfessionalToArray(professional), filterRequest.Text.Split(" ")))
             .ToList();
     }
 
@@ -118,6 +123,8 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
             .Include(p => p.Audiences).ThenInclude(pa => pa.Audience)
             .Include(p => p.Missions).ThenInclude(pm => pm.Mission)
             .Include(p => p.PlacesOfIntervention).ThenInclude(pp => pp.PlaceOfIntervention)
+            .Include(p => p.ValidationStatus)
+            .Include(p => p.PendingProfessionals)
             .SingleOrDefaultAsync(p => p.Id == id);
     }
 }

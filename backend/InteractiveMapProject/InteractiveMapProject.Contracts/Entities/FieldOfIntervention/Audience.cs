@@ -8,6 +8,8 @@ public class Audience
 
     public IEnumerable<ProfessionalAudience> Professionals { get; set; } = default!;
 
+    public IEnumerable<PendingProfessionalAudience> PendingProfessionals { get; set; } = default!;
+
     public DateTime CreationDateTime { get; set; }
 
     public Audience()

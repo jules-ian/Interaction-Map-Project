@@ -1,6 +1,6 @@
 using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace InteractiveMapProject.Data.Db.Configurations.FieldOfIntervention;
 
@@ -14,6 +14,10 @@ public class PlaceOfInterventionConfiguration : IEntityTypeConfiguration<PlaceOf
 
         builder
             .HasMany(p => p.Professionals)
+            .WithOne(p => p.PlaceOfIntervention);
+
+        builder
+            .HasMany(p => p.PendingProfessionals)
             .WithOne(p => p.PlaceOfIntervention);
 
         builder.HasData(
