@@ -19,8 +19,7 @@ public class ProfessionalController : ControllerBase
         _pendingProfessionalService = pendingProfessionalService;
     }
 
-    //TODO: change post address to "approved/all"
-    [HttpGet("all", Name = "GetAllProfessionals")]
+    [HttpGet("approved/all", Name = "GetAllProfessionals")]
     public async Task<IActionResult> GetAllApproved()
     {
         return Ok(await _professionalService.GetAllAsync());
@@ -32,15 +31,13 @@ public class ProfessionalController : ControllerBase
         return Ok(await _pendingProfessionalService.GetAllAsync());
     }
 
-    //TODO: change post address to "approved/filtered"
-    [HttpPost("all-filtered", Name = "GetAllProfessionalsFiltered")]
+    [HttpPost("approved/filtered", Name = "GetAllProfessionalsFiltered")]
     public async Task<IActionResult> GetAllApprovedFiltered(ProfessionalFilterRequest filterRequest)
     {
         return Ok(await _professionalService.GetAllFilteredAsync(filterRequest));
     }
 
-    //TODO: change post address to "approved/{id}"
-    [HttpGet("{id}", Name = "GetApprovedProfessional")]
+    [HttpGet("approved/{id}", Name = "GetApprovedProfessional")]
     public async Task<IActionResult> GetApproved([FromRoute] Guid id)
     {
         ProfessionalResponseDto response = await _professionalService.GetAsync(id);
@@ -79,8 +76,7 @@ public class ProfessionalController : ControllerBase
         return Ok(await _pendingProfessionalService.UpdateAsync(id, request));
     }
 
-    //TODO: change post address to "approved/{id}"
-    [HttpDelete("{id}", Name = "DeleteProfessional")]
+    [HttpDelete("approved/{id}", Name = "DeleteProfessional")]
     public async Task<IActionResult> DeleteProfessional([FromRoute] Guid id)
     {
         await _professionalService.DeleteAsync(id);
