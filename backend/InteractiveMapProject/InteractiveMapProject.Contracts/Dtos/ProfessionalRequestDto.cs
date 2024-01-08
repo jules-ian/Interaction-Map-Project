@@ -13,7 +13,7 @@ public class ProfessionalRequestDto
 
     public Address Address { get; set; } = default!;
 
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = default!;
 
     public string Email { get; set; } = default!;
 

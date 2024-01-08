@@ -19,8 +19,8 @@ public static class ProfessionalSpecification
     public static Expression<Func<Professional, bool>>
         FilterByMapSquare(MapSquare mapSquare) =>
         x =>
-            mapSquare.NorthWestLatitude >= x.Geolocation.Latitude &&
-            mapSquare.SouthEastLatitude <= x.Geolocation.Latitude &&
-            mapSquare.NorthWestLongitude <= x.Geolocation.Longitude &&
-            mapSquare.SouthEastLongitude >= x.Geolocation.Longitude;
+            mapSquare.NorthEastLatitude >= x.Geolocation.Latitude &&
+            mapSquare.NorthEastLongitude >= x.Geolocation.Longitude &&
+            mapSquare.SouthWestLatitude <= x.Geolocation.Latitude &&
+            mapSquare.SouthWestLongitude <= x.Geolocation.Longitude;
 }

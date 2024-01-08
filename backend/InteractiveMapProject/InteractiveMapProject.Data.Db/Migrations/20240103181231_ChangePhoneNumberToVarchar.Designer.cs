@@ -4,6 +4,7 @@ using InteractiveMapProject.Data.Db.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveMapProject.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103181231_ChangePhoneNumberToVarchar")]
+    partial class ChangePhoneNumberToVarchar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,7 +394,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.Professional", b =>
                 {
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Professional.Address#InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
                                 .HasColumnType("uniqueidentifier");
@@ -410,13 +413,13 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                             b1.HasKey("ProfessionalId");
 
-                            b1.ToTable("Professionals", (string)null);
+                            b1.ToTable("Professionals");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProfessionalId");
                         });
 
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Professional.ContactPerson#InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
                                 .HasColumnType("uniqueidentifier");
@@ -439,13 +442,13 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                             b1.HasKey("ProfessionalId");
 
-                            b1.ToTable("Professionals", (string)null);
+                            b1.ToTable("Professionals");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProfessionalId");
                         });
 
-                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Professional.Geolocation#InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
+                    b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
                                 .HasColumnType("uniqueidentifier");
@@ -458,7 +461,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                             b1.HasKey("ProfessionalId");
 
-                            b1.ToTable("Professionals", (string)null);
+                            b1.ToTable("Professionals");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProfessionalId");
