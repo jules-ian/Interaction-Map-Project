@@ -8,6 +8,7 @@ import {
   approveProfessional,
   declineProfessional,
   getResultsSearch,
+  getUnapprovedProfessionals,
 } from "../utils/BackendFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
@@ -22,12 +23,15 @@ export default function Admin({ setMenuTitel }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getResultsSearch(setUnapprovedProfessionals);
+    getUnapprovedProfessionals(setUnapprovedProfessionals);
   }, []);
 
   const callbackAcceptDecline = function () {
-    getResultsSearch(setUnapprovedProfessionals);
-    setSelectedProfessional(null);
+    // TODO
+    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+      getUnapprovedProfessionals(setUnapprovedProfessionals);
+      setSelectedProfessional(null);
+    });
   };
 
   useEffect(() => {
@@ -166,6 +170,7 @@ function Tabel({
       )}
       <PopoverWindow
         selectedProfessional={selectedProfessional}
+        setSelectedProfessional={setSelectedProfessional}
       ></PopoverWindow>
     </Box>
   );

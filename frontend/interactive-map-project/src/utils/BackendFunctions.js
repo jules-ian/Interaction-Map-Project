@@ -56,24 +56,63 @@ export function addNewProfessional(professional, callback) {
     .post(url, professional.toJSON())
     .then((response) => {
       console.log(response);
+      callback(true);
     })
     .catch((error) => {
       console.error("Error Posting Professional:", error.response);
+      callback(false, error.response);
     });
 }
 
 export function approveProfessional(professional, callback) {
-  new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-    callback();
-    console.log(professional.name + " was approved");
-  });
+  let url =
+    "https://localhost:7212/api/professional/validate/" + professional.id;
+  const data = { approve: true };
+  axios
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        // Add any other headers if needed
+      },
+    })
+    .then((response) => {
+      console.log(professional.name + " was approved");
+      callback();
+    })
+    .catch((error) => {
+      console.error("Error approving Professional:", error.response);
+      callback();
+    });
 }
 
 export function declineProfessional(professional, callback) {
-  new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-    callback();
-    console.log(professional.name + " was declined");
-  });
+  let url =
+    "https://localhost:7212/api/professional/pending/" + professional.id;
+  axios
+    .delete(url)
+    .then((response) => {
+      console.log(professional.name + " was deleted");
+      callback();
+    })
+    .catch((error) => {
+      console.error("Error deleteing Professional:", error.response);
+      callback();
+    });
+}
+
+export function getUnapprovedProfessionals(setResults) {
+  let url = "https://localhost:7212/api/professional/pending/all";
+  axios
+    .get(url)
+    .then((response) => {
+      let professionals = response.data.map((profData) => {
+        return professionalFromJSON(profData);
+      });
+      setResults(professionals);
+    })
+    .catch((error) => {
+      console.error("Error sending post for search:", error);
+    });
 }
 
 export function getResultsSearch(
