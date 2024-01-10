@@ -8,6 +8,8 @@ public class Mission
 
     public IEnumerable<ProfessionalMission> Professionals { get; set; } = default!;
 
+    public IEnumerable<PendingProfessionalMission> PendingProfessionals { get; set; } = default!;
+
     public DateTime CreationDateTime { get; set; }
 
     public Mission()

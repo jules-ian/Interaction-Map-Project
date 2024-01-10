@@ -14,7 +14,7 @@ public class Professional
 
     public Address Address { get; set; } = default!;
 
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = default!;
 
     public string Email { get; set; } = default!;
 
@@ -22,13 +22,20 @@ public class Professional
 
     public IEnumerable<ProfessionalAudience> Audiences { get; set; } = new List<ProfessionalAudience> { };
 
-    public IEnumerable<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } = new List<ProfessionalPlaceOfIntervention> { };
+    public IEnumerable<ProfessionalPlaceOfIntervention> PlacesOfIntervention { get; set; } =
+        new List<ProfessionalPlaceOfIntervention> { };
 
     public IEnumerable<ProfessionalMission> Missions { get; set; } = new List<ProfessionalMission> { };
 
     public Geolocation Geolocation { get; set; } = default!;
 
-    public string? Description { get; set; } = default!;
+    public Guid ValidationStatusId { get; set; }
+
+    public ValidationStatus? ValidationStatus { get; set; } = default!;
+
+    public IEnumerable<PendingProfessional> PendingProfessionals { get; set; } = default!;
+
+    public string? Description { get; set; }
 
     public DateTime CreationDateTime { get; set; }
 }

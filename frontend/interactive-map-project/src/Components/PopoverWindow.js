@@ -3,6 +3,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import React, { useEffect, useState } from "react";
 import useWindowDimensions from "../utils/windowDimension.js";
 import { Header, Text } from "./Label.js";
+import { useTranslation } from "react-i18next";
+
 export function PopoverWindow(props) {
   const { selectedProfessional } = props;
   const content = props.children;
@@ -52,6 +54,7 @@ export function PopoverWindow(props) {
         vertical: "center",
         horizontal: "center",
       }}
+      sx={{}}
     >
       <IconButton
         edge="end"
@@ -68,71 +71,112 @@ export function PopoverWindow(props) {
 
 function ProfessionalTable({ professional }) {
   const { width, height } = useWindowDimensions();
+  const { t } = useTranslation();
 
   return (
     <Box
       sx={{
-        padding: 10,
-        height: height * 0.6,
+        margin: 5,
+        height: height * 0.9,
         width: width * 0.7,
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
+        position: "relative",
       }}
     >
-      <Text>Information de votre structure</Text>
-      <Row
-        label="Nom de la structure"
-        value={professional.name}
-        marked={true}
-      />
-      <Row label="Service" value={professional.establishmentType} />
-      <Row
-        label="Gestionnaire"
-        value={professional.managementType}
-        marked={true}
-      />
-      <Row label="Street" value={professional.address.street} />
-      <Row label="City" value={professional.address.city} marked={true} />
-      <Row label="Postal" value={professional.address.postalCode} />
-      <Row label="Mail" value={professional.email} marked={true} />
-      <Text>Information de la personne ressource</Text>
-      <Row
-        label="Nom contact personne"
-        value={professional.contactPerson.name}
-        marked={true}
-      />
-      <Row
-        label="Numero téléphone contact personne"
-        value={professional.contactPerson.phoneNumber}
-      />
-      <Row
-        label="Email contact personne"
-        value={professional.contactPerson.email}
-        marked={true}
-      />
-      <Row
-        label="function contact personne"
-        value={professional.contactPerson._function}
-      />
-      <Text>Champs d'intervention</Text>
-      <Row label="Audiences" value={professional.audiences} marked={true} />
-      <Row
-        label="Lieu d'Intervention"
-        value={professional.placesOfIntervention}
-      />
-      <Row label="Mission" value={professional.missions} marked={true} />
-      <Text>Présentation: </Text>
-      <Grid item xs={12}>
-        {professional.description}
-      </Grid>
+      <Box
+        sx={{
+          boxSizing: "border-box",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.infoProfessional")}
+        </Text>
+        <Row
+          label={t("professional.name")}
+          value={professional.name}
+          marked={true}
+        />
+        <Row
+          label={t("common.typeOf") + " " + t("professional.establishment")}
+          value={professional.establishmentType}
+        />
+        <Row
+          label={t("common.typeOf") + " " + t("professional.management")}
+          value={professional.managementType}
+          marked={true}
+        />
+        <Row
+          label={t("professional.address.street")}
+          value={professional.address.street}
+        />
+        <Row
+          label={t("professional.address.city")}
+          value={professional.address.city}
+          marked={true}
+        />
+        <Row
+          label={t("professional.address.postalCode")}
+          value={professional.address.postalCode}
+        />
+        <Row
+          label={t("professional.email")}
+          value={professional.email}
+          marked={true}
+        />
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.infoContactPerson")}
+        </Text>
+        <Row
+          label={t("professional.contactPerson.name")}
+          value={professional.contactPerson.name}
+          marked={true}
+        />
+        <Row
+          label={t("professional.contactPerson.phoneNumber")}
+          value={professional.contactPerson.phoneNumber}
+        />
+        <Row
+          label={t("professional.contactPerson.email")}
+          value={professional.contactPerson.email}
+          marked={true}
+        />
+        <Row
+          label={t("professional.contactPerson._function")}
+          value={professional.contactPerson._function}
+        />
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.infoFieldsOfIntervention")}
+        </Text>
+        <Row
+          label={t("professional.audiences")}
+          value={professional.audiences}
+          marked={true}
+        />
+        <Row
+          label={t("professional.placesOfIntervention")}
+          value={professional.placesOfIntervention}
+        />
+        <Row
+          label={t("professional.missions")}
+          value={professional.missions}
+          marked={true}
+        />
+
+        <Text sx={{ marginLeft: -2 }}>
+          {t("professional.popOver.description")}
+        </Text>
+        <Grid item xs={12}>
+          {professional.description}
+        </Grid>
+      </Box>
     </Box>
   );
 }
 
 function Row({ label, value, marked }) {
   const color = "lightgrey";
-  const rowProps = { padding: 1 };
+  const rowProps = { padding: 0.2 };
   return (
     <Grid container>
       <Grid

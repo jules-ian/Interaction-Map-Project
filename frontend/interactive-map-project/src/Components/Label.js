@@ -1,20 +1,22 @@
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
-export function Text (props){
-    const text = props.children
-    return (
-        <Typography variant="h6" gutterBottom>
-            {text}
-        </Typography>
-    )
-} 
+export function Text(props) {
+  const { sx } = props;
 
-export function Header(props){
-    const text = props.children
-    return (
-        <Typography variant="h4" gutterBottom>
-            {text}
-        </Typography>
-    )
-} 
+  const text = props.children;
+  return (
+    <Typography sx={sx} variant="h6">
+      {text}
+    </Typography>
+  );
+}
 
+export function Header(props) {
+  const { sx } = props;
+  const text = props.children;
+  return (
+    <Typography sx={sx} variant="h4">
+      {text}
+    </Typography>
+  );
+}

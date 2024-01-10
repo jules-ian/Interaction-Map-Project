@@ -4,10 +4,10 @@ export default function TextInput({
   defaultValue = "",
   setTextState,
   error = false,
-  setErrorState = function () {},
-  label = "placeholder",
+  setErrorState = function () { },
+  label = "",
   multiline = false,
-  helperText = "Empty Helpertext",
+  helperText = "",
 }) {
   return (
     <InputComponent>
