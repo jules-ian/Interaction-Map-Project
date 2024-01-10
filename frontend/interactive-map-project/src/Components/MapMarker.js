@@ -1,20 +1,20 @@
 import mapboxgl from 'mapbox-gl';
 
 const MapMarker = ({ map, lngLat, popupText }) => {
-    const marker = new mapboxgl.Marker()
-        .setLngLat(lngLat)
-        .addTo(map);
+    // Create a marker
+    const marker = new mapboxgl.Marker().setLngLat(lngLat).addTo(map);
 
-    // Add a popup on marker click
-    const popup = new mapboxgl.Popup().setLngLat(lngLat).setHTML(popupText);
+    // Create a popup
+    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupText);
 
-    marker.getElement().addEventListener('click', () => {
-        // Toggle the popup on click
-        if (popup.isOpen()) {
-            popup.remove();
-        } else {
-            marker.setPopup(popup).addTo(map);
-        }
+    // Add popup on marker hover
+    marker.getElement().addEventListener('mouseenter', () => {
+        marker.togglePopup(popup).addTo(map);
+    });
+
+    // Remove popup on marker hover out
+    marker.getElement().addEventListener('mouseleave', () => {
+        marker.togglePopup(popup);
     });
 
     return null;

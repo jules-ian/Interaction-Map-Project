@@ -120,21 +120,37 @@ export function getResultsSearch(
   textSearch = "",
   audiencesIDs = [],
   placesOfInterventionIDs = [],
-  missionIDs = []
+  missionIDs = [],
+  mapBounds
 ) {
   let data = {};
-  if (!textSearch.length == 0) {
+  if (!textSearch.length === 0) {
     data.text = textSearch;
   }
-  if (!audiencesIDs.length == 0) {
+  if (!audiencesIDs.length === 0) {
     data.audiences = audiencesIDs;
   }
-  if (!missionIDs.length == 0) {
+  if (!missionIDs.length === 0) {
     data.missions = missionIDs;
   }
-  if (!placesOfInterventionIDs.length == 0) {
+  if (!placesOfInterventionIDs.length === 0) {
     data.placesOfIntervention = placesOfInterventionIDs;
   }
+
+  if (mapBounds) {
+    data.mapSquare = {
+      /*northEastLatitude: mapBounds._ne.lat,
+      northEastLongitude: mapBounds._ne.lng,
+      southWestLatitude: mapBounds._sw.lat,
+      southWestLongitude: mapBounds._sw.lng*/
+      northEastLatitude: 50,
+      northEastLongitude: 30,
+      southWestLatitude: 40,
+      southWestLongitude: -2
+    }
+  };
+
+
   console.log("Data send to backend on search");
   console.log(data);
 

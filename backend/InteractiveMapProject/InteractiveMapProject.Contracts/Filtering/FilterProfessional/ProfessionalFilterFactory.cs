@@ -11,22 +11,22 @@ public class ProfessionalFilterFactory : IFilterFactory<Professional, Profession
 
         if (request?.Audiences?.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByAudience(request.Audiences));
+            dbFilters.Add(ProfessionalFilterSpecification.FilterByAudience(request.Audiences));
         }
 
         if (request?.PlacesOfIntervention?.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByPlaceOfIntervention(request.PlacesOfIntervention));
+            dbFilters.Add(ProfessionalFilterSpecification.FilterByPlaceOfIntervention(request.PlacesOfIntervention));
         }
 
         if (request?.Missions?.Any() == true)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByMission(request.Missions));
+            dbFilters.Add(ProfessionalFilterSpecification.FilterByMission(request.Missions));
         }
 
         if (request?.MapSquare != null)
         {
-            dbFilters.Add(ProfessionalSpecification.FilterByMapSquare(request.MapSquare));
+            dbFilters.Add(ProfessionalFilterSpecification.FilterByMapSquare(request.MapSquare));
         }
 
         return dbFilters.ToArray();

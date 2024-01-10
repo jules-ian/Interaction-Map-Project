@@ -16,7 +16,7 @@ public class PendingProfessionalResponseDto
 
     public Address Address { get; set; } = default!;
 
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 
     public string Email { get; set; } = default!;
 

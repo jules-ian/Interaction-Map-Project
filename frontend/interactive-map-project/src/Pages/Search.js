@@ -19,11 +19,8 @@ import { useTranslation } from "react-i18next";
 export default function Search({ setMenuTitel }) {
   const { t } = useTranslation();
   setMenuTitel(t("page.search"));
-  //TODO Task Sondre
-  const [northWestLongitude, setNorthWestLongitude] = useState(0);
-  const [northWestLatitude, setNorthWestLatitude] = useState(0);
-  const [southEastLongitude, setSouthEastLongitude] = useState(0);
-  const [southEastLatitude, setSouthEastLatitude] = useState(0);
+
+  const [mapBounds, setMapBounds] = useState(null);
 
   const [textSearch, setTextSearch] = useState("");
   const [missionsSelection, setMissionsSelection] = useState([]);
@@ -50,11 +47,7 @@ export default function Search({ setMenuTitel }) {
     textSearch,
     missionsSelection,
     audiencesSelection,
-    placesOfInterventionSelection,
-    northWestLongitude,
-    northWestLatitude,
-    southEastLongitude,
-    southEastLatitude,
+    placesOfInterventionSelection
   ]);
 
   const onSearch = function () {
@@ -71,7 +64,8 @@ export default function Search({ setMenuTitel }) {
         textSearch,
         audiencesIDs,
         placesOfInterventionIDs,
-        missionsIDS
+        missionsIDS,
+        mapBounds
       );
     }
   };
@@ -116,7 +110,7 @@ export default function Search({ setMenuTitel }) {
               setSelectionState={setPlacesOfInterventionSelection}
             />
           </Box>
-          <Map />
+          <Map setMapBounds={setMapBounds} results={results} />
         </Box>
         <ResultCardDisplay
           results={results}

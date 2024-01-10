@@ -3,7 +3,7 @@ using InteractiveMapProject.Contracts.Entities;
 
 namespace InteractiveMapProject.Contracts.Filtering.FilterProfessional;
 
-public static class ProfessionalSpecification
+public static class ProfessionalFilterSpecification
 {
     public static Expression<Func<Professional, bool>> FilterByAudience(IEnumerable<Guid> audiences) =>
         x => x.Audiences.Any(professional => audiences.Contains(professional.Audience.Id));
