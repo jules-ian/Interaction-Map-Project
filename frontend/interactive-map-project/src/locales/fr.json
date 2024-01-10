@@ -1,0 +1,62 @@
+{
+  "page": {
+    "form": "Formulaire",
+    "home": "Acceuil",
+    "search": "Recherche",
+    "admin": "Admin"
+  },
+
+  "form": {
+    "descriptionOfForm": "Avec une inscription confirmée, vous entrez dans notre service de recherche et d'identification dans le domaine professionnel des handicaps de la petite enfance.",
+    "header": "Veuillez remplir le formulaire suivant",
+    "subHeaderStructure": "Informations sur votre structure",
+    "subHeaderFieldsOfIntervention": "Champs d'intervention",
+    "subHeaderPerson": "Information sur la personne ressource",
+    "description": "Description personnelle de votre mission",
+    "license": "J'accepte d'apparître sur le répoire de partenaires du réseau d'Accueil pour tous et ainsi d'être solicité si besoin en tant que personne ressource.",
+    "helperText": {
+      "phoneNumber": "Numéro de téléphone non valide"
+    }
+  },
+  "successForm": {
+    "description": "La saisie du formulaire a été effectuée avec succès, retour à l'écran d'accueil"
+  },
+  "professional": {
+    "name": "Nom de la structure",
+    "establishment": "Service",
+    "management": "Gestionnaire",
+    "address": {
+      "street": "Rue",
+      "city": "Ville",
+      "postalCode": "Code postale"
+    },
+    "phoneNumber": "Numéro de téléphone",
+    "email": "E-Mail",
+    "contactPerson": {
+      "name": "Nom de la personne ressource",
+      "phoneNumber": "Numéro de téléphone de la personne ressource",
+      "email": "E-Mail de la personne ressource",
+      "_function": "Fonction(poste) de la personne ressource"
+    },
+    "audiences": "Publics",
+    "missions": "Missions",
+    "placesOfIntervention": "Lieu d'intervention",
+    "description": "Présentation personnalisée de vos missions ",
+    "popOver": {
+      "infoProfessional": "Information of the Structure",
+      "infoContactPerson": "Information of Contact Person",
+      "infoFieldsOfIntervention": "Fields of Intervention",
+      "description": "Présentation personnalisée"
+    }
+  },
+
+  "common": {
+    "noResults": "Pas de résultats",
+    "moreInfo": "Plus d'info",
+    "search": "Recherche",
+    "submit": "Soumettre",
+    "accept": "Accepter",
+    "decline": "Décliner",
+    "typeOf": "Type de"
+  }
+}

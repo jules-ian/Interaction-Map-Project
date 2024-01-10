@@ -1,12 +1,14 @@
 import { TextField } from "@mui/material";
 import InputComponent from "./InputComponent";
+import { useTranslation } from "react-i18next";
 
 function SearchBar() {
+  const { t } = useTranslation();
   return (
     <InputComponent>
       <TextField
         id="outlined-basic"
-        label="Search"
+        label={t("common.search")}
         variant="outlined"
         fullWidth="true"
         onKeyDown={(event) => {

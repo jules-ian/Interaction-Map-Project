@@ -1,20 +1,23 @@
 // Map.js
-import React, { useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import MapMarker from './MapMarker';
+import React, { useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import MapMarker from "./MapMarker";
+import useWindowDimensions from "../utils/windowDimension";
 
-mapboxgl.accessToken = "pk.eyJ1Ijoic29uZHJlbHV4IiwiYSI6ImNsbnZ3aXRneDAzcDcydG82NGE2dG4xYnQifQ._TpEa0XTz2SpM5Zv9xju_w";
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoic29uZHJlbHV4IiwiYSI6ImNsbnZ3aXRneDAzcDcydG82NGE2dG4xYnQifQ._TpEa0XTz2SpM5Zv9xju_w";
 
-const Map = () => {
+export default function Map() {
   const mapContainerRef = useRef(null);
+  const { height, width } = useWindowDimensions();
 
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: "mapbox://styles/mapbox/streets-v11",
       center: [1.4442, 43.6047],
-      zoom: 12
+      zoom: 12,
     });
 
     // Add markers after the map is initialized
@@ -25,8 +28,9 @@ const Map = () => {
   }, []);
 
   return (
-    <div ref={mapContainerRef} style={{ width: '100%', height: '400px' }} />
+    <div
+      ref={mapContainerRef}
+      style={{ width: "100%", height: height * 0.8 }}
+    />
   );
-};
-
-export default Map;
+}

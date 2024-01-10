@@ -3,8 +3,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 import ButtonComponent from "../Components/ButtonComponent";
 import useWindowDimensions from "../utils/windowDimension";
 import { Text } from "../Components/Label";
+import { useTranslation } from "react-i18next";
 
-export default function FormSuccess() {
+export default function FormSuccess({ setMenuTitel }) {
+  const { t } = useTranslation();
+  setMenuTitel(t("page.successForm"));
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
   return (
@@ -17,10 +20,10 @@ export default function FormSuccess() {
         flexDirection: "column",
       }}
     >
-      <Text>Entering Form was successfull returning to Homescreen</Text>
+      <Text>{t("successForm.description")}</Text>
       <Box sx={{ width: 0.3 }}>
         <ButtonComponent
-          label="Home"
+          label={t("page.home")}
           onClick={() => navigate("/Home", { replace: true })}
         />
       </Box>
