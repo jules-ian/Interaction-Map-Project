@@ -4,10 +4,12 @@ using InteractiveMapProject.Contracts.Dtos;
 
 namespace InteractiveMapProject.API.Validators;
 
-public class ProfessionalRequestDtoValidator : AbstractValidator<ProfessionalRequestDto>
+public class ProfessionalUpdateRequestDtoValidator : AbstractValidator<ProfessionalUpdateRequestDto>
 {
-    public ProfessionalRequestDtoValidator()
+    public ProfessionalUpdateRequestDtoValidator()
     {
+        RuleFor(x => x.ProfessionalId)
+            .NotNull().WithMessage("Name is required.");
         RuleFor(x => x.Name)
             .NotNull().WithMessage("Name is required.");
         RuleFor(x => x.EstablishmentType)
