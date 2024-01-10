@@ -47,8 +47,7 @@ export default function Search({ setMenuTitel }) {
     textSearch,
     missionsSelection,
     audiencesSelection,
-    placesOfInterventionSelection,
-    mapBounds
+    placesOfInterventionSelection
   ]);
 
   const onSearch = function () {

@@ -9,12 +9,12 @@ const MapMarker = ({ map, lngLat, popupText }) => {
 
     // Add popup on marker hover
     marker.getElement().addEventListener('mouseenter', () => {
-        marker.setPopup(popup).addTo(map);
+        marker.togglePopup(popup).addTo(map);
     });
 
     // Remove popup on marker hover out
     marker.getElement().addEventListener('mouseleave', () => {
-        marker.closePopup();
+        marker.togglePopup(popup);
     });
 
     return null;

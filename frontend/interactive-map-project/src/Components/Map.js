@@ -36,13 +36,19 @@ const Map = ({ setMapBounds, results }) => {
     });
 
     // Add markers based on search results
-    results.forEach((professional) => {
-      const { geoLocation, name } = professional;
-      if (geoLocation && geoLocation.coordinates) {
-        const [lng, lat] = geoLocation.coordinates;
-        MapMarker({ map, lngLat: [lng, lat], popupText: name });
+    for (const professional of results) {
+      if (professional.geolocation) {
+        let lat = professional.geolocation.latitude;
+        let lng = professional.geolocation.longitude;
+        MapMarker({ map, lngLat: [lng, lat], popupText: professional.name });
+        /*const marker = new mapboxgl.Marker()
+            .setLngLat([lng, lat])
+            .setPopup()
+            .addTo(map);*/
+
       }
-    });
+    }
+
 
     return () => map.remove();
   }, [setMapBounds, results]);
