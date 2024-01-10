@@ -22,11 +22,16 @@ import { PopoverWindow } from "../Components/PopoverWindow.js";
 import { useTranslation } from "react-i18next";
 import { test } from "../utils/BackendFunctions.js";
 import ButtonComponent from "../Components/ButtonComponent.js";
+import InputComponent from "../Components/InputComponent.js";
+import TextInput from "../Components/TextInput.js";
 export default function Test() {
   const { t, i18n } = useTranslation();
+  const [error, setError] = useState(false);
+  const [testText, setTestText] = useState("");
   return (
     <Box>
       <ButtonComponent label="test" onClick={test} />
+      <TextInput error={error} setError={setError} setTextState={setTestText} />
     </Box>
   );
 }
