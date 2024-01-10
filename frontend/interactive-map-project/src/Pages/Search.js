@@ -110,7 +110,7 @@ export default function Search() {
               setSelectionState={setPlacesOfInterventionSelection}
             />
           </Box>
-          <Map setMapBounds={setMapBounds} />
+          <Map setMapBounds={setMapBounds} results={results} />
         </Box>
         <ResultCardDisplay
           results={results}
