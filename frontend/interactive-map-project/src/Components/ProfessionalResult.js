@@ -1,20 +1,17 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  MobileStepper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import useWindowDimensions from "../utils/windowDimension";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Text } from "./Label";
+import { useTranslation } from "react-i18next";
 
 //const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-export default function ResultCardDisplay({ results }) {
+export default function ResultCardDisplay({
+  results,
+  setSelectedProfessional,
+}) {
   const { height, width } = useWindowDimensions();
-
+  const { t } = useTranslation();
   useEffect(() => {
     console.log(results.length);
     console.log(results);
@@ -22,75 +19,83 @@ export default function ResultCardDisplay({ results }) {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        overflow: "auto",
-        flexDirection: "row",
-        backgroundColor: "lightgrey",
-        margin: 1,
-        borderRadius: 1,
-      }}
+      spacing={2}
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      overflow="auto"
     >
       {results.length != 0 ? (
         results.map((professional) => (
           <ProfessionalCard
             professional={professional}
-            width={height * 0.4}
-            height={height * 0.2}
+            width={width * 0.2}
+            height={height * 0.15}
             other={{ flexShrink: 0 }}
+            setOnClick={setSelectedProfessional}
           />
         ))
       ) : (
         <ResultCard>
-          <Text>No Results</Text>
+          <Text>{t("common.noResults")}</Text>
         </ResultCard>
       )}
     </Box>
   );
 }
 
-function ProfessionalCard({ professional, width, height, other }) {
+function ProfessionalCard({ professional, width, height, other, setOnClick }) {
+  const { t } = useTranslation();
   return (
     <ResultCard width={width} height={height} other={other}>
       <Typography variant="h5" noWrap>
         {professional.name}
       </Typography>
       <Typography noWrap>
-        {"Gestionnare: " + professional.managementType}
+        {t("professional.management") + ": " + professional.managementType}
       </Typography>
       <Typography noWrap>
-        {"Service: " + professional.establishmentType}
+        {t("professional.establishment") +
+          ": " +
+          professional.establishmentType}
       </Typography>
       <Button
         variant="contained"
         fullWidth
         onClick={() => {
-          /*TODO*/
+          setOnClick(professional);
         }}
       >
-        More Info
+        {t("common.moreInfo")}
       </Button>
     </ResultCard>
   );
 }
 
-function ResultCard(props, { width, height, other }) {
+function ResultCard(props) {
+  const { width, height, other } = props;
   const content = props.children;
+
   return (
     <Card
       sx={{
-        margin: 2,
-        padding: 2,
+        margin: 1,
+        padding: 1,
         height: height,
-        wdith: width,
-        alignItems: "center",
+        minHeight: 100,
+        width: width,
+        color: "black",
         justifyContent: "center",
         display: "flex",
-        color: "black",
+        flexDirection: "column",
+
+        "&:hover": {
+          background: "lightblue", // change to the desired background color on hover
+        },
         ...other,
       }}
     >
-      <CardContent sx={{ maxWidth: width }}>{content}</CardContent>
+      <CardContent>{content}</CardContent>
     </Card>
   );
 }

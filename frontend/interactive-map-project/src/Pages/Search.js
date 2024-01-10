@@ -9,19 +9,23 @@ import {
   getResultsSearch,
 } from "../utils/BackendFunctions";
 import TextInput from "../Components/TextInput";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import ResultCardDisplay from "../Components/ProfessionalResult";
 import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
+import { PopoverWindow } from "../Components/PopoverWindow";
+import { useTranslation } from "react-i18next";
 
-export default function Search() {
+export default function Search({ setMenuTitel }) {
+  const { t } = useTranslation();
+  setMenuTitel(t("page.search"));
   //TODO Task Sondre
   const [northWestLongitude, setNorthWestLongitude] = useState(0);
   const [northWestLatitude, setNorthWestLatitude] = useState(0);
   const [southEastLongitude, setSouthEastLongitude] = useState(0);
   const [southEastLatitude, setSouthEastLatitude] = useState(0);
 
-  const [search, setSearch] = useState("");
+  const [textSearch, setTextSearch] = useState("");
   const [missionsSelection, setMissionsSelection] = useState([]);
   const [audiencesSelection, setAudiencesSelection] = useState([]);
   const [placesOfInterventionSelection, setPlacesOfInterventionSelection] =
@@ -32,6 +36,7 @@ export default function Search() {
   const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
   const [results, setResults] = useState([]);
 
+  const [selectedProfessional, SetSelectedProfessinoal] = useState(null);
   // on first render
   useEffect(() => {
     getAllPlacesOfIntervention(setPlacesOfIntervention);
@@ -42,7 +47,7 @@ export default function Search() {
   useEffect(() => {
     onSearch();
   }, [
-    search,
+    textSearch,
     missionsSelection,
     audiencesSelection,
     placesOfInterventionSelection,
@@ -62,10 +67,11 @@ export default function Search() {
       );
       let missionsIDS = mapNamesToIDs(missionsSelection, missions);
       getResultsSearch(
+        setResults,
+        textSearch,
         audiencesIDs,
         placesOfInterventionIDs,
-        missionsIDS,
-        setResults
+        missionsIDS
       );
     }
   };
@@ -77,38 +83,49 @@ export default function Search() {
 
   return (
     <Box>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box
-          sx={{
-            width: 400,
-            margin: 2,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <TextInput setTextState={setSearch} label="Search" />
-          <DropMultiSelect
-            label="Missions"
-            options={missions.map((item) => item.name)}
-            setSelectionState={setMissionsSelection}
-          />
+      <Box>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box
+            sx={{
+              width: 400,
+              margin: 2,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "top",
+            }}
+          >
+            <TextInput
+              setTextState={setTextSearch}
+              label={t("common.search")}
+            />
+            <DropMultiSelect
+              label={t("professional.missions")}
+              options={missions.map((item) => item.name)}
+              setSelectionState={setMissionsSelection}
+            />
 
-          <DropMultiSelect
-            label="Public"
-            options={audiences.map((item) => item.name)}
-            setSelectionState={setAudiencesSelection}
-          />
+            <DropMultiSelect
+              label={t("professional.audiences")}
+              options={audiences.map((item) => item.name)}
+              setSelectionState={setAudiencesSelection}
+            />
 
-          <DropMultiSelect
-            label="Lieu d'intervention"
-            options={placesOfIntervention.map((item) => item.name)}
-            setSelectionState={setPlacesOfInterventionSelection}
-          />
+            <DropMultiSelect
+              label={t("professional.placesOfIntervention")}
+              options={placesOfIntervention.map((item) => item.name)}
+              setSelectionState={setPlacesOfInterventionSelection}
+            />
+          </Box>
+          <Map />
         </Box>
-        <Map />
+        <ResultCardDisplay
+          results={results}
+          setSelectedProfessional={SetSelectedProfessinoal}
+        />
       </Box>
-      <ResultCardDisplay results={results} />
+      <PopoverWindow
+        selectedProfessional={selectedProfessional}
+      ></PopoverWindow>
     </Box>
   );
 }
