@@ -56,6 +56,8 @@
     "submit": "Submit",
     "accept": "Accept",
     "decline": "Decline",
-    "typeOf": "Type of"
+    "typeOf": "Type of",
+    "error": "Error",
+    "success": "Success"
   }
 }
