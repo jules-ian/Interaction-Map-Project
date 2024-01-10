@@ -81,21 +81,33 @@ export function getResultsSearch(
   textSearch = "",
   audiencesIDs = [],
   placesOfInterventionIDs = [],
-  missionIDs = []
+  missionIDs = [],
+  mapBounds
 ) {
   let data = {};
-  if (!textSearch.length == 0) {
+  if (!textSearch.length === 0) {
     data.text = textSearch;
   }
-  if (!audiencesIDs.length == 0) {
+  if (!audiencesIDs.length === 0) {
     data.audiences = audiencesIDs;
   }
-  if (!missionIDs.length == 0) {
+  if (!missionIDs.length === 0) {
     data.missions = missionIDs;
   }
-  if (!placesOfInterventionIDs.length == 0) {
+  if (!placesOfInterventionIDs.length === 0) {
     data.placesOfIntervention = placesOfInterventionIDs;
   }
+
+  if (mapBounds) {
+    data.mapSquare = {
+      northWestLatitude: mapBounds._ne.lat,
+      northWestLongitude: mapBounds._ne.lng,
+      southEastLatitude: mapBounds._sw.lat,
+      southEastLongitude: mapBounds._sw.lng
+    }
+  };
+
+
   console.log("Data send to backend on search");
   console.log(data);
 
