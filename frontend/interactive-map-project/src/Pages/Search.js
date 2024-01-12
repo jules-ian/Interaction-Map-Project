@@ -45,7 +45,7 @@ export default function Search({ setMenuTitel }) {
   }, []);
   // change to search criteria
   useEffect(() => {
-    debouncedSearch();
+    onSearch();
   }, [
     textSearch,
     missionsSelection,

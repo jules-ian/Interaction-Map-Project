@@ -100,14 +100,10 @@ export function getResultsSearch(
 
   if (mapBounds) {
     data.mapSquare = {
-      /*northEastLatitude: mapBounds._ne.lat,
+      northEastLatitude: mapBounds._ne.lat,
       northEastLongitude: mapBounds._ne.lng,
       southWestLatitude: mapBounds._sw.lat,
-      southWestLongitude: mapBounds._sw.lng*/
-      northEastLatitude: 50,
-      northEastLongitude: 30,
-      southWestLatitude: 40,
-      southWestLongitude: -2
+      southWestLongitude: mapBounds._sw.lng
     }
   };
 
