@@ -15,6 +15,7 @@ import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
+import _ from 'lodash';
 
 export default function Search({ setMenuTitel }) {
   const { t } = useTranslation();
@@ -34,6 +35,8 @@ export default function Search({ setMenuTitel }) {
   const [results, setResults] = useState([]);
 
   const [selectedProfessional, SetSelectedProfessinoal] = useState(null);
+
+
   // on first render
   useEffect(() => {
     getAllPlacesOfIntervention(setPlacesOfIntervention);
@@ -42,12 +45,13 @@ export default function Search({ setMenuTitel }) {
   }, []);
   // change to search criteria
   useEffect(() => {
-    onSearch();
+    debouncedSearch();
   }, [
     textSearch,
     missionsSelection,
     audiencesSelection,
-    placesOfInterventionSelection
+    placesOfInterventionSelection,
+    mapBounds
   ]);
 
   const onSearch = function () {
@@ -69,6 +73,8 @@ export default function Search({ setMenuTitel }) {
       );
     }
   };
+
+  const debouncedSearch = _.debounce(onSearch, 500); // Adjust debounce time as needed
 
   const checkEntries = function () {
     let checkSuccess = true;

@@ -48,6 +48,8 @@ const Map = ({ setMapBounds, results }) => {
 
       }
     }
+    MapMarker({ map, lngLat: [31.56, 1.56], popupText: "1" });
+    MapMarker({ map, lngLat: [31.55, 1.55], popupText: "2" });
 
 
     return () => map.remove();
