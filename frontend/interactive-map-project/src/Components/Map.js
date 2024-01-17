@@ -44,7 +44,7 @@ const Map = ({ setMapBounds, results }) => {
       const centerChange =
         (mapboxgl.LngLat.convert(currentMapCenter).distanceTo(prevMapCenter) /
           mapboxgl.LngLat.convert([0, 0]).distanceTo([180, 0])) *
-        100 >
+          100 >
         5; // Example distance threshold in percentage
       const zoomChange =
         (Math.abs(currentMapZoom - prevMapZoom) / maxZoom) * 100 > 2; // Example zoom threshold in percentage
@@ -60,7 +60,6 @@ const Map = ({ setMapBounds, results }) => {
       }
     });
 
-
     // Add markers based on search results
     for (const professional of results) {
       if (professional.geolocation) {
@@ -71,19 +70,17 @@ const Map = ({ setMapBounds, results }) => {
             .setLngLat([lng, lat])
             .setPopup()
             .addTo(map);*/
-
       }
     }
 
 
-
     return () => map.remove();
-  }, [setMapBounds, results,]);
+  }, [setMapBounds, results]);
 
   return (
     <div
       ref={mapContainerRef}
-      style={{ width: "100%", height: height * 0.8 }}
+      style={{ width: "100%", height: height * 0.7 }}
     />
   );
 };

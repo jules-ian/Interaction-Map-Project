@@ -4,7 +4,7 @@ export default function TextInput({
   defaultValue = "",
   setTextState,
   error = false,
-  setErrorState = function () { },
+  setErrorState = function () {},
   label = "",
   multiline = false,
   helperText = "",
