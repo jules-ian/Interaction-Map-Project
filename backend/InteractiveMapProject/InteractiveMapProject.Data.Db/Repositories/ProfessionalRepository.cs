@@ -1,3 +1,4 @@
+using System;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
@@ -73,6 +74,8 @@ public class ProfessionalRepository : Repository<Professional>, IProfessionalRep
 
     private int GetNumberOfMatches(string[] professionalArray, string[] textArray)
     {
+        professionalArray = professionalArray.Select(s => s.ToLowerInvariant()).ToArray();
+        textArray = textArray.Select(s => s.ToLowerInvariant()).ToArray();
         int numberOfMatches = 0;
         foreach (string text in textArray)
         {
