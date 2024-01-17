@@ -72,7 +72,7 @@ const Map = ({
         let lng = professional.geolocation.longitude;
         MapMarker({
           map,
-          lngLat: [lng, lat],
+          lngLat: [lat, lng],
           professional: professional,
           setSelectedProfessional: setSelectedProfessional,
           setOpenPopover: setOpenPopover,
