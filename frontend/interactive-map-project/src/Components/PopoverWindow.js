@@ -34,9 +34,6 @@ export function PopoverWindow(props) {
   };
 
   const handleClose = () => {
-    if (typeof setSelectedProfessional == "function") {
-      setSelectedProfessional(null);
-    }
     setAnchorEl(null);
     setOpenPopover(false);
   };
