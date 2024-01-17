@@ -5,7 +5,6 @@ import Home from "./Pages/Home";
 import Test from "./Pages/Test";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Admin from "./Pages/Admin";
-import FormSuccess from "./Pages/FormSuccess";
 import {
   Box,
   FormControl,
@@ -77,10 +76,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to={defaultRoute} />} />
         <Route path="Form" element={<Form setMenuTitel={setMenuTitel} />} />
-        <Route
-          path="FormSuccess"
-          element={<FormSuccess setMenuTitel={setMenuTitel} />}
-        />
         <Route path="Search" element={<Search setMenuTitel={setMenuTitel} />} />
         <Route path="Home" element={<Home setMenuTitel={setMenuTitel} />} />
         <Route path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} />

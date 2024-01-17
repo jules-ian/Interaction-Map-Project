@@ -15,6 +15,6 @@ export function isTelephoneNumber(number) {
 }
 
 export function isEmail(email) {
-  // TODO
-  return isName(email);
+  const regex = /^[^@]+@[^@]+$/;
+  return email !== "" && regex.test(email);
 }

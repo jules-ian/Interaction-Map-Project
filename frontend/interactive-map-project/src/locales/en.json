@@ -3,8 +3,7 @@
     "form": "Form",
     "home": "Home",
     "search": "Search",
-    "admin": "Admin",
-    "successForm": "Success"
+    "admin": "Admin"
   },
 
   "form": {
@@ -17,10 +16,9 @@
     "license": "I agree to appear on the directory of Accueil pour tous network partners and thus to be contacted if necessary as a resource person",
     "helperText": {
       "phoneNumber": "Not a valid phonenumber"
-    }
-  },
-  "successForm": {
-    "description": "Entering Form was successfull returning to Homescreen"
+    },
+    "successMessage": "Entering Form was successfull returning to Homescreen",
+    "errorMessageFE": "Some Fields were not entered correctly please adjust"
   },
   "professional": {
     "name": "Name of the Structure",
@@ -58,6 +56,8 @@
     "submit": "Submit",
     "accept": "Accept",
     "decline": "Decline",
-    "typeOf": "Type of"
+    "typeOf": "Type of",
+    "error": "Error",
+    "success": "Success"
   }
 }

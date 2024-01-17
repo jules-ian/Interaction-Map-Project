@@ -20,6 +20,7 @@ import { Address, ContactPerson, Professional } from "../utils/Entities";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
 
 export default function Form({ setMenuTitel }) {
   const { t } = useTranslation();
@@ -69,6 +70,20 @@ export default function Form({ setMenuTitel }) {
   const [acceptError, setAcceptError] = useState(false);
   const navigate = useNavigate();
 
+  // Dialogs
+  const successMessage = t("form.successMessage");
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+  const onCloseSuccessDialog = function () {
+    setOpenSuccessDialog(false);
+    navigate("/Home", { replace: true });
+  };
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [openErrorDialog, setOpenErrorDialog] = useState(false);
+  const onCloseErrorDialog = function () {
+    setOpenErrorDialog(false);
+  };
+
   // on first render
   useEffect(() => {
     getAllPlacesOfIntervention(setPlacesOfIntervention);
@@ -78,12 +93,18 @@ export default function Form({ setMenuTitel }) {
 
   const onSubmit = function () {
     let valid = checkEntries();
+    if (!valid) {
+      setErrorMessage(t("form.errorMessageFE"));
+      setOpenErrorDialog(true);
+      return;
+    }
     if (valid) {
-      const callback = function (success) {
+      const callback = function (success, errorMessage = "") {
         if (success) {
-          navigate("/FormSuccess", { replace: true });
+          setOpenSuccessDialog(true);
         } else {
-          navigate("/FormError", { replace: true });
+          setErrorMessage(t("form.errorMessageFE"));
+          setOpenErrorDialog(true);
         }
       };
       let professional = createProfessinalEntitiy();
@@ -222,6 +243,16 @@ export default function Form({ setMenuTitel }) {
   };
   return (
     <Box>
+      <SuccessDialog
+        message={successMessage}
+        onClose={onCloseSuccessDialog}
+        open={openSuccessDialog}
+      />
+      <ErrorDialog
+        message={errorMessage}
+        onClose={onCloseErrorDialog}
+        open={openErrorDialog}
+      />
       <Box sx={{ padding: 5 }}>
         <Header>{t("form.header")}</Header>
         <Text>{t("form.descriptionOfForm")}</Text>
