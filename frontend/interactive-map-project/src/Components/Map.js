@@ -66,7 +66,7 @@ const Map = ({ setMapBounds, results }) => {
       if (professional.geolocation) {
         let lat = professional.geolocation.latitude;
         let lng = professional.geolocation.longitude;
-        MapMarker({ map, lngLat: [lng, lat], popupText: professional.name });
+        MapMarker({ map, lngLat: [lat, lng], popupText: professional.name });
         /*const marker = new mapboxgl.Marker()
             .setLngLat([lng, lat])
             .setPopup()
@@ -74,8 +74,7 @@ const Map = ({ setMapBounds, results }) => {
 
       }
     }
-    MapMarker({ map, lngLat: [31.56, 1.56], popupText: "1" });
-    MapMarker({ map, lngLat: [31.55, 1.55], popupText: "2" });
+
 
 
     return () => map.remove();
