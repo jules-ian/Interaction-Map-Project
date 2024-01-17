@@ -8,7 +8,7 @@ public class PendingProfessionalAudienceConfiguration : IEntityTypeConfiguration
 {
     public void Configure(EntityTypeBuilder<PendingProfessionalAudience> builder)
     {
-        builder.ToTable("PendingProfessionalAudiences");
+        builder.ToTable("PendingProfessionalsAudiences");
 
         builder
             .HasKey(pa => new { PendingProfessionalId = pa.PendingProfessionalId, AudienceId = pa.AudienceId });
