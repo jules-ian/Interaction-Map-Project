@@ -34,7 +34,8 @@ export default function Search({ setMenuTitel }) {
   const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
   const [results, setResults] = useState([]);
 
-  const [selectedProfessional, SetSelectedProfessinoal] = useState(null);
+  const [selectedProfessional, setSelectedProfessional] = useState(null);
+  const [openPopover, setOpenPopover] = useState(false);
 
   // on first render
   useEffect(() => {
@@ -114,15 +115,23 @@ export default function Search({ setMenuTitel }) {
               setSelectionState={setPlacesOfInterventionSelection}
             />
           </Box>
-          <Map setMapBounds={setMapBounds} results={results} />
+          <Map
+            setMapBounds={setMapBounds}
+            results={results}
+            setSelectedProfessional={setSelectedProfessional}
+            setOpenPopover={setOpenPopover}
+          />
         </Box>
         <ResultCardDisplay
           results={results}
-          setSelectedProfessional={SetSelectedProfessinoal}
+          setSelectedProfessional={setSelectedProfessional}
+          setOpenPopover={setOpenPopover}
         />
       </Box>
       <PopoverWindow
         selectedProfessional={selectedProfessional}
+        openPopover={openPopover}
+        setOpenPopover={setOpenPopover}
       ></PopoverWindow>
     </Box>
   );

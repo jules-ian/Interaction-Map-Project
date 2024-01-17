@@ -19,6 +19,7 @@ export default function Admin({ setMenuTitel }) {
   const { width, height } = useWindowDimensions();
   const [unapprovedProfessionals, setUnapprovedProfessionals] = useState([]);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
+  const [openPopover, setOpenPopover] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -27,7 +28,6 @@ export default function Admin({ setMenuTitel }) {
 
   const callbackAcceptDecline = function () {
     getResultsSearch(setUnapprovedProfessionals);
-    setSelectedProfessional(null);
   };
 
   useEffect(() => {
@@ -48,6 +48,8 @@ export default function Admin({ setMenuTitel }) {
       ) : (
         <Tabel
           unapprovedProfessionals={unapprovedProfessionals}
+          openPopover={openPopover}
+          setOpenPopover={setOpenPopover}
           setSelectedProfessional={setSelectedProfessional}
           selectedProfessional={selectedProfessional}
           callbackAcceptDecline={callbackAcceptDecline}
@@ -59,6 +61,8 @@ export default function Admin({ setMenuTitel }) {
 }
 function Tabel({
   unapprovedProfessionals,
+  openPopover,
+  setOpenPopover,
   setSelectedProfessional,
   selectedProfessional,
   callbackAcceptDecline,
@@ -92,6 +96,7 @@ function Tabel({
               xs={9}
               onClick={() => {
                 console.log(professional);
+                setOpenPopover(true);
                 setSelectedProfessional(professional);
               }}
             >
@@ -165,6 +170,8 @@ function Tabel({
         <Text> {t("common.noResults")}</Text>
       )}
       <PopoverWindow
+        setOpenPopover={setOpenPopover}
+        openPopover={openPopover}
         selectedProfessional={selectedProfessional}
       ></PopoverWindow>
     </Box>

@@ -8,7 +8,12 @@ import useWindowDimensions from "../utils/windowDimension";
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic29uZHJlbHV4IiwiYSI6ImNsbnZ3aXRneDAzcDcydG82NGE2dG4xYnQifQ._TpEa0XTz2SpM5Zv9xju_w";
 
-const Map = ({ setMapBounds, results }) => {
+const Map = ({
+  setMapBounds,
+  results,
+  setSelectedProfessional,
+  setOpenPopover,
+}) => {
   const mapContainerRef = useRef(null);
   const { height, width } = useWindowDimensions();
   const [mapCenter, setMapCenter] = useState([1.4442, 43.6047]);
@@ -65,15 +70,19 @@ const Map = ({ setMapBounds, results }) => {
       if (professional.geolocation) {
         let lat = professional.geolocation.latitude;
         let lng = professional.geolocation.longitude;
-        MapMarker({ map, lngLat: [lng, lat], popupText: professional.name });
+        MapMarker({
+          map,
+          lngLat: [lng, lat],
+          professional: professional,
+          setSelectedProfessional: setSelectedProfessional,
+          setOpenPopover: setOpenPopover,
+        });
         /*const marker = new mapboxgl.Marker()
             .setLngLat([lng, lat])
             .setPopup()
             .addTo(map);*/
       }
     }
-    MapMarker({ map, lngLat: [31.56, 1.56], popupText: "1" });
-    MapMarker({ map, lngLat: [31.55, 1.55], popupText: "2" });
 
     return () => map.remove();
   }, [setMapBounds, results]);
