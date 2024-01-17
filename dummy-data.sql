@@ -72,9 +72,6 @@ VALUES
   ('1d0ed49a-149b-4654-98a5-8f39cfd0abf4', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 1 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 13, Audience 2
   ('1d0ed49a-149b-4654-98a5-8f39cfd0abf4', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 3 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 13, Audience 4
   ('1d0ed49a-149b-4654-98a5-8f39cfd0abf4', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 4 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 13, Audience 5
-  ('2f69b399-c270-4a9b-81fb-64a35421827a', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 0 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 14, Audience 1
-  ('2f69b399-c270-4a9b-81fb-64a35421827a', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 4 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 14, Audience 5
-  ('2f69b399-c270-4a9b-81fb-64a35421827a', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 5 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 14, Audience 6
   ('dd1f3985-38fc-4ba3-80c0-67b987b33257', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 1 ROWS FETCH NEXT 1 ROW ONLY)), -- Professional 15, Audience 2
   ('dd1f3985-38fc-4ba3-80c0-67b987b33257', (SELECT Id FROM Audiences ORDER BY Audiences.Id OFFSET 2 ROWS FETCH NEXT 1 ROW ONLY)); -- Professional 15, Audience 3
   
