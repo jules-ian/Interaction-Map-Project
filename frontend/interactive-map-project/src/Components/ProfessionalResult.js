@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 export default function ResultCardDisplay({
   results,
   setSelectedProfessional,
+  setOpenPopover,
 }) {
   const { height, width } = useWindowDimensions();
   const { t } = useTranslation();
@@ -33,6 +34,7 @@ export default function ResultCardDisplay({
             height={height * 0.15}
             other={{ flexShrink: 0 }}
             setOnClick={setSelectedProfessional}
+            setOpenPopover={setOpenPopover}
           />
         ))
       ) : (
@@ -44,7 +46,14 @@ export default function ResultCardDisplay({
   );
 }
 
-function ProfessionalCard({ professional, width, height, other, setOnClick }) {
+function ProfessionalCard({
+  professional,
+  width,
+  height,
+  other,
+  setOnClick,
+  setOpenPopover,
+}) {
   const { t } = useTranslation();
   return (
     <ResultCard width={width} height={height} other={other}>
@@ -63,6 +72,7 @@ function ProfessionalCard({ professional, width, height, other, setOnClick }) {
         variant="contained"
         fullWidth
         onClick={() => {
+          setOpenPopover(true);
           setOnClick(professional);
         }}
       >

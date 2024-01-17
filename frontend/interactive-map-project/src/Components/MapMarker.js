@@ -1,24 +1,37 @@
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from "mapbox-gl";
 
-const MapMarker = ({ map, lngLat, popupText }) => {
-    // Create a marker
-    const marker = new mapboxgl.Marker().setLngLat(lngLat).addTo(map);
+const MapMarker = ({
+  map,
+  lngLat,
+  professional,
+  setSelectedProfessional,
+  setOpenPopover,
+}) => {
+  // Create a marker
+  const marker = new mapboxgl.Marker().setLngLat(lngLat);
 
-    // Create a popup
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupText);
+  // Create a popup
+  const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(professional.name);
 
-    // Add popup on marker hover
-    marker.getElement().addEventListener('mouseenter', () => {
-        marker.togglePopup(popup).addTo(map);
-    });
+  // Add popup on marker hover
+  marker.addTo(map).setPopup(popup);
 
-    // Remove popup on marker hover out
-    marker.getElement().addEventListener('mouseleave', () => {
-        marker.togglePopup(popup);
-    });
+  // Show popup on marker mouseenter
+  marker.getElement().addEventListener("mouseenter", () => {
+    marker.togglePopup();
+  });
 
-    return null;
+  // Hide popup on marker mouseleave
+  marker.getElement().addEventListener("mouseleave", () => {
+    marker.togglePopup();
+  });
+
+  marker.getElement().addEventListener("click", () => {
+    setOpenPopover(true);
+    setSelectedProfessional(professional);
+  });
+
+  return null;
 };
 
 export default MapMarker;
-

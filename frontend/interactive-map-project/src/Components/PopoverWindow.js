@@ -6,16 +6,16 @@ import { Header, Text } from "./Label.js";
 import { useTranslation } from "react-i18next";
 
 export function PopoverWindow(props) {
-  const { selectedProfessional, setSelectedProfessional } = props;
+  const { selectedProfessional, openPopover, setOpenPopover } = props;
   const content = props.children;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const { width, height } = useWindowDimensions();
   useEffect(() => {
-    if (selectedProfessional !== null) {
+    if (selectedProfessional !== null && openPopover) {
       handlePop();
     }
-  }, [selectedProfessional]);
+  }, [openPopover]);
 
   const handlePop = (event) => {
     // calculate and set middle of window for popup
@@ -38,6 +38,7 @@ export function PopoverWindow(props) {
       setSelectedProfessional(null);
     }
     setAnchorEl(null);
+    setOpenPopover(false);
   };
 
   const open = Boolean(anchorEl);
