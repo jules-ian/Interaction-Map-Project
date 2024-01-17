@@ -28,7 +28,7 @@ export default function Admin({ setMenuTitel }) {
   }, []);
 
   const callbackAcceptDecline = function () {
-    getResultsSearch(setUnapprovedProfessionals);
+    getUnapprovedProfessionals(setUnapprovedProfessionals);
   };
 
   useEffect(() => {
