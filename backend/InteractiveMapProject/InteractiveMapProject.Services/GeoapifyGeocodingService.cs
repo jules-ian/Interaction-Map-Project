@@ -38,6 +38,6 @@ public class GeoapifyGeocodingService : IGeocodingService
             return null;
         }
         GeoapifyFeatureDto feature = geoapifyResponse.Features.First();
-        return new Geolocation(feature.Properties.Lon, feature.Properties.Lat);
+        return new Geolocation(feature.Properties.Lat, feature.Properties.Lon);
     }
 }
