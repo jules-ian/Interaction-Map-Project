@@ -1,19 +1,19 @@
 {
   "page": {
     "form": "Formulaire",
-    "home": "Acceuil",
+    "home": "Accueil",
     "search": "Recherche",
     "admin": "Admin"
   },
 
   "form": {
-    "descriptionOfForm": "Avec une inscription confirmée, vous entrez dans notre service de recherche et d'identification dans le domaine professionnel des handicaps de la petite enfance.",
+    "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",
     "header": "Veuillez remplir le formulaire suivant",
     "subHeaderStructure": "Informations sur votre structure",
     "subHeaderFieldsOfIntervention": "Champs d'intervention",
-    "subHeaderPerson": "Information sur la personne ressource",
-    "description": "Description personnelle de votre mission",
-    "license": "J'accepte d'apparître sur le répoire de partenaires du réseau d'Accueil pour tous et ainsi d'être solicité si besoin en tant que personne ressource.",
+    "subHeaderPerson": "Informations sur la personne ressource",
+    "description": "Description de votre mission",
+    "license": "J'accepte d'apparaître sur le répertoire des partenaires du réseau d'Accueil Pour Tous 31 et ainsi d'être solicité si besoin en tant que personne ressource.",
     "helperText": {
       "phoneNumber": "Numéro de téléphone non valide"
     },
@@ -42,15 +42,15 @@
     "placesOfIntervention": "Lieu d'intervention",
     "description": "Présentation personnalisée de vos missions ",
     "popOver": {
-      "infoProfessional": "Information of the Structure",
-      "infoContactPerson": "Information of Contact Person",
-      "infoFieldsOfIntervention": "Fields of Intervention",
+      "infoProfessional": "Informations sur la structure",
+      "infoContactPerson": "Informations sur la personne ressource",
+      "infoFieldsOfIntervention": "Domaines d'intervention",
       "description": "Présentation personnalisée"
     }
   },
 
   "common": {
-    "noResults": "Pas de résultats",
+    "noResults": "Pas de résultat",
     "moreInfo": "Plus d'info",
     "search": "Recherche",
     "submit": "Soumettre",
