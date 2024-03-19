@@ -2,6 +2,8 @@
   "page": {
     "form": "Form",
     "home": "Home",
+    "signUp": "Sign up",
+    "logIn": "Log in",
     "search": "Search",
     "admin": "Admin"
   },
@@ -29,6 +31,7 @@
       "city": "City",
       "postalCode": "Postalcode"
     },
+    "password": "Password",
     "phoneNumber": "Telephonenumber",
     "email": "E-Mail",
     "contactPerson": {

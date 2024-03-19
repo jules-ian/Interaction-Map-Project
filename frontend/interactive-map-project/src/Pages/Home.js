@@ -24,25 +24,25 @@ export default function Home({ setMenuTitel }) {
     >
       <Box sx={{ width: 0.3 }}>
         <ButtonComponent
-          label={t("page.form")}
+          label={t("page.signUp")}
           onClick={() => navigate("/Form", { replace: true })}
         />
         <ButtonComponent
-          label={t("page.search")}
-          onClick={() => navigate("/Search", { replace: true })}
+          label={t("page.logIn")}
+          onClick={() => navigate("/LogIn", { replace: true })}
         />
-        <Box sx={{ height: height * 0.02 }}></Box>
-        <ButtonComponent
+        {/* <Box sx={{ height: height * 0.02 }}></Box>
+        { <ButtonComponent
           label={t("page.admin")}
           onClick={() => navigate("/Admin", { replace: true })}
           color="secondary"
-        />
+        /> }
         <ButtonComponent //todo: potentiellement à enlever
           label={t("page.test")}
           onClick={() => navigate("/Test", { replace: true })}
           color="secondary"
-        />
-      </Box>
+        />*/}
+      </Box> 
     </Box>
   );
 }

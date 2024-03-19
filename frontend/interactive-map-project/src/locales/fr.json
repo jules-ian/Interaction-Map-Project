@@ -1,6 +1,8 @@
 {
   "page": {
     "form": "Formulaire",
+    "signUp": "Inscription",
+    "logIn": "Connexion",
     "home": "Accueil",
     "search": "Recherche",
     "admin": "Admin"
@@ -29,6 +31,7 @@
       "city": "Ville",
       "postalCode": "Code postale"
     },
+    "password": "Mot de passe",
     "phoneNumber": "Numéro de téléphone",
     "email": "E-Mail",
     "contactPerson": {

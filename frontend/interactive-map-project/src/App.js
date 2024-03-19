@@ -3,6 +3,7 @@ import Form from "./Pages/Form";
 import Search from "./Pages/Search";
 import Home from "./Pages/Home";
 import Test from "./Pages/Test";
+import LogIn from "./Pages/LogIn";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Admin from "./Pages/Admin";
 import {
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="Home" element={<Home setMenuTitel={setMenuTitel} />} />
         <Route path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} />
         <Route path="Test" element={<Test setMenuTitel={setMenuTitel} />} />
+        <Route path="LogIn" element={<Test setMenuTitel={setMenuTitel} />} />
       </Routes>
     </Box>
   );
