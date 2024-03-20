@@ -7,7 +7,9 @@
     "search": "Recherche",
     "admin": "Admin"
   },
-
+  "login": {
+    "logInDescription": "Veuillez entrer vos informations de connexion"
+  },
   "form": {
     "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",
     "header": "Veuillez remplir le formulaire suivant",
@@ -51,7 +53,6 @@
       "description": "Présentation personnalisée"
     }
   },
-
   "common": {
     "noResults": "Pas de résultat",
     "moreInfo": "Plus d'info",

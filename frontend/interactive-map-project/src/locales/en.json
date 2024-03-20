@@ -7,7 +7,9 @@
     "search": "Search",
     "admin": "Admin"
   },
-
+  "login": {
+    "logInDescription": "Enter your connection information"
+  },
   "form": {
     "descriptionOfForm": "With a confirmed registration, you enter our professional identification service in the professional field of early childhood early childhood disabilities. After successfull completion this form is send to a superviser and will be checked for approval",
     "header": "Please fill in the following form",
@@ -51,7 +53,6 @@
       "description": "Description"
     }
   },
-
   "common": {
     "noResults": "No Results",
     "moreInfo": "More Info",

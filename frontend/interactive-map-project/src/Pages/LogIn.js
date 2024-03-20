@@ -1,12 +1,12 @@
 
-import { Box } from "@mui/material";
+import { Box, Grid, Button } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import ButtonComponent from "../Components/ButtonComponent";
 import useWindowDimensions from "../utils/windowDimension";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextInput from "../Components/TextInput";
-import {isEmail} from "../utils/checkFunctions";
+import { isEmail } from "../utils/checkFunctions";
 import { Text, Header } from "../Components/Label";
 
 export default function LogIn({ setMenuTitel }) {
@@ -48,44 +48,42 @@ export default function LogIn({ setMenuTitel }) {
     }
   }
 
-
+  const catergoryHeaderProps = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 35,
+    marginBottom: 3
+  };
 
   return (
-    
     <Box
       sx={{
-        height: height * 0.5,
+        height: height * 0.9,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Box sx={{ padding: 5 }}>
-        <Header>{t("form.header")}</Header>
-        <Text>{t("form.descriptionOfForm")}</Text>
-      </Box>
-      <Box sx={{ width: 0.3 }}>
-      <TextInput
-            error={descriptionError}
-            setTextState={setDescription}
-            setErrorState={setDescriptionError}
-            label={t("professional.email")}
-            multiline={true}
-          />
-          <TextInput
-            error={descriptionError}
-            setTextState={setDescription}
-            setErrorState={setDescriptionError}
-            label={t("professional.password")}
-            multiline={true}
-          />
-        <ButtonComponent
-          label={t("page.logIn")}
-          onClick={onSubmit} //todo : vérifier que les identifiants sont corrects
+      <Box sx={{ width: 0.55 }}>
+        <Text sx={catergoryHeaderProps}>{t("login.logInDescription")}</Text>
+        <TextInput
+          label={t("professional.email")}
+          multiline={true}
         />
-        
-       
-      </Box> 
+        <TextInput
+          label={t("professional.password")}
+          multiline={true}
+        />
+        <Button variant="contained" fullWidth={true} onClick={() => navigate("/Search", { replace: true })} sx={{ marginTop: 2 }}>
+          {t("page.logIn")}
+        </Button>
+
+        {/* 
+        todo : vérifier que les identifiants sont corrects
+        faire on Submit dans onClick qui vérifie password puis navigate vers carte
+        */}
+      </Box>
     </Box>
   );
 }

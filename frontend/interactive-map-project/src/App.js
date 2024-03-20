@@ -81,7 +81,7 @@ export default function App() {
         <Route path="Home" element={<Home setMenuTitel={setMenuTitel} />} />
         <Route path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} />
         <Route path="Test" element={<Test setMenuTitel={setMenuTitel} />} />
-        <Route path="LogIn" element={<Test setMenuTitel={setMenuTitel} />} />
+        <Route path="LogIn" element={<LogIn setMenuTitel={setMenuTitel} />} />
       </Routes>
     </Box>
   );
