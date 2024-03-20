@@ -25,6 +25,7 @@ import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
 export default function Form({ setMenuTitel }) {
   const { t } = useTranslation();
   setMenuTitel(t("page.form"));
+  //phase d'initialisation
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [establishmentType, setEstablishmentType] = useState("");
@@ -70,7 +71,7 @@ export default function Form({ setMenuTitel }) {
   const [acceptError, setAcceptError] = useState(false);
   const navigate = useNavigate();
 
-  // Dialogs
+  // Fenêtres pop-up
   const successMessage = t("form.successMessage");
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const onCloseSuccessDialog = function () {
@@ -93,7 +94,7 @@ export default function Form({ setMenuTitel }) {
 
   const onSubmit = function () {
     let valid = checkEntries();
-    if (!valid) {
+    if (!valid) { //A détailler, plusieurs types d'erreurs possibles
       setErrorMessage(t("form.errorMessageFE"));
       setOpenErrorDialog(true);
       return;
@@ -113,7 +114,7 @@ export default function Form({ setMenuTitel }) {
     }
   };
 
-  const checkEntries = function () {
+  const checkEntries = function () { //todo : différencier les types de forms invalides
     let checkSuccess = true;
     // Name
     if (!isName(name)) {
@@ -205,7 +206,7 @@ export default function Form({ setMenuTitel }) {
 
   const createProfessinalEntitiy = function () {
     let audiencesIDs = mapNamesToIDs(audiencesSelection, audiences);
-    let placesOfInterventionIDs = mapNamesToIDs(
+    let placesOfInterventionIDs = mapNamesToIDs( 
       placesOfInterventionSelection,
       placesOfIntervention
     );
@@ -375,7 +376,7 @@ export default function Form({ setMenuTitel }) {
             error={audiencesSelectionError}
             setSelectionState={setAudiencesSelection}
             setErrorState={setAudiencesSelectionError}
-            label={t("professional.audiences") + " (pusieur choix possible)"}
+            label={t("professional.audiences") + " (plusieurs choix possibles)"}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -386,7 +387,7 @@ export default function Form({ setMenuTitel }) {
             setErrorState={setPlacesOfInterventionSelectionError}
             label={
               t("professional.placesOfIntervention") +
-              " (pusieur choix possible)"
+              " (plusieurs choix possibles)"
             }
           />
         </Grid>
@@ -396,7 +397,7 @@ export default function Form({ setMenuTitel }) {
             error={missionsSelectionError}
             setSelectionState={setMissionsSelection}
             setErrorState={setMissionsSelectionError}
-            label={t("professional.missions") + " (pusieur choix possible)"}
+            label={t("professional.missions") + " (plusieurs choix possibles)"}
           />
         </Grid>
 

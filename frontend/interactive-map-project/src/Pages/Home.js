@@ -1,3 +1,7 @@
+//page d'acceuil
+
+
+
 import { Box } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import ButtonComponent from "../Components/ButtonComponent";
@@ -5,7 +9,7 @@ import useWindowDimensions from "../utils/windowDimension";
 import { useTranslation } from "react-i18next";
 
 export default function Home({ setMenuTitel }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); //constante t -> alias pour useTranslation() (traduction de l'anglais vers le français)
   setMenuTitel(t("page.home"));
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
@@ -33,7 +37,7 @@ export default function Home({ setMenuTitel }) {
           onClick={() => navigate("/Admin", { replace: true })}
           color="secondary"
         />
-        <ButtonComponent
+        <ButtonComponent //todo: potentiellement à enlever
           label={t("page.test")}
           onClick={() => navigate("/Test", { replace: true })}
           color="secondary"
