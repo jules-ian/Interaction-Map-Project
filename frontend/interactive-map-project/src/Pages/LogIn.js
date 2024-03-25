@@ -1,6 +1,6 @@
 
-import { Box, Grid, Button } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Box, Grid, Button, Link } from "@mui/material";
+import { Navigate, useNavigate, Link as RouterLink } from "react-router-dom";
 import ButtonComponent from "../Components/ButtonComponent";
 import useWindowDimensions from "../utils/windowDimension";
 import { useEffect, useState } from "react";
@@ -75,10 +75,14 @@ export default function LogIn({ setMenuTitel }) {
           label={t("professional.password")}
           multiline={true}
         />
-        <Button variant="contained" fullWidth={true} onClick={() => navigate("/Search", { replace: true })} sx={{ marginTop: 2 }}>
+        <Button variant="contained" fullWidth={true} onClick={() => navigate("/Search", { replace: true })} sx={{ marginTop: 2, marginBottom: 2 }}>
           {t("page.logIn")}
         </Button>
-
+        <Box sx={{ textAlign: "center", marginBottom: 1 }}>
+          <Link component={RouterLink} to="/forgotPassword" color="primary" sx={{ textDecoration: "none" }}>
+            {t("login.forgotPassword")}
+          </Link>
+        </Box>
         {/* 
         todo : vérifier que les identifiants sont corrects
         faire on Submit dans onClick qui vérifie password puis navigate vers carte

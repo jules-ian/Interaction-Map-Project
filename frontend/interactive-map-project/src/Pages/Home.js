@@ -22,7 +22,12 @@ export default function Home({ setMenuTitel }) {
         alignItems: "center",
       }}
     >
-      <Box sx={{ width: 0.3 }}>
+      <Box sx={{ width: 0.3, textAlign: 'center' }}>
+        <img
+          src="https://accueilpourtous31.fr/wp-content/uploads/2017/12/cropped-logo-Accueilpourtous31-180x180.jpg"
+          alt="Accueilpourtous31 dessin maison"
+          style={{ margin: 'auto' }}
+        />
         <ButtonComponent
           label={t("page.signUp")}
           onClick={() => navigate("/Form", { replace: true })}
@@ -42,7 +47,7 @@ export default function Home({ setMenuTitel }) {
           onClick={() => navigate("/Test", { replace: true })}
           color="secondary"
         />*/}
-      </Box> 
+      </Box>
     </Box>
   );
 }

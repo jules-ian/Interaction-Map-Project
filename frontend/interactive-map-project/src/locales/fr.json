@@ -8,7 +8,13 @@
     "admin": "Admin"
   },
   "login": {
-    "logInDescription": "Veuillez entrer vos informations de connexion"
+    "logInDescription": "Veuillez entrer vos informations de connexion",
+    "forgotPassword": "Mot de passe oublié?"
+  },
+  "forgotpw": {
+    "titlepw": "Mot de passe oublié",
+    "headerForgotPassword": "Vous avez oublié votre mot de passe?",
+    "subheaderForgotPassword": "Veuillez rentrer votre adresse mail. Nous allons vous envoyer un mail contenant un lien vous permettant de renouveller votre mot de passe."
   },
   "form": {
     "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",
@@ -62,6 +68,8 @@
     "decline": "Décliner",
     "typeOf": "Type de",
     "error": "Erreur",
-    "success": "Succès"
+    "success": "Succès",
+    "valid": "Valider",
+    "myAccount": "Mon compte"
   }
 }

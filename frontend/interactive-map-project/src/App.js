@@ -4,16 +4,11 @@ import Search from "./Pages/Search";
 import Home from "./Pages/Home";
 import Test from "./Pages/Test";
 import LogIn from "./Pages/LogIn";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import ForgotPassword from "./Pages/ForgotPassword";
+import Profil from "./Pages/Profil";
+import { Routes, Route, Navigate, useNavigate, Link as RouterLink, useLocation } from "react-router-dom";
 import Admin from "./Pages/Admin";
-import {
-  Box,
-  FormControl,
-  IconButton,
-  MenuItem,
-  Paper,
-  Select,
-} from "@mui/material";
+import { Box, FormControl, IconButton, MenuItem, Paper, Select, Button } from "@mui/material";
 import { useState } from "react";
 import useWindowDimensions from "./utils/windowDimension";
 import { Header } from "./Components/Label";
@@ -22,6 +17,7 @@ import DropMultiSelect from "./Components/DropMultiSelect";
 import { useTranslation } from "react-i18next";
 export default function App() {
   const defaultRoute = "Home";
+  const location = useLocation();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
@@ -31,14 +27,35 @@ export default function App() {
     margin: 2,
   };
   const [currentLanguage, setCurrentLanguage] = useState("fr");
+
+
   const onBackButtonClick = function () {
     console.log("blub");
     navigate("/Home", { replace: true });
   };
+
+
   const onChangeLanguage = function (languageString) {
     setCurrentLanguage(languageString);
     i18n.changeLanguage(languageString);
   };
+
+  // Fonction pour rendre le bouton "Mon compte" uniquement sur la page de recherche
+  const renderMonCompteButton = () => {
+    if (location.pathname === "/Search") {
+      return (
+        <Button
+          component={RouterLink}
+          to="/Profil"
+          variant="contained"
+          sx={{ borderRadius: "20px" }}
+        >
+          {t("common.myAccount")}
+        </Button>
+      );
+    }
+  };
+
   return (
     <Box style={testStyle}>
       <Paper
@@ -59,7 +76,9 @@ export default function App() {
         >
           <HomeIcon />
         </IconButton>
-        <Header>{menuTitel}</Header>
+        <Header >{menuTitel}</Header>
+
+        {renderMonCompteButton()}
 
         <Select
           variant="standard"
@@ -82,6 +101,8 @@ export default function App() {
         <Route path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} />
         <Route path="Test" element={<Test setMenuTitel={setMenuTitel} />} />
         <Route path="LogIn" element={<LogIn setMenuTitel={setMenuTitel} />} />
+        <Route path="ForgotPassword" element={<ForgotPassword setMenuTitel={setMenuTitel} />} />
+        <Route path="Profil" element={<Profil setMenuTitel={setMenuTitel} />} />
       </Routes>
     </Box>
   );
