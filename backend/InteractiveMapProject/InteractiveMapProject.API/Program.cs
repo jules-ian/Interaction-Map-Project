@@ -26,7 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 });
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-    options.SignIn.RequireConfirmedAccount = true)
+    options.SignIn.RequireConfirmedAccount = true) // Users must confirm their Email
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services
