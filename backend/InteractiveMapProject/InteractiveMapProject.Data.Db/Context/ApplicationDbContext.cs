@@ -7,6 +7,7 @@ namespace InteractiveMapProject.Data.Db.Context;
 
 public class ApplicationDbContext : DbContext
 {
+    // Database tables
     public DbSet<Professional> Professionals { get; set; } = default!;
     public DbSet<PendingProfessional> PendingProfessionals { get; set; } = default!;
     public DbSet<Audience> Audiences { get; set; } = default!;
@@ -18,7 +19,7 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    public ApplicationDbContext(DbContextOptions options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) //<ApplicationDbContext> needed ?
         : base(options)
     {
     }

@@ -17,12 +17,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+var connectionString = builder.Configuration.GetConnectionString("InteractiveMapProjectDb");
 
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("InteractiveMapProjectDb"),
-        opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db"));
+    opt.UseSqlServer(connectionString,
+        opt => opt.MigrationsAssembly("InteractiveMapProject.API"));
 });
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
