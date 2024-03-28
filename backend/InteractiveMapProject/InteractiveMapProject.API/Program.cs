@@ -12,15 +12,22 @@ using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.UoW;
 using InteractiveMapProject.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("InteractiveMapProjectDb"),
         opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db"));
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services
     .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
@@ -79,6 +86,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication(); 
 
 app.UseAuthorization();
 
