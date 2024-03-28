@@ -95,7 +95,7 @@ export function declineProfessional(professional, callback) {
       callback();
     })
     .catch((error) => {
-      console.error("Error deleteing Professional:", error.response);
+      console.error("Error deleting Professional:", error.response);
       callback();
     });
 }
@@ -112,6 +112,18 @@ export function getUnapprovedProfessionals(setResults) {
     })
     .catch((error) => {
       console.error("Error sending post for search:", error);
+    });
+}
+
+export function getInfosProfessionals(mail) {
+  let url = "https://localhost:7212/api/professional/allinfos/" + mail;
+  axios
+    .get(url)
+    .then((response) => {
+      return professionalFromJSON(response.data);
+    })
+    .catch((error) => {
+      console.error("Error getting professionnal information:", error);
     });
 }
 

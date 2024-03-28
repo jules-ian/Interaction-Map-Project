@@ -3,21 +3,25 @@ import { Box, Grid, Button, Link } from "@mui/material";
 import { Navigate, useNavigate, Link as RouterLink } from "react-router-dom";
 import ButtonComponent from "../Components/ButtonComponent";
 import useWindowDimensions from "../utils/windowDimension";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextInput from "../Components/TextInput";
 import { isEmail } from "../utils/checkFunctions";
 import { Text, Header } from "../Components/Label";
 
+
 export default function LogIn({ setMenuTitel }) {
-  const { t } = useTranslation(); //constante t -> alias pour useTranslation() (traduction de l'anglais vers le français)
+  const { t } = useTranslation(); //t -> alias pour useTranslation() (traduction en vers fr)
   setMenuTitel(t("page.logIn"));
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
 
+
   const [mail, setMail] = useState("");
+
   const [mailError, setMailError] = useState(false);
 
+  const [passwd, setPswd] = useState("");
 
   const [description, setDescription] = useState("");
   const [descriptionError, setDescriptionError] = useState(false);
@@ -30,11 +34,11 @@ export default function LogIn({ setMenuTitel }) {
   const onSubmit = function () {
     let valid = checkEntries();
     if (!valid) { //A détailler, plusieurs types d'erreurs possibles
-      setErrorMessage(t("form.errorMessageFE"));
+      setErrorMessage(t("login.errorMessageFE"));
       setOpenErrorDialog(true);
       return;
     }
-    if (valid) { //todo : ajouter le navigate 
+    if (valid) {
       navigate("/Search", { replace: true });
     }
   };
@@ -69,10 +73,12 @@ export default function LogIn({ setMenuTitel }) {
         <Text sx={catergoryHeaderProps}>{t("login.logInDescription")}</Text>
         <TextInput
           label={t("professional.email")}
+          setTextState={setMail}
           multiline={true}
         />
         <TextInput
           label={t("professional.password")}
+          setTextState={setPswd}
           multiline={true}
         />
         <Button variant="contained" fullWidth={true} onClick={() => navigate("/Search", { replace: true })} sx={{ marginTop: 2, marginBottom: 2 }}>
@@ -88,6 +94,6 @@ export default function LogIn({ setMenuTitel }) {
         faire on Submit dans onClick qui vérifie password puis navigate vers carte
         */}
       </Box>
-    </Box>
+    </Box >
   );
 }

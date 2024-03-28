@@ -27,8 +27,12 @@
     "helperText": {
       "phoneNumber": "Not a valid phonenumber"
     },
-    "successMessage": "Entering Form was successfull returning to Homescreen",
-    "errorMessageFE": "Some Fields were not entered correctly please adjust"
+    "successMessage": "Entering form was successfull returning to Homescreen",
+    "errorMessageFE": "Some fields were not entered correctly please adjust"
+  },
+  "profil": {
+    "header": "My profile",
+    "edit": "Edit profile"
   },
   "professional": {
     "name": "Name of the Structure",
@@ -40,11 +44,11 @@
       "postalCode": "Postalcode"
     },
     "password": "Password",
-    "phoneNumber": "Telephonenumber",
+    "phoneNumber": "Telephone Number",
     "email": "E-Mail",
     "contactPerson": {
       "name": "Name of Contact Person",
-      "phoneNumber": "Telephonenumber of Contact Person",
+      "phoneNumber": "Telephone Number of Contact Person",
       "email": "E-Mail of Contact Person",
       "_function": "Function of Contact Person"
     },
@@ -53,10 +57,10 @@
     "placesOfIntervention": "Places of Intervention",
     "description": "Description",
     "popOver": {
-      "infoProfessional": "Information of the Structure",
-      "infoContactPerson": "Information of Contact Person",
-      "infoFieldsOfIntervention": "Fields of Intervention",
-      "description": "Description"
+      "infoProfessional": "My Structure",
+      "infoContactPerson": "My Contact Person",
+      "infoFieldsOfIntervention": "My Fields of Intervention",
+      "description": "My Description"
     }
   },
   "common": {

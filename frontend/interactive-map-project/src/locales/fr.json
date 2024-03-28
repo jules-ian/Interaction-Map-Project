@@ -19,10 +19,10 @@
   "form": {
     "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",
     "header": "Veuillez remplir le formulaire suivant",
-    "subHeaderStructure": "Informations sur votre structure",
-    "subHeaderFieldsOfIntervention": "Champs d'intervention",
-    "subHeaderPerson": "Informations sur la personne ressource",
-    "description": "Description de votre mission",
+    "subHeaderStructure": "Ma structure",
+    "subHeaderFieldsOfIntervention": "Mes champs d'intervention",
+    "subHeaderPerson": "Ma personne ressource",
+    "description": "Description de ma mission",
     "license": "J'accepte d'apparaître sur le répertoire des partenaires du réseau d'Accueil Pour Tous 31 et ainsi d'être solicité si besoin en tant que personne ressource.",
     "helperText": {
       "phoneNumber": "Numéro de téléphone non valide"
@@ -30,14 +30,18 @@
     "successMessage": "La saisie du formulaire a été effectuée avec succès, retour à l'écran d'accueil",
     "errorMessageFE": "Certains champs n'ont pas été saisis correctement, veuillez les corriger"
   },
+  "profil": {
+    "header": "Mon compte",
+    "edit": "Modifier mes informations personnelles"
+  },
   "professional": {
     "name": "Nom de la structure",
-    "establishment": "Service",
-    "management": "Gestionnaire",
+    "establishment": "service",
+    "management": "gestionnaire",
     "address": {
-      "street": "Rue",
+      "street": "Adresse",
       "city": "Ville",
-      "postalCode": "Code postale"
+      "postalCode": "Code postal"
     },
     "password": "Mot de passe",
     "phoneNumber": "Numéro de téléphone",
@@ -46,17 +50,17 @@
       "name": "Nom de la personne ressource",
       "phoneNumber": "Numéro de téléphone de la personne ressource",
       "email": "E-Mail de la personne ressource",
-      "_function": "Fonction(poste) de la personne ressource"
+      "_function": "Fonction (poste) de la personne ressource"
     },
     "audiences": "Publics",
     "missions": "Missions",
     "placesOfIntervention": "Lieu d'intervention",
     "description": "Présentation personnalisée de vos missions ",
     "popOver": {
-      "infoProfessional": "Informations sur la structure",
-      "infoContactPerson": "Informations sur la personne ressource",
-      "infoFieldsOfIntervention": "Domaines d'intervention",
-      "description": "Présentation personnalisée"
+      "infoProfessional": "Ma structure",
+      "infoContactPerson": "Ma personne ressource",
+      "infoFieldsOfIntervention": "Mes domaines d'intervention",
+      "description": "Ma présentation"
     }
   },
   "common": {

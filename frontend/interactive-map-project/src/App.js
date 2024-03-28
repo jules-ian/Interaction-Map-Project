@@ -6,6 +6,7 @@ import Test from "./Pages/Test";
 import LogIn from "./Pages/LogIn";
 import ForgotPassword from "./Pages/ForgotPassword";
 import Profil from "./Pages/Profil";
+import EditProfil from "./Pages/EditProfil";
 import { Routes, Route, Navigate, useNavigate, Link as RouterLink, useLocation } from "react-router-dom";
 import Admin from "./Pages/Admin";
 import { Box, FormControl, IconButton, MenuItem, Paper, Select, Button } from "@mui/material";
@@ -15,6 +16,8 @@ import { Header } from "./Components/Label";
 import HomeIcon from "@mui/icons-material/Home";
 import DropMultiSelect from "./Components/DropMultiSelect";
 import { useTranslation } from "react-i18next";
+
+
 export default function App() {
   const defaultRoute = "Home";
   const location = useLocation();
@@ -56,6 +59,21 @@ export default function App() {
     }
   };
 
+  const renderEditProfileButton = () => {
+    if (location.pathname === "/Profil") {
+      return (
+        <Button
+          component={RouterLink}
+          to="/EditProfil"
+          variant="contained"
+          sx={{ borderRadius: "20px" }}
+        >
+          {t("profil.edit")}
+        </Button>
+      );
+    }
+  };
+
   return (
     <Box style={testStyle}>
       <Paper
@@ -79,6 +97,7 @@ export default function App() {
         <Header >{menuTitel}</Header>
 
         {renderMonCompteButton()}
+        {renderEditProfileButton()}
 
         <Select
           variant="standard"
@@ -103,6 +122,7 @@ export default function App() {
         <Route path="LogIn" element={<LogIn setMenuTitel={setMenuTitel} />} />
         <Route path="ForgotPassword" element={<ForgotPassword setMenuTitel={setMenuTitel} />} />
         <Route path="Profil" element={<Profil setMenuTitel={setMenuTitel} />} />
+        <Route path="EditProfil" element={<EditProfil setMenuTitel={setMenuTitel} />} />
       </Routes>
     </Box>
   );
