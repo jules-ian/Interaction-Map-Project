@@ -1,12 +1,12 @@
 import { Autocomplete, TextField } from "@mui/material";
 import InputComponent from "./InputComponent";
 
-function DropMultiSelect({
-  setSelectionState = function () {},
+function DropMultiSelect({ //TODO : set les valeurs par défaut
+  setSelectionState = function () { },
   options = [],
   label = "label",
   error = false,
-  setErrorState = function () {},
+  setErrorState = function () { },
   placeholder = "placeholder",
 }) {
   return (

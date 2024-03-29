@@ -267,6 +267,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={nameError}
+                        defaultValue={professional.name}
                         setTextState={setName}
                         setErrorState={setNameError}
                         label={t("professional.name")}
@@ -275,6 +276,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={establishmentTypeError}
+                        defaultValue={professional.establishmentType}
                         setTextState={setEstablishmentType}
                         setErrorState={setEstablishmentTypeError}
                         label={t("common.typeOf") + " " + t("professional.establishment")}
@@ -283,6 +285,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={managementTypeError}
+                        defaultValue={professional.managementType}
                         setTextState={setManagementType}
                         setErrorState={setManagementTypeError}
                         label={t("common.typeOf") + " " + t("professional.management")}
@@ -291,6 +294,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={telephoneError}
+                        defaultValue={professional.phoneNumber}
                         setTextState={setTelephone}
                         setErrorState={setTelephoneError}
                         label={t("professional.phoneNumber")}
@@ -301,6 +305,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={streetError}
+                        defaultValue={professional.address.street}
                         setTextState={setStreet}
                         setErrorState={setStreetError}
                         label={t("professional.address.street")}
@@ -309,6 +314,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={cityError}
+                        defaultValue={professional.address.city}
                         setTextState={setCity}
                         setErrorState={setCityError}
                         label={t("professional.address.city")}
@@ -317,6 +323,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={postalError}
+                        defaultValue={professional.address.postalCode}
                         setTextState={setPostal}
                         setErrorState={setPostalError}
                         label={t("professional.address.postalCode")}
@@ -326,6 +333,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={mailError}
+                        defaultValue={professional.email}
                         setTextState={setMail}
                         setErrorState={setMailError}
                         label={t("professional.email")}
@@ -337,6 +345,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={contactPersonNameError}
+                        defaultValue={professional.contactPerson.name}
                         setTextState={setContactPersonName}
                         setErrorState={setContactPersonNameError}
                         label={t("professional.contactPerson.name")}
@@ -345,6 +354,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={contactPersonTelephoneError}
+                        defaultValue={professional.contactPerson.phoneNumber}
                         setTextState={setContactPersonTelephone}
                         setErrorState={setContactPersonTelephoneError}
                         label={t("professional.contactPerson.phoneNumber")}
@@ -354,6 +364,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={contactPersonEmailError}
+                        defaultValue={professional.contactPerson.email}
                         setTextState={setContactPersonEmail}
                         setErrorState={setContactPersonEmailError}
                         label={t("professional.contactPerson.email")}
@@ -362,6 +373,7 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12} sm={6}>
                     <TextInput
                         error={contactPersonFunctionError}
+                        defaultValue={professional.contactPerson._function}
                         setTextState={setContactPersonFunction}
                         setErrorState={setContactPersonFunctionError}
                         label={t("professional.contactPerson._function")}
@@ -409,24 +421,17 @@ export default function EditProfil({ setMenuTitel }) {
                 <Grid item xs={12}>
                     <TextInput
                         error={descriptionError}
+                        defaultValue={professional.description}
                         setTextState={setDescription}
                         setErrorState={setDescriptionError}
                         label={t("professional.description")}
                         multiline={true}
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    <SingleCheckbox
-                        stateCheck={accept}
-                        error={acceptError}
-                        setErrorState={setAcceptError}
-                        setStateCheck={setAccept}
-                        label={t("form.license")}
-                    />
-                </Grid>
+
                 <Grid item xs={12}>
                     <Button variant="contained" fullWidth={true} onClick={onSubmit}>
-                        {t("common.submit")}
+                        {t("common.submitUpdate")}
                     </Button>
                 </Grid>
             </Grid>

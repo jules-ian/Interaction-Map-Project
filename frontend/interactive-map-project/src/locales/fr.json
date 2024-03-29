@@ -74,6 +74,7 @@
     "error": "Erreur",
     "success": "Succès",
     "valid": "Valider",
-    "myAccount": "Mon compte"
+    "myAccount": "Mon compte",
+    "submitUpdate": "Valider les modifications"
   }
 }

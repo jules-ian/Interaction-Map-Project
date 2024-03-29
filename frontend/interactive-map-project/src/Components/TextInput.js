@@ -1,10 +1,10 @@
 import { TextField } from "@mui/material";
 import InputComponent from "./InputComponent";
 export default function TextInput({
-  defaultValue = "",
+  defaultValue,
   setTextState,
   error = false,
-  setErrorState = function () {},
+  setErrorState = function () { },
   label = "",
   multiline = false,
   helperText = "",
@@ -19,6 +19,8 @@ export default function TextInput({
         helperText={error ? helperText : ""}
         error={error}
         multiline={multiline}
+        value={defaultValue}
+        // TODO:faire en sorte que ce soit modifiable ensuite
         onChange={(event) => {
           setErrorState(false);
           setTextState(event.target.value);
