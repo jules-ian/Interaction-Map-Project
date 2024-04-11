@@ -37,6 +37,6 @@ public class ProfessionalConfiguration : IEntityTypeConfiguration<Professional>
             .HasOne(p => p.ValidationStatus)
             .WithMany(vs => vs.Professionals)
             .HasForeignKey(p => p.ValidationStatusId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

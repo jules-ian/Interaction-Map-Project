@@ -17,10 +17,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.Audience", b =>
                 {
@@ -42,37 +42,37 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("62b23179-1d48-4a88-bdbf-bca2e573fa2e"),
+                            Id = new Guid("e31ee107-d36c-467e-b36f-9594d68d6a8c"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "0-3 ans"
                         },
                         new
                         {
-                            Id = new Guid("9c57d76d-8ec1-4739-89e7-66efe931a74a"),
+                            Id = new Guid("2917f241-c795-4c06-936c-f67799408316"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "3-6 ans"
                         },
                         new
                         {
-                            Id = new Guid("bf7f1cf7-04b4-4298-b5d3-4cb529a9c960"),
+                            Id = new Guid("f8741e85-0dd8-479e-a52c-17529f0fb5de"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "6-12 ans"
                         },
                         new
                         {
-                            Id = new Guid("ed42ec43-6f70-4ebf-8a35-44cd5478c09e"),
+                            Id = new Guid("397e7679-8380-4ac7-a869-71844052da00"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "12-18 ans"
                         },
                         new
                         {
-                            Id = new Guid("cb77a44f-cdf1-4012-bda8-ef1b971754a5"),
+                            Id = new Guid("7faba611-d697-4d2d-bbad-f4a68a568849"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Parents"
                         },
                         new
                         {
-                            Id = new Guid("67ddb4fb-822d-4c2e-a635-c2943610e532"),
+                            Id = new Guid("200a7713-a503-4197-802b-3bfea5442b00"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Professionnels"
                         });
@@ -98,85 +98,85 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f4dd8423-db38-494d-a955-5b6ff0e3c557"),
+                            Id = new Guid("584e5a97-6268-4b0d-948b-d11009a9783d"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de loisirs"
                         },
                         new
                         {
-                            Id = new Guid("8517fcf1-da29-436d-bf4b-d463ed60b1d9"),
+                            Id = new Guid("5f8a0f19-a9d5-44df-a66d-d05e8c5c7bf4"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Culture et loisirs"
                         },
                         new
                         {
-                            Id = new Guid("c5e6bda9-3115-46b0-b6f7-ece14b54eac5"),
+                            Id = new Guid("aea635f6-7c91-472c-ba4d-697b59f79c9f"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petite enfance"
                         },
                         new
                         {
-                            Id = new Guid("1a20ab2e-fc3d-4adb-860d-38287c185e6a"),
+                            Id = new Guid("ea3e4b99-35cd-4cf7-b647-b20fe580080b"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Répit"
                         },
                         new
                         {
-                            Id = new Guid("2986161a-bedc-4422-8a7d-319e916f1862"),
+                            Id = new Guid("3ad4a1a7-b003-495d-a238-5c3ace6ac480"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil occasionnel"
                         },
                         new
                         {
-                            Id = new Guid("959648de-6474-4e3d-83e4-c3c56dd8f572"),
+                            Id = new Guid("d80fefdd-d0d6-4b2c-b168-8f692ba64d94"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil d’urgence"
                         },
                         new
                         {
-                            Id = new Guid("542e5835-9929-413e-8b59-76196ab0f481"),
+                            Id = new Guid("68cc3438-f4ef-4917-bc7f-b177263f1243"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Scolarité"
                         },
                         new
                         {
-                            Id = new Guid("2f441c60-f693-49a8-ae75-6a17ff1af61b"),
+                            Id = new Guid("f61ae959-ff74-4002-a054-57911aa633b1"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de nuit"
                         },
                         new
                         {
-                            Id = new Guid("4218e63f-1e3d-4183-af76-350bc1a735ae"),
+                            Id = new Guid("80d1a09f-fe78-4d97-a3ed-b5a0eba3eb43"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Soins/santé"
                         },
                         new
                         {
-                            Id = new Guid("b8c78682-8a16-4c66-a74f-c5a5e1cbd60f"),
+                            Id = new Guid("063c0f5a-3d50-4feb-ae3b-572e22e04849"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rééducation"
                         },
                         new
                         {
-                            Id = new Guid("6bd2273e-9f9c-4824-9cc7-0957d8a6eb4e"),
+                            Id = new Guid("96ebbecc-237c-4b19-8f93-f1094f67ea70"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement à la parentalité"
                         },
                         new
                         {
-                            Id = new Guid("7b268607-e396-485a-963f-01a3b399afec"),
+                            Id = new Guid("906e68ce-e559-4423-949d-b9a1933e1297"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement administratif"
                         },
                         new
                         {
-                            Id = new Guid("dcd9d3c2-210b-4454-aebd-124a9201c3c7"),
+                            Id = new Guid("87121d06-4847-435c-85a9-169c805de82d"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Group de parole/Ateliers"
                         },
                         new
                         {
-                            Id = new Guid("338472da-83a9-499d-bd5d-18b01910f6c0"),
+                            Id = new Guid("40a25171-aa9b-43e0-8c50-e01d6bfe8a75"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Information/orientation"
                         });
@@ -247,49 +247,49 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("43605b91-2da2-4cf0-9982-2d9b6c5ba36d"),
+                            Id = new Guid("f1ec238a-d67c-4d2d-acbf-54096e6be8ec"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Domicile"
                         },
                         new
                         {
-                            Id = new Guid("dae7b5d1-2ff4-4b9f-9ff3-53c3c7e788b0"),
+                            Id = new Guid("8c6ca971-a130-45ee-9da2-f785867630cc"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "EAJE"
                         },
                         new
                         {
-                            Id = new Guid("057d742d-c851-4ba3-b93b-103858dcecba"),
+                            Id = new Guid("4c27a475-b5ad-4a5c-aa17-ea0325297be4"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "École"
                         },
                         new
                         {
-                            Id = new Guid("741c1e86-b141-4e31-a964-67ae1799781d"),
+                            Id = new Guid("130826aa-0b73-47f8-a1b1-0b7b2c198c9d"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure individuelle"
                         },
                         new
                         {
-                            Id = new Guid("e7346d5d-b36f-46b9-8c48-0b2a21bc3cb8"),
+                            Id = new Guid("e0f0be08-60f0-431f-a3ba-a5ae52d8a5b8"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure de soins"
                         },
                         new
                         {
-                            Id = new Guid("64efb46d-f6e6-4db0-bb4a-6b18b242c502"),
+                            Id = new Guid("fdaa71ab-3921-4a59-ad7c-eba224e9b0ad"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Institution"
                         },
                         new
                         {
-                            Id = new Guid("46a77fbf-4a18-48a2-8628-f63d40efbbbc"),
+                            Id = new Guid("bda0116c-f8a0-4779-9fa9-a5883153e2df"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure d’orientation et d’information"
                         },
                         new
                         {
-                            Id = new Guid("60dc9556-96a3-4964-9638-6eebd4598cd9"),
+                            Id = new Guid("b9f6cab0-d421-4811-b02e-42e76b0b0217"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tiers lieu"
                         });
@@ -446,221 +446,19 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5ae4cb07-3426-489c-965c-d09c50a01620"),
+                            Id = new Guid("50c85248-ec09-4d32-8ff0-c2ffe9ce95d3"),
                             Name = "Approved"
                         },
                         new
                         {
-                            Id = new Guid("7e1219bb-ae0f-40b4-abef-8306a1dbf6cd"),
+                            Id = new Guid("437d9c06-8259-4969-bf61-50fee2d37b4f"),
                             Name = "Waiting After Creation"
                         },
                         new
                         {
-                            Id = new Guid("cd907a17-e787-4c43-be40-21cd3b2f3cb7"),
+                            Id = new Guid("ecee07ae-d9f5-49ad-90fb-011dd2d72d7d"),
                             Name = "Waiting After Update"
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalAudience", b =>
@@ -787,7 +585,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasOne("InteractiveMapProject.Contracts.Entities.ValidationStatus", "ValidationStatus")
                         .WithMany("PendingProfessionals")
                         .HasForeignKey("ValidationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
@@ -882,7 +680,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasOne("InteractiveMapProject.Contracts.Entities.ValidationStatus", "ValidationStatus")
                         .WithMany("Professionals")
                         .HasForeignKey("ValidationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
@@ -968,57 +766,6 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .IsRequired();
 
                     b.Navigation("ValidationStatus");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.Audience", b =>

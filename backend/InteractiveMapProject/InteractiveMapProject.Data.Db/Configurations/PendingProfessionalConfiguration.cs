@@ -36,8 +36,7 @@ public class PendingProfessionalConfiguration : IEntityTypeConfiguration<Pending
         builder
             .HasOne(p => p.ValidationStatus)
             .WithMany(vs => vs.PendingProfessionals)
-            .HasForeignKey(p => p.ValidationStatusId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(p => p.ValidationStatusId);
 
         builder
             .HasOne(p => p.Professional)
