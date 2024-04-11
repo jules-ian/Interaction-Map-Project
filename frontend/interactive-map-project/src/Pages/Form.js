@@ -1,8 +1,10 @@
-import { Box, Grid, Button } from "@mui/material";
+import { Box, Grid, Button, } from "@mui/material";
 import DropMultiSelect from "../Components/DropMultiSelect";
 import { Text, Header } from "../Components/Label";
 import { useEffect, useState } from "react";
 import TextInput from "../Components/TextInput";
+
+
 import {
   addNewProfessional,
   getAllAudiences,
@@ -104,7 +106,7 @@ export default function Form({ setMenuTitel }) {
         if (success) {
           setOpenSuccessDialog(true);
         } else {
-          setErrorMessage(t("form.errorMessageFE"));
+          setErrorMessage(t("form.errorMessageDB"));
           setOpenErrorDialog(true);
         }
       };
@@ -206,7 +208,7 @@ export default function Form({ setMenuTitel }) {
 
   const createProfessinalEntitiy = function () {
     let audiencesIDs = mapNamesToIDs(audiencesSelection, audiences);
-    let placesOfInterventionIDs = mapNamesToIDs( 
+    let placesOfInterventionIDs = mapNamesToIDs(
       placesOfInterventionSelection,
       placesOfIntervention
     );
@@ -422,12 +424,81 @@ export default function Form({ setMenuTitel }) {
             label={t("form.license")}
           />
         </Grid>
+
+        <div style={{ marginTop: '20px', width: '100%', backgroundColor: '#efffff', height: '400px', paddingLeft: '10px', overflow: 'scroll' }}>
+          <h2>Charte des membres du réseau partenarial</h2>
+          Le collectif ressources à l’origine d’élaboration de la présente Charte, le réseau partenarial ainsi que la présente Charte sont portés par le pôle ressources Accueil 31.
+          Ils s’inscrivent dans la démarche et les valeurs d'Accueil Pour Tous 31 relatifs à l'accueil inclusif qui sont :
+          <br />
+
+          <ul>
+            <li>Accompagner les parents, et les professionnels afin de favoriser et construire ensemble un accueil collectif ou individuel pour chaque enfant. Quels que soient son environnement, ses besoins, ses différences et ses potentiels, sa singularité, chaque enfant doit pouvoir être accueilli dans les lieux d’accueil.</li>
+            <li>Le projet d’accueil de l’enfant se construit grâce à une relation de confiance entre l’enfant, les parents et l’équipe pluri-professionnelle.</li>
+            <li>Une démarche de connaissance réciproque, d’échange de savoirs et de savoir-faire, de partage d’expériences permet de mettre en place un accueil de qualité pour chaque enfant.</li>
+          </ul>
+          <br />
+
+          <h4>La présente Charte du réseau partenarial repose sur les principes suivants :</h4>
+
+          <h6>NOS VALEURS</h6>
+          <ul>
+            <li>Informer les parents et les professionnels, mutualiser les informations concernant l’ensemble des acteurs du département (éducatifs, médicaux sociaux, institutionnels).</li>
+            <li>Faciliter le partage d’expériences et l’échange de pratiques d’accueil d’enfants en situation de handicap.</li>
+            <li>Croiser les regards et les réalités des familles et des professionnels afin de définir ensemble un accueil de qualité.</li>
+            <li>Soutenir les réflexions et les actions des professionnels visant à améliorer l’accueil de l’enfant en situation de handicap et de sa famille.</li>
+            <li>Valoriser les pratiques des lieux d’accueil de la petite enfance.</li>
+          </ul>
+
+          <h6>NOS OBJECTIFS</h6>
+          <ul>
+            <li>Mutualiser des compétences</li>
+            <li>Mobiliser et partager les savoir-faire</li>
+            <li>Identifier des acteurs complémentaires</li>
+            <li>Optimiser l'orientation des familles</li>
+            <li>Personnaliser l'accompagnement au plus près des besoins et des attentes</li>
+            <li>Être ressource et favoriser les échanges entre les pros</li>
+          </ul>
+
+          <h6>NOTRE FONCTIONNEMENT</h6>
+          <ul>
+            <li>La cooptation et validation par un autre membre du réseau</li>
+            <li>La présentation détaillée du nouveau membre grâce à une fiche d'identité complète sur la structure, son domaine d’activité, sa zone géographique, etc</li>
+            <li>L’adhésion requise aux objectifs annoncés</li>
+            <li>Le respect sur la confidentialité des informations partagées au sein du réseau partenarial</li >
+            <li>Le respect sur l’accès privé et professionnel au répertoire des membres du réseau partenarial</li >
+            <li>Ne pas utiliser ce réseau comme lieu de promotion de son activité, mais en privilégiant l’intérêt majeur de trouver la réponse la mieux adapté à la demande </li >
+          </ul>
+
+          <h6>LES ENGAGEMENTS </h6>
+          <ul>
+            <li>Remplir la fiche d'identité de l'établissement ou de l'institution</li>
+            <li>Définir une personne / un service ressource au sein de l'institution après validation de la direction</li>
+            <li>Actualiser les informations administratives lorsqu’il y a des changements</li>
+            <li>Alimenter le répertoire en partageant des informations auprès de la personne référente APT</li>
+            <li>Mettre en lien, orienter, diriger au - delà du répertoire pour favoriser le tissage, dans l’intérêt majeur de trouver une réponse la plus adapté à la demande de la famille et / ou du professionnel</li>
+            <li>Respecter les projets des familles dans les choix d'orientation</li>
+            <li>Ne pas diffuser le répertoire directement aux familles ni aux professionnels ou structures n’ayant pas accepté et signée la présente charte</li>
+            <li>S'inscrire dans la complémentarité sans promouvoir son activité</li>
+            <li>Accepter d'être sollicité par les partenaires ayant accès au répertoire réseau partenarial</li>
+            <li>Engagement tacite du nouveau membre concernant le partage des objectifs, du fonctionnement et des engagements par signature de la présente charte</li>
+          </ul>
+
+          < SingleCheckbox
+            stateCheck={accept}
+            error={acceptError}
+            setErrorState={setAcceptError}
+            setStateCheck={setAccept}
+            label={t("form.charter")}
+          />
+
+        </div >
+
         <Grid item xs={12}>
           <Button variant="contained" fullWidth={true} onClick={onSubmit}>
             {t("common.submit")}
           </Button>
         </Grid>
-      </Grid>
-    </Box>
+      </Grid >
+    </Box >
   );
 }

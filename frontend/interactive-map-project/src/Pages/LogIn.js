@@ -6,6 +6,7 @@ import useWindowDimensions from "../utils/windowDimension";
 import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextInput from "../Components/TextInput";
+import PasswordInput from "../Components/PasswordInput";
 import { isEmail } from "../utils/checkFunctions";
 import { Text, Header } from "../Components/Label";
 
@@ -76,8 +77,8 @@ export default function LogIn({ setMenuTitel }) {
           setTextState={setMail}
           multiline={true}
         />
-        <TextInput
-          label={t("professional.password")}
+        <PasswordInput
+          //a finir ne marche pas - todo
           setTextState={setPswd}
           multiline={true}
         />

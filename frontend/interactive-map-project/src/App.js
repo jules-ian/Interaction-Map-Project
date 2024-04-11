@@ -33,7 +33,7 @@ export default function App() {
 
 
   const onBackButtonClick = function () {
-    console.log("blub");
+    console.log("Back to Homepage");
     navigate("/Home", { replace: true });
   };
 
@@ -111,7 +111,7 @@ export default function App() {
           <MenuItem value="en">en</MenuItem>
           <MenuItem value="fr">fr</MenuItem>
         </Select>
-      </Paper>
+      </Paper  >
       <Routes>
         <Route path="/" element={<Navigate to={defaultRoute} />} />
         <Route path="Form" element={<Form setMenuTitel={setMenuTitel} />} />
@@ -124,6 +124,6 @@ export default function App() {
         <Route path="Profil" element={<Profil setMenuTitel={setMenuTitel} />} />
         <Route path="EditProfil" element={<EditProfil setMenuTitel={setMenuTitel} />} />
       </Routes>
-    </Box>
+    </Box  >
   );
 }

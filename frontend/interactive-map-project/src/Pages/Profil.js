@@ -14,7 +14,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
 
-export default function Profil({ setMenuTitel }) {
+export default function Profil({ setMenuTitel, email }) { //todo : uId
     const { t } = useTranslation();
     setMenuTitel(t("common.myAccount"));
     const [audiences, setAudiences] = useState([]);
@@ -75,7 +75,7 @@ export default function Profil({ setMenuTitel }) {
     };
 
     //let professional = getInfosProfessionals({ email });
-    let professional = new Professional(null, "Crèche de Ramonville", "Garde d'enfants", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), "3-10 ans", "crèche", "garde d'enfants", "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", "");
+    let professional = new Professional(null, "Crèche de Ramonville", "Garde d'enfants", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, email, new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), "3-10 ans", "crèche", "garde d'enfants", "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", "");
 
 
     return (

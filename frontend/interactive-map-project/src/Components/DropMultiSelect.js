@@ -7,7 +7,7 @@ function DropMultiSelect({ //TODO : set les valeurs par défaut
   label = "label",
   error = false,
   setErrorState = function () { },
-  placeholder = "placeholder",
+  placeholder = "...",
 }) {
   return (
     <InputComponent>

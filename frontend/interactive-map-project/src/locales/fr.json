@@ -17,6 +17,7 @@
     "subheaderForgotPassword": "Veuillez rentrer votre adresse mail. Nous allons vous envoyer un mail contenant un lien vous permettant de renouveller votre mot de passe."
   },
   "form": {
+    "charter": "J'accepte la charte ci-dessus",
     "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",
     "header": "Veuillez remplir le formulaire suivant",
     "subHeaderStructure": "Ma structure",
@@ -28,7 +29,8 @@
       "phoneNumber": "Numéro de téléphone non valide"
     },
     "successMessage": "La saisie du formulaire a été effectuée avec succès, retour à l'écran d'accueil",
-    "errorMessageFE": "Certains champs n'ont pas été saisis correctement, veuillez les corriger"
+    "errorMessageFE": "Certains champs n'ont pas été saisis correctement, veuillez les corriger",
+    "errorMessageDB": "Une erreur inattendue est survenue, veuillez réessayer"
   },
   "profil": {
     "header": "Mon compte",
@@ -75,6 +77,7 @@
     "success": "Succès",
     "valid": "Valider",
     "myAccount": "Mon compte",
-    "submitUpdate": "Valider les modifications"
+    "submitUpdate": "Valider les modifications",
+    "close": "Fermer"
   }
 }

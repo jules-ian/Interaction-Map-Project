@@ -10,7 +10,7 @@ export const SuccessDialog = ({ open, onClose, message }) => {
       <DialogTitle>{t("common.success")}</DialogTitle>
       <DialogContent>{message}</DialogContent>
       <Button onClick={onClose} color="primary" autoFocus>
-        Close
+        {t("common.close")}
       </Button>
     </Dialog>
   );
@@ -24,7 +24,7 @@ export const ErrorDialog = ({ open, onClose, message }) => {
       <DialogTitle>{t("common.error")}</DialogTitle>
       <DialogContent>{message}</DialogContent>
       <Button onClick={onClose} color="primary" autoFocus>
-        Close
+        {t("common.close")}
       </Button>
     </Dialog>
   );

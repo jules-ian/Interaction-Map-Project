@@ -19,8 +19,7 @@ export default function TextInput({
         helperText={error ? helperText : ""}
         error={error}
         multiline={multiline}
-        value={defaultValue}
-        // TODO:faire en sorte que ce soit modifiable ensuite
+        defaultValue={defaultValue}
         onChange={(event) => {
           setErrorState(false);
           setTextState(event.target.value);

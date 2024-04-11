@@ -17,6 +17,7 @@
     "subheaderForgotPassword": "Please, enter your email. You will receive an email with a link to change your password"
   },
   "form": {
+    "charter": "I accept the above conditions and charter",
     "descriptionOfForm": "With a confirmed registration, you enter our professional identification service in the professional field of early childhood early childhood disabilities. After successfull completion this form is send to a superviser and will be checked for approval",
     "header": "Please fill in the following form",
     "subHeaderStructure": "Information about your structure",
@@ -28,7 +29,8 @@
       "phoneNumber": "Not a valid phonenumber"
     },
     "successMessage": "Entering form was successfull returning to Homescreen",
-    "errorMessageFE": "Some fields were not entered correctly please adjust"
+    "errorMessageFE": "Some fields were not entered correctly please adjust",
+    "errorMessageDB": "An error occured, please try again"
   },
   "profil": {
     "header": "My profile",
@@ -75,6 +77,7 @@
     "error": "Error",
     "success": "Success",
     "valid": "Valid",
-    "myAccount": "My account"
+    "myAccount": "My account",
+    "close": "Close"
   }
 }
