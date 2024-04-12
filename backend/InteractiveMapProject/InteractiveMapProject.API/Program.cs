@@ -64,6 +64,7 @@ public class Program
         builder.Services.AddScoped<IMissionService, MissionService>();
         builder.Services.AddScoped<IValidationStatusService, ValidationStatusService>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IRoleService, RoleService>();
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -104,15 +105,30 @@ public class Program
 
         using (var scope = app.Services.CreateScope())
         {
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var roles = new[] { "User", "Professional", "Admin" };
+            var roleService = scope.ServiceProvider.GetRequiredService<IRoleService>();
+            await roleService.CreateAsync("Professional");
+            await roleService.CreateAsync("Admin");
+            await roleService.CreateAsync("Super-Admin");
 
-            foreach (var role in roles)
+        }
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            string adminEmail = "referente_apt31@cocagne31.org";
+            string adminPassword = "Apt31@2024";
+
+            if (await userManager.FindByEmailAsync(adminEmail) == null)
             {
-                if (!await roleManager.RoleExistsAsync(role))
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                }
+                var user = new IdentityUser();
+                user.UserName = adminEmail;
+                user.Email = adminEmail;
+                user.EmailConfirmed = true;
+
+                await userManager.CreateAsync(user, adminPassword);
+
+                await userManager.AddToRoleAsync(user, "Super-Admin");
             }
 
         }
