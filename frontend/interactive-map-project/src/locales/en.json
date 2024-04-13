@@ -78,6 +78,12 @@
     "success": "Success",
     "valid": "Valid",
     "myAccount": "My account",
-    "close": "Close"
+    "close": "Close",
+    "confirmation": "Confimation pop-up",
+    "confimationBody": "are you sure you want to disconnect?",
+    "disconnection": "Disconnection",
+    "return": "return",
+    "returnHome": "return to Home page",
+    "returnAPT": "return to Accueil Pour Tous 31 website"
   }
 }

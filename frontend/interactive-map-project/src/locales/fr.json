@@ -78,6 +78,12 @@
     "valid": "Valider",
     "myAccount": "Mon compte",
     "submitUpdate": "Valider les modifications",
-    "close": "Fermer"
+    "close": "Fermer",
+    "confirmation": "Pop-up de confimation",
+    "confimationBody": "Êtes-vous sûr de vouloir vous déconnecter?",
+    "disconnection": "Déconnexion",
+    "return": "Retour",
+    "returnHome": "Retour à la page d'accueil",
+    "returnAPT": "Retour sur le site Accueil Pour Tous 31"
   }
 }

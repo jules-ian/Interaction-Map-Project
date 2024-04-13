@@ -7,7 +7,7 @@ import {
   getAllPlacesOfIntervention,
   getAllMissions,
   getResults,
-  getResultsSearch,
+  getResultsSearch
 } from "../utils/BackendFunctions";
 import TextInput from "../Components/TextInput";
 import { useEffect, useState, useTransition } from "react";

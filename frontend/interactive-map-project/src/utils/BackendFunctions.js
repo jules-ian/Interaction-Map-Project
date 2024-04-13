@@ -127,6 +127,85 @@ export function getInfosProfessionals(mail) {
     });
 }
 
+export function addEditedProfessional(professional, callback) {
+  let url = "https://localhost:7212/api/modification";
+
+  axios
+    .post(url, professional.toJSON())
+    .then((response) => {
+      console.log(response);
+      callback(true);
+    })
+    .catch((error) => {
+      console.error("Error Posting Professional Modifications:", error.response);
+      callback(false, error.response);
+    });
+}
+
+export function approveModification(professional, callback) {
+  let url =
+    "https://localhost:7212/api/modification/validate/" + professional.id;
+  const data = { approve: true };
+  axios
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        // Add any other headers if needed
+      },
+    })
+    .then((response) => {
+      console.log(professional.name + "'s modifications were approved");
+      callback();
+    })
+    .catch((error) => {
+      console.error("Error approving modifications of professional:", error.response);
+      callback();
+    });
+}
+
+export function declineModification(professional, callback) {
+  let url =
+    "https://localhost:7212/api/modification/pending/" + professional.id;
+  axios
+    .delete(url)
+    .then((response) => {
+      console.log(professional.name + "'s modifications were refused");
+      callback();
+    })
+    .catch((error) => {
+      console.error("Error refusing modifications of professional:", error.response);
+      callback();
+    });
+}
+
+export function getEditedProfessionals(setResults) {
+  let url = "https://localhost:7212/api/modification/pending/all";
+  axios
+    .get(url)
+    .then((response) => {
+      let professionals = response.data.map((profData) => {
+        return professionalFromJSON(profData);
+      });
+      setResults(professionals);
+    })
+    .catch((error) => {
+      console.error("Error sending post for search:", error);
+    });
+}
+
+//TODO
+/*export function checkIdentifiants(mail, password) {
+  let url = "https://localhost:7212/api/modification/professional/checkid/" + mail;
+  axios
+    .get(url)
+    .then((response) => {
+        return response.data == password;
+    })
+    .catch((error) => {
+      console.error("Error sending post for search:", error);
+    });
+}*/
+
 export function getResultsSearch(
   setResults,
   textSearch = "",

@@ -78,7 +78,6 @@ export default function LogIn({ setMenuTitel }) {
           multiline={true}
         />
         <PasswordInput
-          //a finir ne marche pas - todo
           setTextState={setPswd}
           multiline={true}
         />

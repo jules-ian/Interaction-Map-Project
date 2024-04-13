@@ -35,6 +35,15 @@
   color: white;
 }
 
+/* .paperContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+} */
+
+
 /* .App-title {
   font-family: peaches, serif;
   font-size: 28px;
@@ -47,13 +56,6 @@
   color: #61dafb;
 }
 
-.charte {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #d9ffff;
-  height: 400px;
-  padding-left: 10px
-}
 
 @keyframes App-logo-spin {
   from {
