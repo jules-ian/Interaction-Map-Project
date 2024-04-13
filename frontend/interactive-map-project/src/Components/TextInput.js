@@ -23,8 +23,6 @@ export default function TextInput({
         onChange={(event) => {
           setErrorState(false);
           setTextState(event.target.value);
-          if (event.key === "Enter") {
-          }
         }}
       />
     </InputComponent>

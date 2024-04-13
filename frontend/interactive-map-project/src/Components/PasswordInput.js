@@ -19,8 +19,6 @@ export default function PasswordInput({
                 onChange={(event) => {
                     setErrorState(false);
                     setTextState(event.target.value);
-                    if (event.key === "Enter") {
-                    }
                 }}
             />
         </InputComponent>

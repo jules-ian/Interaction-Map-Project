@@ -37,15 +37,20 @@ export default function App() {
   const [currentLanguage, setCurrentLanguage] = useState("fr");
 
 
+  const [openPopUpDialog, setOpenPopUpDialog] = useState(false);
+  const onClosePopUpDialog = function () {
+    setOpenPopUpDialog(false);
+  };
+
+
   const onHomeClick = function () {
     console.log("Back to Homepage");
     navigate("/Search", { replace: true });
   };
   //déconnecter l'utilisateur ici
   const onLogOutClick = function () {
-    console.log("Disconnection");
-
-
+    console.log("Déconnexion");
+    setOpenPopUpDialog(true);
   };
 
   const onChangeLanguage = function (languageString) {
@@ -86,6 +91,10 @@ export default function App() {
   return (
 
     <Box sx={{ flexGrow: 1 }}>
+      <PopUpDialog
+        onClose={onClosePopUpDialog}
+        open={openPopUpDialog}
+      />
       <AppBar position="sticky" sx={{ backgroundColor: 'lightblue' }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <ToolbarGroup firstChild={true} float="left" >

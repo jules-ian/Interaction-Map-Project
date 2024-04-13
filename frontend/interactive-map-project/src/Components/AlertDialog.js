@@ -1,6 +1,7 @@
 // AlertDialog.js
 import React from "react";
 import { Dialog, DialogContent, DialogTitle, Button } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useTranslation } from "react-i18next";
@@ -42,9 +43,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export const PopUpDialog = ({ open, onClose }) => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
 
   const handleClose = () => {
+    onClose();
+    navigate("/Home", { replace: true });
+  };
+  const handleReturn = () => {
     onClose();
   };
 
@@ -67,7 +72,7 @@ export const PopUpDialog = ({ open, onClose }) => {
         <DialogActions>
           <Button onClick={handleClose}>{t("common.disconnection")}
           </Button>
-          <Button onClick={handleClose}>{t("common.return")}
+          <Button onClick={handleReturn}>{t("common.return")}
           </Button>
         </DialogActions>
       </Dialog>

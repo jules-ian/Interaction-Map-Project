@@ -1,14 +1,13 @@
-
+import { useCallback } from "react";
 import { Box, Grid, Button, Link } from "@mui/material";
-import { Navigate, useNavigate, Link as RouterLink } from "react-router-dom";
-import ButtonComponent from "../Components/ButtonComponent";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import useWindowDimensions from "../utils/windowDimension";
-import { createContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextInput from "../Components/TextInput";
 import PasswordInput from "../Components/PasswordInput";
 import { isEmail } from "../utils/checkFunctions";
-import { Text, Header } from "../Components/Label";
+import { Text } from "../Components/Label";
 
 
 export default function LogIn({ setMenuTitel }) {
@@ -33,6 +32,7 @@ export default function LogIn({ setMenuTitel }) {
   const [openErrorDialog, setOpenErrorDialog] = useState(false);
 
   const onSubmit = function () {
+    console.log("Form submitted");
     let valid = checkEntries();
     if (!valid) { //A détailler, plusieurs types d'erreurs possibles
       setErrorMessage(t("login.errorMessageFE"));
@@ -41,8 +41,8 @@ export default function LogIn({ setMenuTitel }) {
     }
     if (valid) {
       navigate("/Search", { replace: true });
-    }
-  };
+    };
+  }
 
   const checkEntries = function () { //todo : différencier les types de forms invalides
     let checkSuccess = true;
@@ -61,6 +61,13 @@ export default function LogIn({ setMenuTitel }) {
     marginBottom: 3
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      console.log("Enter key pressed");
+      onSubmit();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -76,12 +83,14 @@ export default function LogIn({ setMenuTitel }) {
           label={t("professional.email")}
           setTextState={setMail}
           multiline={true}
+          onKeyDown={handleKeyDown}
         />
         <PasswordInput
           setTextState={setPswd}
           multiline={true}
+          onKeyDown={handleKeyDown}
         />
-        <Button variant="contained" fullWidth={true} onClick={() => navigate("/Search", { replace: true })} sx={{ marginTop: 2, marginBottom: 2 }}>
+        <Button variant="contained" fullWidth={true} onClick={onSubmit} sx={{ marginTop: 2, marginBottom: 2 }}>
           {t("page.logIn")}
         </Button>
         <Box sx={{ textAlign: "center", marginBottom: 1 }}>
