@@ -13,7 +13,6 @@ using InteractiveMapProject.Contracts.Entities.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Exceptions;
 using InteractiveMapProject.Contracts.Services;
 using InteractiveMapProject.Contracts.UoW;
-using InteractiveMapProject.Contracts.Dtos.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,6 +51,15 @@ public class RoleService : IRoleService
     async Task IRoleService.DeleteAsync(Guid id)
     {
         var role = await _roleManager.FindByIdAsync(id.ToString());
+        if (role != null)
+        {
+            await _roleManager.DeleteAsync(role);
+        }
+    }
+
+    async Task IRoleService.DeleteAsync(string roleName)
+    {
+        var role = await _roleManager.FindByNameAsync(roleName);
         if (role != null)
         {
             await _roleManager.DeleteAsync(role);
