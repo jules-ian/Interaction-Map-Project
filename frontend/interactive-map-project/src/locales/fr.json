@@ -5,7 +5,8 @@
     "logIn": "Connexion",
     "home": "Accueil",
     "search": "Recherche",
-    "admin": "Admin"
+    "admin": "Admin",
+    "editPswd": "Mot de Passe"
   },
   "login": {
     "logInDescription": "Veuillez entrer vos informations de connexion",
@@ -15,6 +16,13 @@
     "titlepw": "Mot de passe oublié",
     "headerForgotPassword": "Vous avez oublié votre mot de passe?",
     "subheaderForgotPassword": "Veuillez rentrer votre adresse mail. Nous allons vous envoyer un mail contenant un lien vous permettant de renouveller votre mot de passe."
+  },
+  "editpswd": {
+    "titlepage": "Modification mot de passe",
+    "subtitle": "Saisissez votre mot de passe actuel puis choisissez votre nouveau mot de passe et confirmez-le",
+    "currentPswd": "Mot de passe actuel",
+    "newPswd": "Nouveau mot de passe",
+    "confirmPswd": "Confirmer le nouveau mot de passe"
   },
   "form": {
     "charter": "J'accepte la charte ci-dessus",
@@ -35,6 +43,12 @@
   "profil": {
     "header": "Mon compte",
     "edit": "Modifier mes informations personnelles"
+  },
+  "admin": {
+    "titlepopupDecline": "Pourquoi voulez-vous décliner l'inscription de cette structure?",
+    "motif": "motif",
+    "askmotif": "Veuillez saisir un motif",
+    "titlepopupValidate": "Êtes-vous sûr de vouloir accepter l'inscription de cette structure?"
   },
   "professional": {
     "name": "Nom de la structure",

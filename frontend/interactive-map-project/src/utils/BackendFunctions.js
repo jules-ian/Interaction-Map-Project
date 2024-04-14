@@ -193,18 +193,29 @@ export function getEditedProfessionals(setResults) {
     });
 }
 
-//TODO
-/*export function checkIdentifiants(mail, password) {
-  let url = "https://localhost:7212/api/modification/professional/checkid/" + mail;
+export function checkIdentifiants(mail, password) {
+  let url = "https://localhost:7212/api/professional/checkid/" + mail;
   axios
     .get(url)
     .then((response) => {
-        return response.data == password;
+      return response.data == password;
     })
     .catch((error) => {
-      console.error("Error sending post for search:", error);
+      console.error("Error email doesn't exist:", error);
     });
-}*/
+}
+
+export function isAdmin(mail) {
+  let url = "https://localhost:7212/api/admin/" + mail;
+  axios
+    .get(url)
+    .then((response) => {
+      return response.data; //true or false depending on admin or not admin
+    })
+    .catch((error) => {
+      console.error("Error email doesn't exist:", error);
+    });
+}
 
 export function getResultsSearch(
   setResults,

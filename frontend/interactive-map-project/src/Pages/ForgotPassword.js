@@ -10,6 +10,20 @@ import { isEmail } from "../utils/checkFunctions";
 import { Text, Header } from "../Components/Label";
 
 export default function ForgotPassword({ setMenuTitel }) {
+    useEffect(() => {
+        function handleKeyDown(e) {
+            if (e.key === "Enter") {
+                console.log("Enter key pressed");
+                onSubmit();
+            }
+        }
+        document.addEventListener('keydown', handleKeyDown);
+        return function cleanup() {
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+    }, []);
+
+
     const { t } = useTranslation(); //constante t -> alias pour useTranslation() (traduction de l'anglais vers le français)
     setMenuTitel(t("forgotpw.titlepw"));
     const navigate = useNavigate();
@@ -28,15 +42,16 @@ export default function ForgotPassword({ setMenuTitel }) {
     const [openErrorDialog, setOpenErrorDialog] = useState(false);
 
     const onSubmit = function () {
-        let valid = checkEntries();
+        /*let valid = checkEntries();
         if (!valid) { //A détailler, plusieurs types d'erreurs possibles
             setErrorMessage(t("form.errorMessageFE"));
             setOpenErrorDialog(true);
             return;
         }
         if (valid) { //todo : envoyer un mail de renouvellement de mot de passe
-
-        }
+            TODO : pop up confirmation email*/
+        navigate("/LogIn", { replace: true });
+        //}
     };
 
     const checkEntries = function () {
@@ -78,7 +93,9 @@ export default function ForgotPassword({ setMenuTitel }) {
                 <Text sx={catergorySubheaderProps}>{t("forgotpw.subheaderForgotPassword")}</Text>
                 <TextInput
                     label={t("professional.email")}
-                    multiline={true}
+                    setTextState={setMail}
+                    type="email"
+                    multiline={false}
                 />
                 <Button variant="contained" fullWidth={true} onClick={onSubmit} sx={{ marginTop: 2, marginBottom: 2 }}>
                     {t("common.valid")}

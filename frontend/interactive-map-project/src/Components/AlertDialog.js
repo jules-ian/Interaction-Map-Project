@@ -6,6 +6,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useTranslation } from "react-i18next";
 import Slide from '@mui/material/Slide';
+import TextInput from "../Components/TextInput";
+import {
+  approveProfessional,
+  declineProfessional,
+} from "../utils/BackendFunctions";
 
 export const SuccessDialog = ({ open, onClose, message }) => {
   const { t } = useTranslation();
@@ -46,7 +51,7 @@ export const PopUpDialog = ({ open, onClose }) => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    onClose();
+    onClose(); //todo : déconnecter l'utilisateur? deja fait?
     navigate("/Home", { replace: true });
   };
   const handleReturn = () => {
@@ -74,6 +79,102 @@ export const PopUpDialog = ({ open, onClose }) => {
           </Button>
           <Button onClick={handleReturn}>{t("common.return")}
           </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
+};
+
+
+export const PopUpAdminValidateDialog = ({ open, onClose }) => {
+  const { t } = useTranslation();
+
+  const handleClose = () => {
+    onClose();
+  };
+  const handleReturn = () => {
+    onClose();
+  };
+
+  return (
+    <React.Fragment>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        onClose={handleClose}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries(formData.entries());
+            const email = formJson.email;
+            console.log(email);
+            handleClose();
+          },
+        }}
+      >
+        <DialogTitle>{t("admin.titlepopupValidate")}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleReturn}>{t("common.return")}</Button>
+          <Button onClick={handleClose} type="submit">{t("common.valid")}</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
+};
+
+
+
+export const PopUpAdminDeclineDialog = ({ open, onClose }) => {
+  const { t } = useTranslation();
+
+  const handleClose = () => {//todo:verifier qu'un motif soit saisi
+    onClose();
+  };
+  const handleReturn = () => {
+    onClose();
+  };
+
+  return (
+    <React.Fragment>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        onClose={handleClose}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries(formData.entries());
+            const email = formJson.email;
+            console.log(email);
+            handleClose();
+          },
+        }}
+      >
+        <DialogTitle>{t("admin.titlepopupDecline")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t("admin.askmotif")}
+          </DialogContentText>
+          <TextInput
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            multiline={true}
+            name={t("admin.motif")}
+            label={t("admin.motif")}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleReturn}>{t("common.return")}</Button>
+          <Button onClick={handleClose} type="submit">{t("common.valid")}</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

@@ -5,7 +5,8 @@
     "signUp": "Sign up",
     "logIn": "Log in",
     "search": "Search",
-    "admin": "Admin"
+    "admin": "Admin",
+    "editPswd": "Password"
   },
   "login": {
     "logInDescription": "Enter your connection information",
@@ -15,6 +16,13 @@
     "titlepw": "Password forgot",
     "headerForgotPassword": "Do you forget your password?",
     "subheaderForgotPassword": "Please, enter your email. You will receive an email with a link to change your password"
+  },
+  "editpswd": {
+    "titlepage": "Change my password",
+    "subtitle": "Type the new chosen password and confirm it",
+    "currentPswd": "Former Password",
+    "newPswd": "New Password",
+    "confirmPswd": "Confirm New Password"
   },
   "form": {
     "charter": "I accept the above conditions and charter",
@@ -35,6 +43,12 @@
   "profil": {
     "header": "My profile",
     "edit": "Edit profile"
+  },
+  "admin": {
+    "titlepopupDecline": "why do you want to decline this registration?",
+    "motif": "reason",
+    "askmotif": "please enter a reason",
+    "titlepopupValidate": "Are you sure you want to register this structure?"
   },
   "professional": {
     "name": "Name of the Structure",
@@ -81,7 +95,7 @@
     "close": "Close",
     "confirmation": "Confirmation pop-up",
     "confirmationBody": "are you sure you want to disconnect?",
-    "disconnection": "Disconnection",
+    "disconnection": "Log out",
     "return": "return",
     "returnHome": "return to Home page",
     "returnAPT": "return to Accueil Pour Tous 31 website"

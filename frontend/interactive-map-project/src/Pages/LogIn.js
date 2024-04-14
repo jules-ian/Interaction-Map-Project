@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Box, Grid, Button, Link } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import useWindowDimensions from "../utils/windowDimension";
@@ -10,7 +10,20 @@ import { isEmail } from "../utils/checkFunctions";
 import { Text } from "../Components/Label";
 
 
-export default function LogIn({ setMenuTitel }) {
+export default function LogIn({ setMenuTitel, loggedIn, user }) {
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === "Enter") {
+        console.log("Enter key pressed");
+        logInClick();
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return function cleanup() {
+      document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, []);
+
   const { t } = useTranslation(); //t -> alias pour useTranslation() (traduction en vers fr)
   setMenuTitel(t("page.logIn"));
   const navigate = useNavigate();
@@ -31,17 +44,21 @@ export default function LogIn({ setMenuTitel }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [openErrorDialog, setOpenErrorDialog] = useState(false);
 
-  const onSubmit = function () {
-    console.log("Form submitted");
-    let valid = checkEntries();
+  const logInClick = function () {
+    {/* 
+        todo : vérifier que les identifiants sont corrects
+        faire on Submit dans onClick qui vérifie password puis navigate vers carte
+        */}
+    console.log("Connexion submitted");
+    {/*let valid = checkEntries();
     if (!valid) { //A détailler, plusieurs types d'erreurs possibles
       setErrorMessage(t("login.errorMessageFE"));
       setOpenErrorDialog(true);
       return;
     }
-    if (valid) {
-      navigate("/Search", { replace: true });
-    };
+  if (valid) {*/}
+    navigate("/Search", { replace: true });
+    //};
   }
 
   const checkEntries = function () { //todo : différencier les types de forms invalides
@@ -61,13 +78,6 @@ export default function LogIn({ setMenuTitel }) {
     marginBottom: 3
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      console.log("Enter key pressed");
-      onSubmit();
-    }
-  };
-
   return (
     <Box
       sx={{
@@ -83,14 +93,13 @@ export default function LogIn({ setMenuTitel }) {
           label={t("professional.email")}
           setTextState={setMail}
           multiline={true}
-          onKeyDown={handleKeyDown}
         />
         <PasswordInput
           setTextState={setPswd}
+          setLabel={t("professional.password")}
           multiline={true}
-          onKeyDown={handleKeyDown}
         />
-        <Button variant="contained" fullWidth={true} onClick={onSubmit} sx={{ marginTop: 2, marginBottom: 2 }}>
+        <Button id="login" variant="contained" fullWidth={true} onClick={() => logInClick()} sx={{ marginTop: 2, marginBottom: 2 }}>
           {t("page.logIn")}
         </Button>
         <Box sx={{ textAlign: "center", marginBottom: 1 }}>
@@ -98,10 +107,7 @@ export default function LogIn({ setMenuTitel }) {
             {t("login.forgotPassword")}
           </Link>
         </Box>
-        {/* 
-        todo : vérifier que les identifiants sont corrects
-        faire on Submit dans onClick qui vérifie password puis navigate vers carte
-        */}
+
       </Box>
     </Box >
   );

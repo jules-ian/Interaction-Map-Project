@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 export default function PasswordInput({
     setTextState,
+    setLabel,
     setErrorState = function () { }
 }) {
     const { t } = useTranslation();
@@ -11,7 +12,7 @@ export default function PasswordInput({
         <InputComponent>
             <TextField
                 id="outlined-password-input"
-                label={t("professional.password")}
+                label={setLabel}
                 type="password"
                 variant="outlined"
                 fullWidth="true"

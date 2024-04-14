@@ -5,13 +5,11 @@ import useWindowDimensions from "../utils/windowDimension";
 import { Header, Text } from "../Components/Label";
 import { useEffect, useState, useTransition } from "react";
 import {
-  approveProfessional,
-  declineProfessional,
-  getResultsSearch,
   getUnapprovedProfessionals,
 } from "../utils/BackendFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
+import { PopUpAdminValidateDialog, PopUpAdminDeclineDialog } from "../Components/AlertDialog";
 
 export default function Admin({ setMenuTitel }) {
   const { t } = useTranslation();
@@ -22,6 +20,7 @@ export default function Admin({ setMenuTitel }) {
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const [openPopover, setOpenPopover] = useState(false);
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     getUnapprovedProfessionals(setUnapprovedProfessionals);
@@ -70,8 +69,42 @@ function Tabel({
   setLoading,
 }) {
   const { t } = useTranslation();
+
+
+
+  const [openPopUpAdminDeclineDialog, setOpenPopUpAdminDeclineDialog] = useState(false);
+  const onClosePopUpAdminDeclineDialog = function () {
+    setOpenPopUpAdminDeclineDialog(false);
+    //setLoading(true);
+    //declineProfessional(professional, callbackAcceptDecline);
+  };
+
+  const [openPopUpAdminValidateDialog, setOpenPopUpAdminValidateDialog] = useState(false);
+  const onClosePopUpAdminValidateDialog = function () {
+    setOpenPopUpAdminValidateDialog(false);
+    //setLoading(true);
+    //approveProfessional(professional, callbackAcceptDecline);
+  };
+
+  const onDeclineClick = function () {
+    setOpenPopUpAdminDeclineDialog(true);
+  };
+
+  const onValidateClick = function () {
+    setOpenPopUpAdminValidateDialog(true);
+  };
+
+
   return (
     <Box>
+      <PopUpAdminDeclineDialog
+        onClose={onClosePopUpAdminDeclineDialog}
+        open={openPopUpAdminDeclineDialog}
+      />
+      <PopUpAdminValidateDialog
+        onClose={onClosePopUpAdminValidateDialog}
+        open={openPopUpAdminValidateDialog}
+      />
       {/* HEADERS */}
       <Grid container sx={{ marginBottom: 2, alignItems: "center" }}>
         <Grid item xs={8}>
@@ -126,10 +159,7 @@ function Tabel({
                     background: "green", // change to the desired background color on hover
                   },
                 }}
-                onClick={() => {
-                  setLoading(true);
-                  approveProfessional(professional, callbackAcceptDecline);
-                }}
+                onClick={onValidateClick}
               >
                 {t("common.accept")}
               </Box>
@@ -157,10 +187,7 @@ function Tabel({
                     background: "red", // change to the desired background color on hover
                   },
                 }}
-                onClick={() => {
-                  setLoading(true);
-                  declineProfessional(professional, callbackAcceptDecline);
-                }}
+                onClick={onDeclineClick}
               >
                 {t("common.decline")}
               </Box>
@@ -178,4 +205,7 @@ function Tabel({
       ></PopoverWindow>
     </Box>
   );
+
+
+
 }
