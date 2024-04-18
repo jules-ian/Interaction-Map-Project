@@ -134,7 +134,7 @@ public class Program
 
         }
 
-        using (var scope = app.Services.CreateScope())
+        /*using (var scope = app.Services.CreateScope())
         {
             var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
             string adminEmail = "referente_apt31@cocagne31.org";
@@ -153,7 +153,7 @@ public class Program
                 await userManager.AddToRoleAsync(user, "Super-Admin");
             }
 
-        }
+        }*/
 
         app.Run();
 
