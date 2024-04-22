@@ -1,5 +1,5 @@
 using InteractiveMapProject.API.Validators;
-using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,34 +19,50 @@ public class UserController : ControllerBase
 
     }
 
-    [HttpGet("{email}", Name = "GetUserByEmail")]
-    public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
+    [HttpGet("{email}", Name = "GetUser")]
+    public async Task<IActionResult> GetUser([FromRoute] string email)
     {
         var user = await _userService.GetAsync(email);
+        if (user == null)
+        {
+            return NotFound();
+        }
         return Ok(user);
     }
 
-    [HttpPost("create", Name = "CreateUser")]
-    public async Task<IActionResult> CreateUser([FromBody] UserCredentials request)
+    [HttpPost("create", Name = "CreateProfessionalAccount")]
+    public async Task<IActionResult> CreateProfessionalAccount([FromBody] UserCredentialsDto credentials)
     {
-        if(!ModelState.IsValid)
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
         {
             return BadRequest(ModelState);
         }
-        await _userService.CreateAsync(request.Email, request.Password);
+        await _userService.CreateAsync(credentials.Email, credentials.Password);
+        await _userService.AddToRoleAsync(credentials.Email, "Professional");
         return Ok();
     }
 
-    [HttpGet("{credentials}", Name = "CheckUserCredentials")]
-    public async Task<IActionResult> CheckUserCredentials([FromRoute] UserCredentials credentials)
+    [HttpPost("verify", Name = "CheckUserCredentials")]
+    public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         var user = await _userService.GetAsync(credentials.Email);
-        if(user == null)
+        if (user == null)
         {
             return NotFound();
         }
         var result = await _userService.CheckPasswordAsync(credentials.Email, credentials.Password);
         return Ok(result);
+    }
+
+    [HttpDelete("{email}", Name = "DeleteUser")]
+    public async Task<IActionResult> DeleteUser([FromRoute] string email)
+    {
+        await _userService.DeleteAsync(email);
+        return Ok();
     }
 
 }

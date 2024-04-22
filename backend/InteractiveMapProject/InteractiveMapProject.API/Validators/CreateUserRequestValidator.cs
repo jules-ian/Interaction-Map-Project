@@ -1,9 +1,9 @@
 using FluentValidation;
-using InteractiveMapProject.Contracts.Entities;
+using InteractiveMapProject.Contracts.Dtos;
 
 namespace InteractiveMapProject.API.Validators;
 
-public class CreateUserRequestValidator : AbstractValidator<UserCredentials>
+public class CreateUserRequestValidator : AbstractValidator<UserCredentialsDto>
 {
     public CreateUserRequestValidator()
     {
