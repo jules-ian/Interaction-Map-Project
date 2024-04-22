@@ -1,3 +1,4 @@
+using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,13 @@ namespace InteractiveMapProject.API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly CreateUserRequestValidator _createUserRequestValidator;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, CreateUserRequestValidator createUserRequestValidator)
     {
         _userService = userService;
+        _createUserRequestValidator = createUserRequestValidator;
+
     }
 
     [HttpGet("{email}", Name = "GetUserByEmail")]
@@ -23,7 +27,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("create", Name = "CreateUser")]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+    public async Task<IActionResult> CreateUser([FromBody] UserCredentials request)
     {
         if(!ModelState.IsValid)
         {
@@ -32,4 +36,17 @@ public class UserController : ControllerBase
         await _userService.CreateAsync(request.Email, request.Password);
         return Ok();
     }
+
+    [HttpGet("{credentials}", Name = "CheckUserCredentials")]
+    public async Task<IActionResult> CheckUserCredentials([FromRoute] UserCredentials credentials)
+    {
+        var user = await _userService.GetAsync(credentials.Email);
+        if(user == null)
+        {
+            return NotFound();
+        }
+        var result = await _userService.CheckPasswordAsync(credentials.Email, credentials.Password);
+        return Ok(result);
+    }
+
 }

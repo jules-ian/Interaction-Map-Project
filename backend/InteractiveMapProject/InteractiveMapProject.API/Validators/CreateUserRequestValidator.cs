@@ -3,7 +3,7 @@ using InteractiveMapProject.Contracts.Entities;
 
 namespace InteractiveMapProject.API.Validators;
 
-public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
+public class CreateUserRequestValidator : AbstractValidator<UserCredentials>
 {
     public CreateUserRequestValidator()
     {

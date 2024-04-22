@@ -131,7 +131,6 @@ public class Program
             await roleService.CreateAsync("Professional");
             await roleService.CreateAsync("Admin");
             await roleService.CreateAsync("Super-Admin");
-
         }
 
         /*using (var scope = app.Services.CreateScope())
