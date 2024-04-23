@@ -45,10 +45,6 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
   const [openErrorDialog, setOpenErrorDialog] = useState(false);
 
   const logInClick = function () {
-    {/* 
-        todo : vérifier que les identifiants sont corrects
-        faire on Submit dans onClick qui vérifie password puis navigate vers carte
-        */}
     console.log("Connexion submitted");
     let valid = checkIdentifiants(mail, passwd);
     console.log(valid);

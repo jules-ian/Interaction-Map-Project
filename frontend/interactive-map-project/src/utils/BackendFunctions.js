@@ -1,11 +1,5 @@
-import InitGetter from "../Components/InitGetter";
 import axios from "axios";
 import {
-  Address,
-  ContactPerson,
-  GeoLocation,
-  Professional,
-  dummyProf,
   professionalFromJSON,
   Identifiants
 } from "./Entities";
@@ -98,6 +92,19 @@ export function declineProfessional(professional, callback) {
     .catch((error) => {
       console.error("Error deleting Professional:", error.response);
       callback();
+    });
+}
+
+export function checkIdentifiants(mail, password) {
+  let url = "https://localhost:7212/api/account";
+  const id = new Identifiants(mail, password);
+  axios
+    .post(url, id.toJSON())
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error email doesn't exist:", error);
     });
 }
 
@@ -194,18 +201,7 @@ export function getEditedProfessionals(setResults) {
     });
 }
 
-export function checkIdentifiants(mail, password) {
-  let url = "https://localhost:7212/api/account";
-  const id = new Identifiants(mail, password);
-  axios
-    .post(url, id.toJSON())
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.error("Error email doesn't exist:", error);
-    });
-}
+
 
 export function isAdmin(mail) {
   let url = "https://localhost:7212/api/admin/" + mail;

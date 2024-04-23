@@ -36,6 +36,7 @@ export default function EditPassword({ setMenuTitel }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        textAlign: "left",
         fontSize: 35,
         marginBottom: 3
     };

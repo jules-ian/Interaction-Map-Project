@@ -61,7 +61,7 @@ export default function Admin({ setMenuTitel }) {
           />
 
           <Tabel
-            unapprovedProfessionals={unapprovedProfessionals}
+            unapprovedModifications={unapprovedModifications}
             openPopover={openPopover}
             setOpenPopover={setOpenPopover}
             setSelectedProfessional={setSelectedProfessional}
@@ -77,6 +77,7 @@ export default function Admin({ setMenuTitel }) {
 
 function Tabel({
   unapprovedProfessionals,
+  unapprovedModifications,
   openPopover,
   setOpenPopover,
   setSelectedProfessional,
@@ -128,13 +129,13 @@ function Tabel({
         onReturn={onReturnPopUpAdminValidateDialog}
         open={openPopUpAdminValidateDialog}
       />
-      {/* HEADERS */}
+
+      {/*TABLE OF PENDING JOIN*/}
       <Grid container sx={{ marginBottom: 2, alignItems: "center" }}>
         <Grid item xs={8}>
           <Header sx={{ textAlign: "left" }}>{t("admin.unapproved")}</Header>
         </Grid>
       </Grid>
-      {/*TABLE OF PENDING JOIN*/}
       {unapprovedProfessionals.length != 0 ? (
         unapprovedProfessionals.map((professional) => (
           // every professional
