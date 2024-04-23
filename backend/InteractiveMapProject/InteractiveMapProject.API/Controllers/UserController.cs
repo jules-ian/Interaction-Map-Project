@@ -1,8 +1,14 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using NuGet.Common;
 
 namespace InteractiveMapProject.API.Controllers;
 
@@ -11,11 +17,13 @@ namespace InteractiveMapProject.API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ITokenGeneratorService _tokenGeneratorService;
     private readonly CreateUserRequestValidator _createUserRequestValidator;
 
-    public UserController(IUserService userService, CreateUserRequestValidator createUserRequestValidator)
+    public UserController(IUserService userService, ITokenGeneratorService tokenGeneratorService, CreateUserRequestValidator createUserRequestValidator)
     {
         _userService = userService;
+        _tokenGeneratorService = tokenGeneratorService;
         _createUserRequestValidator = createUserRequestValidator;
 
     }
@@ -55,12 +63,12 @@ public class UserController : ControllerBase
         return Ok();
     }
 
-    [HttpPost(Name = "CheckUserCredentials")]
+    /*[HttpPost("login", Name = "CheckUserCredentials")]
     public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
         if (!_createUserRequestValidator.Validate(credentials).IsValid)
         {
-            return BadRequest(ModelState);
+            return BadRequest("Email not valid or empty credentials fields");
         }
         var user = await _userService.GetAsync(credentials.Email);
         if (user == null)
@@ -69,9 +77,43 @@ public class UserController : ControllerBase
         }
         var result = await _userService.CheckPasswordAsync(credentials.Email, credentials.Password);
         return Ok(result);
+    }*/
+
+    [HttpPost("login", Name = "CheckUserCredentials")]
+    public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
+    {
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
+        {
+            return BadRequest("Email not valid or empty credentials fields");
+        }
+        var user = await _userService.GetAsync(credentials.Email);
+        if (user != null && await _userService.CheckPasswordAsync(credentials.Email, credentials.Password))
+        {
+            var userRoles = await _userService.GetRolesAsync(credentials.Email);
+
+            var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+            var token = _tokenGeneratorService.GetToken(authClaims);
+
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            });
+        }
+        return Unauthorized();
     }
 
-    [HttpDelete("{email}", Name = "DeleteUser")]
+[HttpDelete("{email}", Name = "DeleteUser")]
     public async Task<IActionResult> DeleteUser([FromRoute] string email)
     {
         await _userService.DeleteAsync(email);
