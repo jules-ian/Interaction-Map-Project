@@ -109,12 +109,11 @@ public class UserService : IUserService
     public async Task<bool> CheckPasswordAsync(string email, string password)
     {
         var user = await _userManager.FindByEmailAsync(email);
-        if (user != null)
+        if (user != null && await _userManager.CheckPasswordAsync(user, password))
         {
-            return await _userManager.CheckPasswordAsync(user, password);
+            return true;
         }
         return false;
     }
-
 
 }

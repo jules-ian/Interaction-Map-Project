@@ -1,3 +1,4 @@
+using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Services;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InteractiveMapProject.API.Controllers;
 
 [ApiController]
-[Route("api/user")]
+[Route("api/account")]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -30,7 +31,7 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost("create", Name = "CreateProfessionalAccount")]
+    [HttpPost("professional/create", Name = "CreateProfessionalAccount")]
     public async Task<IActionResult> CreateProfessionalAccount([FromBody] UserCredentialsDto credentials)
     {
         if (!_createUserRequestValidator.Validate(credentials).IsValid)
@@ -38,11 +39,23 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
         await _userService.CreateAsync(credentials.Email, credentials.Password);
-        await _userService.AddToRoleAsync(credentials.Email, "Professional");
+        await _userService.AddToRoleAsync(credentials.Email, UserRoles.Professional);
         return Ok();
     }
 
-    [HttpPost("verify", Name = "CheckUserCredentials")]
+    [HttpPost("admin/create", Name = "CreateAdminAccount")]
+    public async Task<IActionResult> CreateAdminAccount([FromBody] UserCredentialsDto credentials)
+    {
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        await _userService.CreateAsync(credentials.Email, credentials.Password);
+        await _userService.AddToRoleAsync(credentials.Email, UserRoles.Admin);
+        return Ok();
+    }
+
+    [HttpPost(Name = "CheckUserCredentials")]
     public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
         if (!_createUserRequestValidator.Validate(credentials).IsValid)

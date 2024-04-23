@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using InteractiveMapProject.API.Middleware;
+using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Common.Profiles;
 using InteractiveMapProject.Contracts.Entities;
@@ -128,9 +129,9 @@ public class Program
         using (var scope = app.Services.CreateScope())
         {
             var roleService = scope.ServiceProvider.GetRequiredService<IRoleService>();
-            await roleService.CreateAsync("Professional");
-            await roleService.CreateAsync("Admin");
-            await roleService.CreateAsync("Super-Admin");
+            await roleService.CreateAsync(UserRoles.Professional);
+            await roleService.CreateAsync(UserRoles.Admin);
+            await roleService.CreateAsync(UserRoles.SuperAdmin);
         }
 
         /*using (var scope = app.Services.CreateScope())
