@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
+using InteractiveMapProject.API.Email;
+using InteractiveMapProject.API.Email_Services;
 using InteractiveMapProject.API.Middleware;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Common.Profiles;
@@ -56,6 +58,16 @@ public class Program
             options.User.RequireUniqueEmail = true;
         });*/
 
+        //Add email configs
+        var emailconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+        builder.Services.AddSingleton(emailconfig);
+
+        // config for required email
+        builder.Services.Configure<IdentityOptions>(
+            options => options.SignIn.RequireConfirmedEmail = true
+        );
+
+
         builder.Services
             .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
             .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
@@ -87,6 +99,7 @@ public class Program
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IEmailService, EmailService>();
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
