@@ -27,7 +27,8 @@ export default function Home({ setMenuTitel }) {
           style={{ marginTop: '100px', marginBottom: '20px' }}
         />
         <ButtonComponent
-          label={t("page.signUp")} s
+          label={t("page.signUp")}
+          variant="contained"
           onClick={() => navigate("/Form", { replace: true })}
           sx={{ marginTop: '20px' }}
         />

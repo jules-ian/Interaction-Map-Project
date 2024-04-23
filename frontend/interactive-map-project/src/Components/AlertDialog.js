@@ -85,15 +85,54 @@ export const PopUpDialog = ({ open, onClose }) => {
   );
 };
 
+export const PopUpDialogEditProfil = ({ open, onClose }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-export const PopUpAdminValidateDialog = ({ open, onClose }) => {
+  const handleClose = () => {
+    onClose(); //todo : modifier les infos dans la base de données
+    navigate("/Profil", { replace: true });
+  };
+  const handleReturn = () => {
+    onClose();
+  };
+
+
+  return (
+    <React.Fragment>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{t("common.confirmation")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {t("common.confirmationBody")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>{t("common.submit")}
+          </Button>
+          <Button onClick={handleReturn}>{t("common.return")}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
+};
+
+
+export const PopUpAdminValidateDialog = ({ open, onClose, onReturn }) => {
   const { t } = useTranslation();
 
   const handleClose = () => {
     onClose();
   };
   const handleReturn = () => {
-    onClose();
+    onReturn();
   };
 
   return (
@@ -126,14 +165,14 @@ export const PopUpAdminValidateDialog = ({ open, onClose }) => {
 
 
 
-export const PopUpAdminDeclineDialog = ({ open, onClose }) => {
+export const PopUpAdminDeclineDialog = ({ open, onClose, onReturn }) => {
   const { t } = useTranslation();
 
   const handleClose = () => {//todo:verifier qu'un motif soit saisi
     onClose();
   };
   const handleReturn = () => {
-    onClose();
+    onReturn();
   };
 
   return (

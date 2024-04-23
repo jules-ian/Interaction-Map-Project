@@ -7,6 +7,7 @@ import {
   Professional,
   dummyProf,
   professionalFromJSON,
+  Identifiants
 } from "./Entities";
 
 export function getAllMissions(setReturn) {
@@ -194,11 +195,12 @@ export function getEditedProfessionals(setResults) {
 }
 
 export function checkIdentifiants(mail, password) {
-  let url = "https://localhost:7212/api/professional/checkid/" + mail;
+  let url = "https://localhost:7212/api/account";
+  const id = new Identifiants(mail, password);
   axios
-    .get(url)
+    .post(url, id.toJSON())
     .then((response) => {
-      return response.data == password;
+      return response.data;
     })
     .catch((error) => {
       console.error("Error email doesn't exist:", error);
@@ -226,16 +228,16 @@ export function getResultsSearch(
   mapBounds
 ) {
   let data = {};
-  if (!textSearch.length == 0) {
+  if (!textSearch.length === 0) {
     data.text = textSearch;
   }
-  if (!audiencesIDs.length == 0) {
+  if (!audiencesIDs.length === 0) {
     data.audiences = audiencesIDs;
   }
-  if (!missionIDs.length == 0) {
+  if (!missionIDs.length === 0) {
     data.missions = missionIDs;
   }
-  if (!placesOfInterventionIDs.length == 0) {
+  if (!placesOfInterventionIDs.length === 0) {
     data.placesOfIntervention = placesOfInterventionIDs;
   }
 

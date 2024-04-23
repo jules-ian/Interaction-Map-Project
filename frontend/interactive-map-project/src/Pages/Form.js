@@ -102,11 +102,12 @@ export default function Form({ setMenuTitel }) {
       return;
     }
     if (valid) {
-      const callback = function (success, errorMessage = "") {
+      const callback = function (success) {
         if (success) {
           setOpenSuccessDialog(true);
         } else {
           setErrorMessage(t("form.errorMessageDB"));
+
           setOpenErrorDialog(true);
         }
       };
@@ -179,12 +180,12 @@ export default function Form({ setMenuTitel }) {
       checkSuccess = false;
     }
     //Audiences
-    if (audiencesSelection.length == 0) {
+    if (audiencesSelection.length === 0) {
       setAudiencesSelectionError(true);
       checkSuccess = false;
     }
     //Missions
-    if (missionsSelection.length == 0) {
+    if (missionsSelection.length === 0) {
       setMissionsSelectionError(true);
       checkSuccess = false;
     }

@@ -22,7 +22,8 @@
     "subtitle": "Type the new chosen password and confirm it",
     "currentPswd": "Former Password",
     "newPswd": "New Password",
-    "confirmPswd": "Confirm New Password"
+    "confirmPswd": "Confirm New Password",
+    "modifpsw": "Update your paassword"
   },
   "form": {
     "charter": "I accept the above conditions and charter",
@@ -45,9 +46,11 @@
     "edit": "Edit profile"
   },
   "admin": {
-    "titlepopupDecline": "why do you want to decline this registration?",
-    "motif": "reason",
-    "askmotif": "please enter a reason",
+    "unapproved": "Joining requests",
+    "modifications": "Modification requests",
+    "titlepopupDecline": "Why do you want to decline this registration?",
+    "motif": "Reason",
+    "askmotif": "Please enter a reason",
     "titlepopupValidate": "Are you sure you want to register this structure?"
   },
   "professional": {
@@ -94,10 +97,10 @@
     "myAccount": "My account",
     "close": "Close",
     "confirmation": "Confirmation pop-up",
-    "confirmationBody": "are you sure you want to disconnect?",
+    "confirmationBody": "Are you sure you want to disconnect?",
     "disconnection": "Log out",
-    "return": "return",
-    "returnHome": "return to Home page",
-    "returnAPT": "return to Accueil Pour Tous 31 website"
+    "return": "Return",
+    "returnHome": "Return to Home page",
+    "returnAPT": "Return to Accueil Pour Tous website"
   }
 }

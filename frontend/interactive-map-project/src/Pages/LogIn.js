@@ -8,7 +8,7 @@ import TextInput from "../Components/TextInput";
 import PasswordInput from "../Components/PasswordInput";
 import { isEmail } from "../utils/checkFunctions";
 import { Text } from "../Components/Label";
-
+import { checkIdentifiants } from "../utils/BackendFunctions";
 
 export default function LogIn({ setMenuTitel, loggedIn, user }) {
   useEffect(() => {
@@ -50,15 +50,16 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
         faire on Submit dans onClick qui vérifie password puis navigate vers carte
         */}
     console.log("Connexion submitted");
-    {/*let valid = checkEntries();
-    if (!valid) { //A détailler, plusieurs types d'erreurs possibles
+    let valid = checkIdentifiants(mail, passwd);
+    console.log(valid);
+    if (!valid) {
       setErrorMessage(t("login.errorMessageFE"));
       setOpenErrorDialog(true);
       return;
     }
-  if (valid) {*/}
-    navigate("/Search", { replace: true });
-    //};
+    if (valid) {
+      navigate("/Search", { replace: true });
+    };
   }
 
   const checkEntries = function () { //todo : différencier les types de forms invalides

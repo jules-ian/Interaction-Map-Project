@@ -91,7 +91,7 @@ export default function App() {
   };
 
   const renderHomeButton = () => {
-    if ((location.pathname === "/Search") || (location.pathname === "/Profil") || (location.pathname === "/EditProfil")) {
+    if ((location.pathname === "/Search") || (location.pathname === "/Profil") || (location.pathname === "/Admin") || (location.pathname === "/EditProfil") || (location.pathname === "/EditPassword")) {
       return (
         <IconButton
           sx={{ backgroundColor: "white", marginRight: 2 }}
@@ -105,10 +105,10 @@ export default function App() {
   }
 
   const renderLogOutButton = () => {
-    if ((location.pathname === "/Search") || (location.pathname === "/Profil") || (location.pathname === "/EditProfil")) {
+    if ((location.pathname === "/Search") || (location.pathname === "/Profil") || (location.pathname === "/Admin") || (location.pathname === "/EditProfil") || (location.pathname === "/EditPassword")) {
       return (
         <IconButton
-          sx={{ backgroundColor: "white", marginRight: 2 }}
+          sx={{ backgroundColor: "white", marginLeft: 2 }}
           onClick={onLogOutClick}
           title={t("common.disconnection")}
         >
@@ -136,14 +136,13 @@ export default function App() {
         onClose={onClosePopUpDialog}
         open={openPopUpDialog}
       />
-      <AppBar position="sticky" sx={{ backgroundColor: 'lightblue' }}>
+      <AppBar position="sticky" sx={{ backgroundColor: '#5DD3E4' }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <ToolbarGroup firstChild={true} float="left" >
             {renderHomeButton()}
-            {renderLogOutButton()}
 
             <a href="https://accueilpourtous31.fr/">
-              <Button sx={{ backgroundColor: "white" }} startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
+              <Button sx={{ backgroundColor: "white", color: "primary" }} startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
                 Retour à APT31
               </Button>
             </a>
@@ -170,6 +169,7 @@ export default function App() {
               <MenuItem value="en">en</MenuItem>
               <MenuItem value="fr">fr</MenuItem>
             </Select>
+            {renderLogOutButton()}
           </ToolbarGroup>
 
 

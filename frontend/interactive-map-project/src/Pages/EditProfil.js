@@ -9,7 +9,6 @@ import {
     getAllMissions,
     getAllPlacesOfIntervention,
 } from "../utils/BackendFunctions";
-import { SingleCheckbox } from "../Components/Checkbox";
 import {
     isEmail,
     isName,
@@ -21,6 +20,8 @@ import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
+import { PopUpDialogEditProfil } from "../Components/AlertDialog";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function EditProfil({ setMenuTitel }) {
     const { t } = useTranslation();
@@ -177,12 +178,12 @@ export default function EditProfil({ setMenuTitel }) {
             checkSuccess = false;
         }
         //Audiences
-        if (audiencesSelection.length == 0) {
+        if (audiencesSelection.length === 0) {
             setAudiencesSelectionError(true);
             checkSuccess = false;
         }
         //Missions
-        if (missionsSelection.length == 0) {
+        if (missionsSelection.length === 0) {
             setMissionsSelectionError(true);
             checkSuccess = false;
         }
@@ -210,6 +211,7 @@ export default function EditProfil({ setMenuTitel }) {
             placesOfInterventionSelection,
             placesOfIntervention
         );
+
         let missionsIDS = mapNamesToIDs(missionsSelection, missions);
         const address = new Address(street, city, postal);
         const contactPerson = new ContactPerson(
@@ -218,6 +220,7 @@ export default function EditProfil({ setMenuTitel }) {
             contactPersonEmail,
             contactPersonFunction
         );
+
         const professional = new Professional(
             null,
             name,
@@ -237,6 +240,11 @@ export default function EditProfil({ setMenuTitel }) {
         return professional;
     };
 
+    const [openPopUpDialogEditProfil, setOpenPopUpDialogEditProfil] = useState(false);
+    const onClosePopUpDialogEditProfil = function () {
+        setOpenPopUpDialogEditProfil(false);
+    };
+
     const catergoryHeaderProps = {
         textAlign: "left",
         marginLeft: -2,
@@ -247,6 +255,10 @@ export default function EditProfil({ setMenuTitel }) {
 
     return (
         <Box>
+            <PopUpDialogEditProfil
+                onClose={onClosePopUpDialogEditProfil}
+                open={openPopUpDialogEditProfil}
+            />
             <SuccessDialog
                 message={successMessage}
                 onClose={onCloseSuccessDialog}
@@ -258,11 +270,22 @@ export default function EditProfil({ setMenuTitel }) {
                 open={openErrorDialog}
             />
             <Box sx={{ textAlign: "left", margin: 5 }}>
-                <Header>{t("profil.edit")}</Header>
+                <Header>{t("profil.edit")}
+                    <Button
+                        component={RouterLink}
+                        to="/EditPassword"
+                        variant="contained"
+                        sx={{ borderRadius: "20px", marginLeft: "40px" }}
+                    >
+                        {t("editpswd.modifpsw")}
+                    </Button>
+                </Header>
+
             </Box>
             <Grid paddingX={10} container spacing={2}>
                 <Grid item xs={12}>
                     <Text sx={catergoryHeaderProps}>{t("form.subHeaderStructure")}</Text>
+
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextInput
@@ -430,7 +453,11 @@ export default function EditProfil({ setMenuTitel }) {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Button variant="contained" fullWidth={true} onClick={onSubmit}>
+                    <Button
+                        variant="contained"
+                        fullWidth={true}
+                        onClick={onSubmit}
+                    >
                         {t("common.submitUpdate")}
                     </Button>
                 </Grid>

@@ -5,8 +5,8 @@
     "logIn": "Connexion",
     "home": "Accueil",
     "search": "Recherche",
-    "admin": "Admin",
-    "editPswd": "Mot de Passe"
+    "admin": "Gestion des utilisateurs",
+    "editPswd": "Modification mot de Passe"
   },
   "login": {
     "logInDescription": "Veuillez entrer vos informations de connexion",
@@ -19,10 +19,11 @@
   },
   "editpswd": {
     "titlepage": "Modification mot de passe",
-    "subtitle": "Saisissez votre mot de passe actuel puis choisissez votre nouveau mot de passe et confirmez-le",
+    "subtitle": "Veuillez compléter les champs suivants :",
     "currentPswd": "Mot de passe actuel",
     "newPswd": "Nouveau mot de passe",
-    "confirmPswd": "Confirmer le nouveau mot de passe"
+    "confirmPswd": "Confirmer le nouveau mot de passe",
+    "modifpsw": "Modifier votre mot de passe"
   },
   "form": {
     "charter": "J'accepte la charte ci-dessus",
@@ -45,15 +46,17 @@
     "edit": "Modifier mes informations personnelles"
   },
   "admin": {
+    "unapproved": "Demandes en attente",
+    "modifications": "Modifications en attente",
     "titlepopupDecline": "Pourquoi voulez-vous décliner l'inscription de cette structure?",
-    "motif": "motif",
-    "askmotif": "Veuillez saisir un motif",
+    "motif": "Motif",
+    "askmotif": "Veuillez saisir un motif de refus",
     "titlepopupValidate": "Êtes-vous sûr de vouloir accepter l'inscription de cette structure?"
   },
   "professional": {
     "name": "Nom de la structure",
-    "establishment": "service",
-    "management": "gestionnaire",
+    "establishment": "Service",
+    "management": "Gestionnaire",
     "address": {
       "street": "Adresse",
       "city": "Ville",
@@ -81,7 +84,7 @@
   },
   "common": {
     "noResults": "Pas de résultat",
-    "moreInfo": "Plus d'info",
+    "moreInfo": "Détails",
     "search": "Recherche",
     "submit": "Soumettre",
     "accept": "Accepter",
@@ -93,7 +96,7 @@
     "myAccount": "Mon compte",
     "submitUpdate": "Valider les modifications",
     "close": "Fermer",
-    "confirmation": "Pop-up de confirmation",
+    "confirmation": "Confirmation",
     "confirmationBody": "Êtes-vous sûr de vouloir vous déconnecter?",
     "disconnection": "Déconnexion",
     "return": "Retour",
