@@ -13,6 +13,7 @@ import {
 } from "../utils/BackendFunctions";
 import { useTranslation } from "react-i18next";
 import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Profil({ setMenuTitel, email }) { //todo : uId
     const { t } = useTranslation();
@@ -91,6 +92,23 @@ export default function Profil({ setMenuTitel, email }) { //todo : uId
                 open={openErrorDialog}
             />
             <Grid paddingX={10} container spacing={2}>
+                <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", marginTop: 5 }}>
+                    <Button
+                        component={RouterLink}
+                        to="/EditProfil"
+                        variant="outlined"
+                        sx={{ borderRadius: "5px", marginRight: 2 }}
+                    >{t("profil.edit")}
+                    </Button>
+                    <Button
+                        component={RouterLink}
+                        to="/EditPassword"
+                        variant="outlined"
+                        sx={{ borderRadius: "5px", marginLeft: 2 }}
+                    >{t("editpswd.modifpsw")}
+                    </Button>
+                </Grid>
+
                 <Grid item xs={12}>
                     <Text sx={catergoryHeaderProps}>{t("form.subHeaderStructure")}</Text>
                 </Grid>

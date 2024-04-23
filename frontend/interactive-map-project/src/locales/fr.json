@@ -10,7 +10,8 @@
   },
   "login": {
     "logInDescription": "Veuillez entrer vos informations de connexion",
-    "forgotPassword": "Mot de passe oublié?"
+    "forgotPassword": "Mot de passe oublié?",
+    "wrongID": "Identifiant et/ou mot de passe incorrects."
   },
   "forgotpw": {
     "titlepw": "Mot de passe oublié",
@@ -43,7 +44,7 @@
   },
   "profil": {
     "header": "Mon compte",
-    "edit": "Modifier mes informations personnelles"
+    "edit": "Modifier mes informations"
   },
   "admin": {
     "unapproved": "Demandes en attente",
@@ -83,7 +84,7 @@
     }
   },
   "common": {
-    "noResults": "Pas de résultat",
+    "noResults": "Aucun résultat",
     "moreInfo": "Détails",
     "search": "Recherche",
     "submit": "Soumettre",

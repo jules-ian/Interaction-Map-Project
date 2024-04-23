@@ -4,6 +4,7 @@ import useWindowDimensions from "../utils/windowDimension";
 import { Header, Text } from "../Components/Label";
 import { useEffect, useState } from "react";
 import {
+  getEditedProfessionals,
   getUnapprovedProfessionals,
 } from "../utils/BackendFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
@@ -20,6 +21,7 @@ export default function Admin({ setMenuTitel }) {
   const navigate = useNavigate();
   const { width, height } = useWindowDimensions();
   const [unapprovedProfessionals, setUnapprovedProfessionals] = useState([]);
+  const [editedProfessionals, setEditedProfessionals] = useState([]);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const [openPopover, setOpenPopover] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,15 +29,17 @@ export default function Admin({ setMenuTitel }) {
 
   useEffect(() => {
     getUnapprovedProfessionals(setUnapprovedProfessionals);
+    getEditedProfessionals(setEditedProfessionals);
   }, []);
 
   const callbackAcceptDecline = function () {
     getUnapprovedProfessionals(setUnapprovedProfessionals);
+    getEditedProfessionals(setEditedProfessionals);
   };
 
   useEffect(() => {
     setLoading(false);
-  }, [unapprovedProfessionals]);
+  }, [unapprovedProfessionals, editedProfessionals]);
 
   return (
     <Box
@@ -52,6 +56,7 @@ export default function Admin({ setMenuTitel }) {
         <Box>
           <Tabel
             unapprovedProfessionals={unapprovedProfessionals}
+            editedProfessionals={editedProfessionals}
             openPopover={openPopover}
             setOpenPopover={setOpenPopover}
             setSelectedProfessional={setSelectedProfessional}
@@ -60,15 +65,6 @@ export default function Admin({ setMenuTitel }) {
             setLoading={setLoading}
           />
 
-          <Tabel
-            unapprovedModifications={unapprovedModifications}
-            openPopover={openPopover}
-            setOpenPopover={setOpenPopover}
-            setSelectedProfessional={setSelectedProfessional}
-            selectedProfessional={selectedProfessional}
-            callbackAcceptDecline={callbackAcceptDecline}
-            setLoading={setLoading}
-          />
         </Box>
       )}
     </Box>
@@ -77,7 +73,7 @@ export default function Admin({ setMenuTitel }) {
 
 function Tabel({
   unapprovedProfessionals,
-  unapprovedModifications,
+  editedProfessionals,
   openPopover,
   setOpenPopover,
   setSelectedProfessional,
@@ -96,8 +92,11 @@ function Tabel({
 
   const [openPopUpAdminValidateDialog, setOpenPopUpAdminValidateDialog] = useState(false);
   const onClosePopUpAdminValidateDialog = function () {
+    console.log("test");
     setOpenPopUpAdminValidateDialog(false);
+    console.log("test1");
     setLoading(true);
+    console.log("test2");
     approveProfessional(selectedProfessional, callbackAcceptDecline);
   };
 
@@ -113,12 +112,10 @@ function Tabel({
     setOpenPopUpAdminDeclineDialog(true);
   };
 
-  const onValidateClick = function () {
-    setOpenPopUpAdminValidateDialog(true);
-  };
 
   return (
     <Box>
+
       <PopUpAdminDeclineDialog
         onClose={onClosePopUpAdminDeclineDialog} //TODO : close pop up et c'est tout
         onReturn={onReturnPopUpAdminDeclineDialog}
@@ -129,7 +126,6 @@ function Tabel({
         onReturn={onReturnPopUpAdminValidateDialog}
         open={openPopUpAdminValidateDialog}
       />
-
       {/*TABLE OF PENDING JOIN*/}
       <Grid container sx={{ marginBottom: 2, alignItems: "center" }}>
         <Grid item xs={8}>
@@ -153,7 +149,7 @@ function Tabel({
               item
               xs={9}
               onClick={() => {
-                console.log(professional);
+                console.log("professional = ", professional);
                 setOpenPopover(true);
                 setSelectedProfessional(professional);
               }}
@@ -183,7 +179,10 @@ function Tabel({
                     background: "green", // change to the desired background color on hover
                   },
                 }}
-                onClick={onValidateClick}
+                onClick={() => {
+                  setOpenPopUpAdminValidateDialog(true);
+                  setSelectedProfessional(professional);
+                }}
               >
                 {t("common.accept")}
               </Box>
@@ -211,7 +210,10 @@ function Tabel({
                     background: "red", // change to the desired background color on hover
                   },
                 }}
-                onClick={onDeclineClick}
+                onClick={() => {
+                  setOpenPopUpAdminDeclineDialog(true);
+                  setSelectedProfessional(professional);
+                }}
               >
                 {t("common.decline")}
               </Box>
@@ -220,100 +222,109 @@ function Tabel({
         ))
       ) : (
         <Text> {t("common.noResults")}</Text>
-      )}
+      )
+      }
 
       <Grid container sx={{ marginBottom: 2, alignItems: "center" }}>
         <Grid item xs={8}>
-          <Header sx={{ textAlign: "left" }}>{t("admin.modifications")}</Header>
+          <Header sx={{ marginTop: 5, textAlign: "left" }}>{t("admin.modifications")}</Header>
         </Grid>
       </Grid>
 
       {/*TABLE OF PENDING MODIFICATIONS*/}
-      {unapprovedModifications.length != 0 ? (
-        unapprovedModifications.map((professional) => (
-          // every professional
-          <Grid
-            container
-            sx={{
-              borderTop: "2px solid lightblue",
-              alignItems: "center",
-              "&:hover": {
-                background: "lightblue", // change to the desired background color on hover
-              },
-            }}
-          >
+      {
+        editedProfessionals.length != 0 ? (
+          editedProfessionals.map((professional) => (
+            // every professional
             <Grid
-              item
-              xs={9}
-              onClick={() => {
-                console.log(professional);
-                setOpenPopover(true);
-                setSelectedProfessional(professional);
-              }}
-            >
-              <Text sx={{ textAlign: "left" }}>{professional.name}</Text>
-            </Grid>
-            <Grid
-              item
-              xs={1.5}
+              container
               sx={{
-                width: "100%",
-                height: "100%",
-                padding: 0.2,
+                borderTop: "2px solid lightblue",
+                alignItems: "center",
+                "&:hover": {
+                  background: "lightblue", // change to the desired background color on hover
+                },
               }}
             >
-              <Box
+              <Grid
+                item
+                xs={9}
+                onClick={() => {
+                  console.log(professional);
+                  setOpenPopover(true);
+                  setSelectedProfessional(professional);
+                }}
+              >
+                <Text sx={{ textAlign: "left" }}>{professional.name}</Text>
+              </Grid>
+              <Grid
+                item
+                xs={1.5}
                 sx={{
-                  borderRadius: 1,
-                  background: "darkgreen",
                   width: "100%",
                   height: "100%",
-                  color: "white",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  "&:hover": {
-                    background: "green", // change to the desired background color on hover
-                  },
+                  padding: 0.2,
                 }}
-                onClick={onValidateClick}
               >
-                {t("common.accept")}
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={1.5}
-              sx={{
-                width: "100%",
-                height: "100%",
-                padding: 0.2,
-              }}
-            >
-              <Box
+                <Box
+                  sx={{
+                    borderRadius: 1,
+                    background: "darkgreen",
+                    width: "100%",
+                    height: "100%",
+                    color: "white",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    "&:hover": {
+                      background: "green", // change to the desired background color on hover
+                    },
+                  }}
+                  onClick={() => {
+                    setOpenPopUpAdminValidateDialog(true);
+                    setSelectedProfessional(professional);
+                  }}
+                >
+                  {t("common.accept")}
+                </Box>
+              </Grid>
+              <Grid
+                item
+                xs={1.5}
                 sx={{
-                  borderRadius: 1,
-                  background: "darkred",
                   width: "100%",
                   height: "100%",
-                  color: "white",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  "&:hover": {
-                    background: "red", // change to the desired background color on hover
-                  },
+                  padding: 0.2,
                 }}
-                onClick={onDeclineClick}
               >
-                {t("common.decline")}
-              </Box>
+                <Box
+                  sx={{
+                    borderRadius: 1,
+                    background: "darkred",
+                    width: "100%",
+                    height: "100%",
+                    color: "white",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    "&:hover": {
+                      background: "red", // change to the desired background color on hover
+                    },
+                  }}
+                  onClick={() => {
+                    setOpenPopUpAdminDeclineDialog(true);
+                    setSelectedProfessional(professional);
+                  }}
+                >
+                  {t("common.decline")}
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        ))
-      ) : (
-        <Text> {t("common.noResults")}</Text>
-      )}
+          ))
+        ) : (
+          <Text> {t("common.noResults")}</Text>
+        )
+      }
 
       < PopoverWindow
         setOpenPopover={setOpenPopover}

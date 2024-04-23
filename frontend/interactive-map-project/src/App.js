@@ -17,6 +17,7 @@ import { Box, FormControl, IconButton, MenuItem, Select, Button, Toolbar, Typogr
 import AppBar from "@mui/material/AppBar";
 import ToolbarGroup from "@mui/material/Toolbar";
 import HomeIcon from "@mui/icons-material/Home";
+import MapIcon from '@mui/icons-material/Map';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -66,25 +67,10 @@ export default function App() {
         <Button
           component={RouterLink}
           to="/Profil"
-          variant="contained"
-          sx={{ borderRadius: "20px" }}
+          variant="outlined"
+          sx={{ borderRadius: "3px", backgroundColor: "white", marginRight: 2 }}
         >
           {t("common.myAccount")}
-        </Button>
-      );
-    }
-  };
-
-  const renderEditProfileButton = () => {
-    if (location.pathname === "/Profil") {
-      return (
-        <Button
-          component={RouterLink}
-          to="/EditProfil"
-          variant="contained"
-          sx={{ borderRadius: "20px" }}
-        >
-          {t("profil.edit")}
         </Button>
       );
     }
@@ -96,9 +82,23 @@ export default function App() {
         <IconButton
           sx={{ backgroundColor: "white", marginRight: 2 }}
           onClick={onHomeClick}
-          title={t("common.returnHome")}
+          title={t("pages.search")}
         >
           <HomeIcon />
+        </IconButton>
+      );
+    }
+  }
+
+  const renderSearchButton = () => {
+    if ((location.pathname === "/Admin")) {
+      return (
+        <IconButton
+          sx={{ backgroundColor: "white", marginRight: 2 }}
+          onClick={onHomeClick}
+          title={t("common.returnHome")}
+        >
+          <MapIcon />
         </IconButton>
       );
     }
@@ -142,7 +142,7 @@ export default function App() {
             {renderHomeButton()}
 
             <a href="https://accueilpourtous31.fr/">
-              <Button sx={{ backgroundColor: "white", color: "primary" }} startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
+              <Button sx={{ backgroundColor: "white" }} variant="outlined" startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
                 Retour à APT31
               </Button>
             </a>
@@ -151,15 +151,15 @@ export default function App() {
           <ToolbarGroup sx={{
             left: "50%", transform: "translateX(-50%);", position: "absolute"
           }}>
-            < Header > {menuTitel}</Header>
+            <Header> {menuTitel}</Header>
           </ToolbarGroup>
 
           <ToolbarGroup lastChild={true} float="right">
             {renderMonCompteButton()}
-            {renderEditProfileButton()}
+            {renderSearchButton()}
             <Select
               variant="standard"
-              sx={{ marginLeft: 2, backgroundColor: "white", padding: 0.5, borderRadius: 1, justifyContent: "right" }}
+              sx={{ backgroundColor: "white", padding: 0.5, borderRadius: 1, justifyContent: "right" }}
               value={currentLanguage}
               onChange={function (event) {
                 onChangeLanguage(event.target.value);

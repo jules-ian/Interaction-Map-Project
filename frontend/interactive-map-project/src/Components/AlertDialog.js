@@ -1,16 +1,15 @@
 // AlertDialog.js
 import React from "react";
 import { Dialog, DialogContent, DialogTitle, Button } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import Slide from '@mui/material/Slide';
 import TextInput from "../Components/TextInput";
-import {
-  approveProfessional,
-  declineProfessional,
-} from "../utils/BackendFunctions";
+import { isName } from "../utils/checkFunctions";
+
 
 export const SuccessDialog = ({ open, onClose, message }) => {
   const { t } = useTranslation();
@@ -165,11 +164,17 @@ export const PopUpAdminValidateDialog = ({ open, onClose, onReturn }) => {
 
 
 
+
 export const PopUpAdminDeclineDialog = ({ open, onClose, onReturn }) => {
   const { t } = useTranslation();
+  const [motif, setMotif] = useState("");
+  const [motifError, setMotifError] = useState(false);
 
   const handleClose = () => {//todo:verifier qu'un motif soit saisi
     onClose();
+    if (!isName(motif)) {
+      setMotifError(true);
+    }
   };
   const handleReturn = () => {
     onReturn();
@@ -199,16 +204,11 @@ export const PopUpAdminDeclineDialog = ({ open, onClose, onReturn }) => {
             {t("admin.askmotif")}
           </DialogContentText>
           <TextInput
-            autoFocus
-            required
-            margin="dense"
-            id="name"
             multiline={true}
-            name={t("admin.motif")}
             label={t("admin.motif")}
-            type="text"
-            fullWidth
-            variant="standard"
+            error={motifError}
+            setTextState={setMotif}
+            setErrorState={setMotifError}
           />
         </DialogContent>
         <DialogActions>

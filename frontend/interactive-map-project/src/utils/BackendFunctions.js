@@ -60,8 +60,11 @@ export function addNewProfessional(professional, callback) {
 }
 
 export function approveProfessional(professional, callback) {
+  console.log("pro = ", professional);
+  console.log("id = ", professional.id);
   let url =
     "https://localhost:7212/api/professional/validate/" + professional.id;
+
   const data = { approve: true };
   axios
     .post(url, data, {
@@ -95,16 +98,23 @@ export function declineProfessional(professional, callback) {
     });
 }
 
-export function checkIdentifiants(mail, password) {
+export function checkIdentifiants(mail, password, setReturn) {
+  let id = new Identifiants(mail, password);
+  console.log(id.toJSON());
   let url = "https://localhost:7212/api/account";
-  const id = new Identifiants(mail, password);
   axios
     .post(url, id.toJSON())
     .then((response) => {
-      return response.data;
+      if (response.data) {
+        setReturn(true);
+      }
+      else {
+        setReturn(false);
+      }
     })
     .catch((error) => {
-      console.error("Error email doesn't exist:", error);
+      console.log("Error mail doesn't exist:", error);
+      setReturn(false);
     });
 }
 
@@ -200,8 +210,6 @@ export function getEditedProfessionals(setResults) {
       console.error("Error sending post for search:", error);
     });
 }
-
-
 
 export function isAdmin(mail) {
   let url = "https://localhost:7212/api/admin/" + mail;

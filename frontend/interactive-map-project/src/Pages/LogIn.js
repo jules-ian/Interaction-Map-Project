@@ -1,5 +1,5 @@
-import { useCallback, useEffect } from "react";
-import { Box, Grid, Button, Link } from "@mui/material";
+import { useEffect } from "react";
+import { Box, Button, Link } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import useWindowDimensions from "../utils/windowDimension";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import PasswordInput from "../Components/PasswordInput";
 import { isEmail } from "../utils/checkFunctions";
 import { Text } from "../Components/Label";
 import { checkIdentifiants } from "../utils/BackendFunctions";
+import { ErrorDialog } from "../Components/AlertDialog";
 
 export default function LogIn({ setMenuTitel, loggedIn, user }) {
   useEffect(() => {
@@ -31,48 +32,41 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
 
 
   const [mail, setMail] = useState("");
-
   const [mailError, setMailError] = useState(false);
 
   const [passwd, setPswd] = useState("");
 
-  const [description, setDescription] = useState("");
-  const [descriptionError, setDescriptionError] = useState(false);
-  const [accept, setAccept] = useState(false);
-  const [acceptError, setAcceptError] = useState(false);
-
   const [errorMessage, setErrorMessage] = useState("");
   const [openErrorDialog, setOpenErrorDialog] = useState(false);
+  const onCloseErrorDialog = function () {
+    setOpenErrorDialog(false);
+  };
+
 
   const logInClick = function () {
     console.log("Connexion submitted");
-    let valid = checkIdentifiants(mail, passwd);
-    console.log(valid);
-    if (!valid) {
-      setErrorMessage(t("login.errorMessageFE"));
-      setOpenErrorDialog(true);
-      return;
-    }
-    if (valid) {
-      navigate("/Search", { replace: true });
-    };
-  }
-
-  const checkEntries = function () { //todo : différencier les types de forms invalides
-    let checkSuccess = true;
-    // Mail
     if (!isEmail(mail)) {
       setMailError(true);
-      checkSuccess = false;
     }
+    checkIdentifiants(mail, passwd, (valid) => {
+      if (!valid) {
+        console.log("Wrong identifiants");
+        setErrorMessage(t("login.wrongID"));
+        setOpenErrorDialog(true);
+      }
+      else {
+        console.log("Good identifiants");
+        navigate("/Search", { replace: true });
+      };
+    });
   }
 
   const catergoryHeaderProps = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 35,
-    marginBottom: 3
+    fontSize: 30,
+    marginBottom: 2
   };
 
   return (
@@ -84,11 +78,19 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
         alignItems: "center",
       }}
     >
+      <ErrorDialog
+        message={errorMessage}
+        onClose={onCloseErrorDialog}
+        open={openErrorDialog}
+      />
+
       <Box sx={{ width: 0.55 }}>
         <Text sx={catergoryHeaderProps}>{t("login.logInDescription")}</Text>
         <TextInput
           label={t("professional.email")}
+          error={mailError}
           setTextState={setMail}
+          setErrorState={setMailError}
           multiline={true}
         />
         <PasswordInput

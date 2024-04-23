@@ -10,19 +10,19 @@ public class ValidationStatusConfiguration : IEntityTypeConfiguration<Validation
     {
         builder.ToTable("ValidationStatuses");
 
-        builder.HasKey(p => p.Id);
+        builder.HasKey(vs => vs.Id);
 
         builder
-            .HasMany(p => p.Professionals)
+            .HasMany(vs => vs.Professionals)
             .WithOne(p => p.ValidationStatus)
             .HasForeignKey(p => p.ValidationStatusId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder
-            .HasMany(p => p.PendingProfessionals)
+            .HasMany(vs => vs.PendingProfessionals)
             .WithOne(p => p.ValidationStatus)
             .HasForeignKey(p => p.ValidationStatusId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasData(
             new ValidationStatus(Guid.NewGuid(), "Approved"),

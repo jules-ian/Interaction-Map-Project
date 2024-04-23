@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
 import { PopUpDialogEditProfil } from "../Components/AlertDialog";
-import { Link as RouterLink } from "react-router-dom";
+
 
 export default function EditProfil({ setMenuTitel }) {
     const { t } = useTranslation();
@@ -270,16 +270,7 @@ export default function EditProfil({ setMenuTitel }) {
                 open={openErrorDialog}
             />
             <Box sx={{ textAlign: "left", margin: 5 }}>
-                <Header>{t("profil.edit")}
-                    <Button
-                        component={RouterLink}
-                        to="/EditPassword"
-                        variant="contained"
-                        sx={{ borderRadius: "20px", marginLeft: "40px" }}
-                    >
-                        {t("editpswd.modifpsw")}
-                    </Button>
-                </Header>
+                <Header>{t("profil.edit")}</Header>
 
             </Box>
             <Grid paddingX={10} container spacing={2}>

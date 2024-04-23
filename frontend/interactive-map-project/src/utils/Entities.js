@@ -125,8 +125,8 @@ export class Identifiants {
   }
   toJSON() {
     return {
-      name: this.name,
-      passwd: this.passwd
+      Email: this.mail,
+      Password: this.passwd
     }
   };
 }
