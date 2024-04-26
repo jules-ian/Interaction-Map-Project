@@ -15,7 +15,7 @@ export default function TextInput({
         id="outlined-basic"
         label={label}
         variant="outlined"
-        fullWidth="true"
+        fullWidth={true}
         helperText={error ? helperText : ""}
         error={error}
         multiline={multiline}

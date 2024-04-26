@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PasswordInput from "../Components/PasswordInput";
 import { Text } from "../Components/Label";
+import { isName } from "../utils/checkFunctions";
 
 
 export default function EditPassword({ setMenuTitel }) {
@@ -27,7 +28,14 @@ export default function EditPassword({ setMenuTitel }) {
     const navigate = useNavigate();
     const { width, height } = useWindowDimensions();
 
+    const [errorMessage, setErrorMessage] = useState("");
+    const [openErrorDialog, setOpenErrorDialog] = useState(false);
+    const onCloseErrorDialog = function () {
+        setOpenErrorDialog(false);
+    };
+
     const [current, setCurrentPw] = useState("");
+    const [pswdError, setPswdError] = useState(false);
     const [pswd1, setPswd1] = useState("");
     const [pswd2, setPswd2] = useState("");
 
@@ -42,8 +50,14 @@ export default function EditPassword({ setMenuTitel }) {
     };
 
     const checkUpdatePswd = () => {
+        if (!isName(current) || !isName(pswd1) || !isName(pswd2)) {
+            setPswdError(false);
+            setErrorMessage(t("test pswd vide"));
+            setOpenErrorDialog(true);
+        }
+
         //TODO : get current password (check if sme as DB) + check new password valid (characters, length, ...)
-        if (pswd1 === pswd2) {
+        if ((pswd1 === pswd2)) {
             return true;
         } else {
             return false;
@@ -64,7 +78,9 @@ export default function EditPassword({ setMenuTitel }) {
                 <Text sx={catergoryHeaderProps}>{t("editpswd.subtitle")}</Text>
 
                 <PasswordInput
+                    error={pswdError}
                     setTextState={setCurrentPw}
+                    setErrorState={setPswdError}
                     setLabel={t("editpswd.currentPswd")}
                     multiline={true}
                 />
@@ -74,6 +90,7 @@ export default function EditPassword({ setMenuTitel }) {
                     setLabel={t("editpswd.newPswd")}
                     multiline={true}
                 />
+
                 <PasswordInput
                     setTextState={setPswd2}
                     setLabel={t("editpswd.confirmPswd")}

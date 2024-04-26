@@ -10,7 +10,7 @@ function SearchBar() {
         id="outlined-basic"
         label={t("common.search")}
         variant="outlined"
-        fullWidth="true"
+        fullWidth={true}
         onKeyDown={(event) => {
           if (event.key === "Enter") {
             // handle events here

@@ -4,6 +4,7 @@ using InteractiveMapProject.API.Middleware;
 using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Common.Profiles;
+using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
@@ -88,6 +89,7 @@ public class Program
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -134,26 +136,26 @@ public class Program
             await roleService.CreateAsync(UserRoles.SuperAdmin);
         }
 
-        /*using (var scope = app.Services.CreateScope())
+        using (var scope = app.Services.CreateScope())
         {
             var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
-            string adminEmail = "referente_apt31@cocagne31.org";
-            string adminPassword = "Apt31@2024";
-            await userService.CreateAsync(adminEmail, adminPassword);
 
-            if (await userManager.FindByEmailAsync(adminEmail) == null)
+            string adminEmail = "admin@admin.fr";
+            string adminPassword = "password";
+            if(await userService.GetAsync(adminEmail) == null)
             {
-                var user = new IdentityUser();
-                user.UserName = adminEmail;
-                user.Email = adminEmail;
-                user.EmailConfirmed = true;
-
-                await userManager.CreateAsync(user, adminPassword);
-
-                await userManager.AddToRoleAsync(user, "Super-Admin");
+                await userService.CreateAsync(adminEmail, adminPassword);
+                await userService.AddToRoleAsync(adminEmail, UserRoles.SuperAdmin);
             }
 
-        }*/
+            string professionalEmail = "pro@pro.fr";
+            string professionalPassword = "password";
+            if (await userService.GetAsync(professionalEmail) == null)
+            {
+                await userService.CreateAsync(professionalEmail, professionalPassword);
+                await userService.AddToRoleAsync(professionalEmail, UserRoles.Professional);
+            }
+        }
 
         app.Run();
 

@@ -48,13 +48,13 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
     if (!isEmail(mail)) {
       setMailError(true);
     }
-    checkIdentifiants(mail, passwd, (valid) => {
-      if (!valid) {
+    checkIdentifiants(mail, passwd, (tok) => {
+      if (tok == null) {
         console.log("Wrong identifiants");
         setErrorMessage(t("login.wrongID"));
         setOpenErrorDialog(true);
       }
-      else {
+      else { //TODO : checker si c'est un admin ou non
         console.log("Good identifiants");
         navigate("/Search", { replace: true });
       };

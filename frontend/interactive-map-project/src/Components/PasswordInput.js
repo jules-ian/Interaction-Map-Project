@@ -15,7 +15,7 @@ export default function PasswordInput({
                 label={setLabel}
                 type="password"
                 variant="outlined"
-                fullWidth="true"
+                fullWidth={true}
                 autoComplete="current-password"
                 onChange={(event) => {
                     setErrorState(false);

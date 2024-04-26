@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Slide from '@mui/material/Slide';
 import TextInput from "../Components/TextInput";
-import { isName } from "../utils/checkFunctions";
 
 
 export const SuccessDialog = ({ open, onClose, message }) => {
@@ -87,6 +86,7 @@ export const PopUpDialog = ({ open, onClose }) => {
 export const PopUpDialogEditProfil = ({ open, onClose }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
 
   const handleClose = () => {
     onClose(); //todo : modifier les infos dans la base de données
@@ -170,10 +170,13 @@ export const PopUpAdminDeclineDialog = ({ open, onClose, onReturn }) => {
   const [motif, setMotif] = useState("");
   const [motifError, setMotifError] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleClose = () => {//todo:verifier qu'un motif soit saisi
     onClose();
-    if (!isName(motif)) {
+    if (motif.length < 5) {
       setMotifError(true);
+      setErrorMessage(t("pas de motif !!!!!!!!!!!"));
     }
   };
   const handleReturn = () => {

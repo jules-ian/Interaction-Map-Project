@@ -18,12 +18,12 @@
     "subheaderForgotPassword": "Please, enter your email. You will receive an email with a link to change your password"
   },
   "editpswd": {
-    "titlepage": "Change my password",
+    "titlepage": "Edit password",
     "subtitle": "Type the new chosen password and confirm it",
     "currentPswd": "Former Password",
     "newPswd": "New Password",
     "confirmPswd": "Confirm New Password",
-    "modifpsw": "Update your paassword"
+    "modifpsw": "Edit password"
   },
   "form": {
     "charter": "I accept the above conditions and charter",

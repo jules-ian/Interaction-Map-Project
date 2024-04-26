@@ -125,10 +125,20 @@ export class Identifiants {
   }
   toJSON() {
     return {
-      Email: this.mail,
-      Password: this.passwd
+      email: this.mail,
+      password: this.passwd
     }
   };
+}
+export class Token {
+  constructor(token, exp) {
+    this.token = token;
+    this.exp = exp;
+  }
+}
+export function tokenFromJSON(json) {
+  console.log("**********token = ", json.token, json.expiration);
+  return new Token(json.token, json.expiration);
 }
 
 const dummyAdd = new Address("dummystreet", "dummycity", "000000");

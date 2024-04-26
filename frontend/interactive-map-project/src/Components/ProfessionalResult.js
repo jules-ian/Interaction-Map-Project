@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import useWindowDimensions from "../utils/windowDimension";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect } from "react";
 import { Text } from "./Label";
 import { useTranslation } from "react-i18next";
 
@@ -26,20 +26,20 @@ export default function ResultCardDisplay({
       flexWrap="nowrap"
       overflow="auto"
     >
-      {results.length != 0 ? (
+      {results.length !== 0 ? (
         results.map((professional) => (
           <ProfessionalCard
             professional={professional}
             width={width * 0.2}
             height={height * 0.15}
-            other={{ flexShrink: 0 }}
+            other={{ backgroundColor: '#efffff', flexShrink: 0 }}
             setOnClick={setSelectedProfessional}
             setOpenPopover={setOpenPopover}
           />
         ))
       ) : (
         <ResultCard>
-          <Text>{t("common.noResults")}</Text>
+          <Text >{t("common.noResults")}</Text>
         </ResultCard>
       )}
     </Box>
@@ -69,7 +69,8 @@ function ProfessionalCard({
           professional.establishmentType}
       </Typography>
       <Button
-        variant="contained"
+        variant="outlined"
+        sx={{ backgroundColor: '#ffffff' }}
         fullWidth
         onClick={() => {
           setOpenPopover(true);
@@ -78,7 +79,7 @@ function ProfessionalCard({
       >
         {t("common.moreInfo")}
       </Button>
-    </ResultCard>
+    </ResultCard >
   );
 }
 

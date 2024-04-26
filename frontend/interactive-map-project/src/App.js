@@ -138,7 +138,7 @@ export default function App() {
       />
       <AppBar position="sticky" sx={{ backgroundColor: '#5DD3E4' }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <ToolbarGroup firstChild={true} float="left" >
+          <ToolbarGroup firstchild={true} float="left" >
             {renderHomeButton()}
 
             <a href="https://accueilpourtous31.fr/">
@@ -154,7 +154,7 @@ export default function App() {
             <Header> {menuTitel}</Header>
           </ToolbarGroup>
 
-          <ToolbarGroup lastChild={true} float="right">
+          <ToolbarGroup lastchild={true} float="right">
             {renderMonCompteButton()}
             {renderSearchButton()}
             <Select

@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   professionalFromJSON,
+  tokenFromJSON,
   Identifiants
 } from "./Entities";
 
@@ -100,21 +101,16 @@ export function declineProfessional(professional, callback) {
 
 export function checkIdentifiants(mail, password, setReturn) {
   let id = new Identifiants(mail, password);
-  console.log(id.toJSON());
-  let url = "https://localhost:7212/api/account";
+  let url = "https://localhost:7212/api/account/login";
   axios
     .post(url, id.toJSON())
     .then((response) => {
-      if (response.data) {
-        setReturn(true);
-      }
-      else {
-        setReturn(false);
-      }
+      let tok = tokenFromJSON(response.data);
+      setReturn(tok);
     })
     .catch((error) => {
-      console.log("Error mail doesn't exist:", error);
-      setReturn(false);
+      console.log("Error due to wrong id:", error);
+      setReturn(null);
     });
 }
 
