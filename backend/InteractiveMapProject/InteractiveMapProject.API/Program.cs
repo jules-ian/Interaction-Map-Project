@@ -62,6 +62,9 @@ public class Program
         var emailconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
         builder.Services.AddSingleton(emailconfig);
 
+        builder.Services.Configure<DataProtectionTokenProviderOptions>(
+            options => options.TokenLifespan = TimeSpan.FromHours(2));
+
         // config for required email
         builder.Services.Configure<IdentityOptions>(
             options => options.SignIn.RequireConfirmedEmail = true
