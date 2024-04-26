@@ -1,10 +1,11 @@
+using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InteractiveMapProject.API.Controllers;
 
-[Authorize(Roles="Admin")]
+[Authorize(Roles = UserRoles.Admin)]
 [ApiController]
 [Route("api/validation-status")]
 public class ValidationStatusController : ControllerBase

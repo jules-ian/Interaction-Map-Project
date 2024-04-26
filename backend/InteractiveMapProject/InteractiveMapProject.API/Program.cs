@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using InteractiveMapProject.API.Middleware;
@@ -14,8 +15,10 @@ using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.UoW;
 using InteractiveMapProject.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 public class Program
 {
@@ -37,6 +40,28 @@ public class Program
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+        // Adding Authentication
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        // Adding Jwt Bearer
+        .AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                //ValidAudience = configuration["JWT:ValidAudience"],
+                //ValidIssuer = configuration["JWT:ValidIssuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT")["Secret"]))
+            };
+        });
+
         builder.Services.Configure<IdentityOptions>(options =>
         {
             // Password settings.
@@ -46,16 +71,27 @@ public class Program
             options.Password.RequireUppercase = false;
             options.Password.RequiredLength = 6;
             options.Password.RequiredUniqueChars = 1;
-/*
-            // Lockout settings.
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            options.Lockout.MaxFailedAccessAttempts = 5;
-            options.Lockout.AllowedForNewUsers = true;
+            /*
+                        // Lockout settings.
+                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                        options.Lockout.MaxFailedAccessAttempts = 5;
+                        options.Lockout.AllowedForNewUsers = true;
 
-            // User settings.
-            options.User.AllowedUserNameCharacters =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            options.User.RequireUniqueEmail = true;*/
+                        // User settings.
+                        options.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                        options.User.RequireUniqueEmail = true;*/
+        });
+
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminOrSuperAdmin", policy =>
+                policy.RequireRole(UserRoles.SuperAdmin, UserRoles.Admin));
+        });
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("ProfessionalOrAdminOrSuperAdmin", policy =>
+                policy.RequireRole(UserRoles.Professional, UserRoles.Admin, UserRoles.SuperAdmin));
         });
 
         builder.Services
@@ -89,6 +125,7 @@ public class Program
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 

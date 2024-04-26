@@ -5,6 +5,7 @@ using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -28,6 +29,7 @@ public class UserController : ControllerBase
 
     }
 
+    [Authorize(Roles = UserRoles.SuperAdmin)]
     [HttpGet("{email}", Name = "GetUser")]
     public async Task<IActionResult> GetUser([FromRoute] string email)
     {
@@ -39,6 +41,7 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
+    [Authorize(Policy = "AdminOrSuperAdmin")]
     [HttpPost("professional/create", Name = "CreateProfessionalAccount")]
     public async Task<IActionResult> CreateProfessionalAccount([FromBody] UserCredentialsDto credentials)
     {
@@ -51,6 +54,7 @@ public class UserController : ControllerBase
         return Ok();
     }
 
+    [Authorize(Roles = UserRoles.SuperAdmin)]
     [HttpPost("admin/create", Name = "CreateAdminAccount")]
     public async Task<IActionResult> CreateAdminAccount([FromBody] UserCredentialsDto credentials)
     {
@@ -79,6 +83,8 @@ public class UserController : ControllerBase
         return Ok(result);
     }*/
 
+
+    [AllowAnonymous]
     [HttpPost("login", Name = "CheckUserCredentials")]
     public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
@@ -113,7 +119,8 @@ public class UserController : ControllerBase
         return Unauthorized();
     }
 
-[HttpDelete("{email}", Name = "DeleteUser")]
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+    [HttpDelete("{email}", Name = "DeleteUser")]
     public async Task<IActionResult> DeleteUser([FromRoute] string email)
     {
         await _userService.DeleteAsync(email);
