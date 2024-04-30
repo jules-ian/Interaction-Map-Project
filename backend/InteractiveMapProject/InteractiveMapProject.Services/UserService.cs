@@ -23,14 +23,11 @@ public class UserService : IUserService
             UserName = email,
             Email = email
         };
-        await _userManager.CreateAsync(user, password);
-    }
-
-    public async Task<IdentityUser> GetAsync(Guid id)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-
-        return user;
+        var result = await _userManager.CreateAsync(user, password);
+        if (!result.Succeeded)
+        {
+            throw new Exception(result.Errors.First().Description);
+        }
     }
 
     public async Task<IdentityUser> GetAsync(string email)
@@ -40,32 +37,12 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task DeleteAsync(Guid id)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            await _userManager.DeleteAsync(user);
-        }
-    }
-
     public async Task DeleteAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user != null)
         {
             await _userManager.DeleteAsync(user);
-        }
-    }
-
-    public async Task UpdateEmailAsync(Guid id, string newEmail)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            user.Email = newEmail;
-            user.UserName = newEmail;
-            await _userManager.UpdateAsync(user);
         }
     }
 
@@ -80,16 +57,6 @@ public class UserService : IUserService
         }
     }
 
-    public async Task UpdatePasswordAsync(Guid id, string newPassword)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            await _userManager.ResetPasswordAsync(user, token, newPassword);
-        }
-    }
-
     public async Task UpdatePasswordAsync(string email, string newPassword)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -100,30 +67,12 @@ public class UserService : IUserService
         }
     }
 
-    public async Task AddToRoleAsync(Guid id, string roleName)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            await _userManager.AddToRoleAsync(user, roleName);
-        }
-    }
-
     public async Task AddToRoleAsync(string email, string roleName)
     {
-        var user = await _userManager.FindByIdAsync(email);
+        var user = await _userManager.FindByEmailAsync(email);
         if (user != null)
         {
             await _userManager.AddToRoleAsync(user, roleName);
-        }
-    }
-
-    public async Task RemoveFromRoleAsync(Guid id, string roleName)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            await _userManager.RemoveFromRoleAsync(user, roleName);
         }
     }
 
@@ -134,17 +83,6 @@ public class UserService : IUserService
         {
             await _userManager.RemoveFromRoleAsync(user, roleName);
         }
-    }
-
-    public async Task<List<string>> GetRolesAsync(Guid id)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            var roles = await _userManager.GetRolesAsync(user);
-            return roles.ToList();
-        }
-        return null;
     }
 
     public async Task<List<string>> GetRolesAsync(string email)
@@ -158,16 +96,6 @@ public class UserService : IUserService
         return null;
     }
 
-    public async Task<bool> IsInRoleAsync(Guid id, string roleName)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            return await _userManager.IsInRoleAsync(user, roleName);
-        }
-        return false;
-    }
-
     public async Task<bool> IsInRoleAsync(string email, string roleName)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -178,25 +106,14 @@ public class UserService : IUserService
         return false;
     }
 
-    public async Task<bool> CheckPasswordAsync(Guid id, string password)
-    {
-        var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user != null)
-        {
-            return await _userManager.CheckPasswordAsync(user, password);
-        }
-        return false;
-    }
-
     public async Task<bool> CheckPasswordAsync(string email, string password)
     {
         var user = await _userManager.FindByEmailAsync(email);
-        if (user != null)
+        if (user != null && await _userManager.CheckPasswordAsync(user, password))
         {
-            return await _userManager.CheckPasswordAsync(user, password);
+            return true;
         }
         return false;
     }
-
 
 }

@@ -1,10 +1,13 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using InteractiveMapProject.API.Email;
 using InteractiveMapProject.API.Email_Services;
 using InteractiveMapProject.API.Middleware;
+using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.API.Validators;
 using InteractiveMapProject.Common.Profiles;
+using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Filtering;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
@@ -14,8 +17,10 @@ using InteractiveMapProject.Contracts.UoW;
 using InteractiveMapProject.Data.Db.Context;
 using InteractiveMapProject.Data.Db.UoW;
 using InteractiveMapProject.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 public class Program
 {
@@ -37,26 +42,59 @@ public class Program
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        /*builder.Services.Configure<IdentityOptions>(options =>
+        // Adding Authentication
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        // Adding Jwt Bearer
+        .AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                //ValidAudience = configuration["JWT:ValidAudience"],
+                //ValidIssuer = configuration["JWT:ValidIssuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT")["Secret"]))
+            };
+        });
+
+        builder.Services.Configure<IdentityOptions>(options =>
         {
             // Password settings.
-            options.Password.RequireDigit = true;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireNonAlphanumeric = true;
-            options.Password.RequireUppercase = true;
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
             options.Password.RequiredLength = 6;
             options.Password.RequiredUniqueChars = 1;
+            /*
+                        // Lockout settings.
+                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                        options.Lockout.MaxFailedAccessAttempts = 5;
+                        options.Lockout.AllowedForNewUsers = true;
 
-            // Lockout settings.
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            options.Lockout.MaxFailedAccessAttempts = 5;
-            options.Lockout.AllowedForNewUsers = true;
+                        // User settings.
+                        options.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                        options.User.RequireUniqueEmail = true;*/
+        });
 
-            // User settings.
-            options.User.AllowedUserNameCharacters =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            options.User.RequireUniqueEmail = true;
-        });*/
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminOrSuperAdmin", policy =>
+                policy.RequireRole(UserRoles.SuperAdmin, UserRoles.Admin));
+        });
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("ProfessionalOrAdminOrSuperAdmin", policy =>
+                policy.RequireRole(UserRoles.Professional, UserRoles.Admin, UserRoles.SuperAdmin));
+        });
 
         //Add email configs
         var emailconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
@@ -103,6 +141,7 @@ public class Program
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
+        builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -144,32 +183,31 @@ public class Program
         using (var scope = app.Services.CreateScope())
         {
             var roleService = scope.ServiceProvider.GetRequiredService<IRoleService>();
-            await roleService.CreateAsync("Professional");
-            await roleService.CreateAsync("Admin");
-            await roleService.CreateAsync("Super-Admin");
-
+            await roleService.CreateAsync(UserRoles.Professional);
+            await roleService.CreateAsync(UserRoles.Admin);
+            await roleService.CreateAsync(UserRoles.SuperAdmin);
         }
 
-        /*using (var scope = app.Services.CreateScope())
+        using (var scope = app.Services.CreateScope())
         {
             var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
-            string adminEmail = "referente_apt31@cocagne31.org";
-            string adminPassword = "Apt31@2024";
-            await userService.CreateAsync(adminEmail, adminPassword);
 
-            if (await userManager.FindByEmailAsync(adminEmail) == null)
+            string adminEmail = "admin@admin.fr";
+            string adminPassword = "password";
+            if(await userService.GetAsync(adminEmail) == null)
             {
-                var user = new IdentityUser();
-                user.UserName = adminEmail;
-                user.Email = adminEmail;
-                user.EmailConfirmed = true;
-
-                await userManager.CreateAsync(user, adminPassword);
-
-                await userManager.AddToRoleAsync(user, "Super-Admin");
+                await userService.CreateAsync(adminEmail, adminPassword);
+                await userService.AddToRoleAsync(adminEmail, UserRoles.SuperAdmin);
             }
 
-        }*/
+            string professionalEmail = "pro@pro.fr";
+            string professionalPassword = "password";
+            if (await userService.GetAsync(professionalEmail) == null)
+            {
+                await userService.CreateAsync(professionalEmail, professionalPassword);
+                await userService.AddToRoleAsync(professionalEmail, UserRoles.Professional);
+            }
+        }
 
         app.Run();
 

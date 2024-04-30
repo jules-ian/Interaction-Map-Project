@@ -2,60 +2,137 @@ using System.ComponentModel.DataAnnotations;
 using InteractiveMapProject.API.Email;
 using InteractiveMapProject.API.Email_Services;
 using InteractiveMapProject.Contracts.Entities;
+using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using InteractiveMapProject.API.Utilities;
+using InteractiveMapProject.API.Validators;
+using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using NuGet.Common;
 
 namespace InteractiveMapProject.API.Controllers;
 
 [ApiController]
-[Route("api/user")]
+[Route("api/account")]
 public class UserController : ControllerBase
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IUserService _userService;
     private readonly IEmailService _emailService;
 
-    public UserController(IUserService userService,IEmailService emailService)
+    public UserController(IUserService userService, ITokenGeneratorService tokenGeneratorService, CreateUserRequestValidator createUserRequestValidator,IEmailService emailService)
     {
         _userService = userService;
+        _tokenGeneratorService = tokenGeneratorService;
+        _createUserRequestValidator = createUserRequestValidator;
         _emailService = emailService;
+
     }
 
-    [HttpGet("{email}", Name = "GetUserByEmail")]
-    public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+    [HttpGet("{email}", Name = "GetUser")]
+    public async Task<IActionResult> GetUser([FromRoute] string email)
     {
         var user = await _userService.GetAsync(email);
+        if (user == null)
+        {
+            return NotFound();
+        }
         return Ok(user);
     }
 
-    [HttpPost("create", Name = "CreateUser")]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+    [HttpPost("professional/create", Name = "CreateProfessionalAccount")]
+    public async Task<IActionResult> CreateProfessionalAccount([FromBody] UserCredentialsDto credentials)
     {
-        var user = await _userManager.FindByEmailAsync(request.Email);
-        // TODO: Check email exists
-
-
-        if (!ModelState.IsValid)
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
         {
             return BadRequest(ModelState);
         }
-        await _userService.CreateAsync(request.Email, request.Password);
-
-        // Add role
-        // Add token to verify email
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user.Email }, Request.Scheme);
-        var message = new Message(new string[] { user.Email! }, "Confirmation email link", confirmationLink!);
-        _emailService.SendEmail(message);
-
-
-
+        await _userService.CreateAsync(credentials.Email, credentials.Password);
+        await _userService.AddToRoleAsync(credentials.Email, UserRoles.Professional);
         return Ok();
     }
+
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+    [HttpPost("admin/create", Name = "CreateAdminAccount")]
+    public async Task<IActionResult> CreateAdminAccount([FromBody] UserCredentialsDto credentials)
+    {
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        await _userService.CreateAsync(credentials.Email, credentials.Password);
+        await _userService.AddToRoleAsync(credentials.Email, UserRoles.Admin);
+        return Ok();
+    }
+
+    /*[HttpPost("login", Name = "CheckUserCredentials")]
+    public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
+    {
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
+        {
+            return BadRequest("Email not valid or empty credentials fields");
+        }
+        var user = await _userService.GetAsync(credentials.Email);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        var result = await _userService.CheckPasswordAsync(credentials.Email, credentials.Password);
+        return Ok(result);
+    }*/
+
+
+    [AllowAnonymous]
+    [HttpPost("login", Name = "CheckUserCredentials")]
+    public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
+    {
+        if (!_createUserRequestValidator.Validate(credentials).IsValid)
+        {
+            return BadRequest("Email not valid or empty credentials fields");
+        }
+        var user = await _userService.GetAsync(credentials.Email);
+        if (user != null && await _userService.CheckPasswordAsync(credentials.Email, credentials.Password))
+        {
+            var userRoles = await _userService.GetRolesAsync(credentials.Email);
+
+            var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+            var token = _tokenGeneratorService.GetToken(authClaims);
+
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            });
+        }
+        return Unauthorized();
+    }
+
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+    [HttpDelete("{email}", Name = "DeleteUser")]
+    public async Task<IActionResult> DeleteUser([FromRoute] string email)
+    {
+        await _userService.DeleteAsync(email);
+        return Ok();
+    }
+        
 
     [HttpGet]
     public async Task<IActionResult> TestEmail()
