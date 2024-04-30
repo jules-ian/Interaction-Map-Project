@@ -1,7 +1,7 @@
 using MimeKit;
 
 namespace InteractiveMapProject.API.Email;
-internal class Message
+public class Message
 {
     public List<MailboxAddress> To { get; set; }
 
