@@ -25,6 +25,8 @@ public class UserController : ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IUserService _userService;
     private readonly IEmailService _emailService;
+    private readonly ITokenGeneratorService _tokenGeneratorService;
+    private readonly CreateUserRequestValidator _createUserRequestValidator;
 
     public UserController(IUserService userService, ITokenGeneratorService tokenGeneratorService, CreateUserRequestValidator createUserRequestValidator,IEmailService emailService)
     {
