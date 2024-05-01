@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InteractiveMapProject.Contracts.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace InteractiveMapProject.Contracts.Services;
@@ -18,4 +19,9 @@ public interface IUserService
     Task<List<string>> GetRolesAsync(string email);
     Task<bool> IsInRoleAsync(string email, string roleName);
     Task<bool> CheckPasswordAsync(string email, string password);
+    Task ConfirmEmailAsync(string email, string token);
+    Task<string> GenerateEmailConfirmationTokenAsync(string email);
+    Task<string> GeneratePasswordResetTokenAsync(string email);
+    Task ResetPasswordAsync(ResetPassword resetpwd);
+
 }

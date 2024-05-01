@@ -6,7 +6,7 @@ namespace InteractiveMapProject.Contracts.Entities;
 {
     [Required]
     public string Password { get; set; } = null!;
-    [Compare("Password")]
+    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
 
     public string PasswordConfirmation { get; set; } = null!;
     public string Email { get; set; } = null!;

@@ -22,7 +22,6 @@ namespace InteractiveMapProject.API.Controllers;
 [Route("api/account")]
 public class UserController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> _userManager;
     private readonly IUserService _userService;
     private readonly IEmailService _emailService;
     private readonly ITokenGeneratorService _tokenGeneratorService;
@@ -59,6 +58,11 @@ public class UserController : ControllerBase
         }
         await _userService.CreateAsync(credentials.Email, credentials.Password);
         await _userService.AddToRoleAsync(credentials.Email, UserRoles.Professional);
+        // add token to verify mail
+        var token = await _userService.GenerateEmailConfirmationTokenAsync(credentials.Email);
+        var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = credentials.Email }, Request.Scheme);
+        var message = new Message(new string[] { credentials.Email! }, "Confirmation email link", confirmationLink!);
+        _emailService.SendEmail(message);
         return Ok();
     }
 
@@ -134,41 +138,35 @@ public class UserController : ControllerBase
         await _userService.DeleteAsync(email);
         return Ok();
     }
-        
+
+    /*
 
     [HttpGet]
     public async Task<IActionResult> TestEmail()
     {
         // TODO: change client's adresse email
-        var message = new Message(new string[] { "xxx@gmail.com" }, "TEST PIR", "Test message content");
+        var message = new Message(new string[] { "zhuxuxinapp@gmail.com" }, "<h1>TEST PIR</h1>", "Test message content");
         _emailService.SendEmail(message);
         return Ok();
     }
-
+    */
     [HttpGet("ConfirmEmail")]
     public async Task<IActionResult> ConfirmEmail(string token, string email)
     {
-
-        var user = await _userManager.FindByEmailAsync(email);
-        if (user != null)
-        {
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                return Ok();
-            }
-        }
-        return NotFound();
+        await _userService.ConfirmEmailAsync(email, token);
+        return Ok();
     }
 
     [HttpPost]
     [AllowAnonymous]
+    [Route("forgot-password")]
     public async Task<IActionResult> ForgotPassword([Required] string email)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userService.GetAsync(email);
         if (user != null)
         {
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            // TODO: think about parameter
+            var token = await _userService.GeneratePasswordResetTokenAsync(email);
             var forgotlink = Url.Action("ResetPassword", "Authentication", new { token, email = user.Email }, Request.Scheme);
             var message = new Message(new string[] { user.Email! }, "Forget Password resend email link", forgotlink!);
             _emailService.SendEmail(message);
@@ -184,6 +182,15 @@ public class UserController : ControllerBase
         return Ok(new{
             example
         });
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    [Route("reset-password")]
+    public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
+    {
+        await _userService.ResetPasswordAsync(resetPassword);
+        return Ok();
     }
 
 
