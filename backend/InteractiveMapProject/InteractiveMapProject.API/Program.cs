@@ -41,7 +41,6 @@ builder.Services.Configure<GeoapifySettings>(builder.Configuration.GetSection("G
 builder.Services.AddScoped<IFilterFactory<Professional, ProfessionalFilterRequest>, ProfessionalFilterFactory>();
 
 builder.Services.AddHttpClient();
-
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IGeocodingService, GeoapifyGeocodingService>();
 builder.Services.AddScoped<IProfessionalService, ProfessionalService>();
@@ -74,6 +73,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles();
+
+app.MapGet("/myapp.bundle.js", () =>
+{
+    // Return the contents of your bundle file
+    return File.ReadAllText("myapp.bundle.js");
+});
 
 
 app.UseCors(MyAllowSpecificOrigins);
