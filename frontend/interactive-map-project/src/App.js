@@ -147,10 +147,7 @@ export default function App() {
             {renderHomeButton()}
 
             <a href="https://accueilpourtous31.fr/">
-              <Button sx={{
-                backgroundColor: "white", backgroundImage: "url(https://accueilpourtous31.fr/wp-content/themes/apt31/css/img/fond-body.gif')",
-                backgroundSize: "cover"
-              }} variant="outlined" startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
+              <Button sx={{ backgroundColor: "white" }} variant="outlined" startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
                 Retour à APT31
               </Button>
             </a>
