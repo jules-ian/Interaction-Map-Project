@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { setTokenUser } from "../App";
 import { Box, Button, Link } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import useWindowDimensions from "../utils/windowDimension";
@@ -8,7 +9,7 @@ import TextInput from "../Components/TextInput";
 import PasswordInput from "../Components/PasswordInput";
 import { isEmail } from "../utils/checkFunctions";
 import { Text } from "../Components/Label";
-import { checkIdentifiants } from "../utils/BackendFunctions";
+import { checkIdentifiants, getToken } from "../utils/BackendFunctions";
 import { ErrorDialog } from "../Components/AlertDialog";
 
 export default function LogIn({ setMenuTitel, loggedIn, user }) {
@@ -53,11 +54,19 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
         console.log("Wrong identifiants");
         setErrorMessage(t("login.wrongID"));
         setOpenErrorDialog(true);
+      } else {
+        console.log(getToken(tok));
+        if (getToken(tok).token === "Professional") {
+          setTokenUser(tok);
+          console.log("Good professionnal identifiants");
+          navigate("/Search", { replace: true });
+        } else if (getToken(tok).token === "Admin") {
+          setTokenUser(tok);
+          console.log("Good admin identifiants");
+          navigate("/Admin", { replace: true });
+        }
       }
-      else { //TODO : checker si c'est un admin ou non
-        console.log("Good identifiants");
-        navigate("/Search", { replace: true });
-      };
+
     });
   }
 

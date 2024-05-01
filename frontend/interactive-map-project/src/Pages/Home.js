@@ -17,7 +17,7 @@ export default function Home({ setMenuTitel }) {
         height: height * 0.5,
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
       }}
     >
       <Box sx={{ width: 0.3, textAlign: 'center' }}>

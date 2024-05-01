@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import PasswordInput from "../Components/PasswordInput";
 import { Text } from "../Components/Label";
 import { isName } from "../utils/checkFunctions";
-
+import { getToken } from "../utils/BackendFunctions";
+import { tokenUser } from "../App";
 
 export default function EditPassword({ setMenuTitel }) {
     useEffect(() => {
@@ -63,46 +64,50 @@ export default function EditPassword({ setMenuTitel }) {
             return false;
         }
     }
+    const tok = getToken(tokenUser).token;
+    if (tok === "Professional" | tok === "Admin") {
+
+        return (
+            <Box
+                sx={{
+                    height: height * 0.9,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <Box sx={{ width: 0.55 }}>
+                    <Text sx={catergoryHeaderProps}>{t("editpswd.subtitle")}</Text>
+
+                    <PasswordInput
+                        error={pswdError}
+                        setTextState={setCurrentPw}
+                        setErrorState={setPswdError}
+                        setLabel={t("editpswd.currentPswd")}
+                        multiline={true}
+                    />
+
+                    <PasswordInput
+                        setTextState={setPswd1}
+                        setLabel={t("editpswd.newPswd")}
+                        multiline={true}
+                    />
+
+                    <PasswordInput
+                        setTextState={setPswd2}
+                        setLabel={t("editpswd.confirmPswd")}
+                        multiline={true}
+                    />
+
+                    <Button id="validate" variant="contained" fullWidth={true} onClick={() => checkUpdatePswd()} sx={{ marginTop: 2, marginBottom: 2 }}>
+                        {t("common.valid")}
+                    </Button>
 
 
-    return (
-        <Box
-            sx={{
-                height: height * 0.9,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
-        >
-            <Box sx={{ width: 0.55 }}>
-                <Text sx={catergoryHeaderProps}>{t("editpswd.subtitle")}</Text>
-
-                <PasswordInput
-                    error={pswdError}
-                    setTextState={setCurrentPw}
-                    setErrorState={setPswdError}
-                    setLabel={t("editpswd.currentPswd")}
-                    multiline={true}
-                />
-
-                <PasswordInput
-                    setTextState={setPswd1}
-                    setLabel={t("editpswd.newPswd")}
-                    multiline={true}
-                />
-
-                <PasswordInput
-                    setTextState={setPswd2}
-                    setLabel={t("editpswd.confirmPswd")}
-                    multiline={true}
-                />
-
-                <Button id="validate" variant="contained" fullWidth={true} onClick={() => checkUpdatePswd()} sx={{ marginTop: 2, marginBottom: 2 }}>
-                    {t("common.valid")}
-                </Button>
-
-
-            </Box>
-        </Box >
-    );
+                </Box>
+            </Box >
+        );
+    } else {
+        navigate("/LogIn", { replace: true });
+    }
 }

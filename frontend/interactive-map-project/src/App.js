@@ -12,6 +12,7 @@ import Profil from "./Pages/Profil";
 import EditProfil from "./Pages/EditProfil";
 import Admin from "./Pages/Admin";
 import EditPassword from "./Pages/EditPassword";
+import { Token } from "./utils/Entities";
 
 import { Box, FormControl, IconButton, MenuItem, Select, Button, Toolbar, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -28,6 +29,10 @@ import DropMultiSelect from "./Components/DropMultiSelect";
 import { PopUpDialog } from "./Components/AlertDialog";
 import GuardedRoute from "./Components/GuardedRoute";
 
+export var tokenUser = null;
+export function setTokenUser(tok) {
+  tokenUser = tok;
+}
 export default function App() {
   const defaultRoute = "Home";
   const location = useLocation();
@@ -136,13 +141,16 @@ export default function App() {
         onClose={onClosePopUpDialog}
         open={openPopUpDialog}
       />
-      <AppBar position="sticky" sx={{ backgroundColor: '#5DD3E4' }}>
+      <AppBar position="sticky" sx={{ backgroundColor: "#3EBBCD" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <ToolbarGroup firstchild={true} float="left" >
             {renderHomeButton()}
 
             <a href="https://accueilpourtous31.fr/">
-              <Button sx={{ backgroundColor: "white" }} variant="outlined" startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
+              <Button sx={{
+                backgroundColor: "white", backgroundImage: "url(https://accueilpourtous31.fr/wp-content/themes/apt31/css/img/fond-body.gif')",
+                backgroundSize: "cover"
+              }} variant="outlined" startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
                 Retour à APT31
               </Button>
             </a>

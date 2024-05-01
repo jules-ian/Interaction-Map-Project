@@ -5,7 +5,7 @@
     "logIn": "Connexion",
     "home": "Accueil",
     "search": "Recherche",
-    "admin": "Gestion des utilisateurs",
+    "admin": "Admin",
     "editPswd": "Modification mot de Passe"
   },
   "login": {

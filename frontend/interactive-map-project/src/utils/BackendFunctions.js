@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   professionalFromJSON,
   tokenFromJSON,
-  Identifiants
+  Identifiants,
+  Token
 } from "./Entities";
 
 export function getAllMissions(setReturn) {
@@ -207,16 +208,20 @@ export function getEditedProfessionals(setResults) {
     });
 }
 
-export function isAdmin(mail) {
-  let url = "https://localhost:7212/api/admin/" + mail;
-  axios
-    .get(url)
-    .then((response) => {
-      return response.data; //true or false depending on admin or not admin
-    })
-    .catch((error) => {
-      console.error("Error email doesn't exist:", error);
-    });
+export function getToken(tok) {
+  if (tok === null) {
+    return new Token(null, null);
+  }
+  var base64Url = tok.token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  const role = JSON.parse(jsonPayload)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  const ex = JSON.parse(jsonPayload).exp;
+  console.log("ex = ", ex, ";  role = ", role);
+
+  return new Token(role, ex);
 }
 
 export function getResultsSearch(
