@@ -1,7 +1,7 @@
 
 
 namespace InteractiveMapProject.API.Email;
-internal class EmailConfiguration
+public class EmailConfiguration
 {
     public string From { get; set; }
     public String SmtpServer { get; set; } = null!;
