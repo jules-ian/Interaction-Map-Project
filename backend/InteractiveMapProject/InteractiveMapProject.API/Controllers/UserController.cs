@@ -15,7 +15,7 @@ namespace InteractiveMapProject.API.Controllers;
 
 [ApiController]
 [Route("api/account")]
-public class UserController : ControllerBase
+public class UserController : ControllerBase // TODO : API to allow a pro to get its information / modify them / make a modif request
 {
     private readonly IUserService _userService;
     private readonly ITokenGeneratorService _tokenGeneratorService;
@@ -29,7 +29,7 @@ public class UserController : ControllerBase
 
     }
 
-    [Authorize(Roles = UserRoles.SuperAdmin)]
+    //[Authorize(Roles = UserRoles.SuperAdmin)]
     [HttpGet("{email}", Name = "GetUser")]
     public async Task<IActionResult> GetUser([FromRoute] string email)
     {
@@ -41,7 +41,7 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    [Authorize(Policy = "AdminOrSuperAdmin")]
+    //[Authorize(Policy = "AdminOrSuperAdmin")]
     [HttpPost("professional/create", Name = "CreateProfessionalAccount")]
     public async Task<IActionResult> CreateProfessionalAccount([FromBody] UserCredentialsDto credentials)
     {
@@ -54,7 +54,7 @@ public class UserController : ControllerBase
         return Ok();
     }
 
-    [Authorize(Roles = UserRoles.SuperAdmin)]
+    //[Authorize(Roles = UserRoles.SuperAdmin)]
     [HttpPost("admin/create", Name = "CreateAdminAccount")]
     public async Task<IActionResult> CreateAdminAccount([FromBody] UserCredentialsDto credentials)
     {
@@ -119,7 +119,7 @@ public class UserController : ControllerBase
         return Unauthorized();
     }
 
-    [Authorize(Roles = UserRoles.SuperAdmin)]
+    //[Authorize(Roles = UserRoles.SuperAdmin)]
     [HttpDelete("{email}", Name = "DeleteUser")]
     public async Task<IActionResult> DeleteUser([FromRoute] string email)
     {

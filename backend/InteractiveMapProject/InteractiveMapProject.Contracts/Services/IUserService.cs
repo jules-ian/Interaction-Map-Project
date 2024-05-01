@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InteractiveMapProject.Contracts.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace InteractiveMapProject.Contracts.Services;
 public interface IUserService
 {
     Task CreateAsync(string email, string password);
-    Task<IdentityUser> GetAsync(string email);
+    Task<ApplicationUser> GetAsync(string email);
     Task DeleteAsync(string email);
     Task UpdateEmailAsync(string oldEmail, string newEmail);
     Task UpdatePasswordAsync(string email, string newPassword);

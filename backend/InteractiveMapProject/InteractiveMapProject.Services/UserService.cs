@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace InteractiveMapProject.Services;
 public class UserService : IUserService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserService(UserManager<IdentityUser> userManager)
+    public UserService(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
 
     public async Task CreateAsync(string email, string password)
     {
-        var user = new IdentityUser
+        var user = new ApplicationUser
         {
             UserName = email,
             Email = email
@@ -30,7 +31,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<IdentityUser> GetAsync(string email)
+    public async Task<ApplicationUser> GetAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
 

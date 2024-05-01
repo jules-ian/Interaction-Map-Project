@@ -35,7 +35,7 @@ public class Program
                 opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db")); // How to apply migrations to Data.Db ???
         });
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+        builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             options.SignIn.RequireConfirmedAccount = true) // Users must confirm their Email
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
