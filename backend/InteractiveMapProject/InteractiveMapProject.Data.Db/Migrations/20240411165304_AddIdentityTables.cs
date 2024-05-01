@@ -372,7 +372,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 values: new object[,]
                 {
                     { new Guid("08da705c-4dde-45ee-b94b-f1d7803093ad"), "Waiting After Creation" },
-                    { new Guid("50c85248-ec09-4d32-8ff0-c2ffe9ce95d3"), "Approved" },
+                    { new Guid("b9d2a680-8fe6-4fbe-99bd-6032ec190bcc"), "Approved" },
                     { new Guid("d23a0f58-a503-456e-9242-aa3c6ee7a9bd"), "Waiting After Update" }
                 });
 

@@ -31,22 +31,27 @@ public class AudienceController : ControllerBase
         return Ok(await _audienceService.GetAsync(id));
     }
 
-
+#if !TESTING
     [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpPost(Name = "CreateAudience")]
     public async Task<IActionResult> Create([FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _audienceService.CreateAsync(request));
     }
 
+#if !TESTING
     [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpPut("{id}", Name = "UpdateAudience")]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _audienceService.UpdateAsync(id, request));
     }
 
+#if !TESTING
     [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpDelete("{id}", Name = "DeleteAudience")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {

@@ -17,7 +17,10 @@ public class ValidationStatusController : ControllerBase
         _validationStatusService = validationStatusService;
     }
 
-    [HttpGet("all", Name = "GetAllValidationStatuses")]
+#if !TESTING
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+#endif
+    [HttpGet("all", Name = "GetAllValidationStatuses")] //TODO : doesnt work
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _validationStatusService.GetAllAsync());

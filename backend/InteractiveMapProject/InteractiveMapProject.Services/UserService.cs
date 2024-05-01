@@ -17,12 +17,13 @@ public class UserService : IUserService
         _userManager = userManager;
     }
 
-    public async Task CreateAsync(string email, string password)
+    public async Task CreateAsync(string email, string password, Guid? ProfessionalId = null)
     {
         var user = new ApplicationUser
         {
             UserName = email,
-            Email = email
+            Email = email,
+            ProfessionalId = ProfessionalId
         };
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded)
@@ -86,7 +87,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<List<string>> GetRolesAsync(string email)
+    public async Task<List<string>?> GetRolesAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user != null)

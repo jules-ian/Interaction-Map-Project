@@ -29,7 +29,9 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
 
     }
 
-    //[Authorize(Roles = UserRoles.SuperAdmin)]
+#if !TESTING
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpGet("{email}", Name = "GetUser")]
     public async Task<IActionResult> GetUser([FromRoute] string email)
     {
@@ -41,7 +43,9 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         return Ok(user);
     }
 
-    //[Authorize(Policy = "AdminOrSuperAdmin")]
+#if !TESTING
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+#endif
     [HttpPost("professional/create", Name = "CreateProfessionalAccount")]
     public async Task<IActionResult> CreateProfessionalAccount([FromBody] UserCredentialsDto credentials)
     {
@@ -54,7 +58,9 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         return Ok();
     }
 
-    //[Authorize(Roles = UserRoles.SuperAdmin)]
+#if !TESTING
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpPost("admin/create", Name = "CreateAdminAccount")]
     public async Task<IActionResult> CreateAdminAccount([FromBody] UserCredentialsDto credentials)
     {
@@ -62,7 +68,7 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         {
             return BadRequest(ModelState);
         }
-        await _userService.CreateAsync(credentials.Email, credentials.Password);
+        await _userService.CreateAsync(credentials.Email, credentials.Password, null);
         await _userService.AddToRoleAsync(credentials.Email, UserRoles.Admin);
         return Ok();
     }
@@ -83,8 +89,9 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         return Ok(result);
     }*/
 
-
+#if !TESTING
     [AllowAnonymous]
+#endif
     [HttpPost("login", Name = "CheckUserCredentials")]
     public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
@@ -119,7 +126,9 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         return Unauthorized();
     }
 
-    //[Authorize(Roles = UserRoles.SuperAdmin)]
+#if !TESTING
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpDelete("{email}", Name = "DeleteUser")]
     public async Task<IActionResult> DeleteUser([FromRoute] string email)
     {
