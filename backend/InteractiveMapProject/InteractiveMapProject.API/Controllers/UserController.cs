@@ -44,6 +44,23 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
     }
 
 #if !TESTING
+    [Authorize(Policy = "ProfessionalOrAdminOrSuperAdmin")]
+#endif
+    [HttpGet(Name = "GetUserInformation")]
+    public async Task<IActionResult> GetUserInformation()
+    {
+        var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+        var user = await _userService.GetAsync(email);
+        var userRoles = await _userService.GetRolesAsync(email);
+        if (user == null || userRoles == null || !userRoles.Contains(UserRoles.Professional))
+        {
+            return NotFound();
+        }
+        return Ok(user);
+    }
+
+
+#if !TESTING
     [Authorize(Policy = "AdminOrSuperAdmin")]
 #endif
     [HttpPost("professional/create", Name = "CreateProfessionalAccount")]
