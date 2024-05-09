@@ -110,6 +110,7 @@ public class Program
         builder.Services.Configure<DataProtectionTokenProviderOptions>(
             options => options.TokenLifespan = TimeSpan.FromHours(2));
 
+       // Configuration.Default.ApiKey.Add("api-key", builder.Configuration["BrevoApi:ApiKey"]);
 
         builder.Services
             .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)

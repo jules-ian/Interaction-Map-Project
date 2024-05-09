@@ -11,6 +11,8 @@ internal class EmailService : IEmailService
     public void SendEmail(Email.Message m)
     {
         var email = createEmail(m);
+       // var sendTestEmail = new SendTestEmail(emailTo);
+       // apiInstance.SendTestTemplate(templateId, sendTestEmail);
         SendEmail(email);
 
     }
