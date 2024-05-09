@@ -77,7 +77,7 @@ export function approveProfessional(professional, callback) {
         'Authorization': `Bearer ${tokenUser.token}`
       },
     })
-    .then((response) => {
+    .then(() => {
       console.log(professional.name + " was approved");
       callback();
     })
@@ -92,7 +92,7 @@ export function declineProfessional(professional, callback) {
     "https://localhost:7212/api/professional/pending/" + professional.id;
   axios
     .delete(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
-    .then((response) => {
+    .then(() => {
       console.log(professional.name + " was deleted");
       callback();
     })
@@ -132,14 +132,14 @@ export function getUnapprovedProfessionals(setResults) {
     });
 }
 
-export function getInfosProfessionals() {
+export function getInfosProfessionals(setReturn) {
   let url = "https://localhost:7212/api/account/professional/info";
   console.log("A la recherche des infos du professional", tokenUser.token);
   axios
     .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       console.log("Professional = ", response.data);
-      return professionalFromJSON(response.data);
+      setReturn(professionalFromJSON(response.data));
     })
     .catch((error) => {
       console.error("Error getting professionnal information:", error);
