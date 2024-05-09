@@ -29,8 +29,7 @@ export default function LogIn({ setMenuTitel, loggedIn, user }) {
   const { t } = useTranslation(); //t -> alias pour useTranslation() (traduction en vers fr)
   setMenuTitel(t("page.logIn"));
   const navigate = useNavigate();
-  const { width, height } = useWindowDimensions();
-
+  const { height } = useWindowDimensions();
 
   const [mail, setMail] = useState("");
   const [mailError, setMailError] = useState(false);

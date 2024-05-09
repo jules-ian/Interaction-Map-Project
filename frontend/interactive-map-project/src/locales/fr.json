@@ -6,16 +6,16 @@
     "home": "Accueil",
     "search": "Recherche",
     "admin": "Admin",
-    "editPswd": "Modification mot de Passe"
+    "editPswd": "Modification mot de passe"
   },
   "login": {
     "logInDescription": "Veuillez entrer vos informations de connexion",
-    "forgotPassword": "Mot de passe oublié?",
-    "wrongID": "Identifiant et/ou mot de passe incorrects."
+    "forgotPassword": "Mot de passe oublié ?",
+    "wrongID": "Identifiant ou mot de passe incorrects."
   },
   "forgotpw": {
     "titlepw": "Mot de passe oublié",
-    "headerForgotPassword": "Vous avez oublié votre mot de passe?",
+    "headerForgotPassword": "Vous avez oublié votre mot de passe ?",
     "subheaderForgotPassword": "Veuillez rentrer votre adresse mail. Nous allons vous envoyer un mail contenant un lien vous permettant de renouveller votre mot de passe."
   },
   "editpswd": {
@@ -27,7 +27,7 @@
     "modifpsw": "Modifier mon mot de passe"
   },
   "form": {
-    "charter": "J'accepte la charte ci-dessus",
+    "charter": "Je m’engage à avoir lu et à respecter la charte ci-dessus",
     "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",
     "header": "Veuillez remplir le formulaire suivant",
     "subHeaderStructure": "Ma structure",
@@ -47,16 +47,16 @@
     "edit": "Modifier mes informations"
   },
   "admin": {
-    "unapproved": "Demandes en attente",
-    "modifications": "Modifications en attente",
-    "titlepopupDecline": "Pourquoi voulez-vous décliner l'inscription de cette structure?",
+    "unapproved": "Demandes d'inscription en attente",
+    "modifications": "Demandes de modifications en attente",
+    "titlepopupDecline": "Pourquoi voulez-vous décliner l'inscription de la structure ?",
     "motif": "Motif",
     "askmotif": "Veuillez saisir un motif de refus",
-    "titlepopupValidate": "Êtes-vous sûr de vouloir accepter l'inscription de cette structure?"
+    "titlepopupValidate": "Êtes-vous sûr de vouloir accepter l'inscription de cette structure ?"
   },
   "professional": {
     "name": "Nom de la structure",
-    "establishment": "Service",
+    "establishment": "Etablissement",
     "management": "Gestionnaire",
     "address": {
       "street": "Adresse",
@@ -102,6 +102,8 @@
     "disconnection": "Déconnexion",
     "return": "Retour",
     "returnHome": "Retour à la page d'accueil",
-    "returnAPT": "Retour sur le site Accueil Pour Tous 31"
+    "returnAPT": "Retour sur le site Accueil Pour Tous 31",
+    "buttonAPT": "Retour à APT31",
+    "multChoice": " (Plusieurs choix)"
   }
 }

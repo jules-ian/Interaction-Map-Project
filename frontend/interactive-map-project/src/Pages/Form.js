@@ -379,7 +379,7 @@ export default function Form({ setMenuTitel }) {
             error={audiencesSelectionError}
             setSelectionState={setAudiencesSelection}
             setErrorState={setAudiencesSelectionError}
-            label={t("professional.audiences") + " (plusieurs choix possibles)"}
+            label={t("professional.audiences") + t("common.multChoice")}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -390,7 +390,7 @@ export default function Form({ setMenuTitel }) {
             setErrorState={setPlacesOfInterventionSelectionError}
             label={
               t("professional.placesOfIntervention") +
-              " (plusieurs choix possibles)"
+              t("common.multChoice")
             }
           />
         </Grid>
@@ -400,7 +400,7 @@ export default function Form({ setMenuTitel }) {
             error={missionsSelectionError}
             setSelectionState={setMissionsSelection}
             setErrorState={setMissionsSelectionError}
-            label={t("professional.missions") + " (plusieurs choix possibles)"}
+            label={t("professional.missions") + t("common.multChoice")}
           />
         </Grid>
 

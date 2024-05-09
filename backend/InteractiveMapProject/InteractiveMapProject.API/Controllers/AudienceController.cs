@@ -1,5 +1,7 @@
+using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.Contracts.Dtos.FieldOfIntervention;
 using InteractiveMapProject.Contracts.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InteractiveMapProject.API.Controllers;
@@ -15,30 +17,41 @@ public class AudienceController : ControllerBase
         _audienceService = audienceService;
     }
 
+    [AllowAnonymous]
     [HttpGet("all", Name = "GetAllAudiences")]
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _audienceService.GetAllAsync());
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}", Name = "GetAudience")]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
         return Ok(await _audienceService.GetAsync(id));
     }
 
+#if !TESTING
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpPost(Name = "CreateAudience")]
     public async Task<IActionResult> Create([FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _audienceService.CreateAsync(request));
     }
 
+#if !TESTING
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpPut("{id}", Name = "UpdateAudience")]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] FieldOfInterventionCreateRequestDto request)
     {
         return Ok(await _audienceService.UpdateAsync(id, request));
     }
 
+#if !TESTING
+    [Authorize(Roles = UserRoles.SuperAdmin)]
+#endif
     [HttpDelete("{id}", Name = "DeleteAudience")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {

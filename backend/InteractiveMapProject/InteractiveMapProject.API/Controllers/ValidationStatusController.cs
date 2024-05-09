@@ -1,10 +1,11 @@
+using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InteractiveMapProject.API.Controllers;
 
-[Authorize(Roles="Admin")]
+[Authorize(Roles = UserRoles.Admin)]
 [ApiController]
 [Route("api/validation-status")]
 public class ValidationStatusController : ControllerBase
@@ -16,7 +17,10 @@ public class ValidationStatusController : ControllerBase
         _validationStatusService = validationStatusService;
     }
 
-    [HttpGet("all", Name = "GetAllValidationStatuses")]
+#if !TESTING
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+#endif
+    [HttpGet("all", Name = "GetAllValidationStatuses")] //TODO : doesnt work
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _validationStatusService.GetAllAsync());

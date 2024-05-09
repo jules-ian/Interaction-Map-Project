@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InteractiveMapProject.Data.Db.Context;
 
-public class ApplicationDbContext : IdentityDbContext<IdentityUser>  //DbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>  //DbContext
 {
-    // Database tablesa
+    // Database tables
     public DbSet<Professional> Professionals { get; set; } = default!;
     public DbSet<PendingProfessional> PendingProfessionals { get; set; } = default!;
     public DbSet<Audience> Audiences { get; set; } = default!;
@@ -21,7 +21,7 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>  //DbContext
     {
     }
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) //<ApplicationDbContext> needed ?
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }

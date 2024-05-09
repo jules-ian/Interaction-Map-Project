@@ -81,34 +81,34 @@ export default function ForgotPassword({ setMenuTitel }) {
         marginBottom: 3
     };
 
-    const tok = getToken(tokenUser).token;
-    if (tok === "Professional" | tok === "Admin") {
-        return (
-            <Box
-                sx={{
-                    height: height * 0.9,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <Box sx={{ width: 0.55 }}>
-                    <Text sx={catergoryHeaderProps}>{t("forgotpw.headerForgotPassword")}</Text>
-                    <Text sx={catergorySubheaderProps}>{t("forgotpw.subheaderForgotPassword")}</Text>
-                    <TextInput
-                        label={t("professional.email")}
-                        setTextState={setMail}
-                        type="email"
-                        multiline={false}
-                    />
-                    <Button variant="contained" fullWidth={true} onClick={onSubmit} sx={{ marginTop: 2, marginBottom: 2 }}>
-                        {t("common.valid")}
-                    </Button>
+    //const tok = getToken(tokenUser).token;
+    //if (tok === "Professional" | tok === "Admin") {
+    return (
+        <Box
+            sx={{
+                height: height * 0.9,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <Box sx={{ width: 0.55 }}>
+                <Text sx={catergoryHeaderProps}>{t("forgotpw.headerForgotPassword")}</Text>
+                <Text sx={catergorySubheaderProps}>{t("forgotpw.subheaderForgotPassword")}</Text>
+                <TextInput
+                    label={t("professional.email")}
+                    setTextState={setMail}
+                    type="email"
+                    multiline={false}
+                />
+                <Button variant="contained" fullWidth={true} onClick={onSubmit} sx={{ marginTop: 2, marginBottom: 2 }}>
+                    {t("common.valid")}
+                </Button>
 
-                </Box>
             </Box>
-        );
-    } else {
-        navigate("/LogIn", { replace: true });
-    }
+        </Box>
+    );
+    //} else {
+    //  navigate("/LogIn", { replace: true });
+    //}
 }

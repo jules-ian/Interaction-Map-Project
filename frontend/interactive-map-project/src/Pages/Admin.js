@@ -68,13 +68,11 @@ export default function Admin({ setMenuTitel }) {
             callbackAcceptDecline={callbackAcceptDecline}
             setLoading={setLoading}
           />
-
         </Box>
       )}
     </Box>
   );
 }
-
 
 
 function Tabel({
@@ -137,11 +135,9 @@ function Tabel({
             },
           }}
         >
-          <DialogTitle>Confirmez votre choix</DialogTitle>
+          <DialogTitle>{t("common.confirmation")}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Pour décliner cette structure, veuillez rentrer un motif.
-            </DialogContentText>
+            <DialogContentText>{t("admin.titlepopupDecline")}</DialogContentText>
             <TextField
               autoFocus
               required
@@ -154,8 +150,8 @@ function Tabel({
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={onReturnPopUpAdminDeclineDialog}>Retour</Button>
-            <Button type="submit">Valider</Button>
+            <Button onClick={onReturnPopUpAdminDeclineDialog}>{t("common.return")}</Button>
+            <Button type="submit">{t("common.valid")}</Button>
           </DialogActions>
         </Dialog>
       </React.Fragment>
@@ -278,7 +274,7 @@ function Tabel({
         }
 
         <Grid container sx={{ marginBottom: 2, alignItems: "center" }}>
-          <Grid item xs={8}>
+          <Grid item xs={10}>
             <Header sx={{ marginTop: 5, textAlign: "left" }}>{t("admin.modifications")}</Header>
           </Grid>
         </Grid>

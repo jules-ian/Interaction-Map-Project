@@ -8,6 +8,7 @@ import {
     getAllAudiences,
     getAllMissions,
     getAllPlacesOfIntervention,
+    getInfosProfessionals
 } from "../utils/BackendFunctions";
 import {
     isEmail,
@@ -29,7 +30,7 @@ export default function EditProfil({ setMenuTitel }) {
     const { t } = useTranslation();
     setMenuTitel(t("common.myAccount"));
     //phase d'initialisation
-    //getInfosOfProfessional : professional from json
+    //let professional = getInfosProfessionals();
     let professional = new Professional(null, "Crèche de Ramonville", "Garde d'enfants", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), ["0-3 ans"], ["Domicile", "EAJE"], ["Scolarité"], "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", "");
     const [name, setName] = useState(professional.name);
     const [nameError, setNameError] = useState(false);
@@ -101,7 +102,7 @@ export default function EditProfil({ setMenuTitel }) {
         let valid = checkEntries();
         if (!valid) {
             setErrorMessage(t("form.errorMessageFE"));
-            console.log("erreur champs non valides");
+            console.log("ERREUR - Champs non valides");
             setOpenErrorDialog(true);
             return;
         }
@@ -111,7 +112,7 @@ export default function EditProfil({ setMenuTitel }) {
                     setOpenSuccessDialog(true);
                 } else {
                     setErrorMessage(t("form.errorMessageFE"));
-                    console.log("erreur api");
+                    console.log("ERREUR - API");
                     setOpenErrorDialog(true);
                 }
             };
@@ -263,6 +264,7 @@ export default function EditProfil({ setMenuTitel }) {
 
         return (
             <Box>
+                {/*Pop-up de confirmation, de succes, d'echec*/}
                 <PopUpDialogEditProfil
                     onClose={onClosePopUpDialogEditProfil}
                     open={openPopUpDialogEditProfil}

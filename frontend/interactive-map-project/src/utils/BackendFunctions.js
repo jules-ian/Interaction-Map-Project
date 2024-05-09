@@ -5,6 +5,7 @@ import {
   Identifiants,
   Token
 } from "./Entities";
+import { tokenUser } from "../App";
 
 export function getAllMissions(setReturn) {
   let url = "https://localhost:7212/api/field-of-intervention/mission/all";
@@ -64,6 +65,7 @@ export function addNewProfessional(professional, callback) {
 export function approveProfessional(professional, callback) {
   console.log("pro = ", professional);
   console.log("id = ", professional.id);
+
   let url =
     "https://localhost:7212/api/professional/validate/" + professional.id;
 
@@ -72,7 +74,7 @@ export function approveProfessional(professional, callback) {
     .post(url, data, {
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers if needed
+        'Authorization': `Bearer ${tokenUser.token}`
       },
     })
     .then((response) => {
@@ -89,7 +91,7 @@ export function declineProfessional(professional, callback) {
   let url =
     "https://localhost:7212/api/professional/pending/" + professional.id;
   axios
-    .delete(url)
+    .delete(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       console.log(professional.name + " was deleted");
       callback();
@@ -118,7 +120,7 @@ export function checkIdentifiants(mail, password, setReturn) {
 export function getUnapprovedProfessionals(setResults) {
   let url = "https://localhost:7212/api/professional/pending/all";
   axios
-    .get(url)
+    .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       let professionals = response.data.map((profData) => {
         return professionalFromJSON(profData);
@@ -130,23 +132,29 @@ export function getUnapprovedProfessionals(setResults) {
     });
 }
 
-export function getInfosProfessionals(mail) {
-  let url = "https://localhost:7212/api/professional/allinfos/" + mail;
+export function getInfosProfessionals() {
+  let url = "https://localhost:7212/api/account/professional/info";
+  console.log("A la recherche des infos du professional", tokenUser.token);
   axios
-    .get(url)
+    .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
+      console.log("Professional = ", response.data);
       return professionalFromJSON(response.data);
     })
     .catch((error) => {
       console.error("Error getting professionnal information:", error);
     });
+  axios.interceptors.request.use(request => {
+    console.log('Request:', request); // Affichage de la configuration de la requête dans la console
+    return request; // N'oubliez pas de renvoyer la requête modifiée ou non modifiée
+  });
 }
 
 export function addEditedProfessional(professional, callback) {
   let url = "https://localhost:7212/api/modification";
 
   axios
-    .post(url, professional.toJSON())
+    .post(url, professional.toJSON(), { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       console.log(response);
       callback(true);
@@ -165,10 +173,11 @@ export function approveModification(professional, callback) {
     .post(url, data, {
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers if needed
-      },
-    })
-    .then((response) => {
+        'Authorization': `Bearer ${tokenUser.token}`
+      }
+    },
+    )
+    .then(() => {
       console.log(professional.name + "'s modifications were approved");
       callback();
     })
@@ -182,7 +191,7 @@ export function declineModification(professional, callback) {
   let url =
     "https://localhost:7212/api/modification/pending/" + professional.id;
   axios
-    .delete(url)
+    .delete(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       console.log(professional.name + "'s modifications were refused");
       callback();
@@ -196,7 +205,7 @@ export function declineModification(professional, callback) {
 export function getEditedProfessionals(setResults) {
   let url = "https://localhost:7212/api/modification/pending/all";
   axios
-    .get(url)
+    .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       let professionals = response.data.map((profData) => {
         return professionalFromJSON(profData);
@@ -224,6 +233,7 @@ export function getToken(tok) {
   return new Token(role, ex);
 }
 
+/*
 export function getResultsSearch(
   setResults,
   textSearch = "",
@@ -235,14 +245,73 @@ export function getResultsSearch(
   let data = {};
   if (!textSearch.length === 0) {
     data.text = textSearch;
+    console.log("textsearch changed");
   }
   if (!audiencesIDs.length === 0) {
     data.audiences = audiencesIDs;
+    console.log("audiences changed");
   }
   if (!missionIDs.length === 0) {
     data.missions = missionIDs;
+    console.log("missions changed");
   }
   if (!placesOfInterventionIDs.length === 0) {
+    data.placesOfIntervention = placesOfInterventionIDs;
+    console.log("places changed");
+  }
+
+  // if (mapBounds) {
+  //   data.mapSquare = {
+  //     northEastLatitude: mapBounds._ne.lat,
+  //     northEastLongitude: mapBounds._ne.lng,
+  //     southWestLatitude: mapBounds._sw.lat,
+  //     southWestLongitude: mapBounds._sw.lng
+  //   }
+  // };
+
+  console.log("Data send to backend on search");
+  console.log(data);
+
+  let url = "https://localhost:7212/api/professional/approved/filtered";
+  console.log("request search - ", tokenUser);
+  axios
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${tokenUser.token}`
+      }
+    })
+    .then((response) => {
+      let professionals = response.data.map((profData) => {
+        console.log(response.data);
+        return professionalFromJSON(profData);
+      });
+      setResults(professionals);
+    })
+    .catch((error) => {
+      console.error("Error sending post for search:", error);
+    });
+}
+*/
+export function getResultsSearch(
+  setResults,
+  textSearch = "",
+  audiencesIDs = [],
+  placesOfInterventionIDs = [],
+  missionIDs = [],
+  mapBounds
+) {
+  let data = {};
+  if (!textSearch.length == 0) {
+    data.text = textSearch;
+  }
+  if (!audiencesIDs.length == 0) {
+    data.audiences = audiencesIDs;
+  }
+  if (!missionIDs.length == 0) {
+    data.missions = missionIDs;
+  }
+  if (!placesOfInterventionIDs.length == 0) {
     data.placesOfIntervention = placesOfInterventionIDs;
   }
 
@@ -263,7 +332,7 @@ export function getResultsSearch(
     .post(url, data, {
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers if needed
+        'Authorization': `Bearer ${tokenUser.token}`
       },
     })
     .then((response) => {

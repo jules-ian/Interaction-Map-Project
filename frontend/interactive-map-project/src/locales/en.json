@@ -6,51 +6,52 @@
     "logIn": "Log in",
     "search": "Search",
     "admin": "Admin",
-    "editPswd": "Password"
+    "editPswd": "Edit Password"
   },
   "login": {
     "logInDescription": "Enter your connection information",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "wrongID": "Incorrect username or password"
   },
   "forgotpw": {
-    "titlepw": "Password forgot",
-    "headerForgotPassword": "Do you forget your password?",
-    "subheaderForgotPassword": "Please, enter your email. You will receive an email with a link to change your password"
+    "titlepw": "Forgotten Password",
+    "headerForgotPassword": "Did you forget your password?",
+    "subheaderForgotPassword": "Please enter your email address. You will receive an email with a link to change your password"
   },
   "editpswd": {
     "titlepage": "Edit password",
-    "subtitle": "Type the new chosen password and confirm it",
-    "currentPswd": "Former Password",
+    "subtitle": "Please fill in the following fields:",
+    "currentPswd": "Current Password",
     "newPswd": "New Password",
     "confirmPswd": "Confirm New Password",
     "modifpsw": "Edit password"
   },
   "form": {
-    "charter": "I accept the above conditions and charter",
-    "descriptionOfForm": "With a confirmed registration, you enter our professional identification service in the professional field of early childhood early childhood disabilities. After successfull completion this form is send to a superviser and will be checked for approval",
+    "charter": "I have read and agree to abide by the above charter",
+    "descriptionOfForm": "With a confirmed registration, you enter our professional of early childhood and early childhood disabilities network.",
     "header": "Please fill in the following form",
     "subHeaderStructure": "Information about your structure",
-    "subHeaderFieldsOfIntervention": "Fields of Intervention",
-    "subHeaderPerson": "Information about contact person",
-    "description": "Personal description about your mission",
-    "license": "I agree to appear on the directory of Accueil pour tous network partners and thus to be contacted if necessary as a resource person",
+    "subHeaderFieldsOfIntervention": "Your fields of intervention",
+    "subHeaderPerson": "Your contact person",
+    "description": "Personal description of your mission",
+    "license": "I agree to appear on the directory of Accueil Pour Tous partners and thus to be contacted if necessary as a resource person",
     "helperText": {
       "phoneNumber": "Not a valid phonenumber"
     },
-    "successMessage": "Entering form was successfull returning to Homescreen",
-    "errorMessageFE": "Some fields were not entered correctly please adjust",
+    "successMessage": "Form submission succeeded. Returning to Homescreen",
+    "errorMessageFE": "Some fields were not entered correctly, please adjust them",
     "errorMessageDB": "An error occured, please try again"
   },
   "profil": {
     "header": "My profile",
-    "edit": "Edit profile"
+    "edit": "Edit my profile"
   },
   "admin": {
-    "unapproved": "Joining requests",
-    "modifications": "Modification requests",
+    "unapproved": "Pending applications",
+    "modifications": "Pending modification requests",
     "titlepopupDecline": "Why do you want to decline this registration?",
     "motif": "Reason",
-    "askmotif": "Please enter a reason",
+    "askmotif": "Please enter a reason for refusal",
     "titlepopupValidate": "Are you sure you want to register this structure?"
   },
   "professional": {
@@ -74,7 +75,7 @@
     "audiences": "Audiences",
     "missions": "Missions",
     "placesOfIntervention": "Places of Intervention",
-    "description": "Description",
+    "description": "Description of your missions",
     "popOver": {
       "infoProfessional": "My Structure",
       "infoContactPerson": "My Contact Person",
@@ -96,11 +97,13 @@
     "valid": "Valid",
     "myAccount": "My account",
     "close": "Close",
-    "confirmation": "Confirmation pop-up",
-    "confirmationBody": "Are you sure you want to disconnect?",
+    "confirmation": "Confirmation",
+    "confirmationBody": "Are you sure you want to log out?",
     "disconnection": "Log out",
     "return": "Return",
     "returnHome": "Return to Home page",
-    "returnAPT": "Return to Accueil Pour Tous website"
+    "returnAPT": "Return to Accueil Pour Tous website",
+    "buttonAPT": "Back to APT31",
+    "multChoice": " (multiple choice)"
   }
 }

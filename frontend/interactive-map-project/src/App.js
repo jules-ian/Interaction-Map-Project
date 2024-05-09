@@ -12,7 +12,6 @@ import Profil from "./Pages/Profil";
 import EditProfil from "./Pages/EditProfil";
 import Admin from "./Pages/Admin";
 import EditPassword from "./Pages/EditPassword";
-import { Token } from "./utils/Entities";
 
 import { Box, FormControl, IconButton, MenuItem, Select, Button, Toolbar, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -20,14 +19,10 @@ import ToolbarGroup from "@mui/material/Toolbar";
 import HomeIcon from "@mui/icons-material/Home";
 import MapIcon from '@mui/icons-material/Map';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import useWindowDimensions from "./utils/windowDimension";
-import { isAdmin } from "./utils/BackendFunctions";
 import { Header } from "./Components/Label";
-import DropMultiSelect from "./Components/DropMultiSelect";
 import { PopUpDialog } from "./Components/AlertDialog";
-import GuardedRoute from "./Components/GuardedRoute";
 
 export var tokenUser = null;
 export function setTokenUser(tok) {
@@ -41,9 +36,7 @@ export default function App() {
 
   const [menuTitel, setMenuTitel] = useState("");
   const { width, height } = useWindowDimensions();
-  const testStyle = {
-    margin: 0,
-  };
+  const testStyle = { margin: 0 };
   const [currentLanguage, setCurrentLanguage] = useState("fr");
 
 
@@ -66,6 +59,7 @@ export default function App() {
     i18n.changeLanguage(languageString);
   };
 
+  // Bouton Profil n'est présent dans la barre de menu que sur la page Search
   const renderMonCompteButton = () => {
     if (location.pathname === "/Search") {
       return (
@@ -81,6 +75,7 @@ export default function App() {
     }
   };
 
+  // Bouton Home affiché seulement sur les pages où l'utilisateur est connecté
   const renderHomeButton = () => {
     if ((location.pathname === "/Search") || (location.pathname === "/Profil") || (location.pathname === "/Admin") || (location.pathname === "/EditProfil") || (location.pathname === "/EditPassword")) {
       return (
@@ -95,6 +90,7 @@ export default function App() {
     }
   }
 
+  // Affiche le bouton (icone) pour qu'un admin accède à la page de recherche (seulement sur la page Admin)
   const renderSearchButton = () => {
     if ((location.pathname === "/Admin")) {
       return (
@@ -126,14 +122,6 @@ export default function App() {
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState("");
 
-  const isAuthenticated = () => {
-    return loggedIn;
-  }
-  const loggedAdmin = () => {
-    return true;
-    //TODO : return isAdmin(user);
-  }
-
   return (
 
     <Box sx={{ flexGrow: 1 }}>
@@ -148,7 +136,7 @@ export default function App() {
 
             <a href="https://accueilpourtous31.fr/">
               <Button sx={{ backgroundColor: "white" }} variant="outlined" startIcon={<img src="https://accueilpourtous31.fr/favicon-32x32.png" />} title={t("common.returnAPT")}>
-                Retour à APT31
+                {t("common.buttonAPT")}
               </Button>
             </a>
           </ToolbarGroup>
@@ -169,7 +157,7 @@ export default function App() {
               onChange={function (event) {
                 onChangeLanguage(event.target.value);
               }}
-              label="Language"
+              label="Langage"
             >
               <MenuItem value="en">en</MenuItem>
               <MenuItem value="fr">fr</MenuItem>
@@ -188,17 +176,11 @@ export default function App() {
         <Route path="LogIn" element={<LogIn setMenuTitel={setMenuTitel} loggedIn={setIsLoggedIn} user={setUser} />} />
         <Route path="ForgotPassword" element={<ForgotPassword setMenuTitel={setMenuTitel} />} />
         <Route path="EditPassword" element={<EditPassword setMenuTitel={setMenuTitel} />} />
-
-        {/*Routes Gardées*/}
         <Route path="Search" element={<Search setMenuTitel={setMenuTitel} />} />
         <Route path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} />
         <Route path="Profil" element={<Profil setMenuTitel={setMenuTitel} />} />
         <Route path="EditProfil" element={<EditProfil setMenuTitel={setMenuTitel} />} />
-        {/*
-        <GuardedRoute path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} hasAccess={loggedAdmin} />
-        <GuardedRoute path="Profil" element={<Profil setMenuTitel={setMenuTitel} />} hasAccess={isAuthenticated} />
-        <GuardedRoute path="EditProfil" element={<EditProfil setMenuTitel={setMenuTitel} />} hasAccess={isAuthenticated} />
-        */}
+
       </Routes>
 
     </Box >

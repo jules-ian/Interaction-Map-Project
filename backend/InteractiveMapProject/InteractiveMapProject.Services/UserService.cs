@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace InteractiveMapProject.Services;
 public class UserService : IUserService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserService(UserManager<IdentityUser> userManager)
+    public UserService(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
 
-    public async Task CreateAsync(string email, string password)
+    public async Task CreateAsync(string email, string password, Guid? ProfessionalId = null)
     {
-        var user = new IdentityUser
+        var user = new ApplicationUser
         {
             UserName = email,
-            Email = email
+            Email = email,
+            ProfessionalId = ProfessionalId
         };
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded)
@@ -30,9 +32,15 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<IdentityUser> GetAsync(string email)
+    public async Task<ApplicationUser> GetByEmailAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
+
+        return user;
+    }
+    public async Task<ApplicationUser> GetByIdAsync(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
 
         return user;
     }
@@ -85,7 +93,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<List<string>> GetRolesAsync(string email)
+    public async Task<List<string>?> GetRolesAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user != null)

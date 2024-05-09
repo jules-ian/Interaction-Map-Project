@@ -23,7 +23,7 @@ public class TokenGeneratorService : ITokenGeneratorService
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
         var token = new JwtSecurityToken(
-            expires: DateTime.Now.AddHours(1),
+            expires: DateTime.Now.AddHours(10),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );
