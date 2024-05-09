@@ -133,7 +133,10 @@ public class ProfessionalController : ControllerBase
         PendingProfessionalResponseDto professional = await _pendingProfessionalService.GetAsync(pendingProfessionalId);
         string randomPassword = RandomPasswordGenerator.GenerateRandomPassword();
         await _professionalService.ValidateAsync(pendingProfessionalId, validationDto);
-        await _userService.CreateAsync(professional.Email, randomPassword, pendingProfessionalId);
+        if (validationDto.Approve)
+        {
+            await _userService.CreateAsync(professional.Email, randomPassword, pendingProfessionalId);
+        }
         // TODO : Send email with reset password link
         return Ok();
     }

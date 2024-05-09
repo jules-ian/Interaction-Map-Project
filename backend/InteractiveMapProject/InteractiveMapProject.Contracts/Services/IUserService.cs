@@ -10,7 +10,8 @@ namespace InteractiveMapProject.Contracts.Services;
 public interface IUserService
 {
     Task CreateAsync(string email, string password, Guid? ProfessionalID = null);
-    Task<ApplicationUser> GetAsync(string email);
+    Task<ApplicationUser> GetByEmailAsync(string email);
+    Task<ApplicationUser> GetByIdAsync(string id);
     Task DeleteAsync(string email);
     Task UpdateEmailAsync(string oldEmail, string newEmail);
     Task UpdatePasswordAsync(string email, string newPassword);

@@ -176,19 +176,20 @@ public class Program
         {
             var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
 
-            string adminEmail = "admin@admin.fr";
-            string adminPassword = "password";
-            if(await userService.GetAsync(adminEmail) == null)
+            string adminEmail = "admin@admin";
+            string adminPassword = "admin123";
+            if (await userService.GetByEmailAsync(adminEmail) == null)
             {
                 await userService.CreateAsync(adminEmail, adminPassword);
-                await userService.AddToRoleAsync(adminEmail, UserRoles.SuperAdmin);
+                await userService.AddToRoleAsync(adminEmail, UserRoles.Admin);
             }
 
-            string professionalEmail = "pro@pro.fr";
-            string professionalPassword = "password";
-            if (await userService.GetAsync(professionalEmail) == null)
+            string professionalEmail = "test@test";
+            string professionalPassword = "test123";
+            Guid proId = Guid.Parse("b2c28b3c-066e-4b7c-6ec8-08dc70315fd2");
+            if (await userService.GetByEmailAsync(professionalEmail) == null)
             {
-                await userService.CreateAsync(professionalEmail, professionalPassword);
+                await userService.CreateAsync(professionalEmail, professionalPassword, proId);
                 await userService.AddToRoleAsync(professionalEmail, UserRoles.Professional);
             }
         }

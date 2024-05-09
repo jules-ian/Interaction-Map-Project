@@ -15,16 +15,18 @@ namespace InteractiveMapProject.API.Controllers;
 
 [ApiController]
 [Route("api/account")]
-public class UserController : ControllerBase // TODO : API to allow a pro to get its information / modify them / make a modif request
+public class UserController : ControllerBase // TODO : API to allow a pro to make a modif request
 {
     private readonly IUserService _userService;
     private readonly ITokenGeneratorService _tokenGeneratorService;
+    private readonly IProfessionalService _professionalService;
     private readonly CreateUserRequestValidator _createUserRequestValidator;
 
-    public UserController(IUserService userService, ITokenGeneratorService tokenGeneratorService, CreateUserRequestValidator createUserRequestValidator)
+    public UserController(IUserService userService, ITokenGeneratorService tokenGeneratorService, IProfessionalService professionalService, CreateUserRequestValidator createUserRequestValidator)
     {
         _userService = userService;
         _tokenGeneratorService = tokenGeneratorService;
+        _professionalService = professionalService;
         _createUserRequestValidator = createUserRequestValidator;
 
     }
@@ -35,7 +37,7 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
     [HttpGet("{email}", Name = "GetUser")]
     public async Task<IActionResult> GetUser([FromRoute] string email)
     {
-        var user = await _userService.GetAsync(email);
+        var user = await _userService.GetByEmailAsync(email);
         if (user == null)
         {
             return NotFound();
@@ -46,17 +48,29 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
 #if !TESTING
     [Authorize(Policy = "ProfessionalOrAdminOrSuperAdmin")]
 #endif
-    [HttpGet(Name = "GetUserInformation")]
+    [HttpGet("professional/info", Name = "GetUserInformation")]
     public async Task<IActionResult> GetUserInformation()
     {
-        var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-        var user = await _userService.GetAsync(email);
-        var userRoles = await _userService.GetRolesAsync(email);
-        if (user == null || userRoles == null || !userRoles.Contains(UserRoles.Professional))
+        if (User == null)
         {
-            return NotFound();
+            return Unauthorized();
         }
-        return Ok(user);
+        var userEmail = User.FindFirst(ClaimTypes.Name)?.Value;
+        if (userEmail == null)
+        {
+            return NotFound("Account not found");
+        }
+
+        var user = await _userService.GetByEmailAsync(userEmail);
+        var userRoles = await _userService.GetRolesAsync(user.Email);
+        if (userRoles == null || !userRoles.Contains(UserRoles.Professional) || user.ProfessionalId == null)
+        {
+            return NotFound("User is not a Professional");
+        }
+        var professionalId = (Guid)user.ProfessionalId;
+        ProfessionalResponseDto response = await _professionalService.GetAsync(professionalId);
+
+        return Ok(response);
     }
 
 
@@ -90,7 +104,7 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         return Ok();
     }
 
-    /*[HttpPost("login", Name = "CheckUserCredentials")]
+    /*[HttpPost("login", Name = "CheckUserCredentials")] 
     public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
         if (!_createUserRequestValidator.Validate(credentials).IsValid)
@@ -116,7 +130,7 @@ public class UserController : ControllerBase // TODO : API to allow a pro to get
         {
             return BadRequest("Email not valid or empty credentials fields");
         }
-        var user = await _userService.GetAsync(credentials.Email);
+        var user = await _userService.GetByEmailAsync(credentials.Email);
         if (user != null && await _userService.CheckPasswordAsync(credentials.Email, credentials.Password))
         {
             var userRoles = await _userService.GetRolesAsync(credentials.Email);

@@ -32,9 +32,15 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<ApplicationUser> GetAsync(string email)
+    public async Task<ApplicationUser> GetByEmailAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
+
+        return user;
+    }
+    public async Task<ApplicationUser> GetByIdAsync(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
 
         return user;
     }
