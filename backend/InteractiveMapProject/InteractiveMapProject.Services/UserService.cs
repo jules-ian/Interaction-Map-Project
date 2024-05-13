@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InteractiveMapProject.Contracts.Entities;
 using InteractiveMapProject.Contracts.Services;
 using Microsoft.AspNetCore.Identity;
+using NuGet.Common;
 
 namespace InteractiveMapProject.Services;
 public class UserService : IUserService
@@ -75,6 +76,7 @@ public class UserService : IUserService
         }
     }
 
+
     public async Task AddToRoleAsync(string email, string roleName)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -124,4 +126,38 @@ public class UserService : IUserService
         return false;
     }
 
+    public async Task ConfirmEmailAsync(string email, string token)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user != null)
+        {
+            await _userManager.ConfirmEmailAsync(user, token);
+            /*
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            */
+        }
+    }
+
+    public async Task<string> GenerateEmailConfirmationTokenAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        return token;
+    }
+
+    public async Task<string> GeneratePasswordResetTokenAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+        return token;
+    }
+
+    public async Task ResetPasswordAsync(ResetPassword resetpwd)
+    {
+        var user = await _userManager.FindByEmailAsync(resetpwd.Email);
+        await _userManager.ResetPasswordAsync(user,resetpwd.Token,resetpwd.Password);
+    }
 }

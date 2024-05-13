@@ -1,3 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+using InteractiveMapProject.API.Email;
+using InteractiveMapProject.API.Email_Services;
+using InteractiveMapProject.Contracts.Entities;
+using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -15,20 +20,21 @@ namespace InteractiveMapProject.API.Controllers;
 
 [ApiController]
 [Route("api/account")]
-public class UserController : ControllerBase // TODO : API to allow a pro to make a modif request
+public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IEmailService _emailService;
     private readonly ITokenGeneratorService _tokenGeneratorService;
     private readonly IProfessionalService _professionalService;
     private readonly CreateUserRequestValidator _createUserRequestValidator;
 
-    public UserController(IUserService userService, ITokenGeneratorService tokenGeneratorService, IProfessionalService professionalService, CreateUserRequestValidator createUserRequestValidator)
+    public UserController(IUserService userService, IProfessionalService professionalService, ITokenGeneratorService tokenGeneratorService, CreateUserRequestValidator createUserRequestValidator,IEmailService emailService)
     {
         _userService = userService;
         _tokenGeneratorService = tokenGeneratorService;
-        _professionalService = professionalService;
         _createUserRequestValidator = createUserRequestValidator;
-
+        _emailService = emailService;
+        _professionalService = professionalService;
     }
 
 #if !TESTING
@@ -86,6 +92,11 @@ public class UserController : ControllerBase // TODO : API to allow a pro to mak
         }
         await _userService.CreateAsync(credentials.Email, credentials.Password);
         await _userService.AddToRoleAsync(credentials.Email, UserRoles.Professional);
+        // add token to verify mail
+        var token = await _userService.GenerateEmailConfirmationTokenAsync(credentials.Email);
+        var confirmationLink = Url.Action(nameof(ConfirmEmail), "User", new { token, email = credentials.Email }, Request.Scheme);
+        var message = new Message(new string[] { credentials.Email! }, "Confirmation email link", confirmationLink!);
+        _emailService.SendEmail(message);
         return Ok();
     }
 
@@ -99,12 +110,16 @@ public class UserController : ControllerBase // TODO : API to allow a pro to mak
         {
             return BadRequest(ModelState);
         }
-        await _userService.CreateAsync(credentials.Email, credentials.Password, null);
+        await _userService.CreateAsync(credentials.Email, credentials.Password);
         await _userService.AddToRoleAsync(credentials.Email, UserRoles.Admin);
+        var token = await _userService.GenerateEmailConfirmationTokenAsync(credentials.Email);
+        var confirmationLink = Url.Action(nameof(ConfirmEmail), "User", new { token, email = credentials.Email }, Request.Scheme);
+        var message = new Message(new string[] { credentials.Email! }, "Confirmation email link", confirmationLink!);
+        _emailService.SendEmail(message);
         return Ok();
     }
 
-    /*[HttpPost("login", Name = "CheckUserCredentials")] 
+    /*[HttpPost("login", Name = "CheckUserCredentials")]
     public async Task<IActionResult> CheckUserCredentials([FromBody] UserCredentialsDto credentials)
     {
         if (!_createUserRequestValidator.Validate(credentials).IsValid)
@@ -167,4 +182,61 @@ public class UserController : ControllerBase // TODO : API to allow a pro to mak
         return Ok();
     }
 
+    /*
+
+    [HttpGet]
+    public async Task<IActionResult> TestEmail()
+    {
+        // TODO: change client's adresse email
+        var message = new Message(new string[] { "zhuxuxinapp@gmail.com" }, "<h1>TEST PIR</h1>", "Test message content");
+        _emailService.SendEmail(message);
+        return Ok();
+    }
+    */
+    [HttpGet("ConfirmEmail")]
+    public async Task<IActionResult> ConfirmEmail(string token, string email)
+    {
+        await _userService.ConfirmEmailAsync(email, token);
+        return Ok();
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    [Route("forgot-password")]
+    public async Task<IActionResult> ForgotPassword([Required] string email)
+    {
+        var user = await _userService.GetAsync(email);
+        if (user != null)
+        {
+            // TODO: think about parameter
+            var token = await _userService.GeneratePasswordResetTokenAsync(email);
+            var forgotlink = Url.Action("ResetPassword", "User", new { token, email = user.Email }, Request.Scheme);
+            var message = new Message(new string[] { user.Email! }, "Forget Password resend email link", forgotlink!);
+            _emailService.SendEmail(message);
+            return Ok();
+        }
+        return NotFound();
+    }
+
+    [HttpGet("reset-password")]
+    public async Task<IActionResult> ResetPassword(string token, string email)
+    {
+        var example = new ResetPassword { Token = token, Email = email };
+        return Ok(new{
+            example
+        });
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    [Route("reset-password")]
+    public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
+    {
+        await _userService.ResetPasswordAsync(resetPassword);
+        return Ok();
+    }
+
+
 }
+
+
