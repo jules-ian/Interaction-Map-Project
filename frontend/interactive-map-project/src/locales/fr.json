@@ -26,6 +26,12 @@
     "confirmPswd": "Confirmer le nouveau mot de passe",
     "modifpsw": "Modifier mon mot de passe"
   },
+  "initpswd": {
+    "titlepage": "Création mot de passe",
+    "subtitle": "Veuillez remplir les champs suivants pour créer votre mot de passe :",
+    "newPswd": "Mot de passe",
+    "confirmPswd": "Confirmez votre mot de passe"
+  },
   "form": {
     "charter": "Je m’engage à avoir lu et à respecter la charte ci-dessus",
     "descriptionOfForm": "Lors de la confirmation de votre inscription, vous rejoignez notre service de recherche de professionnels du handicap et de la petite enfance.",

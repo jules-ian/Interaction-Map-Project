@@ -12,8 +12,8 @@ import Profil from "./Pages/Profil";
 import EditProfil from "./Pages/EditProfil";
 import Admin from "./Pages/Admin";
 import EditPassword from "./Pages/EditPassword";
-
-import { Box, FormControl, IconButton, MenuItem, Select, Button, Toolbar, Typography } from "@mui/material";
+import InitPassword from "./Pages/InitPassword";
+import { Box, IconButton, MenuItem, Select, Button, Toolbar } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import ToolbarGroup from "@mui/material/Toolbar";
 import HomeIcon from "@mui/icons-material/Home";
@@ -180,6 +180,7 @@ export default function App() {
         <Route path="Admin" element={<Admin setMenuTitel={setMenuTitel} />} />
         <Route path="Profil" element={<Profil setMenuTitel={setMenuTitel} />} />
         <Route path="EditProfil" element={<EditProfil setMenuTitel={setMenuTitel} />} />
+        <Route path="initPassword" element={<InitPassword setMenuTitel={setMenuTitel} />} />
 
       </Routes>
 
