@@ -1,3 +1,5 @@
+using InteractiveMapProject.API.Email;
+using InteractiveMapProject.API.Email_Services;
 using InteractiveMapProject.API.Utilities;
 using InteractiveMapProject.Contracts.Dtos;
 using InteractiveMapProject.Contracts.Filtering.FilterProfessional;
@@ -12,15 +14,17 @@ namespace InteractiveMapProject.API.Controllers;
 public class ProfessionalController : ControllerBase
 {
     private readonly IProfessionalService _professionalService;
+    private readonly IEmailService _emailService;
     private readonly IPendingProfessionalService _pendingProfessionalService;
     private readonly IUserService _userService;
 
     public ProfessionalController(IProfessionalService professionalService,
-        IPendingProfessionalService pendingProfessionalService, IUserService userService)
+        IPendingProfessionalService pendingProfessionalService, IUserService userService, IEmailService emailService)
     {
         _professionalService = professionalService;
         _pendingProfessionalService = pendingProfessionalService;
         _userService = userService;
+        _emailService = emailService;
     }
 
 #if !TESTING
@@ -136,8 +140,21 @@ public class ProfessionalController : ControllerBase
         if (validationDto.Approve)
         {
             await _userService.CreateAsync(professional.Email, randomPassword, pendingProfessionalId);
+            // add token to verify mail
+            var token = await _userService.GenerateEmailConfirmationTokenAsync(professional.Email);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Professional", new { token, email = professional.Email }, Request.Scheme);
+            var message = new Message(new string[] { professional.Email! }, "Confirmation email link", confirmationLink!);
+            _emailService.SendEmail(message);
         }
         // TODO : Send email with reset password link
+        return Ok();
+    }
+
+
+    [HttpGet("ConfirmEmail")]
+    public async Task<IActionResult> ConfirmEmail(string token, string email)
+    {
+        await _userService.ConfirmEmailAsync(email, token);
         return Ok();
     }
 }

@@ -193,6 +193,7 @@ public class UserController : ControllerBase
         return Ok();
     }
     */
+
     [HttpGet("ConfirmEmail")]
     public async Task<IActionResult> ConfirmEmail(string token, string email)
     {
@@ -205,7 +206,7 @@ public class UserController : ControllerBase
     [Route("forgot-password")]
     public async Task<IActionResult> ForgotPassword([Required] string email)
     {
-        var user = await _userService.GetAsync(email);
+        var user = await _userService.GetByEmailAsync(email);
         if (user != null)
         {
             // TODO: think about parameter

@@ -3,7 +3,6 @@ using System;
 using InteractiveMapProject.Data.Db.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,72 +11,70 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveMapProject.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240501101421_AddApplicationUser")]
-    partial class AddApplicationUser
+    [Migration("20240513082825_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<Guid?>("ProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -86,8 +83,7 @@ namespace InteractiveMapProject.Data.Db.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -96,14 +92,14 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -112,37 +108,37 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2c0200a4-d7d2-4937-a314-9d50d800b982"),
+                            Id = new Guid("9ae46826-0a6f-48f5-ba9e-a7b1e6ac8786"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "0-3 ans"
                         },
                         new
                         {
-                            Id = new Guid("f7b5e33d-1116-4526-9bb0-594f9da7c2b9"),
+                            Id = new Guid("498c8fbd-ce9d-4d74-b1af-4ffd6ced08d0"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "3-6 ans"
                         },
                         new
                         {
-                            Id = new Guid("9d350951-833a-47e0-a8f2-b634dec0b7e5"),
+                            Id = new Guid("4f5177aa-fbe1-418c-8e29-c53fd57de0c1"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "6-12 ans"
                         },
                         new
                         {
-                            Id = new Guid("3e48fc6b-f15d-4c72-99be-b3919fd76177"),
+                            Id = new Guid("dae32a6b-8991-49ae-97f4-59fe8d607552"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "12-18 ans"
                         },
                         new
                         {
-                            Id = new Guid("fad61b38-c714-4de6-ab1b-e026a6af3c72"),
+                            Id = new Guid("bb1cc290-0fc8-404a-854a-c2b0aae68c80"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Parents"
                         },
                         new
                         {
-                            Id = new Guid("8e030211-2730-4bba-bdea-031cf2b4a9d0"),
+                            Id = new Guid("946127b6-6086-49ae-9d37-74fea6f28b9e"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Professionnels"
                         });
@@ -152,14 +148,14 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -168,85 +164,85 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("98d8711b-a848-44ce-a5f5-4bc590b20de1"),
+                            Id = new Guid("aac34d8b-9e9c-4e22-84be-7eb2bf9e45a9"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de loisirs"
                         },
                         new
                         {
-                            Id = new Guid("bb49faa1-1b64-41b8-a034-9ba2f67e72e9"),
+                            Id = new Guid("b798e3aa-dc15-4edf-9e71-c5022d309bd8"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Culture et loisirs"
                         },
                         new
                         {
-                            Id = new Guid("99400128-3613-4fa0-b61c-3a39e740ec38"),
+                            Id = new Guid("bdd1387d-1a50-4dca-968f-ec92bf11ca7c"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Petite enfance"
                         },
                         new
                         {
-                            Id = new Guid("077c6cdf-c659-4151-bc9c-e8dc85c07282"),
+                            Id = new Guid("3fcb1d8e-e488-4f5a-b48f-c948f47679a5"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Répit"
                         },
                         new
                         {
-                            Id = new Guid("0c197cb7-8c06-42ea-9c2f-410a2264f4f1"),
+                            Id = new Guid("b796ae0d-fca2-4fd5-af81-091ab862c3e6"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil occasionnel"
                         },
                         new
                         {
-                            Id = new Guid("eae65982-9c2c-40a4-9487-d7927f445c21"),
+                            Id = new Guid("40ddc0af-3771-4985-afa5-41dee83aab40"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil d’urgence"
                         },
                         new
                         {
-                            Id = new Guid("c6fc014d-5f0d-459a-86f5-9cec13b6043e"),
+                            Id = new Guid("aae7815a-a9cc-4d3c-8576-49a072c078bb"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Scolarité"
                         },
                         new
                         {
-                            Id = new Guid("b253a9f8-ee72-42f2-8a6c-f5c3e791e8bc"),
+                            Id = new Guid("a1b17a70-be7f-40a6-abab-d0a26dfa2a7a"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accueil de nuit"
                         },
                         new
                         {
-                            Id = new Guid("39d3bcd4-4b84-445f-8b94-cbcd183017e7"),
+                            Id = new Guid("51fe1c6b-f4fa-4ca2-bbfa-fa619ec8e652"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Soins/santé"
                         },
                         new
                         {
-                            Id = new Guid("f2410298-05ae-4f67-bd9b-f44d4b7b60fd"),
+                            Id = new Guid("3c18485e-0085-4482-8c2f-aeb9925e9281"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rééducation"
                         },
                         new
                         {
-                            Id = new Guid("f277bfa6-83a2-4f25-93e2-af782af77bf5"),
+                            Id = new Guid("af9d2f8e-d9cc-4d6f-81c2-2239aca90532"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement à la parentalité"
                         },
                         new
                         {
-                            Id = new Guid("731bb442-9389-4a80-9bec-4408d6ba9273"),
+                            Id = new Guid("2b2060e8-297f-4bee-8b88-67d651e8ae40"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Accompagnement administratif"
                         },
                         new
                         {
-                            Id = new Guid("2082d8f7-8843-4b97-8e45-db50ad66aa8a"),
+                            Id = new Guid("dc45ccb9-7437-46ea-809b-ed531f06bc7a"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Group de parole/Ateliers"
                         },
                         new
                         {
-                            Id = new Guid("807c4c2a-66c2-4062-88f6-729ca93576da"),
+                            Id = new Guid("f65849f3-41f2-4108-9996-d7fd69fcbbbe"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Information/orientation"
                         });
@@ -255,10 +251,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalAudience", b =>
                 {
                     b.Property<Guid>("PendingProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("AudienceId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("PendingProfessionalId", "AudienceId");
 
@@ -270,10 +266,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalMission", b =>
                 {
                     b.Property<Guid>("PendingProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("MissionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("PendingProfessionalId", "MissionId");
 
@@ -285,10 +281,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.PendingProfessionalPlaceOfIntervention", b =>
                 {
                     b.Property<Guid>("PendingProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("PlaceOfInterventionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("PendingProfessionalId", "PlaceOfInterventionId");
 
@@ -301,14 +297,14 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -317,49 +313,49 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e119cf2d-4c9f-4c84-942f-721dd6134df3"),
+                            Id = new Guid("33638c12-e1ac-4508-8717-741884e87136"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Domicile"
                         },
                         new
                         {
-                            Id = new Guid("3d4adf73-5726-48c7-9317-72dc9aa15c25"),
+                            Id = new Guid("49ff9e12-3f70-4835-9627-3a1b36bfbd09"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "EAJE"
                         },
                         new
                         {
-                            Id = new Guid("3baca9a2-c4e8-4615-b929-702859286b8b"),
+                            Id = new Guid("6023fbc8-85cb-4589-b8d8-1408c3a27964"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "École"
                         },
                         new
                         {
-                            Id = new Guid("6f67161d-68e0-4637-a452-cb97c1973644"),
+                            Id = new Guid("a4d58208-fc49-41e1-bb58-64e856cd238c"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure individuelle"
                         },
                         new
                         {
-                            Id = new Guid("38596a5b-4503-40de-bfe2-90e6d0406a3e"),
+                            Id = new Guid("dd417045-5bf9-4a70-810b-15b6bab90e96"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure de soins"
                         },
                         new
                         {
-                            Id = new Guid("b0904bae-0333-433c-98c0-bd817b4327ba"),
+                            Id = new Guid("d081df8c-d78f-47ea-8854-733693a57765"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Institution"
                         },
                         new
                         {
-                            Id = new Guid("52eb7d6b-4244-4941-972c-7b63ba783e83"),
+                            Id = new Guid("be305923-75e1-43ea-87d0-c73ab7400db7"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Structure d’orientation et d’information"
                         },
                         new
                         {
-                            Id = new Guid("3744f86a-bfec-4125-a97f-d11fe2ba3c19"),
+                            Id = new Guid("9d570b69-19a6-4a72-b703-b2a64b84c2f9"),
                             CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tiers lieu"
                         });
@@ -368,10 +364,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalAudience", b =>
                 {
                     b.Property<Guid>("ProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("AudienceId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("ProfessionalId", "AudienceId");
 
@@ -383,10 +379,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalMission", b =>
                 {
                     b.Property<Guid>("ProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("MissionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("ProfessionalId", "MissionId");
 
@@ -398,10 +394,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("InteractiveMapProject.Contracts.Entities.FieldOfIntervention.ProfessionalPlaceOfIntervention", b =>
                 {
                     b.Property<Guid>("ProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("PlaceOfInterventionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("ProfessionalId", "PlaceOfInterventionId");
 
@@ -414,39 +410,39 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("EstablishmentType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ManagementType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<Guid?>("ProfessionalId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("ValidationStatusId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -461,36 +457,36 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreationDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("EstablishmentType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ManagementType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<Guid>("ValidationStatusId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -503,11 +499,11 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -516,17 +512,17 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("404373e7-9cfe-4b84-9b35-4068b7f704d2"),
+                            Id = new Guid("793127fc-5427-4471-b161-58bd68c6636a"),
                             Name = "Approved"
                         },
                         new
                         {
-                            Id = new Guid("ef0b5e43-1dc3-4f16-9d28-8035bf1eb3f5"),
+                            Id = new Guid("be4ce02e-e478-4168-bfc9-22d541acfcd6"),
                             Name = "Waiting After Creation"
                         },
                         new
                         {
-                            Id = new Guid("c44a582d-2524-4fe5-8684-183ad1103f70"),
+                            Id = new Guid("bd7990de-181a-4cb5-9e80-8f8b1caccdd7"),
                             Name = "Waiting After Update"
                         });
                 });
@@ -534,26 +530,25 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -564,17 +559,15 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -589,17 +582,15 @@ namespace InteractiveMapProject.Data.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -612,18 +603,18 @@ namespace InteractiveMapProject.Data.Db.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -635,10 +626,10 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -650,18 +641,18 @@ namespace InteractiveMapProject.Data.Db.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -798,19 +789,19 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("PendingProfessionalId")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("char(36)");
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PostalCode")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("PendingProfessionalId");
 
@@ -823,23 +814,23 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
                         {
                             b1.Property<Guid>("PendingProfessionalId")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("char(36)");
 
                             b1.Property<string>("Email")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("Function")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("Name")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PhoneNumber")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("PendingProfessionalId");
 
@@ -852,13 +843,13 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
                         {
                             b1.Property<Guid>("PendingProfessionalId")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("char(36)");
 
                             b1.Property<double>("Latitude")
-                                .HasColumnType("float");
+                                .HasColumnType("double");
 
                             b1.Property<double>("Longitude")
-                                .HasColumnType("float");
+                                .HasColumnType("double");
 
                             b1.HasKey("PendingProfessionalId");
 
@@ -893,19 +884,19 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("char(36)");
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PostalCode")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("ProfessionalId");
 
@@ -918,23 +909,23 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.ContactPerson", "ContactPerson", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("char(36)");
 
                             b1.Property<string>("Email")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("Function")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("Name")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PhoneNumber")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("ProfessionalId");
 
@@ -947,13 +938,13 @@ namespace InteractiveMapProject.Data.Db.Migrations
                     b.OwnsOne("InteractiveMapProject.Contracts.Entities.Geolocation", "Geolocation", b1 =>
                         {
                             b1.Property<Guid>("ProfessionalId")
-                                .HasColumnType("uniqueidentifier");
+                                .HasColumnType("char(36)");
 
                             b1.Property<double>("Latitude")
-                                .HasColumnType("float");
+                                .HasColumnType("double");
 
                             b1.Property<double>("Longitude")
-                                .HasColumnType("float");
+                                .HasColumnType("double");
 
                             b1.HasKey("ProfessionalId");
 
