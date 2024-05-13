@@ -55,19 +55,17 @@ public class UserController : ControllerBase // TODO : API to allow a pro to mak
         {
             return Unauthorized();
         }
-        var id = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "jti").Value;
-        //var email = User.FindFirst(ClaimTypes.Email).Value;
-        //var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-        var user = await _userService.GetByIdAsync(id);
-        if (user == null)
+        var userEmail = User.FindFirst(ClaimTypes.Name)?.Value;
+        if (userEmail == null)
         {
-            return NotFound();
+            return NotFound("Account not found");
         }
+
+        var user = await _userService.GetByEmailAsync(userEmail);
         var userRoles = await _userService.GetRolesAsync(user.Email);
         if (userRoles == null || !userRoles.Contains(UserRoles.Professional) || user.ProfessionalId == null)
         {
-            return NotFound();
+            return NotFound("User is not a Professional");
         }
         var professionalId = (Guid)user.ProfessionalId;
         ProfessionalResponseDto response = await _professionalService.GetAsync(professionalId);

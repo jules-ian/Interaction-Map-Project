@@ -2,59 +2,32 @@
 import { Box, Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../Components/Label";
-import { Address, ContactPerson, Professional } from "../utils/Entities";
-import { useEffect, useState } from "react";
-import TextInput from "../Components/TextInput";
-import {
-    getInfosProfessionals,
-    getAllAudiences,
-    getAllMissions,
-    getAllPlacesOfIntervention,
-} from "../utils/BackendFunctions";
+import { useState } from "react";
+import { Professional, Address, ContactPerson } from "../utils/Entities";
 import { useTranslation } from "react-i18next";
 import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
 import { Link as RouterLink } from "react-router-dom";
 import { getToken } from "../utils/BackendFunctions";
 import { tokenUser } from "../App";
 
-export default function Profil({ setMenuTitel, email }) { //todo : uId
+export default function Profil({ setMenuTitel }) {
     const { t } = useTranslation();
     setMenuTitel(t("common.myAccount"));
-    const [audiences, setAudiences] = useState([]);
-    const [audiencesSelection, setAudiencesSelection] = useState([]);
-    const [missions, setMissions] = useState([]);
-    const [missionsSelection, setMissionsSelection] = useState([]);
-    const [placesOfIntervention, setPlacesOfIntervention] = useState([]);
-    const [
-        placesOfInterventionSelectionError,
-        setPlacesOfInterventionSelectionError,
-    ] = useState(false);
-    const [description, setDescription] = useState("");
     const navigate = useNavigate();
 
     // Fenêtres pop-up
     const successMessage = t("profil.successMessage");
     const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+    //TODO : getInfosProfessionals(setProfessional);
+    const [professional] = useState(new Professional(null, "Crèche de Ramonville", "Crèche", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), ["0-3 ans"], ["Domicile", "EAJE"], ["Scolarité"], "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", ""));
     const onCloseSuccessDialog = function () {
         setOpenSuccessDialog(false);
         navigate("/Home", { replace: true });
     };
 
-    const [errorMessage, setErrorMessage] = useState("");
     const [openErrorDialog, setOpenErrorDialog] = useState(false);
     const onCloseErrorDialog = function () {
         setOpenErrorDialog(false);
-    };
-
-    // on first render
-    useEffect(() => {
-        getAllPlacesOfIntervention(setPlacesOfIntervention);
-        getAllMissions(setMissions);
-        getAllAudiences(setAudiences);
-    }, []);
-
-    const onSubmit = function () {
-
     };
 
     const catergoryHeaderProps = {
@@ -77,12 +50,13 @@ export default function Profil({ setMenuTitel, email }) { //todo : uId
         color: 'gray',
     };
 
-    //let professional = getInfosProfessionals();
-    //console.log("FROM JSON PROFESSIONAL = ", professional);
-    let professional = new Professional(null, "Crèche de Ramonville", "Garde d'enfants", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), ["0-3 ans"], ["Domicile", "EAJE"], ["Scolarité"], "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", "");
+    const tok = getToken(tokenUser);
+    let tokRole = "Null";
+    if (tok != null) {
+        tokRole = tok.token;
+    }
 
-    const tok = getToken(tokenUser).token;
-    if (tok === "Professional" | tok === "Admin") {
+    if (tokRole === "Professional" | tokRole === "Admin") {
         return (
             <Box>
                 <SuccessDialog
@@ -91,7 +65,7 @@ export default function Profil({ setMenuTitel, email }) { //todo : uId
                     open={openSuccessDialog}
                 />
                 <ErrorDialog
-                    message={errorMessage}
+                    message={""}
                     onClose={onCloseErrorDialog}
                     open={openErrorDialog}
                 />
@@ -177,17 +151,14 @@ export default function Profil({ setMenuTitel, email }) { //todo : uId
                     <Grid item xs={12} sm={6}>
                         <Text sx={catergorySubHeaderProps}>{t("professional.audiences")}</Text>
                         <Text sx={catergoryInfoProps}>{professional.audiences.join(", ")}</Text>
-                        {/* TODO : revoir les print */}
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Text sx={catergorySubHeaderProps}>{t("professional.placesOfIntervention")}</Text>
                         <Text sx={catergoryInfoProps}>{professional.placesOfIntervention.join(", ")}</Text>
-                        {/* TODO : revoir les print */}
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Text sx={catergorySubHeaderProps}>{t("professional.missions")}</Text>
                         <Text sx={catergoryInfoProps}>{professional.missions.join(", ")}</Text>
-                        {/* TODO : revoir les print */}
                     </Grid>
 
                     <Grid item xs={12}>
