@@ -27,7 +27,7 @@ export default function EditPassword({ setMenuTitel }) {
     const { t } = useTranslation(); //t -> alias pour useTranslation() (traduction en vers fr)
     setMenuTitel(t("editpswd.titlepage"));
     const navigate = useNavigate();
-    const { width, height } = useWindowDimensions();
+    const { height } = useWindowDimensions();
 
     const [errorMessage, setErrorMessage] = useState("");
     const [openErrorDialog, setOpenErrorDialog] = useState(false);
@@ -64,8 +64,14 @@ export default function EditPassword({ setMenuTitel }) {
             return false;
         }
     }
-    const tok = getToken(tokenUser).token;
-    if (tok === "Professional" | tok === "Admin") {
+
+    const tok = getToken(tokenUser);
+    let tokRole = "Null";
+    if (tok !== null) {
+        tokRole = tok.token;
+    }
+
+    if (tokRole === "Professional" | tokRole === "Admin") {
 
         return (
             <Box

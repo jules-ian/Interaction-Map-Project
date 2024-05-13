@@ -3,7 +3,7 @@ import { Box, Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../Components/Label";
 import { useState } from "react";
-import { getInfosProfessionals } from "../utils/BackendFunctions";
+import { Professional, Address, ContactPerson } from "../utils/Entities";
 import { useTranslation } from "react-i18next";
 import { ErrorDialog, SuccessDialog } from "../Components/AlertDialog";
 import { Link as RouterLink } from "react-router-dom";
@@ -13,12 +13,13 @@ import { tokenUser } from "../App";
 export default function Profil({ setMenuTitel }) {
     const { t } = useTranslation();
     setMenuTitel(t("common.myAccount"));
-    const [professional, setProfessional] = useState(null);
     const navigate = useNavigate();
 
     // Fenêtres pop-up
     const successMessage = t("profil.successMessage");
     const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+    //TODO : getInfosProfessionals(setProfessional);
+    const [professional] = useState(new Professional(null, "Crèche de Ramonville", "Crèche", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), ["0-3 ans"], ["Domicile", "EAJE"], ["Scolarité"], "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", ""));
     const onCloseSuccessDialog = function () {
         setOpenSuccessDialog(false);
         navigate("/Home", { replace: true });
@@ -49,12 +50,13 @@ export default function Profil({ setMenuTitel }) {
         color: 'gray',
     };
 
-    //getInfosProfessionals(setProfessional);
-    console.log("FROM JSON PROFESSIONAL = ", professional);
-    setProfessional(new Professional(null, "Crèche de Ramonville", "Garde d'enfants", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), ["0-3 ans"], ["Domicile", "EAJE"], ["Scolarité"], "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", ""));
+    const tok = getToken(tokenUser);
+    let tokRole = "Null";
+    if (tok != null) {
+        tokRole = tok.token;
+    }
 
-    const tok = getToken(tokenUser).token;
-    if (tok === "Professional" | tok === "Admin") {
+    if (tokRole === "Professional" | tokRole === "Admin") {
         return (
             <Box>
                 <SuccessDialog
