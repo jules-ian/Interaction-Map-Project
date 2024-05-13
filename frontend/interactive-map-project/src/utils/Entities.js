@@ -118,6 +118,28 @@ export class ContactPerson {
     this._function = _function;
   }
 }
+export class Identifiants {
+  constructor(mail, passwd) {
+    this.mail = mail;
+    this.passwd = passwd;
+  }
+  toJSON() {
+    return {
+      email: this.mail,
+      password: this.passwd
+    }
+  };
+}
+export class Token {
+  constructor(token, exp) {
+    this.token = token;
+    this.exp = exp;
+  }
+}
+export function tokenFromJSON(json) {
+  console.log("**********token = ", json.token, json.expiration);
+  return new Token(json.token, json.expiration);
+}
 
 const dummyAdd = new Address("dummystreet", "dummycity", "000000");
 const dummyPerson = new ContactPerson(

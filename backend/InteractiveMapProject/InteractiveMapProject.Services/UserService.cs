@@ -76,7 +76,6 @@ public class UserService : IUserService
         }
     }
 
-
     public async Task AddToRoleAsync(string email, string roleName)
     {
         var user = await _userManager.FindByEmailAsync(email);

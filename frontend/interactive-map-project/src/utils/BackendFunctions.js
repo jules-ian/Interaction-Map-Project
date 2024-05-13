@@ -1,13 +1,11 @@
-import InitGetter from "../Components/InitGetter";
 import axios from "axios";
 import {
-  Address,
-  ContactPerson,
-  GeoLocation,
-  Professional,
-  dummyProf,
   professionalFromJSON,
+  tokenFromJSON,
+  Identifiants,
+  Token
 } from "./Entities";
+import { tokenUser } from "../App";
 
 export function getAllMissions(setReturn) {
   let url = "https://localhost:7212/api/field-of-intervention/mission/all";
@@ -65,17 +63,21 @@ export function addNewProfessional(professional, callback) {
 }
 
 export function approveProfessional(professional, callback) {
+  console.log("pro = ", professional);
+  console.log("id = ", professional.id);
+
   let url =
     "https://localhost:7212/api/professional/validate/" + professional.id;
+
   const data = { approve: true };
   axios
     .post(url, data, {
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers if needed
+        'Authorization': `Bearer ${tokenUser.token}`
       },
     })
-    .then((response) => {
+    .then(() => {
       console.log(professional.name + " was approved");
       callback();
     })
@@ -89,21 +91,36 @@ export function declineProfessional(professional, callback) {
   let url =
     "https://localhost:7212/api/professional/pending/" + professional.id;
   axios
-    .delete(url)
-    .then((response) => {
+    .delete(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
+    .then(() => {
       console.log(professional.name + " was deleted");
       callback();
     })
     .catch((error) => {
-      console.error("Error deleteing Professional:", error.response);
+      console.error("Error deleting Professional:", error.response);
       callback();
+    });
+}
+
+export function checkIdentifiants(mail, password, setReturn) {
+  let id = new Identifiants(mail, password);
+  let url = "https://localhost:7212/api/account/login";
+  axios
+    .post(url, id.toJSON())
+    .then((response) => {
+      let tok = tokenFromJSON(response.data);
+      setReturn(tok);
+    })
+    .catch((error) => {
+      console.log("Error due to wrong id:", error);
+      setReturn(null);
     });
 }
 
 export function getUnapprovedProfessionals(setResults) {
   let url = "https://localhost:7212/api/professional/pending/all";
   axios
-    .get(url)
+    .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
       let professionals = response.data.map((profData) => {
         return professionalFromJSON(profData);
@@ -115,6 +132,167 @@ export function getUnapprovedProfessionals(setResults) {
     });
 }
 
+export function getInfosProfessionals(setReturn) {
+  let url = "https://localhost:7212/api/account/professional/info";
+  console.log("A la recherche des infos du professional", tokenUser.token);
+  axios
+    .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
+    .then((response) => {
+      console.log("Professional = ", response.data);
+      setReturn(professionalFromJSON(response.data));
+    })
+    .catch((error) => {
+      console.error("Error getting professionnal information:", error);
+    });
+  axios.interceptors.request.use(request => {
+    console.log('Request:', request); // Affichage de la configuration de la requête dans la console
+    return request; // N'oubliez pas de renvoyer la requête modifiée ou non modifiée
+  });
+}
+
+export function addEditedProfessional(professional, callback) {
+  let url = "https://localhost:7212/api/modification";
+
+  axios
+    .post(url, professional.toJSON(), { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
+    .then((response) => {
+      console.log(response);
+      callback(true);
+    })
+    .catch((error) => {
+      console.error("Error Posting Professional Modifications:", error.response);
+      callback(false, error.response);
+    });
+}
+
+export function approveModification(professional, callback) {
+  let url =
+    "https://localhost:7212/api/modification/validate/" + professional.id;
+  const data = { approve: true };
+  axios
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${tokenUser.token}`
+      }
+    },
+    )
+    .then(() => {
+      console.log(professional.name + "'s modifications were approved");
+      callback();
+    })
+    .catch((error) => {
+      console.error("Error approving modifications of professional:", error.response);
+      callback();
+    });
+}
+
+export function declineModification(professional, callback) {
+  let url =
+    "https://localhost:7212/api/modification/pending/" + professional.id;
+  axios
+    .delete(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
+    .then((response) => {
+      console.log(professional.name + "'s modifications were refused");
+      callback();
+    })
+    .catch((error) => {
+      console.error("Error refusing modifications of professional:", error.response);
+      callback();
+    });
+}
+
+export function getEditedProfessionals(setResults) {
+  let url = "https://localhost:7212/api/modification/pending/all";
+  axios
+    .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
+    .then((response) => {
+      let professionals = response.data.map((profData) => {
+        return professionalFromJSON(profData);
+      });
+      setResults(professionals);
+    })
+    .catch((error) => {
+      console.error("Error sending post for search:", error);
+    });
+}
+
+export function getToken(tok) {
+  if (tok === null) {
+    return new Token(null, null);
+  }
+  var base64Url = tok.token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  const role = JSON.parse(jsonPayload)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  const ex = JSON.parse(jsonPayload).exp;
+  console.log("ex = ", ex, ";  role = ", role);
+
+  return new Token(role, ex);
+}
+
+/*
+export function getResultsSearch(
+  setResults,
+  textSearch = "",
+  audiencesIDs = [],
+  placesOfInterventionIDs = [],
+  missionIDs = [],
+  mapBounds
+) {
+  let data = {};
+  if (!textSearch.length === 0) {
+    data.text = textSearch;
+    console.log("textsearch changed");
+  }
+  if (!audiencesIDs.length === 0) {
+    data.audiences = audiencesIDs;
+    console.log("audiences changed");
+  }
+  if (!missionIDs.length === 0) {
+    data.missions = missionIDs;
+    console.log("missions changed");
+  }
+  if (!placesOfInterventionIDs.length === 0) {
+    data.placesOfIntervention = placesOfInterventionIDs;
+    console.log("places changed");
+  }
+
+  // if (mapBounds) {
+  //   data.mapSquare = {
+  //     northEastLatitude: mapBounds._ne.lat,
+  //     northEastLongitude: mapBounds._ne.lng,
+  //     southWestLatitude: mapBounds._sw.lat,
+  //     southWestLongitude: mapBounds._sw.lng
+  //   }
+  // };
+
+  console.log("Data send to backend on search");
+  console.log(data);
+
+  let url = "https://localhost:7212/api/professional/approved/filtered";
+  console.log("request search - ", tokenUser);
+  axios
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${tokenUser.token}`
+      }
+    })
+    .then((response) => {
+      let professionals = response.data.map((profData) => {
+        console.log(response.data);
+        return professionalFromJSON(profData);
+      });
+      setResults(professionals);
+    })
+    .catch((error) => {
+      console.error("Error sending post for search:", error);
+    });
+}
+*/
 export function getResultsSearch(
   setResults,
   textSearch = "",
@@ -154,7 +332,7 @@ export function getResultsSearch(
     .post(url, data, {
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers if needed
+        'Authorization': `Bearer ${tokenUser.token}`
       },
     })
     .then((response) => {

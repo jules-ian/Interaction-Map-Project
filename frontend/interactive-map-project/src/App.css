@@ -7,6 +7,17 @@
   pointer-events: none;
 }
 
+/* @font-face {
+  font-family: peaches;
+  src: url(fonts/peaches/peaches_en_regalia-webfont.eot);
+  src: url(fonts/peaches/peaches_en_regalia-webfont.eot?#iefix) format("embedded-opentype"),
+    url(fonts/peaches/peaches_en_regalia-webfont.woff) format("woff"),
+    url(fonts/peaches/peaches_en_regalia-webfont.ttf) format("truetype"),
+    url(fonts/peaches/peaches_en_regalia-webfont.svg#peaches) format("svg");
+  font-weight: 400;
+  font-style: normal
+} */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -14,7 +25,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #283034;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,6 +34,24 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
+/* .paperContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+} */
+
+
+/* .App-title {
+  font-family: peaches, serif;
+  font-size: 28px;
+  font-size: 1.75rem;
+  color: #399;
+  margin: 20px 0 0;
+} */
 
 .App-link {
   color: #61dafb;
@@ -33,6 +62,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
