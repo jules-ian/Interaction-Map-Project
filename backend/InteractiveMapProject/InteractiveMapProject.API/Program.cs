@@ -33,8 +33,8 @@ public class Program
 
         builder.Services.AddDbContext<ApplicationDbContext>(opt =>
         {
-            opt.UseSqlServer(connectionString,// change this and connection string to change DB and DBMS
-                opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db")); // How to apply migrations to Data.Db ???
+            opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), // change this and connection string to change DB and DBMS
+                    opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db")); // How to apply migrations to Data.Db ???
         });
 
         builder.Services.AddDefaultIdentity<ApplicationUser>(options =>

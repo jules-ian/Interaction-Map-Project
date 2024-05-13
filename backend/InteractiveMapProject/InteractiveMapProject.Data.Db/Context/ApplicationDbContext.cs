@@ -25,7 +25,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>  //DbCont
         : base(options)
     {
     }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
 
+        optionsBuilder.UseMySql("server=127.0.0.1;uid=root;pwd=1234;database=test", ServerVersion.AutoDetect("server=127.0.0.1;uid=root;pwd=1234;database=test"),
+            b => b.MigrationsAssembly("InteractiveMapProject.Data.Db"));
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
