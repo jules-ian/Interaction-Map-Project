@@ -236,16 +236,21 @@ export function getResultsSearch(
   mapBounds
 ) {
   let data = {};
-  if (!textSearch.length === 0) {
+  console.log("text search = ", textSearch);
+  if (textSearch.length !== 0) {
+    console.log("data text not empty");
     data.text = textSearch;
   }
-  if (!audiencesIDs.length === 0) {
+  if (audiencesIDs.length !== 0) {
+    console.log("data aud not empty");
     data.audiences = audiencesIDs;
   }
-  if (!missionIDs.length === 0) {
+  if (missionIDs.length !== 0) {
+    console.log("data mission not empty");
     data.missions = missionIDs;
   }
-  if (!placesOfInterventionIDs.length === 0) {
+  if (placesOfInterventionIDs.length !== 0) {
+    console.log("data places not empty");
     data.placesOfIntervention = placesOfInterventionIDs;
   }
 

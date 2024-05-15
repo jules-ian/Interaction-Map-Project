@@ -163,6 +163,7 @@ function Tabel({
   }
 
   if (tokRole === "Admin") {
+    console.log("token admin");
     return (
       <Box>
 
@@ -384,6 +385,8 @@ function Tabel({
     );
 
   } else {
+    console.log("token pas admin");
     navigate("/LogIn", { replace: true });
+    return (null);
   }
 }
