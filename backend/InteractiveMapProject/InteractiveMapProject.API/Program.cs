@@ -33,16 +33,14 @@ public class Program
 
         builder.Services.AddDbContext<ApplicationDbContext>(opt =>
         {
-            opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), // change this and connection string to change DB and DBMS
-                    opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db")); // How to apply migrations to Data.Db ???
+            opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+                    opt => opt.MigrationsAssembly("InteractiveMapProject.Data.Db"));
         });
 
         builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             options.SignIn.RequireConfirmedAccount = true) // Users must confirm their Email
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
-
-        
 
         // Adding Authentication
         builder.Services.AddAuthentication(options =>
@@ -60,31 +58,36 @@ public class Program
             {
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                //ValidAudience = configuration["JWT:ValidAudience"],
-                //ValidIssuer = configuration["JWT:ValidIssuer"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT")["Secret"]))
             };
         });
 
         builder.Services.Configure<IdentityOptions>(options =>
         {
+#if !TESTING
             // Password settings.
+            options.Password.RequireDigit = true; 
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequiredLength = 10;
+            options.Password.RequiredUniqueChars = 1;
+
+            // Lockout settings. If a user tries to log in 5 times in 5 minutes, he will be locked out for 5 minutes
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.AllowedForNewUsers = true;
+
+            // User settings.
+            options.User.RequireUniqueEmail = true;
+#else
             options.Password.RequireDigit = false;
             options.Password.RequireLowercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
             options.Password.RequiredLength = 6;
             options.Password.RequiredUniqueChars = 1;
-            /*
-                        // Lockout settings.
-                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                        options.Lockout.MaxFailedAccessAttempts = 5;
-                        options.Lockout.AllowedForNewUsers = true;
-
-                        // User settings.
-                        options.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                        options.User.RequireUniqueEmail = true;*/
+#endif
         });
 
         builder.Services.AddAuthorization(options =>
@@ -99,7 +102,7 @@ public class Program
         });
 
         //Add email configs
-        var emailconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+        var emailconfig = builder.Configuration.GetSection("Brevo").Get<EmailConfiguration>();
         builder.Services.AddSingleton(emailconfig);
 
 
@@ -109,8 +112,6 @@ public class Program
         );
         builder.Services.Configure<DataProtectionTokenProviderOptions>(
             options => options.TokenLifespan = TimeSpan.FromHours(2));
-
-       // Configuration.Default.ApiKey.Add("api-key", builder.Configuration["BrevoApi:ApiKey"]);
 
         builder.Services
             .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
@@ -191,6 +192,7 @@ public class Program
             await roleService.CreateAsync(UserRoles.SuperAdmin);
         }
 
+#if TESTING
         using (var scope = app.Services.CreateScope())
         {
             var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
@@ -212,7 +214,20 @@ public class Program
                 await userService.AddToRoleAsync(professionalEmail, UserRoles.Professional);
             }
         }
-
+#else
+        using (var scope = app.Services.CreateScope())
+                {
+                    var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+                    // Replace with your credentials 
+                    string adminEmail = "";
+                    string adminPassword = "";
+                    if (await userService.GetByEmailAsync(adminEmail) == null)
+                    {
+                        await userService.CreateAsync(adminEmail, adminPassword);
+                        await userService.AddToRoleAsync(adminEmail, UserRoles.Admin);
+                    }
+                }
+#endif
         app.Run();
 
     }
