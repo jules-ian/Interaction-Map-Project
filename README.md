@@ -1,8 +1,8 @@
-### Interactive Map Project
+# Interactive Map Project
 
 ## Tool install
 
-# Frontend
+### Frontend
 0. Install Visual Studio Code (I used it as IDE)
 1. Install Node.js
 2. Open GitHub repo in Visual Studio
@@ -13,7 +13,7 @@
 
 The frontend should run on it's own
 
-# Backend
+### Backend
 1. install mariaDB 11.3.2, the database -> https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.3.2
 2. create a database with a root access on it, and adapt the connection string in our code : server=@ip; uid=root; pwd=[password]; database=[database name]
 3. install .net, version 6.0, it was the latest long term support version at the time we started the project -> https://dotnet.microsoft.com/en-us/download/dotnet - when the installer asks you which workload to install, select ASP.NET and web development workload in the Web & Cloud section - these are the official instructions if something doesnt work https://learn.microsoft.com/en-us/dotnet/core/install/windows?tabs=net80 , it also has instructions for linux
