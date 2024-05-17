@@ -3,13 +3,13 @@
 ## Tool install
 
 ### Frontend
-0. Install Visual Studio Code (I used it as IDE)
+0. Install Visual Studio Code 
 1. Install Node.js
 2. Open GitHub repo in Visual Studio
-2.1 Through terminal go into folder frontend-developement
-2.2 run npm install
-2.3 run npm start
-2.4 errors might hint to what other packages need to be installed
+2.1. Through terminal go into folder frontend-developement
+2.2. run "npm install"
+2.3. run "npm start"
+2.4. errors might hint to what other packages need to be installed
 
 The frontend should run on it's own
 
