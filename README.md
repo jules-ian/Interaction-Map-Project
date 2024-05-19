@@ -33,7 +33,23 @@ file.
 12. paste this:
 {
   "Geoapify": {
-    "ApiKey": "your api key"
+    "ApiKey": "YourAmiKey",
+    "Url": "https://api.geoapify.com/v1/geocode/search"
+  },
+  "Brevo": {
+    "From": "yourEmail",
+    "SmtpServer": "smtp-relay.brevo.com",
+    "Port": 465, // Do not change, for secure mail sending
+    "Username": "yourUsername",
+    "Password": "YourPassword"
+  },
+  "JWT": {
+    "Secret": "PleaseChangeThisAbsolutelyNotSecureSecretPhrase1234567890VVhhJDSKQqqdnjk" // You should change this phrase to something else, it is used for encryption
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": { 
+    "InteractiveMapProjectDb": "server=127.0.0.1;uid=root;pwd=1234;database=test" // Change this line with your MariaDB connction configuration
   }
 }
+
 13. now you can run your backend by clicking on the green triangle in the visual studio, it will opet a swagger window where you can test the endpoints.
