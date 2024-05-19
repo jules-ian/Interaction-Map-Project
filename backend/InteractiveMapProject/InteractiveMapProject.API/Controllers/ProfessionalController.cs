@@ -85,7 +85,7 @@ public class ProfessionalController : ControllerBase
     }
 
 #if !TESTING
-    [Authorize(Policy = "AdminOrSuperAdmin")]
+    [AllowAnonymous]
 #endif
     [HttpPost(Name = "CreateProfessional")]
     public async Task<IActionResult> CreateProfessional([FromBody] ProfessionalRequestDto request)
