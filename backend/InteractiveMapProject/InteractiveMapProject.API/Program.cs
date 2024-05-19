@@ -216,17 +216,17 @@ public class Program
         }
 #else
         using (var scope = app.Services.CreateScope())
-                {
-                    var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
-                    // Replace with your credentials 
-                    string adminEmail = "";
-                    string adminPassword = "";
-                    if (await userService.GetByEmailAsync(adminEmail) == null)
-                    {
-                        await userService.CreateAsync(adminEmail, adminPassword);
-                        await userService.AddToRoleAsync(adminEmail, UserRoles.Admin);
-                    }
-                }
+        {
+            var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+            // Replace with your credentials 
+            string adminEmail = "";
+            string adminPassword = "";
+            if (await userService.GetByEmailAsync(adminEmail) == null)
+            { // Uncomment these lines
+                //await userService.CreateAsync(adminEmail, adminPassword);
+                //await userService.AddToRoleAsync(adminEmail, UserRoles.Admin);
+            }
+        }
 #endif
         app.Run();
 
