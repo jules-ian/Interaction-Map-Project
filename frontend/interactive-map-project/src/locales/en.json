@@ -2,23 +2,64 @@
   "page": {
     "form": "Form",
     "home": "Home",
+    "signUp": "Sign up",
+    "logIn": "Log in",
     "search": "Search",
-    "admin": "Admin"
+    "admin": "Admin",
+    "editPswd": "Edit Password"
   },
-
+  "login": {
+    "logInDescription": "Enter your connection information",
+    "forgotPassword": "Forgot password?",
+    "wrongID": "Incorrect username or password"
+  },
+  "forgotpw": {
+    "titlepw": "Forgotten Password",
+    "headerForgotPassword": "Did you forget your password?",
+    "subheaderForgotPassword": "Please enter your email address. You will receive an email with a link to change your password"
+  },
+  "editpswd": {
+    "titlepage": "Edit password",
+    "subtitle": "Please fill in the following fields:",
+    "currentPswd": "Current Password",
+    "newPswd": "New Password",
+    "confirmPswd": "Confirm New Password",
+    "modifpsw": "Edit password"
+  },
+  "initpswd": {
+    "titlepage": "Init password",
+    "subtitle": "Please fill in the following fields to create your password:",
+    "newPswd": "Password",
+    "confirmPswd": "Confirm Password",
+    "modifpsw": "Edit password"
+  },
   "form": {
-    "descriptionOfForm": "With a confirmed registration, you enter our professional identification service in the professional field of early childhood early childhood disabilities. After successfull completion this form is send to a superviser and will be checked for approval",
+    "charter": "I have read and agree to abide by the above charter",
+    "descriptionOfForm": "With a confirmed registration, you enter our professional of early childhood and early childhood disabilities network.",
     "header": "Please fill in the following form",
     "subHeaderStructure": "Information about your structure",
-    "subHeaderFieldsOfIntervention": "Fields of Intervention",
-    "subHeaderPerson": "Information about contact person",
-    "description": "Personal description about your mission",
-    "license": "I agree to appear on the directory of Accueil pour tous network partners and thus to be contacted if necessary as a resource person",
+    "subHeaderFieldsOfIntervention": "Your fields of intervention",
+    "subHeaderPerson": "Your contact person",
+    "description": "Personal description of your mission",
+    "license": "I agree to appear on the directory of Accueil Pour Tous partners and thus to be contacted if necessary as a resource person",
     "helperText": {
       "phoneNumber": "Not a valid phonenumber"
     },
-    "successMessage": "Entering Form was successfull returning to Homescreen",
-    "errorMessageFE": "Some Fields were not entered correctly please adjust"
+    "successMessage": "Form submission succeeded. Returning to Homescreen",
+    "errorMessageFE": "Some fields were not entered correctly, please adjust them",
+    "errorMessageDB": "An error occured, please try again"
+  },
+  "profil": {
+    "header": "My profile",
+    "edit": "Edit my profile"
+  },
+  "admin": {
+    "unapproved": "Pending applications",
+    "modifications": "Pending modification requests",
+    "titlepopupDecline": "Why do you want to decline this registration?",
+    "motif": "Reason",
+    "askmotif": "Please enter a reason for refusal",
+    "titlepopupValidate": "Are you sure you want to register this structure?"
   },
   "professional": {
     "name": "Name of the Structure",
@@ -29,35 +70,48 @@
       "city": "City",
       "postalCode": "Postalcode"
     },
-    "phoneNumber": "Telephonenumber",
+    "password": "Password",
+    "phoneNumber": "Telephone Number",
     "email": "E-Mail",
     "contactPerson": {
       "name": "Name of Contact Person",
-      "phoneNumber": "Telephonenumber of Contact Person",
+      "phoneNumber": "Telephone Number of Contact Person",
       "email": "E-Mail of Contact Person",
       "_function": "Function of Contact Person"
     },
     "audiences": "Audiences",
     "missions": "Missions",
     "placesOfIntervention": "Places of Intervention",
-    "description": "Description",
+    "description": "Description of your missions",
     "popOver": {
-      "infoProfessional": "Information of the Structure",
-      "infoContactPerson": "Information of Contact Person",
-      "infoFieldsOfIntervention": "Fields of Intervention",
-      "description": "Description"
+      "infoProfessional": "My Structure",
+      "infoContactPerson": "My Contact Person",
+      "infoFieldsOfIntervention": "My Fields of Intervention",
+      "description": "My Description"
     }
   },
-
   "common": {
     "noResults": "No Results",
     "moreInfo": "More Info",
     "search": "Search",
     "submit": "Submit",
+    "submitUpdate": "Submit updates",
     "accept": "Accept",
     "decline": "Decline",
     "typeOf": "Type of",
+    "typeO": "Type of",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "valid": "Valid",
+    "myAccount": "My account",
+    "close": "Close",
+    "confirmation": "Confirmation",
+    "confirmationBody": "Are you sure you want to log out?",
+    "disconnection": "Log out",
+    "return": "Return",
+    "returnHome": "Return to Home page",
+    "returnAPT": "Return to Accueil Pour Tous website",
+    "buttonAPT": "Back to APT31",
+    "multChoice": " (multiple choice)"
   }
 }

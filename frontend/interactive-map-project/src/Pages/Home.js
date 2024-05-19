@@ -1,6 +1,4 @@
-//page d'acceuil
-
-
+//page d'accueil
 
 import { Box } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -19,28 +17,24 @@ export default function Home({ setMenuTitel }) {
         height: height * 0.5,
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
       }}
     >
-      <Box sx={{ width: 0.3 }}>
+      <Box sx={{ width: 0.3, textAlign: 'center' }}>
+        <img
+          src="https://accueilpourtous31.fr/wp-content/themes/apt31/css/img/maisons-pages.png"
+          alt="Accueilpourtous31 dessin maison"
+          style={{ marginTop: '100px', marginBottom: '20px' }}
+        />
         <ButtonComponent
-          label={t("page.form")}
+          label={t("page.signUp")}
+          variant="contained"
           onClick={() => navigate("/Form", { replace: true })}
+          sx={{ marginTop: '20px' }}
         />
         <ButtonComponent
-          label={t("page.search")}
-          onClick={() => navigate("/Search", { replace: true })}
-        />
-        <Box sx={{ height: height * 0.02 }}></Box>
-        <ButtonComponent
-          label={t("page.admin")}
-          onClick={() => navigate("/Admin", { replace: true })}
-          color="secondary"
-        />
-        <ButtonComponent //todo: potentiellement à enlever
-          label={t("page.test")}
-          onClick={() => navigate("/Test", { replace: true })}
-          color="secondary"
+          label={t("page.logIn")}
+          onClick={() => navigate("/LogIn", { replace: true })}
         />
       </Box>
     </Box>

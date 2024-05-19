@@ -1,13 +1,14 @@
 import { Autocomplete, TextField } from "@mui/material";
 import InputComponent from "./InputComponent";
 
-function DropMultiSelect({
-  setSelectionState = function () {},
+function DropMultiSelect({ //TODO : set les valeurs par défaut
+  setSelectionState = function () { },
   options = [],
+  defaultValues = [],
   label = "label",
   error = false,
-  setErrorState = function () {},
-  placeholder = "placeholder",
+  setErrorState = function () { },
+  placeholder = "...",
 }) {
   return (
     <InputComponent>
@@ -16,6 +17,7 @@ function DropMultiSelect({
         id="tags-standard"
         options={options}
         error={true}
+        defaultValue={defaultValues}
         getOptionLabel={(option) => option}
         renderInput={(params) => (
           <TextField

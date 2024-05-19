@@ -49,7 +49,7 @@ const Map = ({
       const centerChange =
         (mapboxgl.LngLat.convert(currentMapCenter).distanceTo(prevMapCenter) /
           mapboxgl.LngLat.convert([0, 0]).distanceTo([180, 0])) *
-          100 >
+        100 >
         5; // Example distance threshold in percentage
       const zoomChange =
         (Math.abs(currentMapZoom - prevMapZoom) / maxZoom) * 100 > 2; // Example zoom threshold in percentage
@@ -76,6 +76,7 @@ const Map = ({
           professional: professional,
           setSelectedProfessional: setSelectedProfessional,
           setOpenPopover: setOpenPopover,
+          backgroundColor: '#333'
         });
         /*const marker = new mapboxgl.Marker()
             .setLngLat([lng, lat])

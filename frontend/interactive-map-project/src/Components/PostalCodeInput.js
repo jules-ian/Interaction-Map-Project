@@ -11,7 +11,7 @@ export default function PostalCodeInput({ state_postalcode, label }) {
         id="outlined-basic"
         label={label}
         variant="outlined"
-        fullWidth="true"
+        fullWidth={true}
         error={!postalCodeCorrect}
         onKeyDown={(event) => {
           if (event.key === "Enter") {

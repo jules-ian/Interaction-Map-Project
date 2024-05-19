@@ -6,6 +6,7 @@ const MapMarker = ({
   professional,
   setSelectedProfessional,
   setOpenPopover,
+
 }) => {
   // Create a marker
   const marker = new mapboxgl.Marker().setLngLat(lngLat);

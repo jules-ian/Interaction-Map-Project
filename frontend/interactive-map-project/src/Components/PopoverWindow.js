@@ -103,7 +103,7 @@ function ProfessionalTable({ professional }) {
               marked={true}
             />
             <Row
-              label={t("common.typeOf") + " " + t("professional.establishment")}
+              label={t("common.typeO") + " " + t("professional.establishment")}
               value={professional.establishmentType}
             />
             <Row
