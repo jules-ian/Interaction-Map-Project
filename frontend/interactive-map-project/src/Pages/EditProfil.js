@@ -8,7 +8,6 @@ import {
     getAllAudiences,
     getAllMissions,
     getAllPlacesOfIntervention,
-    getInfosProfessionals
 } from "../utils/BackendFunctions";
 import {
     isEmail,
@@ -30,7 +29,7 @@ export default function EditProfil({ setMenuTitel }) {
     const { t } = useTranslation();
     setMenuTitel(t("common.myAccount"));
     //phase d'initialisation
-    //let professional = getInfosProfessionals();
+    //let professional = getInfosProfessionals(); à aller chercher dans backend function
     let professional = new Professional(null, "Crèche de Ramonville", "Garde d'enfants", "public", new Address("5, avenue de Rangueil", "Ramonville", "31240"), "0987654321", null, "creche@ramonville.fr", new ContactPerson("Pilar", "0706050403", "pilar@insa.fr", "directrice"), ["0-3 ans"], ["Domicile", "EAJE"], ["Scolarité"], "La crèche de Ramonville peut accueillir jusqu'à 48 enfants", "");
     const [name, setName] = useState(professional.name);
     const [nameError, setNameError] = useState(false);
@@ -73,8 +72,6 @@ export default function EditProfil({ setMenuTitel }) {
     ] = useState(false);
     const [description, setDescription] = useState(professional.description);
     const [descriptionError, setDescriptionError] = useState(false);
-    const [accept, setAccept] = useState(false);
-    const [acceptError, setAcceptError] = useState(false);
     const navigate = useNavigate();
 
     // Fenêtres pop-up
@@ -82,7 +79,7 @@ export default function EditProfil({ setMenuTitel }) {
     const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
     const onCloseSuccessDialog = function () {
         setOpenSuccessDialog(false);
-        navigate("/Home", { replace: true });
+        navigate("/Profil", { replace: true });
     };
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -142,7 +139,7 @@ export default function EditProfil({ setMenuTitel }) {
         // Telephonenumber
         if (!isTelephoneNumber(telephone)) {
             setTelephoneError(true);
-            checkSuccess = true;
+            checkSuccess = false;
         }
         // Streetname
         if (!isName(street)) {
@@ -204,11 +201,6 @@ export default function EditProfil({ setMenuTitel }) {
             setDescriptionError(true);
             checkSuccess = false;
         }
-        // Accepted Licence
-        if (!accept) {
-            setAcceptError(true);
-            checkSuccess = false;
-        }
         return checkSuccess;
     };
 
@@ -243,7 +235,6 @@ export default function EditProfil({ setMenuTitel }) {
             missionsIDS,
             description
         );
-        console.log(professional);
         return professional;
     };
 
@@ -259,9 +250,13 @@ export default function EditProfil({ setMenuTitel }) {
     };
 
 
-    const tok = getToken(tokenUser).token;
-    if (tok === "Professional" | tok === "Admin") {
+    const tok = getToken(tokenUser);
+    let tokRole = "Null";
+    if (tok !== null) {
+        tokRole = tok.token;
+    }
 
+    if (tokRole === "Professional" | tokRole === "Admin") {
         return (
             <Box>
                 {/*Pop-up de confirmation, de succes, d'echec*/}

@@ -132,22 +132,17 @@ export function getUnapprovedProfessionals(setResults) {
     });
 }
 
-export function getInfosProfessionals(setReturn) {
+export function getInfosProfessionals() {
   let url = "https://localhost:7212/api/account/professional/info";
   console.log("A la recherche des infos du professional", tokenUser.token);
   axios
     .get(url, { headers: { 'Authorization': `Bearer ${tokenUser.token}` } })
     .then((response) => {
-      console.log("Professional = ", response.data);
-      setReturn(professionalFromJSON(response.data));
+      return (professionalFromJSON(response.data));
     })
     .catch((error) => {
       console.error("Error getting professionnal information:", error);
     });
-  axios.interceptors.request.use(request => {
-    console.log('Request:', request); // Affichage de la configuration de la requête dans la console
-    return request; // N'oubliez pas de renvoyer la requête modifiée ou non modifiée
-  });
 }
 
 export function addEditedProfessional(professional, callback) {
@@ -228,12 +223,10 @@ export function getToken(tok) {
   }).join(''));
   const role = JSON.parse(jsonPayload)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   const ex = JSON.parse(jsonPayload).exp;
-  console.log("ex = ", ex, ";  role = ", role);
 
   return new Token(role, ex);
 }
 
-/*
 export function getResultsSearch(
   setResults,
   textSearch = "",
@@ -243,86 +236,23 @@ export function getResultsSearch(
   mapBounds
 ) {
   let data = {};
-  if (!textSearch.length === 0) {
-    data.text = textSearch;
-    console.log("textsearch changed");
-  }
-  if (!audiencesIDs.length === 0) {
-    data.audiences = audiencesIDs;
-    console.log("audiences changed");
-  }
-  if (!missionIDs.length === 0) {
-    data.missions = missionIDs;
-    console.log("missions changed");
-  }
-  if (!placesOfInterventionIDs.length === 0) {
-    data.placesOfIntervention = placesOfInterventionIDs;
-    console.log("places changed");
-  }
-
-  // if (mapBounds) {
-  //   data.mapSquare = {
-  //     northEastLatitude: mapBounds._ne.lat,
-  //     northEastLongitude: mapBounds._ne.lng,
-  //     southWestLatitude: mapBounds._sw.lat,
-  //     southWestLongitude: mapBounds._sw.lng
-  //   }
-  // };
-
-  console.log("Data send to backend on search");
-  console.log(data);
-
-  let url = "https://localhost:7212/api/professional/approved/filtered";
-  console.log("request search - ", tokenUser);
-  axios
-    .post(url, data, {
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${tokenUser.token}`
-      }
-    })
-    .then((response) => {
-      let professionals = response.data.map((profData) => {
-        console.log(response.data);
-        return professionalFromJSON(profData);
-      });
-      setResults(professionals);
-    })
-    .catch((error) => {
-      console.error("Error sending post for search:", error);
-    });
-}
-*/
-export function getResultsSearch(
-  setResults,
-  textSearch = "",
-  audiencesIDs = [],
-  placesOfInterventionIDs = [],
-  missionIDs = [],
-  mapBounds
-) {
-  let data = {};
-  if (!textSearch.length == 0) {
+  console.log("text search = ", textSearch);
+  if (textSearch.length !== 0) {
+    console.log("data text not empty");
     data.text = textSearch;
   }
-  if (!audiencesIDs.length == 0) {
+  if (audiencesIDs.length !== 0) {
+    console.log("data aud not empty");
     data.audiences = audiencesIDs;
   }
-  if (!missionIDs.length == 0) {
+  if (missionIDs.length !== 0) {
+    console.log("data mission not empty");
     data.missions = missionIDs;
   }
-  if (!placesOfInterventionIDs.length == 0) {
+  if (placesOfInterventionIDs.length !== 0) {
+    console.log("data places not empty");
     data.placesOfIntervention = placesOfInterventionIDs;
   }
-
-  // if (mapBounds) {
-  //   data.mapSquare = {
-  //     northEastLatitude: mapBounds._ne.lat,
-  //     northEastLongitude: mapBounds._ne.lng,
-  //     southWestLatitude: mapBounds._sw.lat,
-  //     southWestLongitude: mapBounds._sw.lng
-  //   }
-  // };
 
   console.log("Data send to backend on search");
   console.log(data);

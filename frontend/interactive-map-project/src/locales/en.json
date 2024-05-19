@@ -26,6 +26,13 @@
     "confirmPswd": "Confirm New Password",
     "modifpsw": "Edit password"
   },
+  "initpswd": {
+    "titlepage": "Init password",
+    "subtitle": "Please fill in the following fields to create your password:",
+    "newPswd": "Password",
+    "confirmPswd": "Confirm Password",
+    "modifpsw": "Edit password"
+  },
   "form": {
     "charter": "I have read and agree to abide by the above charter",
     "descriptionOfForm": "With a confirmed registration, you enter our professional of early childhood and early childhood disabilities network.",
@@ -92,6 +99,7 @@
     "accept": "Accept",
     "decline": "Decline",
     "typeOf": "Type of",
+    "typeO": "Type of",
     "error": "Error",
     "success": "Success",
     "valid": "Valid",

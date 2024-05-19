@@ -6,18 +6,16 @@ import {
   getAllAudiences,
   getAllPlacesOfIntervention,
   getAllMissions,
-  getResults,
   getResultsSearch,
   getToken
 } from "../utils/BackendFunctions";
 import TextInput from "../Components/TextInput";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import ResultCardDisplay from "../Components/ProfessionalResult";
 import Map from "../Components/Map";
 import { mapNamesToIDs } from "../utils/ArrayFunctions";
 import { PopoverWindow } from "../Components/PopoverWindow";
 import { useTranslation } from "react-i18next";
-import _ from "lodash";
 
 export default function Search({ setMenuTitel }) {
   const { t } = useTranslation();
@@ -76,16 +74,20 @@ export default function Search({ setMenuTitel }) {
     }
   };
 
-  const debouncedSearch = _.debounce(onSearch, 500); // Adjust debounce time as needed
 
   const checkEntries = function () {
     let checkSuccess = true;
     return checkSuccess;
   };
 
-  const tok = getToken(tokenUser).token;
+  //Permet de vérifier que l'utilisateur a le droit d'accéder à cette page selon sont profil (token)
+  const tok = getToken(tokenUser);
+  let tokRole = "Null";
+  if (tok != null) {
+    tokRole = tok.token;
+  }
 
-  if (tok === "Professional" | tok === "Admin") {
+  if (tokRole === "Professional" | tokRole === "Admin") {
 
     return (
       <Box>

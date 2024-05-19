@@ -23,7 +23,7 @@ import {
 export default function Admin({ setMenuTitel }) {
   const { t } = useTranslation();
   setMenuTitel(t("page.admin"));
-  const { width, height } = useWindowDimensions();
+  const { height } = useWindowDimensions();
   const [unapprovedProfessionals, setUnapprovedProfessionals] = useState([]);
   const [editedProfessionals, setEditedProfessionals] = useState([]);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
@@ -87,10 +87,7 @@ function Tabel({
 }) {
   const { t } = useTranslation();
   const [motif, setMotif] = useState("");
-  const [motifError, setMotifError] = useState(false);
   const navigate = useNavigate();
-
-  const [errorMessage, setErrorMessage] = useState("");
 
   const [openPopUpAdminDeclineDialog, setOpenPopUpAdminDeclineDialog] = useState(false);
 
@@ -127,7 +124,7 @@ function Tabel({
               event.preventDefault();
               const formData = new FormData(event.currentTarget);
               const formJson = Object.fromEntries(formData.entries());
-              const motif = formJson.motif;
+              setMotif(formJson.motif);
               setLoading(true);
               declineProfessional(selectedProfessional, callbackAcceptDecline);
               console.log(selectedProfessional, "declined");
@@ -159,14 +156,18 @@ function Tabel({
   };
 
 
-  if (getToken(tokenUser).token === "Admin") {
+  const tok = getToken(tokenUser);
+  let tokRole = "Null";
+  if (tok !== null) {
+    tokRole = tok.token;
+  }
 
+  if (tokRole === "Admin") {
+    console.log("token admin");
     return (
       <Box>
 
         <PopUpAdminDeclineDialog
-          //clo={onClosePopUpAdminDeclineDialog} //TODO : close pop up et c'est tout
-          //ret={onReturnPopUpAdminDeclineDialog}
           open={openPopUpAdminDeclineDialog}
         />
         <PopUpAdminValidateDialog
@@ -180,7 +181,7 @@ function Tabel({
             <Header sx={{ textAlign: "left" }}>{t("admin.unapproved")}</Header>
           </Grid>
         </Grid>
-        {unapprovedProfessionals.length != 0 ? (
+        {unapprovedProfessionals.length !== 0 ? (
           unapprovedProfessionals.map((professional) => (
             // every professional
             <Grid
@@ -281,7 +282,7 @@ function Tabel({
 
         {/*TABLE OF PENDING MODIFICATIONS*/}
         {
-          editedProfessionals.length != 0 ? (
+          editedProfessionals.length !== 0 ? (
             editedProfessionals.map((professional) => (
               // every professional
               <Grid
@@ -384,6 +385,8 @@ function Tabel({
     );
 
   } else {
+    console.log("token pas admin");
     navigate("/LogIn", { replace: true });
+    return (null);
   }
 }
